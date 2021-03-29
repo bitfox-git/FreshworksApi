@@ -1,18 +1,30 @@
-﻿using System;
+﻿using Freshworks.CRM.Client.Selectors;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Freshworks.CRM.Client
 {
-    class FWConnection
+    public class FWConnection : IFWConnection
     {
 
         private static HttpClient client = new HttpClient();
 
         private string subdomain;
         private string apikey;
+
+
+        public string BaseURL
+        {
+            get
+            {
+                return $"https://{subdomain}.myfreshworks.com/crm/sales/";
+            }
+        }
 
 
         public FWConnection(string subdomain, string apikey)
@@ -22,34 +34,36 @@ namespace Freshworks.CRM.Client
         }
 
 
-        public List<T> GetSelectorAsync<T>()
+        public async Task<TReturn> GetSelectorsAsync<T>() where T : ISelector<TReturn>
         {
 
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+
+            if (endpoint == null) { return default(T); }
+
+            return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
         
 
-        private GetApiRequets(string api, string optinos)
+        private async Task<T> GetApiRequest<T>(string url)
         {
 
-            
             var request = new HttpRequestMessage
             {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri($"{baseUrl}/token"),
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{BaseURL}{url}"),
                 Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Basic {base64credentials}" }
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={apikey}" }
 
                 }
             };
 
 
-            var result = await client.SendAsync(httpRequestMessage);
+            var result = await client.SendAsync(request);
             var content = await result.Content.ReadAsStringAsync();
-            var x = JsonConvert.DeserializeObject<TokenResult>(content);
-            return x.token;
+            return JsonConvert.DeserializeObject<T>(content);
 
 
-            var requets = client.GetAsync()
 
         }
 
