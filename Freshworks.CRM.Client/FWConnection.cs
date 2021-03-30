@@ -88,7 +88,55 @@ namespace Freshworks.CRM.Client
             return resp.item;
         }
 
-        
+
+        public async Task<Result<T>> Insert<T>(T value) where T : IUniqueID
+        {
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+            if (endpoint == null) {
+                return new Result<T>($"Type {nameof(T)} has no endpointname attribute." );
+            }
+
+            if (value.id != 0)
+            {
+                return new Result<T>($"Cannot insert record with existing id.");
+            }
+
+            var url = $"api/{endpoint}";
+
+            var json = JsonConvert.SerializeObject(value);
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri($"{BaseURL}{url}"),
+                Headers = {
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={apikey}" },
+
+
+                },
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var resp = await client.SendAsync(request);
+            //if (!resp.IsSuccessStatusCode)
+            //{
+            //    return new Result<T>() { ErrorMessage = $"{resp.StatusCode}" };
+            //}
+
+            var content = await resp.Content.ReadAsStringAsync();
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                ContractResolver = new CustomResolver()
+            };
+
+            var intermediateObject = JsonConvert.DeserializeObject<SingleRecordResponse<T>>(content, settings);
+            if (intermediateObject.errors != null)
+            {
+                return new Result<T>(String.Join(",", intermediateObject.errors.message));
+            }
+
+            return new Result<T>(intermediateObject.item);
+        }
 
         public async Task<T> Update<T>(T value) where T:IUniqueID
         {

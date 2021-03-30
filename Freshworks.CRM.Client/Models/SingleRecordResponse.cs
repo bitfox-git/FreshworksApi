@@ -6,6 +6,9 @@
     {
         [JsonPropertyNameBasedOnSingularNameOfT()]
         public T item { get; set; }
+
+        public Error errors { get; set; }
+
     }
 
 }

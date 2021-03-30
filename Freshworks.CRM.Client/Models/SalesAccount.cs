@@ -84,7 +84,7 @@ namespace Freshworks.CRM.Client.Models
         public DateTime create_at { get; set; }
         public DateTime updated_at { get; set; }
         public DateTime? last_assigned_at { get; set; }
-        public string[]? tags { get; set; }
+        public List<string> tags { get; set; }
         public bool is_deleted { get; set; }
 
         public object custom_field { get; set; }
