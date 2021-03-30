@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Freshworks.CRM.Client
 {
+
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class EndpointNameAttribute : Attribute
     {

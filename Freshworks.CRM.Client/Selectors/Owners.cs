@@ -8,12 +8,10 @@ namespace Freshworks.CRM.Client.Selectors
 
 
     [EndpointName("owners")]
-    public class Owners : ISelector<User>
+    public class Owners : ISelector
     { 
        
-
         public List<User> Users { get; set; }
 
-        public List<User> Items => throw new NotImplementedException();
     }
 }

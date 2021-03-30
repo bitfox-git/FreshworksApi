@@ -6,7 +6,7 @@ using System.Text;
 namespace Freshworks.CRM.Client.Selectors
 {
     [EndpointName("industry_types")]
-    public class IndustryTypes
+    public class IndustryTypes : ISelector
     {
         public List<IndustryType> industry_types { get; set; }
     }

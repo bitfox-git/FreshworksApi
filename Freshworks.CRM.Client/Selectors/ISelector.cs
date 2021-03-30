@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Freshworks.CRM.Client.Selectors
 {
-    public interface ISelector<ReturnType>
+    public interface ISelector
     {
-        List<ReturnType> Items { get; }
+       
     }
 }

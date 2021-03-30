@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Freshworks.CRM.Client.Models
 {
-                "id": 30000676973,
+              //"id": 30000676973,
             //"name": "Accounting",
             //"position": 1,
             //"partial": true
-    class IndustryType
+    public class IndustryType
     {
         public long id { get; set; }
         public string name { get; set; }
