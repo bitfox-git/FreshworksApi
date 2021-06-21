@@ -51,7 +51,7 @@ namespace Freshworks.CRM.Client.Models
     [EndpointName("sales_accounts")]
     [JsonPluralName("sales_accounts")]
     [JsonSingularName("sales_account")]
-    public class SalesAccount : IUniqueID
+    public class SalesAccount : IUniqueID, IHasFilter
     {
 
         public long id { get; set; }
@@ -103,6 +103,8 @@ namespace Freshworks.CRM.Client.Models
         {
             custom_field = JObject.FromObject(value);
         }
+
+   
 
     }
 }

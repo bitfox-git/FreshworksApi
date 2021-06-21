@@ -4,10 +4,7 @@ using System.Text;
 
 namespace Freshworks.CRM.Client.Models
 {
-    public interface IUniqueID
+    public interface IHasFilter
     {
-        long id { get; set; }
     }
-
-    
 }

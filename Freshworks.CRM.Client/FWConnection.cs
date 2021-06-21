@@ -36,37 +36,51 @@ namespace Freshworks.CRM.Client
         }
 
 
-        public async Task<List<Filter>> GetSalesAccountFilters()
+        public async Task<List<Filter>> GetFilters<T>() where T:IHasFilter
         {
-            var responseObject = await GetApiRequest<Filters>($"api/sales_accounts/filters");
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+            if (endpoint == null)
+            {
+                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
+            }
+
+            var responseObject = await GetApiRequest<Filters>($"api/{endpoint}/filters");
             return responseObject.filters;
         }
 
-        public async Task<ListResponse<SalesAccount>> GetSalesAccountsPage(long viewID, int page)
-        {
+     
 
-            var responseObject = await GetApiRequest<ListResponse<SalesAccount>>($"api/sales_accounts/view/{viewID}?page={page}");
+        public async Task<ListResponse<TEntity>> GetPage<TEntity>(long viewID, int page) where TEntity : IHasFilter
+        {
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
+            if (endpoint == null)
+            {
+                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
+            }
+            var responseObject = await GetApiRequest<ListResponse<TEntity>>($"api/{endpoint}/view/{viewID}?page={page}");
 
             return responseObject;
         }
 
-        public async Task<List<SalesAccount>> GetSalesAccountsAll()
+
+
+        public async Task<List<TEntity>> GetAll<TEntity>() where TEntity : IHasFilter
         {
             //first , request the correct filter
-            var filters = await GetSalesAccountFilters();
+            var filters = await GetFilters<TEntity>();
 
             var viewId = filters
                            .Where(x => x.name.ToLower().StartsWith("all ") && x.is_default)
                            .Select(x => x.id)
                            .FirstOrDefault();
 
-            var result = new List<SalesAccount>();
+            var result = new List<TEntity>();
 
             int page = 1;
 
             while (page > 0)
             {
-                var records = await GetSalesAccountsPage(viewId, page);
+                var records = await GetPage<TEntity>(viewId, page);
                 result.AddRange(records.items);
                 if (result.Count < records.meta.total)
                 {
@@ -82,9 +96,16 @@ namespace Freshworks.CRM.Client
 
         }
 
-        public async Task<SalesAccount> GetSalesAccountByID( long id)
+
+        public async Task<TEntity> GetByID<TEntity>(long id) where TEntity : IUniqueID
         {
-            var resp = await GetApiRequest<SingleRecordResponse<SalesAccount>>($"api/sales_accounts/{id}");
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
+            if (endpoint == null)
+            {
+                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
+            }
+
+            var resp = await GetApiRequest<SingleRecordResponse<TEntity>>($"api/{endpoint}/{id}");
             return resp.item;
         }
 
