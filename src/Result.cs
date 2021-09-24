@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Freshworks.CRM.Client
+namespace Bitfox.Freshworks
 {
     public class Result<T>
     {

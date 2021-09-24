@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Reflection;
 
-namespace Freshworks.CRM.Client.Models
+namespace Bitfox.Freshworks
 {
     public class CustomResolver : DefaultContractResolver
     {

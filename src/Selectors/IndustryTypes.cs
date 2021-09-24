@@ -1,9 +1,9 @@
-﻿using Freshworks.CRM.Client.Models;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Freshworks.CRM.Client.Selectors
+namespace Bitfox.Freshworks.Selectors
 {
     [EndpointName("industry_types")]
     public class IndustryTypes : ISelector

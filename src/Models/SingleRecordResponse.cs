@@ -1,4 +1,4 @@
-﻿namespace Freshworks.CRM.Client.Models
+﻿namespace Bitfox.Freshworks.Models
 {
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Freshworks.CRM.Client.Models
+namespace Bitfox.Freshworks.Models
 {
 
 //    "errors": {

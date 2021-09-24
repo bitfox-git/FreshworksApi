@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Freshworks.CRM.Client
+namespace Bitfox.Freshworks
 {
 
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]

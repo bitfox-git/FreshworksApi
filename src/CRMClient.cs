@@ -1,5 +1,5 @@
-﻿using Freshworks.CRM.Client.Models;
-using Freshworks.CRM.Client.Selectors;
+﻿using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.Selectors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Freshworks.CRM.Client
+namespace Bitfox.Freshworks
 {
-    public class FWConnection : IFWConnection
+    public class CRMClient : ICRMClient
     {
 
         private static HttpClient client = new HttpClient();
@@ -29,7 +29,7 @@ namespace Freshworks.CRM.Client
         }
 
 
-        public FWConnection(string subdomain, string apikey)
+        public CRMClient(string subdomain, string apikey)
         {
             this.subdomain = subdomain;
             this.apikey = apikey;
@@ -48,7 +48,6 @@ namespace Freshworks.CRM.Client
             return responseObject.filters;
         }
 
-     
 
         public async Task<ListResponse<TEntity>> GetPage<TEntity>(long viewID, int page) where TEntity : IHasFilter
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Freshworks.CRM.Client.Selectors
+namespace Bitfox.Freshworks.Selectors
 {
     public interface ISelector
     {

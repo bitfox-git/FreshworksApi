@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Freshworks.CRM.Client
+namespace Bitfox.Freshworks
 {
     public class JsonPropertyNameBasedOnPluralNameOfT : Attribute
     {

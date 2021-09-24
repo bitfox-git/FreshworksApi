@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Freshworks.CRM.Client
+namespace Bitfox.Freshworks
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class JsonSingularNameAttribute : Attribute
