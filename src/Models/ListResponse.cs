@@ -1,4 +1,6 @@
-﻿namespace Bitfox.Freshworks.Models
+﻿using Bitfox.Freshworks.Attributes;
+
+namespace Bitfox.Freshworks.Models
 {
     public class ListResponse<T>
     {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -51,7 +52,7 @@ namespace Bitfox.Freshworks.Models
     [EndpointName("sales_accounts")]
     [JsonPluralName("sales_accounts")]
     [JsonSingularName("sales_account")]
-    public class SalesAccount : IUniqueID, IHasFilter
+    public class SalesAccount : IUniqueID, IHasView
     {
 
         public long id { get; set; }

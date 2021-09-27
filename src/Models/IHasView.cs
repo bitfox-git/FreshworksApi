@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-    public interface IHasFilter
+    public interface IHasView
     {
     }
 }

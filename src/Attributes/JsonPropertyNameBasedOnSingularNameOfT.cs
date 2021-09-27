@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bitfox.Freshworks
+namespace Bitfox.Freshworks.Attributes
 {
     public class JsonPropertyNameBasedOnSingularNameOfT : Attribute
     {

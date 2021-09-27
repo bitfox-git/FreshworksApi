@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bitfox.Freshworks
+namespace Bitfox.Freshworks.Attributes
 {
 
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]

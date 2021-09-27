@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Filter
+    public class View
     {
         public long id { get; set; }
         public string name { get; set; }

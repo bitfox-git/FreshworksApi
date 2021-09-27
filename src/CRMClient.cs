@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.Selectors;
 using Newtonsoft.Json;
 using System;
@@ -36,85 +37,16 @@ namespace Bitfox.Freshworks
         }
 
 
-        public async Task<List<Filter>> GetFilters<T>() where T:IHasFilter
-        {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null)
-            {
-                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
-            }
-
-            var responseObject = await GetApiRequest<Filters>($"api/{endpoint}/filters");
-            return responseObject.filters;
+        public Query<T> Query<T>() where T:IHasView {
+            return new Query<T>(this);
         }
 
 
-        public async Task<ListResponse<TEntity>> GetPage<TEntity>(long viewID, int page) where TEntity : IHasFilter
-        {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
-            if (endpoint == null)
-            {
-                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
-            }
-            var responseObject = await GetApiRequest<ListResponse<TEntity>>($"api/{endpoint}/view/{viewID}?page={page}");
-
-            return responseObject;
-        }
-
-
-
-        public async Task<List<TEntity>> GetAll<TEntity>() where TEntity : IHasFilter
-        {
-            //first , request the correct filter
-            var filters = await GetFilters<TEntity>();
-
-            var viewId = filters
-                           .Where(x => x.name.ToLower().StartsWith("all ") && x.is_default)
-                           .Select(x => x.id)
-                           .FirstOrDefault();
-
-            var result = new List<TEntity>();
-
-            int page = 1;
-
-            while (page > 0)
-            {
-                var records = await GetPage<TEntity>(viewId, page);
-                result.AddRange(records.items);
-                if (result.Count < records.meta.total)
-                {
-                    page++;
-                }
-                else
-                {
-                    page = -1;
-                }
-            }
-
-            return result;
-
-        }
-
-
-        public async Task<TEntity> GetByID<TEntity>(long id) where TEntity : IUniqueID
-        {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
-            if (endpoint == null)
-            {
-                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
-            }
-
-            var resp = await GetApiRequest<SingleRecordResponse<TEntity>>($"api/{endpoint}/{id}");
-            return resp.item;
-        }
 
 
         public async Task<Result<T>> Insert<T>(T value) where T : IUniqueID
         {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null) {
-                return new Result<T>($"Type {nameof(T)} has no endpointname attribute." );
-            }
+            var endpoint = GetEndpoint<T>();
 
             if (value.id != 0)
             {
@@ -210,10 +142,15 @@ namespace Bitfox.Freshworks
 
             return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
-        
 
 
-        private async Task<T> GetApiRequest<T>(string url)
+        private string GetIncludeRequestParams<T>()
+        {
+            return "";
+        }
+
+
+        public async Task<T> GetApiRequest<T>(string url)
         {
 
             var request = new HttpRequestMessage
@@ -239,6 +176,16 @@ namespace Bitfox.Freshworks
 
 
 
+        }
+
+        private string GetEndpoint<TEntity>()
+        {
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
+            if (endpoint == null)
+            {
+                throw new ArgumentException($"nameof(T) has no EndpointName Attribute defined.");
+            }
+            return endpoint;
         }
 
     }

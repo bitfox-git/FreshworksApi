@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Reflection;

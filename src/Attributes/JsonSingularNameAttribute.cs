@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bitfox.Freshworks
+namespace Bitfox.Freshworks.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class JsonSingularNameAttribute : Attribute

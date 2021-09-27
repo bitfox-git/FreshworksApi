@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace Bitfox.Freshworks.Models
     [EndpointName("contacts")]
     [JsonPluralName("contacts")]
     [JsonSingularName("contact")]
-    public class Contact : IUniqueID, IHasFilter
+    [Include("lists")]
+    public class Contact : IUniqueID, IHasView
     {
         public long id { get; set; }
 
@@ -93,6 +95,14 @@ namespace Bitfox.Freshworks.Models
         /// </summary>
         public string subscription_types { get; set; }
 
+
+        /// TODO : should be private field + detect deserialization state? (null vs empty)?
+       
+       
+        /// <summary>
+        /// list of listids, but only filled when ?include=list?
+        /// </summary>
+        public string list_ids { get; set; }
 
         public int customer_fit { get; set; }
         

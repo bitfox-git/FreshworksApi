@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Filters
+    public class Views
     {
-        public List<Filter> filters { get; set; }
+        public List<View> views { get; set; }
     }
 }
