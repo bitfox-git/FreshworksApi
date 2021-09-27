@@ -37,32 +37,30 @@ namespace Bitfox.Freshworks
         public async Task<ListResponse<TEntity>> GetPage(long viewID, int page) 
         {
             var endpoint = GetEndpoint();
-            var responseObject = await client.GetApiRequest<ListResponse<TEntity>>($"api/{endpoint}/view/{viewID}?page={page}");
+            var uri = $"api/{endpoint}/view/{viewID}?page={page}";
+
+            //add includes
+            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
+
+           
+
+            var responseObject = await client.GetApiRequest<ListResponse<TEntity>>(uri);
 
             return responseObject;
         }
 
-
+        
 
         public async Task<List<TEntity>> GetAll()
         {
-            //first , request the correct filter
-            var filters = await GetViews();
-
-            //This is kind of a hack ? it looks for the "all ....." view for this entity...
-            //is this 100% sure?
-            var viewId = filters
-                           .Where(x => x.name.ToLower().StartsWith("all ") && x.is_default)
-                           .Select(x => x.id)
-                           .FirstOrDefault();
-
+          
+            if (this.viewID == 0) { this.viewID = await getDefaultViewID(); }
             var result = new List<TEntity>();
 
             int page = 1;
-
             while (page > 0)
             {
-                var records = await GetPage(viewId, page);
+                var records = await GetPage(this.viewID, page);
                 result.AddRange(records.items);
                 if (result.Count < records.meta.total)
                 {
@@ -81,7 +79,13 @@ namespace Bitfox.Freshworks
         public async Task<TEntity> GetByID(long id)
         {
             var endpoint = GetEndpoint();
-            var resp = await client.GetApiRequest<SingleRecordResponse<TEntity>>($"api/{endpoint}/{id}");
+            var uri = $"api/{endpoint}/{id}";
+
+            //add includes
+            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
+
+
+            var resp = await client.GetApiRequest<SingleRecordResponse<TEntity>>(uri);
             return resp.item;
         }
 
@@ -93,6 +97,20 @@ namespace Bitfox.Freshworks
             return responseObject.views;
         }
 
+        private async Task<long> getDefaultViewID()
+        {
+            //first , request the correct filter
+            var filters = await GetViews();
+
+            //This is kind of a hack ? it looks for the "all ....." view for this entity...
+            //is this 100% sure?
+            var viewId = filters
+                           .Where(x => x.name.ToLower().StartsWith("all ") && x.is_default)
+                           .Select(x => x.id)
+                           .FirstOrDefault();
+
+            return viewId;
+        }
 
         private string GetEndpoint() 
         {

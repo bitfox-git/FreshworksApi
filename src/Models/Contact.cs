@@ -102,7 +102,7 @@ namespace Bitfox.Freshworks.Models
         /// <summary>
         /// list of listids, but only filled when ?include=list?
         /// </summary>
-        public string list_ids { get; set; }
+        public long[] list_ids { get; set; }
 
         public int customer_fit { get; set; }
         

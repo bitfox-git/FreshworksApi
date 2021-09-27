@@ -88,7 +88,7 @@ namespace Bitfox.Freshworks
             }
 
             return new Result<T>(intermediateObject.item);
-        }
+        } 
 
         public async Task<T> Update<T>(T value) where T:IUniqueID
         {
@@ -103,7 +103,12 @@ namespace Bitfox.Freshworks
 
             var url = $"api/{endpoint}/{value.id}";
 
-            var json = JsonConvert.SerializeObject(value);
+
+            var serializesettings = new JsonSerializerSettings();
+            serializesettings.NullValueHandling = NullValueHandling.Ignore;
+            serializesettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+
+            var json = JsonConvert.SerializeObject(value, serializesettings);
 
             var request = new HttpRequestMessage
             {
