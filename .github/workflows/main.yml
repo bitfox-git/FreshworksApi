@@ -45,7 +45,7 @@ jobs:
 #       run: dotnet pack --configuration Release -p:PackageVersion=1.0.37
 #     - if: ${{ contains(github.ref, 'main') }}
 #       name: Push
-#       run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_DEPLOY_KEY }} --no-symbols 1
+#       run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --no-symbols 1
         
     - if: ${{ !contains(github.ref, 'main') }}
       name: Create Pre-Release
