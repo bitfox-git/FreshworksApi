@@ -5,6 +5,7 @@ env:
   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
   MAJOR: 1
   MINOR: 0
+  VERSION: ""
 
 jobs: 
   build:
