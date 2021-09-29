@@ -10,7 +10,6 @@ env:
 jobs:
   build:
     runs-on: windows-latest
-    # timeout-minutes: 15
     steps:
     - name: Setup Repository
       uses: actions/checkout@v2
