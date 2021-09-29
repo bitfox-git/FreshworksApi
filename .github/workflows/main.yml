@@ -15,7 +15,9 @@ jobs:
     - name: Setup Repository
       uses: actions/checkout@v2
       with:
-        ref: develop
+        fetch-depth: 0
+#       with:
+#         ref: develop
         # TODO make dynamic
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
