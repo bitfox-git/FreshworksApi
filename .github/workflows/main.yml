@@ -18,11 +18,11 @@ jobs:
       with: 
         dotnet-version: '5.0'
 
-    - if: ${{ contains(github.ref, 'main') }}
-      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
+#     - if: ${{ contains(github.ref, 'main') }}
+#       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
 
-    - if: ${{ !contains(github.ref, 'main') }}
-      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
+#     - if: ${{ !contains(github.ref, 'main') }}
+#       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
 
     # - name: Restore
     #   run: dotnet restore
