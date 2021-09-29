@@ -13,6 +13,7 @@ namespace Sample
     {
         static async Task Main(string[] args)
         {
+            Console.WriteLine("called");
 
             ////create an instance
             //var conn = new CRMClient("<your prefix>", "<yourkey>");
@@ -33,10 +34,6 @@ namespace Sample
             //var a2test = (JObject)(account2.custom_field);
             //var a2test2 = a2test.ToObject<CustomSalesAccountFields>();
             //Console.WriteLine(a2test2.cf_external_id);
-            
-
-      
-
         }
     }
 }
