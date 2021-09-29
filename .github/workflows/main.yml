@@ -4,6 +4,7 @@ env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PAT: ${{ secrets.PAT }}
   MAJOR: 1
   MINOR: 0
 
@@ -13,6 +14,8 @@ jobs:
     steps:
     - name: Setup Repository
       uses: actions/checkout@v2
+      with:
+        token: ${{ env.PAT }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with: 
