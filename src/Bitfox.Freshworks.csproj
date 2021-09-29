@@ -4,6 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>Bitfox.Freshworks</AssemblyName>
     <RootNamespace>Bitfox.Freshworks</RootNamespace>
+    <Authors>Bitfox</Authors>
+    <Company>Bitfox B.V.</Company>
+    <Description>A .NET Core library for interacting with the Freshworks CRM Rest API</Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bitfox-git/FreshworksApi</RepositoryUrl>
   </PropertyGroup>
 
 
