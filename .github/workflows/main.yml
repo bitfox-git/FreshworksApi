@@ -29,7 +29,7 @@ jobs:
     - name: Pack
       run: dotnet pack -c Release -p:PackageVersion=${{env.VERSION}}
     - name: Release Nuget
-      run: dotnet nuget push **/Bitfox*.nupkg --source https://api.nuget.org/v3/index.json --api-key oy2nrfkg66tjocxnhipqxcvpswg5isheblbkzl7btah7d4 --no-symbols true
+      run: dotnet nuget push **/Bitfox*.nupkg --source https://api.nuget.org/v3/index.json --api-key oy2n7xf5lq7jdlx7zlvarhurrmo5m7cu5ipe6wyaj2ohvi --no-symbols true
 
     - name: Release Github
       uses: actions/create-release@v1
