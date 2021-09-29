@@ -29,9 +29,9 @@ jobs:
     - name: Pack
       run: dotnet pack -c Release -p:PackageVersion=${{env.VERSION}}
     - name: Release Nuget
-      run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ env.NUGET_API_KEY }} --no-symbols true
+      run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key oy2nrfkg66tjocxnhipqxcvpswg5isheblbkzl7btah7d4 --no-symbols true
 
-    - name: Create Github
+    - name: Release Github
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
