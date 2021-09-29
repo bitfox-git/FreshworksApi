@@ -1,18 +1,22 @@
 name: CI/CD .NET CORE
 on: push
-env:
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-#   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#   PAT: ${{ secrets.PAT }}
-  MAJOR: 1
-  MINOR: 0
+# env:
+#   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+#   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+# #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# #   PAT: ${{ secrets.PAT }}
+#   MAJOR: 1
+#   MINOR: 0
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
+#     - uses: actions/checkout@v2
     - uses: actions/checkout@v2
+      with:
+        ref: my-branch
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with: 
