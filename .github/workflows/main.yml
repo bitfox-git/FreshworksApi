@@ -16,9 +16,13 @@ jobs:
         dotnet-version: '5.0'
         
     - if: ${{ contains(github.ref, 'main') }}
-      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
+      run: |
+        Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
+        Write-Output "::set-env name=PRERELEASE::false"
     - if: ${{ !contains(github.ref, 'main') }}
-      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
+      run: |
+        Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
+        Write-Output "::set-env name=PRERELEASE::true"
 
     - name: Restore
       run: dotnet restore
@@ -29,12 +33,12 @@ jobs:
       
     - name: Release Nuget
       run: dotnet nuget push **/Bitfox*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --no-symbols true
-    - name: Release Github
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{env.VERSION}}
-        release_name: ${{env.VERSION}}
-        prerelease: false
-        draft: false
+#     - name: Release Github
+#       uses: actions/create-release@v1
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         tag_name: ${{env.VERSION}}
+#         release_name: ${{env.VERSION}}
+#         prerelease: ${{env.PRERELEASE}}
+#         draft: false
