@@ -13,7 +13,7 @@ namespace Sample
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("called");
+            Console.WriteLine("called with new content");
 
             ////create an instance
             //var conn = new CRMClient("<your prefix>", "<yourkey>");
