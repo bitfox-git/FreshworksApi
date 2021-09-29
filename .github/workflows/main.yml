@@ -1,47 +1,93 @@
 name: CI/CD .NET CORE
-on: [ push ]
-# env:
-#   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-#   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-# #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-# #   PAT: ${{ secrets.PAT }}
-#   MAJOR: 1
-#   MINOR: 0
+on: push
+env:
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+  MAJOR: 1
+  MINOR: 0
 
-jobs:
+jobs: 
   build:
     runs-on: windows-latest
     steps:
-#     - uses: actions/checkout@v2
-    - uses: actions/checkout@v1
-    - run: echo "my tests, place holder for the real tests"
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with: 
+        dotnet-version: '5.0'
+        
+    - if: ${{ contains(github.ref, 'main') }}
+      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
 
-#     - name: Setup .NET
-#       uses: actions/setup-dotnet@v1
-#       with: 
-#         dotnet-version: '5.0'
+    - if: ${{ !contains(github.ref, 'main') }}
+      run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
 
-#     - if: ${{ contains(github.ref, 'main') }}
-#       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
+    - name: Restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build -c Release --no-restore
+    - name: Pack
+      run: dotnet pack -c Release -p:PackageVersion=${{env.VERSION}}
+    - name: Release Nuget
+      run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ env.NUGET_API_KEY }} --no-symbols true
 
-#     - if: ${{ !contains(github.ref, 'main') }}
-#       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
+    - name: Create Github
+      uses: actions/create-release@${{env.VERSION}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{env.VERSION}}
+        release_name: ${{env.VERSION}}
+        prerelease: false
+        draft: false
+  
 
-    # - name: Restore
-    #   run: dotnet restore
-    # - name: Build
-    #   run: dotnet build -c Release --no-restore
-    # - name: Pack
-    #   run: dotnet pack -c Release -p:PackageVersion=${{env.VERSION}}
-    # - name: Release Nuget
-    #   run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ env.NUGET_API_KEY }} --no-symbols true
 
-    # - name: Create Github
-    #   uses: actions/create-release@${{env.VERSION}}
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     tag_name: ${{env.VERSION}}
-    #     release_name: ${{env.VERSION}}
-    #     prerelease: false
-    #     draft: false
+
+# name: CI/CD .NET CORE
+# on: [ push ]
+# # env:
+# #   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+# #   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+# # #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# # #   PAT: ${{ secrets.PAT }}
+# #   MAJOR: 1
+# #   MINOR: 0
+
+# jobs:
+#   build:
+#     runs-on: windows-latest
+#     steps:
+# #     - uses: actions/checkout@v2
+#     - uses: actions/checkout@v1
+#     - run: echo "my tests, place holder for the real tests"
+
+# #     - name: Setup .NET
+# #       uses: actions/setup-dotnet@v1
+# #       with: 
+# #         dotnet-version: '5.0'
+
+# #     - if: ${{ contains(github.ref, 'main') }}
+# #       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
+
+# #     - if: ${{ !contains(github.ref, 'main') }}
+# #       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}-beta"
+
+#     # - name: Restore
+#     #   run: dotnet restore
+#     # - name: Build
+#     #   run: dotnet build -c Release --no-restore
+#     # - name: Pack
+#     #   run: dotnet pack -c Release -p:PackageVersion=${{env.VERSION}}
+#     # - name: Release Nuget
+#     #   run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ env.NUGET_API_KEY }} --no-symbols true
+
+#     # - name: Create Github
+#     #   uses: actions/create-release@${{env.VERSION}}
+#     #   env:
+#     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     #   with:
+#     #     tag_name: ${{env.VERSION}}
+#     #     release_name: ${{env.VERSION}}
+#     #     prerelease: false
+#     #     draft: false
