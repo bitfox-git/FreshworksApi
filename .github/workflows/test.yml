@@ -1,0 +1,9 @@
+name: CI/CD .NET CORE
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: echo "successfully called"
