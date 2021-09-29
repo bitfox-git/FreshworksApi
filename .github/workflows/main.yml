@@ -2,7 +2,7 @@ name: CI/CD .NET CORE
 on: push
 env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-  NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+  # NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
   MAJOR: 1
   MINOR: 0
 
