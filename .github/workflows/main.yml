@@ -15,7 +15,8 @@ jobs:
     - name: Setup Repository
       uses: actions/checkout@v2
       with:
-        token: ${{ secrets.PAT }}
+        ref: develop
+        # TODO make dynamic
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with: 
