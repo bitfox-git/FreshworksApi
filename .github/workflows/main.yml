@@ -1,5 +1,5 @@
 name: CI/CD .NET CORE
-on: push
+on: [ push ]
 # env:
 #   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 #   NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
@@ -14,13 +14,12 @@ jobs:
     steps:
 #     - uses: actions/checkout@v2
     - uses: actions/checkout@v2
-      with:
-        ref: develop
+    - run: echo "my tests, place holder for the real tests"
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with: 
-        dotnet-version: '5.0'
+#     - name: Setup .NET
+#       uses: actions/setup-dotnet@v1
+#       with: 
+#         dotnet-version: '5.0'
 
 #     - if: ${{ contains(github.ref, 'main') }}
 #       run: Write-Output "::set-env name=VERSION::${{env.MAJOR}}.${{env.MINOR}}.${{github.run_number}}"
