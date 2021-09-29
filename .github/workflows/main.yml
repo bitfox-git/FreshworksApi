@@ -32,7 +32,7 @@ jobs:
       run: dotnet nuget push **/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ env.NUGET_API_KEY }} --no-symbols true
 
     - name: Create Github
-      uses: actions/create-release@${{env.VERSION}}
+      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
