@@ -14,7 +14,7 @@ namespace Bitfox.Freshworks.Models
     [JsonPluralName("contacts")]
     [JsonSingularName("contact")]
     [Include("lists")]
-    public class Contact : WriteableContact, IUniqueID, IHasView
+    public class Contact : IUniqueID, IHasView
     {
         public long id { get; set; }
 

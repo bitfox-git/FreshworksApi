@@ -1,3 +1,5 @@
+using Bitfox.Freshworks;
+using Bitfox.Freshworks.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace TestApplication
 {
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,7 +28,7 @@ namespace TestApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddFreshworks(); // (Configuration);
             services.AddControllers();
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bitfox.Freshworks;
+using Bitfox.Freshworks.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,25 @@ namespace TestApplication.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ICRMClient client)
         {
-            _logger = logger;
+            var account = client.Query<SalesAccount>();
+            var response = account.GetAll();
+
+
+
+            Console.WriteLine(response);
+
+
+
+            //client.GetTest();
         }
+
+
+        //public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
