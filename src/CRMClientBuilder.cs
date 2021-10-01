@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks
 {
     /// <summary>
-    /// Factory the get a ICRMClient instance.\
+    /// Factory the get a ICRMClient instance.
     /// It uses a Fluent API pattern.
     /// </summary>
     public class CRMClientBuilder
@@ -15,7 +15,6 @@ namespace Bitfox.Freshworks
         private string subdomain;
 
         private string apikey;
-
 
         public CRMClientBuilder SetApiKey(string apikey)
         {
