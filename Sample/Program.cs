@@ -18,6 +18,24 @@ namespace Sample
             ////create an instance
             //var conn = new CRMClient("<your prefix>", "<yourkey>");
 
+            var client = new CRMClientBuilder()
+                                .SetApiKey("esrg")
+                                .SetSubdomain("seg")
+                                .Build();
+
+
+            var myContact = await client.Query<Contact>().GetByID(1);
+
+
+            var y= myContact.updated_at;
+
+
+            myContact.Country = "The Netherlands";
+
+            var result = await client.Update(myContact);
+
+
+          
 
             ////get an account
             //var account = await conn.GetByID<SalesAccount>(30002095168);

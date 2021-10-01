@@ -8,11 +8,13 @@ using System.Text;
 namespace Bitfox.Freshworks.Models
 {
 
+
+
     [EndpointName("contacts")]
     [JsonPluralName("contacts")]
     [JsonSingularName("contact")]
     [Include("lists")]
-    public class Contact : IUniqueID, IHasView
+    public class Contact : WriteableContact, IUniqueID, IHasView
     {
         public long id { get; set; }
 
@@ -24,8 +26,11 @@ namespace Bitfox.Freshworks.Models
         public string job_title { get; set; }
         public string city  { get; set; }
         public string state { get; set; }
-        public string zipcode { get; set; }
-        public string country { get; set; }
+
+
+        public string ZipCode { get; set; }
+
+        public string Country { get; set; }
 
        
 
@@ -53,14 +58,18 @@ namespace Bitfox.Freshworks.Models
         public object custom_field { get; set; }
         
         public DateTime created_at { get; set; }
-        public DateTime updated_at { get; set; }
+
+
+        [JsonIgnore()]
+        public DateTime updated_at { get; private set; }
         
         //keyword": null??
 
         public string medium { get; set; }
         public string last_contacted_mode { get; set; }
         
-        public string recent_note { get; }
+        [JsonProperty("recent_note")]
+        public string RecentNote{ get; }
         
         public int? won_deals_count { get; set; }
 

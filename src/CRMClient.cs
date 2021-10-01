@@ -30,7 +30,7 @@ namespace Bitfox.Freshworks
         }
 
 
-        public CRMClient(string subdomain, string apikey)
+        internal CRMClient(string subdomain, string apikey)
         {
             this.subdomain = subdomain;
             this.apikey = apikey;
