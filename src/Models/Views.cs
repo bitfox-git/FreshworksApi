@@ -6,12 +6,9 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-
-
     public class Views
     {
-
-        [JsonProperty("filters")]
-        public List<View> views { get; set; }
+        [JsonProperty("views")]
+        public List<View> Content { get; set; }
     }
 }

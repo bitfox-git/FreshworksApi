@@ -1,20 +1,23 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
 
-//    "errors": {
-//        "code": 403,
-//        "message": [
-//            "U bent niet bevoegd om deze bewerking uit te voeren."
-//        ]
-//}
-
-public class Error
+    //    "errors": {
+    //        "code": 403,
+    //        "message": [
+    //            "U bent niet bevoegd om deze bewerking uit te voeren."
+    //        ]
+    //}
+    public class Error
     {
-        public int code { get; set; }
-        public string[] message { get; set; }
+        [JsonProperty("code")]
+        public int Code { get; set; }
+
+        [JsonProperty("message")]
+        public string[] Message { get; set; }
     }
 }

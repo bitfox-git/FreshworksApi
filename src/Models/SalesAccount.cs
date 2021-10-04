@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -6,8 +7,6 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-
-
     // "id": 30001773156,
     //"name": "Widgetz.io (sample)",
     //"address": "160-6802 Aliquet Rd.",
@@ -54,55 +53,105 @@ namespace Bitfox.Freshworks.Models
     [JsonSingularName("sales_account")]
     public class SalesAccount : IUniqueID, IHasView
     {
+        [JsonProperty("id")]
+        public long ID { get; set; }
 
-        public long id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string zipcode { get; set; }
-        public string country { get; set; }
-        public int? number_of_employees { get; set; }
-        public double? annual_revenue { get; set; }
-        public string website { get; set; }
-        public long? owner_id { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
-        public string phone { get; set; }
+        [JsonProperty("address")]
+        public string Address { get; set; }
 
-        public double? open_deals_amount { get; set; }
-        public int? open_deals_count { get; set; }
-        public double? won_deals_amount { get; set; }
-        public int? won_deals_count { get; set; }
+        [JsonProperty("city")]
+        public string City { get; set; }
 
-        public DateTime? last_contacted { get; set; } 
-        public string last_contacted_mode { get; set;  }
+        [JsonProperty("state")]
+        public string State { get; set; }
 
-        public string facebook { get; set; }
-        public string twitter { get; set; }
-        public string linkedin { get; set; }
+        [JsonProperty("zipcode")]
+        public string ZipCode { get; set; }
 
-        public long? parent_sales_account_id {get;set;}
-        public DateTime create_at { get; set; }
-        public DateTime updated_at { get; set; }
-        public DateTime? last_assigned_at { get; set; }
-        public List<string> tags { get; set; }
-        public bool is_deleted { get; set; }
+        [JsonProperty("country")]
+        public string Country { get; set; }
 
-        public object custom_field { get; set; }
-        
+        [JsonProperty("number_of_employees")]
+        public int? NumberOfEmployees { get; set; }
+
+        [JsonProperty("annual_revenue")]
+        public double? AnnualRevenue { get; set; }
+
+        [JsonProperty("website")]
+        public string Website { get; set; }
+
+        [JsonProperty("owner_id")]
+        public long? OwnerID { get; set; }
+
+        [JsonProperty("phone")]
+        public string Phone { get; set; }
+
+        [JsonProperty("open_deals_amount")]
+        public double? OpenDealsAmount { get; set; }
+
+        [JsonProperty("open_deals_count")]
+        public int? OpenDealsCount { get; set; }
+
+        [JsonProperty("won_deals_amount")]
+        public double? WonDealsAmount { get; set; }
+
+        [JsonProperty("won_deals_count")]
+        public int? WonDealsCount { get; set; }
+
+        [JsonProperty("last_contacted")]
+        public DateTime? LastContacted { get; set; }
+
+        [JsonProperty("last_contacted_mode")]
+        public string LastContactedMode { get; set;  }
+
+        [JsonProperty("facebook")]
+        public string Facebook { get; set; }
+
+        [JsonProperty("twitter")]
+        public string Twitter { get; set; }
+
+        [JsonProperty("linkedin")]
+        public string Linkedin { get; set; }
+
+        [JsonProperty("parent_sales_account_id")]
+        public long? ParentSalesAccountID {get;set; }
+
+        [JsonProperty("create_at")]
+        public DateTime CreateAt { get; set; }
+
+        [JsonProperty("updated_at")]
+        public DateTime UpdatedAt { get; set; }
+
+        [JsonProperty("last_assigned_at")]
+        public DateTime? LastAssignedAt { get; set; }
+
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; }
+
+        [JsonProperty("is_deleted")]
+        public bool IsDeleted { get; set; }
+
+
+        [JsonProperty("custom_field")]
+        public object CustomField { get; set; }
+
         //public long team_user_ids { get; set; }
+
 
         public T GetCustomFields<T>()
         {
 
-            if (custom_field == null) return default(T);
-            var job = (JObject)custom_field;
+            if (CustomField == null) return default(T);
+            var job = (JObject)CustomField;
             return job.ToObject<T>();
         }
 
         public void SetCustomFields<T>(T value)
         {
-            custom_field = JObject.FromObject(value);
+            CustomField = JObject.FromObject(value);
         }
 
    

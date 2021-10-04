@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,8 +20,10 @@ namespace Bitfox.Freshworks.Models
     
     public class ContactSalesAccountPartial
     {
+        [JsonProperty("id")]
+        public long ID { get; set; }
 
-        public long id { get; set; }
-        public bool is_primary { get; set; }
+        [JsonProperty("is_primary")]
+        public bool IsPrimary { get; set; }
     }
 }

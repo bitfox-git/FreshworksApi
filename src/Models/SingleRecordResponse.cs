@@ -1,16 +1,17 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json;
 
 namespace Bitfox.Freshworks.Models
 {
 
-
     class SingleRecordResponse<T>
     {
-        [JsonPropertyNameBasedOnSingularNameOfT()]
-        public T item { get; set; }
+        //[JsonPropertyNameBasedOnSingularNameOfT()]
+        [JsonProperty("item")]
+        public T Item { get; set; }
 
-        public Error errors { get; set; }
-
+        [JsonProperty("errors")]
+        public Error Errors { get; set; }
     }
 
 }

@@ -1,24 +1,34 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-
-        //"id": 30000015422,
-        //    "display_name": "Lucas Vos",
-        //    "email": "lucas@lucrasoft.nl",
-        //    "is_active": true,
-        //    "work_number": "+31646297351",
-        //    "mobile_number": "+31646297351"
+    //    "id": 31234515422,
+    //    "display_name": "John Doe",
+    //    "email": "john@email.nl",
+    //    "is_active": true,
+    //    "work_number": "+31600000000",
+    //    "mobile_number": "+31600000000"
     public class User
     {
+        [JsonProperty("id")]
+        public long ID { get; set; }
 
-        public long id { get; set; }
-        public string display_name { get; set; }
-        public string email { get; set; }
-        public bool is_active { get; set; }
-        public string work_number { get; set; }
-        public string mobile_number { get; set; }
+        [JsonProperty("display_name")]
+        public string DisplayName { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        [JsonProperty("is_active")]
+        public bool IsActive { get; set; }
+
+        [JsonProperty("work_number")]
+        public string WorkNumber { get; set; }
+
+        [JsonProperty("mobile_number")]
+        public string MobileNumber { get; set; }
     }
 }

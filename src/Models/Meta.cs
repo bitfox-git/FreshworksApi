@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,10 @@ namespace Bitfox.Freshworks.Models
 
     public class Meta
     {
-        public int total_pages { get; set; }
-        public int total { get; set;  }
+        [JsonProperty("total_pages")]
+        public int TotalPages { get; set; }
+        
+        [JsonProperty("total")]
+        public int Total { get; set;  }
     }
 }

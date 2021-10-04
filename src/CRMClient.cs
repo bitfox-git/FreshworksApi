@@ -14,12 +14,9 @@ namespace Bitfox.Freshworks
 {
     public class CRMClient : ICRMClient
     {
-
-        private static HttpClient client = new HttpClient();
-
-        private string subdomain;
-        private string apikey;
-
+        private static readonly HttpClient client = new HttpClient();
+        private readonly string subdomain;
+        private readonly string apikey;
 
         public string BaseURL
         {
@@ -29,26 +26,21 @@ namespace Bitfox.Freshworks
             }
         }
 
-
         internal CRMClient(string subdomain, string apikey)
         {
             this.subdomain = subdomain;
             this.apikey = apikey;
         }
 
-
         public Query<T> Query<T>() where T:IHasView {
             return new Query<T>(this);
         }
-
-
-
 
         public async Task<Result<T>> Insert<T>(T value) where T : IUniqueID
         {
             var endpoint = GetEndpoint<T>();
 
-            if (value.id != 0)
+            if (value.ID != 0)
             {
                 return new Result<T>($"Cannot insert record with existing id.");
             }
@@ -82,12 +74,12 @@ namespace Bitfox.Freshworks
             };
 
             var intermediateObject = JsonConvert.DeserializeObject<SingleRecordResponse<T>>(content, settings);
-            if (intermediateObject.errors != null)
+            if (intermediateObject.Errors != null)
             {
-                return new Result<T>(String.Join(",", intermediateObject.errors.message));
+                return new Result<T>(String.Join(",", intermediateObject.Errors.Message));
             }
 
-            return new Result<T>(intermediateObject.item);
+            return new Result<T>(intermediateObject.Item);
         } 
 
         public async Task<T> Update<T>(T value) where T:IUniqueID
@@ -95,13 +87,13 @@ namespace Bitfox.Freshworks
             var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
             if (endpoint == null) { return default(T); }
 
-            if (value.id == 0)
+            if (value.ID == 0)
             {
                 //cannot update a record with id =0 , you probably mean ot Create
                 return default(T);
             }
 
-            var url = $"api/{endpoint}/{value.id}";
+            var url = $"api/{endpoint}/{value.ID}";
 
 
             var serializesettings = new JsonSerializerSettings();
@@ -136,24 +128,8 @@ namespace Bitfox.Freshworks
             };
 
             var intermediateObject =  JsonConvert.DeserializeObject<SingleRecordResponse<T>>(content, settings);
-            return intermediateObject.item;
+            return intermediateObject.Item;
         }
-
-        public async Task<T> GetSelectorsAsync<T>() where T : ISelector
-        {
-
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null) { return default(T); }
-
-            return await GetApiRequest<T>($"api/selector/{endpoint}");
-        }
-
-
-        private string GetIncludeRequestParams<T>()
-        {
-            return "";
-        }
-
 
         public async Task<T> GetApiRequest<T>(string url)
         {
@@ -176,14 +152,34 @@ namespace Bitfox.Freshworks
             {
                 ContractResolver = new CustomResolver()
             };
-          
-            return JsonConvert.DeserializeObject<T>(content,settings);
+
+            return JsonConvert.DeserializeObject<T>(content, settings);
 
 
 
         }
 
-        private string GetEndpoint<TEntity>()
+
+
+
+
+        public async Task<T> GetSelectorsAsync<T>() where T : ISelector
+        {
+
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+            if (endpoint == null) { return default(T); }
+
+            return await GetApiRequest<T>($"api/selector/{endpoint}");
+        }
+
+
+        private string GetIncludeRequestParams<T>()
+        {
+            return "";
+        }
+
+
+        private static string GetEndpoint<TEntity>()
         {
             var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
             if (endpoint == null)

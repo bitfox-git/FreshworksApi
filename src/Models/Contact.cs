@@ -16,130 +16,192 @@ namespace Bitfox.Freshworks.Models
     [Include("lists")]
     public class Contact : IUniqueID, IHasView
     {
-        public long id { get; set; }
-
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public string display_name { get; set; }
+        [JsonProperty("id")]
+        public long ID { get; set; }
         
-        public string avatar { get; set; }
-        public string job_title { get; set; }
-        public string city  { get; set; }
-        public string state { get; set; }
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; }
 
+        [JsonProperty("last_name")]
+        public string LastName { get; set; }
 
+        [JsonProperty("display_name")]
+        public string DisplayName { get; set; }
+        
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; }
+        
+        [JsonProperty("job_title")]
+        public string JobTitle { get; set; }
+
+        [JsonProperty("city")]
+        public string City  { get; set; }
+        
+        [JsonProperty("state")]
+        public string State { get; set; }
+
+        [JsonProperty("zipcode")]
         public string ZipCode { get; set; }
 
+        [JsonProperty("country")]
         public string Country { get; set; }
 
-       
-
+        [JsonProperty("email")]
         [Obsolete("Use the emails property instead.")]
-        public string email { get; set; }
+        public string Email { get; set; }
 
-        public List<ContactEmail> emails { get; set; }
-        
-        public string time_zone { get; set; }
-        
-        public string work_number { get; set; }
-        public string mobile_number { get; set; }
-        public string address  { get; set; }
-        
-        public DateTime? last_seen { get; set; }
-        
-        public int lead_score { get; set; }
-        
-        public DateTime? last_contacted { get; set; }
-        public double? open_deals_amount { get; set; }
-        public double? won_deals_amount { get; set; }
-        
-        public string last_contacted_sales_activity_mode { get; set; }
-        
-        public object custom_field { get; set; }
-        
-        public DateTime created_at { get; set; }
+        [JsonProperty("emails")]
+        public List<ContactEmail> Emails { get; set; }
 
+        [JsonProperty("time_zone")]
+        public string TimeZone { get; set; }
 
-        [JsonIgnore()]
-        public DateTime updated_at { get; private set; }
-        
+        [JsonProperty("work_number")]
+        public string WorkNumber { get; set; }
+
+        [JsonProperty("mobile_number")]
+        public string MobileNumber { get; set; }
+
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        [JsonProperty("last_seen")]
+        public DateTime? LastSeen { get; set; }
+
+        [JsonProperty("lead_score")]
+        public int LeadScore { get; set; }
+
+        [JsonProperty("last_contacted")]
+        public DateTime? LastContacted { get; set; }
+
+        [JsonProperty("open_deals_amount")]
+        public double? OpenDealsAmount { get; set; }
+
+        [JsonProperty("won_deals_amount")]
+        public double? WonDealsAmount { get; set; }
+
+        [JsonProperty("last_contacted_sales_activity_mode")]
+        public string LastContactedSalesActivityMode { get; set; }
+
+        [JsonProperty("custom_field")]
+        public object CustomField { get; set; }
+
+        [JsonProperty("created_at")]
+        public DateTime CreatedAt { get; set; }
+
+        //[JsonIgnore()]
+        [JsonProperty("updated_at")]
+        public DateTime UpdatedAt { get; private set; }
+
         //keyword": null??
 
-        public string medium { get; set; }
-        public string last_contacted_mode { get; set; }
+        [JsonProperty("medium")]
+        public string Medium { get; set; }
+
+        [JsonProperty("last_contacted_mode")]
+        public string LastContactedMode { get; set; }
         
         [JsonProperty("recent_note")]
         public string RecentNote{ get; }
         
-        public int? won_deals_count { get; set; }
+        [JsonProperty("won_deals_count")]
+        public int? WonDealsCount { get; set; }
 
         //"last_contacted_via_sales_activity": null,
-        public int? completed_sales_sequences { get; set; }
+
+        [JsonProperty("completed_sales_sequences")]
+        public int? CompletedSalesSequences { get; set; }
         
         //"active_sales_sequences": null,
         
         //"web_form_ids": null,
-        public int open_deals_count { get; set; }
 
-        public DateTime? last_assigned_at { get; set; }
-          
-        public List<string> tags { get; set; }
-        
-        public string facebook { get; set; }
-        public string twitter { get; set; }
-        public string linkedin { get; set; }
-        public bool is_deleted { get; set; }
+        [JsonProperty("open_deals_count")]
+        public int OpenDealsCount { get; set; }
+
+        [JsonProperty("last_assigned_at")]
+        public DateTime? LastAssignedAt { get; set; }
+
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; }
+
+        [JsonProperty("facebook")]
+        public string Facebook { get; set; }
+
+        [JsonProperty("twitter")]
+        public string Twitter { get; set; }
+
+        [JsonProperty("linkedin")]
+        public string Linkedin { get; set; }
+
+        [JsonProperty("is_deleted")]
+        public bool IsDeleted { get; set; }
 
         //"team_user_ids": null,
-        public string external_id { get; set; }
-        
-        public string work_email { get; set; }
+
+        [JsonProperty("external_id")]
+        public string ExternalID { get; set; }
+
+        [JsonProperty("work_email")]
+        public string WorkEmail { get; set; }
 
         //TODO : make enum?
-        public int subscription_status { get; set; }
+
+        [JsonProperty("subscription_status")]
+        public int SubscriptionStatus { get; set; }
 
         /// <summary>
         /// list of integers, seperated by semicolon
         /// for example: 3;4;1
         /// </summary>
-        public string subscription_types { get; set; }
+        [JsonProperty("subscription_types")]
+        public string SubscriptionTypes { get; set; }
 
 
         /// TODO : should be private field + detect deserialization state? (null vs empty)?
-       
-       
+
+
         /// <summary>
         /// list of listids, but only filled when ?include=list?
         /// </summary>
-        public long[] list_ids { get; set; }
 
-        public int customer_fit { get; set; }
-        
-        public bool has_duplicates { get; set; }
+        [JsonProperty("list_ids")]
+        public long[] ListIDs { get; set; }
 
-        public bool duplicates_searched_today { get; set; }
-        public bool has_connections { get; set; }
-        
-        public bool connections_searched_today { get; set; }
+        [JsonProperty("customer_fit")]
+        public int CustomerFit { get; set; }
+
+        [JsonProperty("has_duplicates")]
+        public bool HasDuplicates { get; set; }
+
+        [JsonProperty("duplicates_searched_today")]
+        public bool DuplicatesSearchedToday { get; set; }
+
+        [JsonProperty("has_connections")]
+        public bool HasConnections { get; set; }
+
+        [JsonProperty("connections_searched_today")]
+        public bool ConnectionsSearchedToday { get; set; }
 
         //public "phone_numbers": [],
+        
+        [JsonProperty("sales_accounts")]
+        //[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public List<ContactSalesAccountPartial> SalesAccounts { get; set; }
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public List<ContactSalesAccountPartial> sales_accounts { get; set; }
-
-        public long lifecycle_stage_id { get; set; }
+        [JsonProperty("lifecycle_stage_id")]
+        public long LifecycleStageID { get; set; }
 
         public T GetCustomFields<T>()
         {
-
-            if (custom_field == null) return default(T);
-            var job = (JObject)custom_field;
+            if (CustomField == null) return default;
+            var job = (JObject)CustomField;
             return job.ToObject<T>();
         }
 
         public void SetCustomFields<T>(T value)
         {
-            custom_field = JObject.FromObject(value);
+            CustomField = JObject.FromObject(value);
         }
 
 

@@ -14,7 +14,7 @@ namespace Bitfox.Freshworks
         private readonly ICRMClient client;
         private long viewID;
 
-        private List<string> includes = new List<string>(); 
+        private List<string> Includes = new List<string>(); 
 
         public Query(ICRMClient client)
         {
@@ -29,10 +29,9 @@ namespace Bitfox.Freshworks
 
         public Query<TEntity> Include(string include)
         {
-            includes.Add(include);
+            Includes.Add(include);
             return this;
         }
-
 
         public async Task<ListResponse<TEntity>> GetPage(long viewID, int page) 
         {
@@ -40,7 +39,7 @@ namespace Bitfox.Freshworks
             var uri = $"api/{endpoint}/view/{viewID}?page={page}";
 
             //add includes
-            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
+            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
 
            
 
@@ -49,20 +48,18 @@ namespace Bitfox.Freshworks
             return responseObject;
         }
 
-        
-
         public async Task<List<TEntity>> GetAll()
         {
           
-            if (this.viewID == 0) { this.viewID = await getDefaultViewID(); }
+            if (this.viewID == 0) { this.viewID = await GetDefaultViewID(); }
             var result = new List<TEntity>();
 
             int page = 1;
             while (page > 0)
             {
                 var records = await GetPage(this.viewID, page);
-                result.AddRange(records.items);
-                if (result.Count < records.meta.total)
+                result.AddRange(records.Items);
+                if (result.Count < records.Meta.Total)
                 {
                     page++;
                 }
@@ -82,22 +79,21 @@ namespace Bitfox.Freshworks
             var uri = $"api/{endpoint}/{id}";
 
             //add includes
-            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
+            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
 
 
             var resp = await client.GetApiRequest<SingleRecordResponse<TEntity>>(uri);
-            return resp.item;
+            return resp.Item;
         }
-
 
         public async Task<List<View>> GetViews() 
         {
             var endpoint = GetEndpoint();
             var responseObject = await client.GetApiRequest<Views>($"api/{endpoint}/filters");
-            return responseObject.views;
+            return responseObject.Content;
         }
 
-        private async Task<long> getDefaultViewID()
+        private async Task<long> GetDefaultViewID()
         {
             //first , request the correct filter
             var filters = await GetViews();
@@ -105,14 +101,14 @@ namespace Bitfox.Freshworks
             //This is kind of a hack ? it looks for the "all ....." view for this entity...
             //is this 100% sure?
             var viewId = filters
-                           .Where(x => x.name.ToLower().StartsWith("all ") && x.is_default)
-                           .Select(x => x.id)
+                           .Where(x => x.Name.ToLower().StartsWith("all ") && x.IsDefault)
+                           .Select(x => x.ID)
                            .FirstOrDefault();
 
             return viewId;
         }
 
-        private string GetEndpoint() 
+        private static string GetEndpoint() 
         {
             var endpoint = EndpointNameAttribute.GetEndpointNameOfType<TEntity>();
             if (endpoint == null)

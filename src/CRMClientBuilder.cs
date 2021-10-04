@@ -13,7 +13,6 @@ namespace Bitfox.Freshworks
     public class CRMClientBuilder
     {
         private string subdomain;
-
         private string apikey;
 
         public CRMClientBuilder SetApiKey(string apikey)
