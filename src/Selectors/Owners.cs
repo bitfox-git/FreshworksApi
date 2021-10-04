@@ -6,13 +6,9 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Selectors
 {
-
-
     [EndpointName("owners")]
     public class Owners : ISelector
     { 
-       
         public List<User> Users { get; set; }
-
     }
 }

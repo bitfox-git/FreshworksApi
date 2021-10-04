@@ -3,8 +3,6 @@ using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.Selectors;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -14,7 +12,7 @@ namespace Bitfox.Freshworks
 {
     public class CRMClient : ICRMClient
     {
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
         private readonly string subdomain;
         private readonly string apikey;
 
@@ -30,6 +28,25 @@ namespace Bitfox.Freshworks
         {
             this.subdomain = subdomain;
             this.apikey = apikey;
+        }
+
+        public async Task<T> Selector<T>() where T : ISelector
+        {
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+
+            if (endpoint == null) { return default; }
+            
+            return await GetApiRequest<T>($"api/selector/{endpoint}");
+        }
+
+        public async Task<T> SelectorByID<T>(long id) where T : ISelector
+        {
+            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+
+            if (endpoint == null) { return default; }
+            endpoint = endpoint.Replace("/[id]/", $"/{id}/");
+
+            return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
 
         public Query<T> Query<T>() where T:IHasView {
@@ -131,6 +148,37 @@ namespace Bitfox.Freshworks
             return intermediateObject.Item;
         }
 
+
+        //public async Task<T> GetSelectorsAsync<T>() where T : ISelector
+        //{
+
+        //    var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
+        //    if (endpoint == null) { return default(T); }
+
+        //    return await GetApiRequest<T>($"api/selector/{endpoint}");
+        //}
+
+        //public async Task<TEntity> GetSelection()
+        //{
+        //    string uri = $"api/selector/{GetEndpoint()}/";
+        //    var response = await client.GetApiRequest<TEntity>(uri);
+        //    return response;
+        //}
+
+        //public async Task<TEntity> GetSelection(int id, string path)
+        //{
+        //    string uri = $"api/selector/{GetEndpoint()}";// /{id}/{path}";
+        //    var response = await client.GetApiRequest<TEntity>(uri);
+        //    return response;
+        //}
+
+
+
+        private string GetIncludeRequestParams<T>()
+        {
+            return "";
+        }
+        
         public async Task<T> GetApiRequest<T>(string url)
         {
 
@@ -158,26 +206,6 @@ namespace Bitfox.Freshworks
 
 
         }
-
-
-
-
-
-        public async Task<T> GetSelectorsAsync<T>() where T : ISelector
-        {
-
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null) { return default(T); }
-
-            return await GetApiRequest<T>($"api/selector/{endpoint}");
-        }
-
-
-        private string GetIncludeRequestParams<T>()
-        {
-            return "";
-        }
-
 
         private static string GetEndpoint<TEntity>()
         {
