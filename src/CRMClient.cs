@@ -47,7 +47,6 @@ namespace Bitfox.Freshworks
             return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
 
-
         public Query<T> Query<T>() where T:IHasView {
             return new Query<T>(this);
         }
@@ -195,8 +194,9 @@ namespace Bitfox.Freshworks
             var result = await client.SendAsync(request);
             var content = await result.Content.ReadAsStringAsync();
 
-            JsonSerializerSettings settings = new JsonSerializerSettings
+            JsonSerializerSettings settings = new()
             {
+                DefaultValueHandling = DefaultValueHandling.Ignore,
                 ContractResolver = new CustomResolver()
             };
 

@@ -8,9 +8,9 @@ namespace Bitfox.Freshworks
 {
     public interface ICRMClient
     {
-        T Selector<T>() where T : ISelector;
+        Task<T> Selector<T>() where T : ISelector;
 
-        T SelectorByID<T>(long id) where T : ISelector;
+        Task<T> SelectorByID<T>(long id) where T : ISelector;
 
         Query<T> Query<T>() where T : IHasView;
 

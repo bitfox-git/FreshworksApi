@@ -23,10 +23,10 @@ namespace Sample
                                 .SetApiKey("OOuMhjaasZwwkfzO__tZFQ")
                                 .Build();
 
-            // Selections
-            //var result = await client.Selector<DealStages>();
+            // Selector
+            var result = await client.Selector<DealStages>();
             //var result = await client.Selector<DealReasons>();
-            //var result = await client.Selector<DealTypes>();
+            // var result = await client.Selector<DealTypes>();
             //var result = await client.Selector<DealProducts>();// TODO
             //var result = await client.Selector<DealPaymentStatuses>();
             //var result = await client.Selector<DealPipelines>();
@@ -37,6 +37,7 @@ namespace Sample
             //var result = await client.Selector<SalesActivityOutcomes>();
             //var result = await client.SelectorByID<SalesActivityOutcomesOnID>(17000241379);
 
+            //var result = await client.Selector.GetOwners();
             //var result = await client.Selector<Owners>();
             //var result = await client.Selector<Territories>();// TODO
             //var result = await client.Selector<Currencies>();
@@ -46,11 +47,12 @@ namespace Sample
             //var result = await client.Selector<ContactStatuses>();
             //var result = await client.Selector<LifecycleStages>();
 
-            // Http Requests
+
+            // Contact
             //var result = await client.Query<>();
 
 
-            //Console.WriteLine(result);
+            Console.WriteLine(result);
 
 
 
