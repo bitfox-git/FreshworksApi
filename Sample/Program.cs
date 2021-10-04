@@ -46,7 +46,12 @@ namespace Sample
             //var result = await client.Selector<ContactStatuses>();
             //var result = await client.Selector<LifecycleStages>();
 
+            // Http Requests
+            //var result = await client.Query<>();
+
+
             //Console.WriteLine(result);
+
 
 
 

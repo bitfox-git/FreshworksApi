@@ -14,6 +14,6 @@ namespace Bitfox.Freshworks.Selectors
     public class DealPaymentStatuses : ISelector
     {
         [JsonProperty("deal_payment_statuses")]
-        public List<PaymentStatus> PaymentStatuses { get; set; }
+        public List<PaymentStatusSelectionResponse> PaymentStatuses { get; set; }
     }
 }

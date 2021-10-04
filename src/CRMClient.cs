@@ -33,7 +33,6 @@ namespace Bitfox.Freshworks
         public async Task<T> Selector<T>() where T : ISelector
         {
             var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-
             if (endpoint == null) { return default; }
             
             return await GetApiRequest<T>($"api/selector/{endpoint}");
@@ -42,12 +41,12 @@ namespace Bitfox.Freshworks
         public async Task<T> SelectorByID<T>(long id) where T : ISelector
         {
             var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-
             if (endpoint == null) { return default; }
-            endpoint = endpoint.Replace("/[id]/", $"/{id}/");
 
+            endpoint = endpoint.Replace("/[id]/", $"/{id}/");
             return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
+
 
         public Query<T> Query<T>() where T:IHasView {
             return new Query<T>(this);
