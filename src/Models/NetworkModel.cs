@@ -45,5 +45,41 @@ namespace Bitfox.Freshworks.Models
                 return JsonConvert.DeserializeObject<T>(data, settings);
             }
         }
+
+        public async Task<Result<Dictionary<string, T>>> PostApiRequest<T>(string url, string apikey, T body, string bodyName) where T: IUniqueID
+        {
+            Dictionary<string, T> bodyReq = new();
+            bodyReq.Add(bodyName, body);
+
+            JsonSerializerSettings settings = new()
+            {
+                ContractResolver = new CustomResolver()
+            };
+
+            // create json & remove unused content
+            var json = JsonConvert.SerializeObject(bodyReq, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                }
+            );
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(url),
+                Headers = {
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={apikey}" },
+                },
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var resp = await Client.SendAsync(request);
+            var content = await resp.Content.ReadAsStringAsync();
+            var response = JsonConvert.DeserializeObject<Dictionary<string, T>>(content, settings);
+            return new Result<Dictionary<string, T>>(response);
+        }
+
+
     }
 }

@@ -54,7 +54,7 @@ namespace Bitfox.Freshworks.Models
     public class SalesAccount : IUniqueID, IHasView
     {
         [JsonProperty("id")]
-        public long ID { get; set; }
+        public long? ID { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }

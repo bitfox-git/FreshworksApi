@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class ContactPortal: BasePanel<ContactModel>
+    public class ContactPortal: BasePortal<ContactModel>
     {
-        public ContactPortal(string baseURL, string apikey): base(baseURL, apikey)
+        public ContactPortal(string baseURL, string apikey): base($"{baseURL}/api/contacts", apikey)
         { }
 
         // 

@@ -17,7 +17,7 @@ namespace Bitfox.Freshworks.Models
         //}
 
         [JsonProperty("id")]
-        public long ID { get; set; }
+        public long? ID { get; set; }
 
         [JsonProperty("name")]
         public long Name { get; set; }

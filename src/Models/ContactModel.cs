@@ -16,10 +16,18 @@ namespace Bitfox.Freshworks.Models
     [Include("lists")]
     public class ContactModel : IUniqueID, IHasView
     {
+
+        [JsonProperty("code")]
+        public int Code { get; set; }
+
+        [JsonProperty("message")]
+        public string[] Message { get; set; }
+
+
         // READ-ONLY
 
         [JsonProperty("id")]
-        public long ID { get; set; } = -1;
+        public long? ID { get; set; } = null;
 
         [JsonProperty("first_name")]
         public string FirstName { get; set; } = null;
@@ -52,7 +60,7 @@ namespace Bitfox.Freshworks.Models
         public string Email { get; set; } = null;
 
         [JsonProperty("emails")]
-        public List<EmailModel> Emails { get; set; } = new();
+        public List<EmailModel> Emails { get; set; } = null;
 
         [JsonProperty("time_zone")]
         public string TimeZone { get; set; } = null;
@@ -70,7 +78,7 @@ namespace Bitfox.Freshworks.Models
         public string LastSeen { get; set; } = null;
 
         [JsonProperty("lead_score")]
-        public int LeadScore { get; set; } = -1;
+        public int? LeadScore { get; set; } = null;
 
         [JsonProperty("last_contacted")]
         public string LastContacted { get; set; } = null;
@@ -82,13 +90,10 @@ namespace Bitfox.Freshworks.Models
         public string WonDealsAmount { get; set; } = null;
 
         [JsonProperty("links")]
-        public LinkModel Links { get; set; } = new();
+        public LinkModel Links { get; set; } = null;
 
         [JsonProperty("last_contacted_sales_activity_mode")]
         public string LastContactedSalesActivityMode { get; set; } = null;
-
-        [JsonProperty("custom_field")]
-        public Object CustomField { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; } = null;
@@ -109,7 +114,7 @@ namespace Bitfox.Freshworks.Models
         public string RecentNote { get; set; } = null;
 
         [JsonProperty("won_deals_count")]
-        public int WonDealsCount { get; set; } = -1;
+        public int? WonDealsCount { get; set; } = null;
 
         [JsonProperty("last_contacted_via_sales_activity")]
         public string LastContactedViaSalesActivity { get; set; } = null;
@@ -124,53 +129,53 @@ namespace Bitfox.Freshworks.Models
         public string WebFormIDs { get; set; } = null;
 
         [JsonProperty("open_deals_count")]
-        public int OpenDealsCount { get; set; } = -1;
+        public int? OpenDealsCount { get; set; } = null;
 
         [JsonProperty("last_assigned_at")]
         public string LastAssignedAt { get; set; } = null;
 
         [JsonProperty("tags")]
-        public List<string> Tags { get; set; } = new();
+        public List<string> Tags { get; set; } = null;
 
         [JsonProperty("is_deleted")]
-        public bool IsDeleted { get; set; } = false;
+        public bool? IsDeleted { get; set; } = null;
 
         [JsonProperty("team_user_ids")]
-        public string TeamUserIDs { get; set; }
+        public string TeamUserIDs { get; set; } = null;
 
         [JsonProperty("external_id")]
-        public string ExternalID { get; set; }
+        public string ExternalID { get; set; } = null;
 
         [JsonProperty("work_email")]
-        public string WorkEmail { get; set; }
+        public string WorkEmail { get; set; } = null;
 
         [JsonProperty("subscription_status")]
-        public int SubscriptionStatus { get; set; }
+        public int? SubscriptionStatus { get; set; } = null;
 
         [JsonProperty("customer_fit")]
-        public int CustomerFit { get; set; }
+        public int? CustomerFit { get; set; } = null;
 
         [JsonProperty("whatsapp_subscription_status")]
-        public int WhatsappSubscriptionStatus { get; set; }
+        public int? WhatsappSubscriptionStatus { get; set; } = null;
 
         [JsonProperty("phone_numbers")]
-        public List<string> PhoneNumbers { get; set; }
+        public List<string> PhoneNumbers { get; set; } = null;
 
         [JsonProperty("facebook")]
-        public string Facebook { get; set; }
+        public string Facebook { get; set; } = null;
 
         [JsonProperty("twitter")]
-        public string Twitter { get; set; }
+        public string Twitter { get; set; } = null;
 
         [JsonProperty("linkedin")]
-        public string Linkedin { get; set; }
+        public string Linkedin { get; set; } = null;
 
         /// <summary>
         /// list of integers, seperated by semicolon
         /// for example: 3;4;1
         /// </summary>
         [JsonProperty("subscription_types")]
-        public string SubscriptionTypes { get; set; }
+        public string SubscriptionTypes { get; set; } = null;
 
 
         /// TODO : should be private field + detect deserialization state? (null vs empty)?
@@ -181,31 +186,37 @@ namespace Bitfox.Freshworks.Models
         /// </summary>
 
         [JsonProperty("list_ids")]
-        public long[] ListIDs { get; set; }
+        public long[] ListIDs { get; set; } = null;
 
         [JsonProperty("has_duplicates")]
-        public bool HasDuplicates { get; set; }
+        public bool? HasDuplicates { get; set; } = null;
 
         [JsonProperty("duplicates_searched_today")]
-        public bool DuplicatesSearchedToday { get; set; }
+        public bool? DuplicatesSearchedToday { get; set; } = null;
 
         [JsonProperty("has_connections")]
-        public bool HasConnections { get; set; }
+        public bool? HasConnections { get; set; } = null;
 
         [JsonProperty("connections_searched_today")]
-        public bool ConnectionsSearchedToday { get; set; }
+        public bool? ConnectionsSearchedToday { get; set; } = null;
 
         [JsonProperty("sales_accounts")]
-        public List<ContactSalesAccountPartial> SalesAccounts { get; set; }
+        public List<ContactSalesAccountPartial> SalesAccounts { get; set; } = null;
 
         [JsonProperty("lifecycle_stage_id")]
-        public long LifecycleStageID { get; set; }
+        public long? LifecycleStageID { get; set; } = null;
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        /// 
+
+
+        //[JsonProperty("custom_field")]
+        private JObject CustomField { get; set; } = null;
+
         public T GetCustomFields<T>()
         {
             if (CustomField == null) return default;

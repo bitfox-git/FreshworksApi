@@ -8,7 +8,7 @@ namespace Bitfox.Freshworks.Models
     public interface IUniqueID
     {
         [JsonProperty("id")]
-        long ID { get; set; }
+        long? ID { get; set; }
     }
 
     

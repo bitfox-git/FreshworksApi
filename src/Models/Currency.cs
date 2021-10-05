@@ -23,7 +23,7 @@ namespace Bitfox.Freshworks.Models
         public bool Partial { get; set; }
 
         [JsonProperty("id")]
-        public long ID { get; set; }
+        public long? ID { get; set; }
 
         [JsonProperty("is_active")]
         public bool IsActive { get; set; }
