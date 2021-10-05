@@ -2,7 +2,7 @@
 
 namespace Bitfox.Freshworks.Models
 {
-    public class PaymentStatusSelectionResponse: IUniqueID
+    public class PaymentStatus: IUniqueID
     {
         //{
         //    "id": 17000057563,

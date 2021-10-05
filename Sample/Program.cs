@@ -13,58 +13,56 @@ namespace Sample
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("called with new content");
-
-            ////create an instance
-            //var conn = new CRMClient("<your prefix>", "<yourkey>");
-
             var client = new CRMClientBuilder()
                                 .SetSubdomain("notdetected-team")
                                 .SetApiKey("OOuMhjaasZwwkfzO__tZFQ")
                                 .Build();
 
-            // Selector
-            var result = await client.Selector<DealStages>();
-            //var result = await client.Selector<DealReasons>();
-            // var result = await client.Selector<DealTypes>();
-            //var result = await client.Selector<DealProducts>();// TODO
-            //var result = await client.Selector<DealPaymentStatuses>();
-            //var result = await client.Selector<DealPipelines>();
-            //var result = await client.SelectorByID<DealPipelinesOnID>(17000029663);
-
-            //var result = await client.Selector<SalesActivityTypes>();
-            //var result = await client.Selector<SalesActivityEntityTypes>();
-            //var result = await client.Selector<SalesActivityOutcomes>();
-            //var result = await client.SelectorByID<SalesActivityOutcomesOnID>(17000241379);
-
+            // Selection
+            //var result = await client.Selection<Campaigns>();   // TODO: create sample data that we know, how
+            //var result = await client.Selection<DealProducts>();// TODO: create sample data that we know, how
+            //var result = await client.Selection<Territories>(); // TODO: create sample data that we know, how
+            //var result = await client.Selector.Deals.GetReasons();
+            //var result = await client.Selector.Deals.GetTypes();
+            //var result = await client.Selector.Deals.GetPaymentStatuses();
+            //var result = await client.Selector.Deals.GetPipelines();
+            //var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
+            //var result = await client.Selector.Sales.GetActivityTypes();
+            //var result = await client.Selector.Sales.GetActivityEntityTypes();
+            //var result = await client.Selector.Sales.GetActivityOutcomes();
+            //var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
             //var result = await client.Selector.GetOwners();
-            //var result = await client.Selector<Owners>();
-            //var result = await client.Selector<Territories>();// TODO
-            //var result = await client.Selector<Currencies>();
-            //var result = await client.Selector<IndustryTypes>();
-            //var result = await client.Selector<BusinessTypes>();
-            //var result = await client.Selector<Campaigns>();// TODO
-            //var result = await client.Selector<ContactStatuses>();
-            //var result = await client.Selector<LifecycleStages>();
-
+            //var result = await client.Selector.GetCurrencies();
+            //var result = await client.Selector.GetIndustryTypes();
+            //var result = await client.Selector.GetBusinessTypes();
+            //var result = await client.Selector.GetContactStatuses();
+            //var result = await client.Selector.GetLifecycleStages();
 
             // Contact
-            //var result = await client.Query<>();
+            var result = await client.Contact.
+                //Create
+                //GetOnID
+                //GetAll
+                //UpdateOnID
+                //DeleteOnID
+                //Create
+                //GetOnID
+                //GetAll
+                //UpdateOnID
+                //CloneOnID
+                //DeleteOnID
+                //ForgetOnID
+                //DeleteOnBulk
+                //GetAllFields
 
+            // notes, search, phone, files
+
+
+            //var result = await client.Query<>();
+            //var result = await client.Query<Contact>().GetAll();
+            //var result = await client.Query<Contact>().GetByID(17000207787);
 
             Console.WriteLine(result);
-
-
-
-
-
-
-
-
-
-
-
-            //var myContact = await client.Query<Contact>().GetByID(1);
 
 
             //var y= myContact.updated_at;

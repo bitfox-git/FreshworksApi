@@ -8,9 +8,34 @@ namespace Bitfox.Freshworks
 {
     public interface ICRMClient
     {
-        Task<T> Selector<T>() where T : ISelector;
+        /// <summary>
+        /// Get data from the user portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        Selection Selector { get; }
 
-        Task<T> SelectorByID<T>(long id) where T : ISelector;
+        /// <summary>
+        /// Get data from the contact portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        ContactPortal Contact { get; }
+
+        /// <summary>
+        /// Get data from the account portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        AccountPortal Account { get; }
+
+
+
+
+
+        //Get Get { get; }
+        //Set Set { get; }
+        //Post Post { get; }
+
+
+        //Task<T> SelectorByID<T>(long id) where T : ISelector;
 
         Query<T> Query<T>() where T : IHasView;
 

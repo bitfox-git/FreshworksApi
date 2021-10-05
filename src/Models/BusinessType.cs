@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class BusinessTypeSelectionResponse: IUniqueID
+    public class BusinessType: IUniqueID
     {
         //{
         //    "id": 17000288051,

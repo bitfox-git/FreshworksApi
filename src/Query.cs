@@ -15,7 +15,7 @@ namespace Bitfox.Freshworks
         private readonly ICRMClient client;
         private long viewID;
 
-        private List<string> Includes = new List<string>(); 
+        private List<string> Includes = new(); 
 
         public Query(ICRMClient client)
         {
@@ -34,33 +34,33 @@ namespace Bitfox.Freshworks
             return this;
         }
 
-
-
-
-
-
-        public async Task<ListResponse<TEntity>> GetPage(long viewID, int page) 
+        public async Task<TEntity> GetByID(long id)
         {
             var endpoint = GetEndpoint();
-            var uri = $"api/{endpoint}/view/{viewID}?page={page}";
+            var uri = $"api/{endpoint}/{id}";
 
             //add includes
             uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
 
-           
 
-            var responseObject = await client.GetApiRequest<ListResponse<TEntity>>(uri);
-
-            return responseObject;
+            var resp = await client.GetApiRequest<SingleRecordResponse<TEntity>>(uri);
+            return resp.Item;
         }
+
+
+
+
 
         public async Task<List<TEntity>> GetAll()
         {
-          
-            if (this.viewID == 0) { this.viewID = await GetDefaultViewID(); }
-            var result = new List<TEntity>();
+            if (this.viewID == 0) 
+            { 
+                this.viewID = await GetDefaultViewID(); 
+            }
 
+            var result = new List<TEntity>();
             int page = 1;
+
             while (page > 0)
             {
                 var records = await GetPage(this.viewID, page);
@@ -76,20 +76,21 @@ namespace Bitfox.Freshworks
             }
 
             return result;
-
         }
 
-        public async Task<TEntity> GetByID(long id)
+        public async Task<ListResponse<TEntity>> GetPage(long viewID, int page) 
         {
             var endpoint = GetEndpoint();
-            var uri = $"api/{endpoint}/{id}";
+            var uri = $"api/{endpoint}/view/{viewID}?page={page}";
 
             //add includes
             uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
 
+           
 
-            var resp = await client.GetApiRequest<SingleRecordResponse<TEntity>>(uri);
-            return resp.Item;
+            var responseObject = await client.GetApiRequest<ListResponse<TEntity>>(uri);
+
+            return responseObject;
         }
 
         public async Task<List<View>> GetViews() 
@@ -123,7 +124,6 @@ namespace Bitfox.Freshworks
             }
             return endpoint;
         }
-
 
     }
 }

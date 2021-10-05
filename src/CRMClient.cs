@@ -20,31 +20,20 @@ namespace Bitfox.Freshworks
         {
             get
             {
-                return $"https://{subdomain}.myfreshworks.com/crm/sales/";
+                return $"https://{subdomain}.myfreshworks.com/crm/sales";
             }
         }
+
+        public Selection Selector => new(BaseURL, apikey);
+
+        public ContactPortal Contact => new(BaseURL, apikey);
+
+        public AccountPortal Account => new(BaseURL, apikey);
 
         internal CRMClient(string subdomain, string apikey)
         {
             this.subdomain = subdomain;
             this.apikey = apikey;
-        }
-
-        public async Task<T> Selector<T>() where T : ISelector
-        {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null) { return default; }
-            
-            return await GetApiRequest<T>($"api/selector/{endpoint}");
-        }
-
-        public async Task<T> SelectorByID<T>(long id) where T : ISelector
-        {
-            var endpoint = EndpointNameAttribute.GetEndpointNameOfType<T>();
-            if (endpoint == null) { return default; }
-
-            endpoint = endpoint.Replace("/[id]/", $"/{id}/");
-            return await GetApiRequest<T>($"api/selector/{endpoint}");
         }
 
         public Query<T> Query<T>() where T:IHasView {

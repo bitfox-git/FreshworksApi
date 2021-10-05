@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class LifecycleStageSelectionResponse: IUniqueID
+    public class LifecycleStage: IUniqueID
     {
     //  {
     //        "id": 18004287484,

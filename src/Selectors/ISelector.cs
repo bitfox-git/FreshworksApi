@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Selectors
 {
-    public interface ISelector
+    public interface ISelector<T>
     {
-       
     }
 }

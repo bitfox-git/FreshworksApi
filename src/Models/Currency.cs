@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class CurrencySelectionResponse: IUniqueID
+    public class Currency: IUniqueID
     {
         //{
         //    "partial": true,

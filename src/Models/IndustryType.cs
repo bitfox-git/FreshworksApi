@@ -9,7 +9,7 @@ namespace Bitfox.Freshworks.Models
     //"name": "Accounting",
     //"position": 1,
     //"partial": true
-    public class IndustryTypeSelectionResponse
+    public class IndustryType
     {
         [JsonProperty("id")]
         public long ID { get; set; }

@@ -29,7 +29,7 @@ namespace Bitfox.Freshworks.Models
 //    "lifecycle_stage_id": 18004287484
 //}
 
-    public class SalesSelectionResponse
+    public class SalesActivityType
     {
 
         [JsonProperty("id")]

@@ -66,7 +66,7 @@ using System.Collections.Generic;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class DealSelectionResponse
+    public class DealStage
     {
         [JsonProperty("id")]
         public long ID { get; set; } = default;
@@ -105,7 +105,7 @@ namespace Bitfox.Freshworks.Models
         public string AggregatedField { get; set; } = default;
 
         [JsonProperty("deal_stages")]
-        public List<DealSelectionResponse> DealStages { get; set; } = default;
+        public List<DealStage> DealStages { get; set; } = default;
 
         [JsonProperty("is_deleted")]
         public bool IsDeleted { get; set; } = default;
