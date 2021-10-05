@@ -1,0 +1,3062 @@
+{
+	"info": {
+		"_postman_id": "9d23ec77-9dd2-44bc-bae3-cade0b00b36b",
+		"name": "FreshWorks",
+		"description": "Copy the Folder name and search on https://developers.freshworks.com/crm/api/ than you get the represented samples from the documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Selector",
+			"item": [
+				{
+					"name": "TODO Deal Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_products",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TODO Territories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/territories",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"territories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TODO Campaigns",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/campaigns",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"campaigns"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Stages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_stages",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_stages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_types",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Reasons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_reasons///",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_reasons",
+								"",
+								"",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Payment Statuses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_payment_statuses",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_payment_statuses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Pipelines",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_pipelines",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_pipelines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deal Pipelines On ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/deal_pipelines/17000029663/deal_stages",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"deal_pipelines",
+								"17000029663",
+								"deal_stages"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Activity Types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/sales_activity_types",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"sales_activity_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Activity Antity Types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/sales_activity_entity_types",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"sales_activity_entity_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Activity Outcomes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/sales_activity_outcomes",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"sales_activity_outcomes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales Activity Outcomes On ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/sales_activity_types/17000241379/sales_activity_outcomes",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"sales_activity_types",
+								"17000241379",
+								"sales_activity_outcomes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Owners",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/owners",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"owners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Statuses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/contact_statuses",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"contact_statuses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Business Types",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/business_types",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"business_types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Currencies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/currencies",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"currencies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lifecycle Stages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/selector/lifecycle_stages",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"selector",
+								"lifecycle_stages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Create a Contact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contact\": {\r\n        \"id\" : 1,\r\n        \"first_name\" : \"John\",\r\n        \"last_name\" : \"Doe\",\r\n        \"job_title\": \"None\",\r\n        \"email\": \"jo@gmail.com\",\r\n        // \"emails\": [ \"A@a.com\", \"B@b.com\" ],\r\n        \"work_number\": \"+316121212\",\r\n        \"external_id\": \"\",\r\n        \"mobile_number\": \"\",\r\n        \"address\" : \"\",\r\n        \"city\" : \"\",\r\n        \"state\" : \"\",\r\n        \"zipcode\" : \"\",\r\n        \"country\" : \"\",\r\n        // \"sales_accounts\": [ \"\" ],\r\n        \"territory_id\": 0,\r\n        \"lead_source_id\": 0,\r\n        \"owner_id\": 123,\r\n        \"subscription_status\": [ \"None\", \"Bron\" ],\r\n        \"subscription_types\": \"None;Bron\",\r\n        \"medium\": \"\",\r\n        \"campaign_id\": 0,\r\n        \"keyword\": \"\",\r\n        \"time_zone\": \"\",\r\n        \"facebook\": \"\",\r\n        \"twitter\": \"\",\r\n        \"linkedin\": \"\",\r\n        // \"created_at\": \"\",\r\n        // \"updated_at\": \"\",\r\n        \"contact_status_id\":0,\r\n        \"sales_account_id\":0,\r\n        \"lifecycle_stage_id\":0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View a Contact",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}?include={value}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{value}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Contacts [X]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/view/{view_id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"view",
+								"{view_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Contact",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contact\": {\r\n        \"id\" : 1,\r\n        \"first_name\" : \"John\",\r\n        \"last_name\" : \"Doe\",\r\n        \"job_title\": \"None\",\r\n        \"email\": \"jo@gmail.com\",\r\n        // \"emails\": [ \"A@a.com\", \"B@b.com\" ],\r\n        \"work_number\": \"+316121212\",\r\n        \"external_id\": \"\",\r\n        \"mobile_number\": \"\",\r\n        \"address\" : \"\",\r\n        \"city\" : \"\",\r\n        \"state\" : \"\",\r\n        \"zipcode\" : \"\",\r\n        \"country\" : \"\",\r\n        // \"sales_accounts\": [ \"\" ],\r\n        \"territory_id\": 0,\r\n        \"lead_source_id\": 0,\r\n        \"owner_id\": 123,\r\n        \"subscription_status\": [ \"None\", \"Bron\" ],\r\n        \"subscription_types\": \"None;Bron\",\r\n        \"medium\": \"\",\r\n        \"campaign_id\": 0,\r\n        \"keyword\": \"\",\r\n        \"time_zone\": \"\",\r\n        \"facebook\": \"\",\r\n        \"twitter\": \"\",\r\n        \"linkedin\": \"\",\r\n        // \"created_at\": \"\",\r\n        // \"updated_at\": \"\",\r\n        \"contact_status_id\":0,\r\n        \"sales_account_id\":0,\r\n        \"lifecycle_stage_id\":0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk assign Owner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"selected_ids\": [\r\n        1,\r\n        2\r\n    ],\r\n    \"owner_id\": 1\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/bulk_assign_owner",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"bulk_assign_owner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clone a Contact",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contact\": {\r\n        \"id\" : 1,\r\n        \"first_name\" : \"John\",\r\n        \"last_name\" : \"Doe\",\r\n        \"job_title\": \"None\",\r\n        \"email\": \"jo@gmail.com\",\r\n        // \"emails\": [ \"A@a.com\", \"B@b.com\" ],\r\n        \"work_number\": \"+316121212\",\r\n        \"external_id\": \"\",\r\n        \"mobile_number\": \"\",\r\n        \"address\" : \"\",\r\n        \"city\" : \"\",\r\n        \"state\" : \"\",\r\n        \"zipcode\" : \"\",\r\n        \"country\" : \"\",\r\n        // \"sales_accounts\": [ \"\" ],\r\n        \"territory_id\": 0,\r\n        \"lead_source_id\": 0,\r\n        \"owner_id\": 123,\r\n        \"subscription_status\": [ \"None\", \"Bron\" ],\r\n        \"subscription_types\": \"None;Bron\",\r\n        \"medium\": \"\",\r\n        \"campaign_id\": 0,\r\n        \"keyword\": \"\",\r\n        \"time_zone\": \"\",\r\n        \"facebook\": \"\",\r\n        \"twitter\": \"\",\r\n        \"linkedin\": \"\",\r\n        // \"created_at\": \"\",\r\n        // \"updated_at\": \"\",\r\n        \"contact_status_id\":0,\r\n        \"sales_account_id\":0,\r\n        \"lifecycle_stage_id\":0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}/clone",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}",
+								"clone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Contact",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget a Contact",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}/forget",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}",
+								"forget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Delete Contacts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"selected_ids\": [\r\n        1,\r\n        2\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/bulk_destroy",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"bulk_destroy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Contact Fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}/activities.json?include={user}&limit={limit}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}",
+								"activities.json"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{user}"
+								},
+								{
+									"key": "limit",
+									"value": "{limit}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all Activites",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/settings/contacts/fields?include=field_group",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"settings",
+								"contacts",
+								"fields"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "field_group"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Create an Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_account\": {\r\n        \"id\":0,\r\n        \"name\":\"\",\r\n        \"address\":\"\",\r\n        \"city\":\"\",\r\n        \"state\":\"\",\r\n        \"zipcode\":\"\",\r\n        \"country\":\"\",\r\n        \"industry_type_id\":0,\r\n        \"business_type_id\":0,\r\n        \"number_of_employees\":0,\r\n        \"annual_revenue\":0,\r\n        \"website\":\"\",\r\n        \"phone\":\"\",\r\n        \"owner_id\":0,\r\n        \"facebook\":\"\",\r\n        \"twitter\":\"\",\r\n        \"linkedin\":\"\",\r\n        \"territory_id\":0,\r\n        \"created_at\":\"\",\r\n        \"updated_at\":\"\",\r\n        \"parent_sales_account_id\":0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View an Account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/{id}?include={owner}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{owner}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Accounts [X]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/view/{view_id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"view",
+								"{view_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Account",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_account\": {\r\n        \"custom_field\": {\r\n            \"cf_domain_name\": \"samplewebsite.yourcompany.com\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clone an Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_account\": {\r\n        \"name\": \"Widgetz.io (sample)\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/{id}/clone",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"{id}",
+								"clone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget an Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/{id}/forget",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"{id}",
+								"forget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Delete Accounts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"selected_ids\": [\r\n        1,\r\n        2\r\n    ],\r\n    \"delete_associated_contacts_deals\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_accounts/bulk_destroy",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_accounts",
+								"bulk_destroy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Account Fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/settings/sales_accounts/fields?include={field_group}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"settings",
+								"sales_accounts",
+								"fields"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{field_group}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deals",
+			"item": [
+				{
+					"name": "Create a Deal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deal\": {\r\n        \"id\": 0,\r\n        \"name\": \"\",\r\n        \"amount\": 0,\r\n        \"currency_id\": 0,\r\n        \"base_currency_amount\": 0,\r\n        \"sales_account_id\": 0,\r\n        \"deal_stage_id\": 0,\r\n        \"deal_reason_id\": 0,\r\n        \"deal_type_id\": 0,\r\n        \"owner_id\": 0,\r\n        \"expected_close\": \"\",\r\n        \"closed_date\": \"\",\r\n        \"lead_source_id\": 0,\r\n        \"campaign_id\": 0,\r\n        \"deal_product_id\": 0,\r\n        \"deal_payment_status_id\": 0,\r\n        \"probability\": 0,\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"territory_id\": 0,\r\n        \"deal_pipeline_id\": 0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Deal Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/{id}?include={owner}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{owner}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Deals [X]",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/{id}?include={owner}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{owner}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Deal",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deal\": {\r\n        \"id\": 0,\r\n        \"name\": \"\",\r\n        \"amount\": 0,\r\n        \"currency_id\": 0,\r\n        \"base_currency_amount\": 0,\r\n        \"sales_account_id\": 0,\r\n        \"deal_stage_id\": 0,\r\n        \"deal_reason_id\": 0,\r\n        \"deal_type_id\": 0,\r\n        \"owner_id\": 0,\r\n        \"expected_close\": \"\",\r\n        \"closed_date\": \"\",\r\n        \"lead_source_id\": 0,\r\n        \"campaign_id\": 0,\r\n        \"deal_product_id\": 0,\r\n        \"deal_payment_status_id\": 0,\r\n        \"probability\": 0,\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"territory_id\": 0,\r\n        \"deal_pipeline_id\": 0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clone a Deal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deal\": {\r\n        \"id\": 0,\r\n        \"name\": \"\",\r\n        \"amount\": 0,\r\n        \"currency_id\": 0,\r\n        \"base_currency_amount\": 0,\r\n        \"sales_account_id\": 0,\r\n        \"deal_stage_id\": 0,\r\n        \"deal_reason_id\": 0,\r\n        \"deal_type_id\": 0,\r\n        \"owner_id\": 0,\r\n        \"expected_close\": \"\",\r\n        \"closed_date\": \"\",\r\n        \"lead_source_id\": 0,\r\n        \"campaign_id\": 0,\r\n        \"deal_product_id\": 0,\r\n        \"deal_payment_status_id\": 0,\r\n        \"probability\": 0,\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"territory_id\": 0,\r\n        \"deal_pipeline_id\": 0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/{id}/clone",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"{id}",
+								"clone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Deal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/[id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"[id]"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget a Deal",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/{id}/forget",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"{id}",
+								"forget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Delete Deals",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"selected_ids\": [\r\n        1,\r\n        2\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/deals/bulk_destroy",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"deals",
+								"bulk_destroy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Deal Fields",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/settings/deals/fields?include={field_group}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"settings",
+								"deals",
+								"fields"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{field_group}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Update a note [X]",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": {\r\n        \"description\": \"Update the Sample note for an account\",\r\n        \"targetable_type\": \"SalesAccount\",\r\n        \"targetable_id\": 1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/notes/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"notes",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a note",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/notes/{id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"notes",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Note [X]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"note\": {\r\n        \"description\": \"Create Sample note for an account\",\r\n        \"targetable_type\": \"SalesAccount\",\r\n        \"targetable_id\": 1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/notes",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Create a Task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": {\r\n        \"id\": 0,\r\n        \"title\": \"\",\r\n        \"description\": \"\",\r\n        \"due_date\": \"\",\r\n        \"targetable_id\": 0,\r\n        \"targetable_type\": \"\",\r\n        \"owner_id\": 0,\r\n        \"status\": false,\r\n        \"creater_id\": 0,\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"outcome_id\": 0,\r\n        \"task_type_id\": 0\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View a Task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks/{id}?include={users,targetable}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks",
+								"{id}"
+							],
+							"query": [
+								{
+									"key": "include",
+									"value": "{users,targetable}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Tasks",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks?filter={open}&include={owner}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "{open}"
+								},
+								{
+									"key": "include",
+									"value": "{owner}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": {\r\n        \"title\": \"Updated Sample Task\",\r\n        \"description\": \"This is just an edited version of sample Task.\",\r\n        \"due_date\": \"Tue Jun 21 2016 11:00:00 GMT+0000\",\r\n        \"owner_id\": \"1\",\r\n        \"targetable_id\": \"1\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"task_users_attributes\": [\r\n            {\r\n                \"user_id\": \"2\"\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks/[:task_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks",
+								"[:task_id]"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Task as Done",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": {\r\n        \"status\": 1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks/[:task_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks",
+								"[:task_id]"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark Task as Done Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task\": {\r\n        \"status\": 1\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/tasks/[:task_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"tasks",
+								"[:task_id]"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Create a Appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointment\": {\r\n        \"id\": 0,\r\n        \"from_date\": \"\",\r\n        \"Start\": \"\",\r\n        \"end_date\": \"\",\r\n        \"date\": \"\",\r\n        \"End\": \"\",\r\n        \"time_zone\": \"\",\r\n        \"title\": \"\",\r\n        \"description\": \"\",\r\n        \"creater_id\": 0,\r\n        \"targetable_id\": 0,\r\n        \"targetable_type\": \"\",\r\n        \"Possible\": [\r\n            1\r\n        ],\r\n        \"location\": \"\",\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"is_allday\": false,\r\n        \"appointment_attendees_attributes\": [\r\n            \"\"\r\n        ],\r\n        \"outcome_id\": 0,\r\n        \"latitude\": \"\",\r\n        \"longitude\": \"\",\r\n        \"checkedin_at\": \"\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/appointments",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View an Appointment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/appointments/{:appointment_id}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"appointments",
+								"{:appointment_id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Appointments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/appointments?filter={upcoming}&include={creater}",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"appointments"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "{upcoming}"
+								},
+								{
+									"key": "include",
+									"value": "{creater}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Appointment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointment\": {\r\n        \"title\": \"Updated Appointment\",\r\n        \"description\": \"This is just an updated version of sample Appointment.\",\r\n        \"from_date\": \"Tue Jun 21 2016 08:00:00 GMT+0530 (IST)\",\r\n        \"end_date\": \"Tue Jun 21 2016 08:30:00 GMT+0530 (IST)\",\r\n        \"time_zone\": \"Hawaii\",\r\n        \"location\": \"Hawaii\",\r\n        \"targetable_id\": \"115765\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"appointment_attendees_attributes\": [\r\n            {\r\n                \"attendee_type\": \"FdMultitenant::User\",\r\n                \"attendee_id\": \"222\"\r\n            },\r\n            {\r\n                \"attendee_type\": \"FdMultitenant::User\",\r\n                \"attendee_id\": \"223\"\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/appointments/[:appointment_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"appointments",
+								"[:appointment_id]"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"appointment\": {\r\n        \"title\": \"Updated Appointment\",\r\n        \"description\": \"This is just an updated version of sample Appointment.\",\r\n        \"from_date\": \"Tue Jun 21 2016 08:00:00 GMT+0530 (IST)\",\r\n        \"end_date\": \"Tue Jun 21 2016 08:30:00 GMT+0530 (IST)\",\r\n        \"time_zone\": \"Hawaii\",\r\n        \"location\": \"Hawaii\",\r\n        \"targetable_id\": \"115765\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"appointment_attendees_attributes\": [\r\n            {\r\n                \"attendee_type\": \"FdMultitenant::User\",\r\n                \"attendee_id\": \"222\"\r\n            },\r\n            {\r\n                \"attendee_type\": \"FdMultitenant::User\",\r\n                \"attendee_id\": \"223\"\r\n            }\r\n        ]\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/appointments/[:appointment_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"appointments",
+								"[:appointment_id]"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales Activities",
+			"item": [
+				{
+					"name": "Create a Sales activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_activity\": {\r\n        \"id\": 0,\r\n        \"title\": \"\",\r\n        \"sales_activity_type_id\": 0,\r\n        \"sales_activity_outcome_id\": 0,\r\n        \"start_date\": \"\",\r\n        \"end_date\": \"\",\r\n        \"notes\": \"\",\r\n        \"owner_id\": 0,\r\n        \"targetable_id\": 0,\r\n        \"targetable_type\": \"\",\r\n        \"Possible\": [\r\n            1,\r\n            2\r\n        ],\r\n        \"creater_id\": 0,\r\n        \"created_at\": \"\",\r\n        \"updated_at\": \"\",\r\n        \"location\": \"\",\r\n        \"latitude\": \"\",\r\n        \"longitude\": \"\",\r\n        \"checkedin_at\": \"\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_activities",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View a Sales activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_activity\": {\r\n        \"title\": \"ticket\",\r\n        \"notes\": \"sample\",\r\n        \"targetable_id\": \"1\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"start_date\": \"2017-12-04T17:00:00+05:30\",\r\n        \"end_date\": \"2017-12-04T17:30:00+05:30\",\r\n        \"owner_id\": \"1\",\r\n        \"sales_activity_type_id\": \"2\",\r\n        \"sales_activity_outcome_id\": \"1\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_activities",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_activities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Sales activities",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_activity\": {\r\n        \"title\": \"ticket\",\r\n        \"notes\": \"sample\",\r\n        \"targetable_id\": \"1\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"start_date\": \"2017-12-04T17:00:00+05:30\",\r\n        \"end_date\": \"2017-12-04T17:30:00+05:30\",\r\n        \"owner_id\": \"1\",\r\n        \"sales_activity_type_id\": \"2\",\r\n        \"sales_activity_outcome_id\": \"1\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_activities?per_page=10&page=1",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_activities"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Sales activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sales_activity\": {\r\n        \"title\": \"sample test\",\r\n        \"notes\": \"sample\",\r\n        \"targetable_id\": \"1\",\r\n        \"targetable_type\": \"Contact\",\r\n        \"owner_id\": \"2\",\r\n        \"sales_activity_type_id\": \"2\",\r\n        \"sales_activity_outcome_id\": \"1\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_activities?per_page=10&page=1",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_activities"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Sales activity",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/sales_activities/[:sales_activity_id]",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"sales_activities",
+								"[:sales_activity_id]"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Phone",
+			"item": [
+				{
+					"name": "Manual Call Log [X]",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone_call\": {\r\n        \"call_direction\": true,\r\n        \"targetable_type\": \"contact\",\r\n        \"targetable\": {\r\n            \"id\": \"1\",\r\n            \"first_name\": \"Jane\",\r\n            \"last_name\": \"Sampleton (sample)\",\r\n            \"work_number \": \"5304915427\",\r\n            \"mobile_number \": \"11919457004 \"\r\n        },\r\n        \"note \": {\r\n            \"description\": \"Sample note\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/phone_calls",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"phone_calls"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Create a File",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/D:/images/icon_sample.png"
+							}
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/documents",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Link",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://docs.google.com/document/d/abcd123\",\r\n    \"is_shared\": false,\r\n    \"targetable_id\": 1,\r\n    \"targetable_type\": \"Contact\",\r\n    \"name\": \"contact 1 doc\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/document_links",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"document_links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all Files and Links",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token token={{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/{id}/document_associations",
+							"protocol": "https",
+							"host": [
+								"{{domain}}",
+								"myfreshworks",
+								"com"
+							],
+							"path": [
+								"crm",
+								"sales",
+								"api",
+								"contacts",
+								"{id}",
+								"document_associations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "overview",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token token={{apikey}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{domain}}.myfreshworks.com/crm/sales/api/contacts/17006659898",
+					"protocol": "https",
+					"host": [
+						"{{domain}}",
+						"myfreshworks",
+						"com"
+					],
+					"path": [
+						"crm",
+						"sales",
+						"api",
+						"contacts",
+						"17006659898"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "domain",
+			"value": "notdetected-team"
+		},
+		{
+			"key": "apikey",
+			"value": "OOuMhjaasZwwkfzO__tZFQ"
+		}
+	]
+}
