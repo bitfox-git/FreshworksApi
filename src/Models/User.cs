@@ -5,30 +5,31 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-    //    "id": 31234515422,
-    //    "display_name": "John Doe",
-    //    "email": "john@email.nl",
-    //    "is_active": true,
-    //    "work_number": "+31600000000",
-    //    "mobile_number": "+31600000000"
     public class User
     {
         [JsonProperty("id")]
-        public long ID { get; set; }
+        public long? ID { get; set; } = null;
 
         [JsonProperty("display_name")]
-        public string DisplayName { get; set; }
+        public string DisplayName { get; set; } = null;
 
         [JsonProperty("email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = null;
 
         [JsonProperty("is_active")]
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; } = null;
 
         [JsonProperty("work_number")]
-        public string WorkNumber { get; set; }
+        public string WorkNumber { get; set; } = null;
 
         [JsonProperty("mobile_number")]
-        public string MobileNumber { get; set; }
+        public string MobileNumber { get; set; } = null;
+
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; } = null;
+
+        [JsonProperty("type")]
+        public string Type { get; set; } = null;
+
     }
 }

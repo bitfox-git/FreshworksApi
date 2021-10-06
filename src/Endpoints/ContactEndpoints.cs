@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class ContactPortal: BasePortal<ContactObject, ContactObject, ContactModel>
+    public class ContactEndpoints: BasePortal<ContactObject, ContactObject, ContactModel>
     {
-        public ContactPortal(string baseURL, string apikey) : base($"{baseURL}/api/contacts", apikey)
+        public ContactEndpoints(string baseURL, string apikey) : base($"{baseURL}/api/contacts", apikey)
         { }
 
         // Clone a user

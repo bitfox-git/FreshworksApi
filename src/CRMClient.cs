@@ -26,11 +26,22 @@ namespace Bitfox.Freshworks
 
         public Selection Selector => new(BaseURL, apikey);
 
-        public ContactPortal Contact => new(BaseURL, apikey);
+        public ContactEndpoints Contact => new(BaseURL, apikey);
 
-        public AccountPortal Account => new(BaseURL, apikey);
+        public AccountEndpoints Account => new(BaseURL, apikey);
 
-        //public DealPortal Deal => new(BaseURL, apikey);
+        public DealEndpoints Deal => new(BaseURL, apikey);
+
+        public TaskEndpoints Task => new(BaseURL, apikey);
+
+        public AppointmentEndpoints Appointment => new(BaseURL, apikey);
+
+        public AppointmentEndpoints Sales => new(BaseURL, apikey);
+
+
+
+
+
 
 
         internal CRMClient(string subdomain, string apikey)

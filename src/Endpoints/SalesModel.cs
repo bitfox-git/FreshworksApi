@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class DealPortal : BasePortal<>
+    public class SalesModel: SalesObjects
     {
+
+
+
+
     }
 }

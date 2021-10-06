@@ -18,13 +18,39 @@ namespace Bitfox.Freshworks
         /// Get data from the contact portal.
         /// </summary>
         /// <returns>Portal data.</returns>
-        ContactPortal Contact { get; }
+        ContactEndpoints Contact { get; }
 
         /// <summary>
         /// Get data from the account portal.
         /// </summary>
         /// <returns>Portal data.</returns>
-        AccountPortal Account { get; }
+        AccountEndpoints Account { get; }
+
+        /// <summary>
+        /// Get data from the Deals portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        DealEndpoints Deal { get; }
+
+        /// <summary>
+        /// Get data from the Deals portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        TaskEndpoints Task { get; }
+
+
+        /// <summary>
+        /// Get data from the Deals portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        AppointmentEndpoints Appointment { get; }
+
+
+        /// <summary>
+        /// Get data from the Deals portal.
+        /// </summary>
+        /// <returns>Portal data.</returns>
+        SalesEndpoints Sales { get; }
 
 
 

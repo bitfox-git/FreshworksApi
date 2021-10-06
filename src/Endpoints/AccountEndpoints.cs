@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AccountPortal: BasePortal<AccountObject, AccountObject, AccountModel>
+    public class AccountEndpoints: BasePortal<AccountObject, AccountObject, AccountModel>
     {
-        public AccountPortal(string baseURL, string apikey): base ($"{baseURL}/api/sales_accounts", apikey)
+        public AccountEndpoints(string baseURL, string apikey): base ($"{baseURL}/api/sales_accounts", apikey)
         { }
 
         // Clone a account

@@ -151,8 +151,109 @@ namespace Sample
 
             #region Deals
 
+            //DealObject createObj = new();
+            //createObj.Deal = new()
+            //{
+            //    Name = "Okido",
+            //    Amount = "12",
+            //    CurrencyID = 17000029017,
+            //    SalesAccountID = 17001067154,
+            //    OwnerID = 17000033771
+            //};
+
+            //DealObject updateObj = new();
+            //updateObj.Deal = new()
+            //{
+            //    Name = "niek 2"
+            //};
+
+
+            //BulkDeleteObject deleteObj = new()
+            //{
+            //    SelectedIDs = new long[] { 17000498540 }
+            //};
+
+            //var result = await client.Deal.Create(createObj);
+            //var result = await client.Deal.GetAllByID(17001463650);
+            //var result = await client.Deal.GetByID(17000498540);
+            //var result = await client.Deal.UpdateByID(17000498540, updateObj);
+            //var result = await client.Deal.DeleteByID(17000498540);
+            //var result = await client.Deal.CloneByID(17000498540, updateObj);
+            //var result = await client.Deal.ForgetByID(17001220091);
+            //var result = await client.Deal.DeleteBulk(deleteObj);
+            //var result = await client.Deal.GetAllFields();
 
             #endregion
+
+            #region Notes
+            #endregion
+
+            #region Tasks
+
+            //TaskObject createObj = new();
+            //createObj.Task = new()
+            //{
+            //    Title = "Okido",
+            //    Description = "12",
+            //    TargetableID = "17001067154",
+            //    OwnerID = 17000033771
+            //};
+
+            //TaskObject updateObj = new();
+            //updateObj.Task = new()
+            //{
+            //    Status = 2
+            //};
+
+            //var result = await client.Task.Create(createObj);
+            //var result = await client.Task.GetAllByID(17001463650);
+            //var result = await client.Task.GetByID(17000498540);
+            //var result = await client.Task.UpdateByID(17000498540, updateObj);
+            //var result = await client.Task.DeleteByID(17000498540);
+            //var result = await client.Task.UpdateMarkByID(17000498540, updateObj);
+            //var result = await client.Task.DeleteMarkByID(17000498540);
+            //var result = await client.Task.CloneByID(17000498540, updateObj);
+            //var result = await client.Task.ForgetByID(17001220091);
+            //var result = await client.Task.DeleteBulk(deleteObj);
+            //var result = await client.Task.GetAllFields();
+
+            #endregion
+
+
+            #region Appointments
+
+            //TaskObject createObj = new();
+            //createObj.Task = new()
+            //{
+            //    Title = "Okido",
+            //    Description = "12",
+            //    TargetableID = "17001067154",
+            //    OwnerID = 17000033771
+            //};
+
+            //TaskObject updateObj = new();
+            //updateObj.Task = new()
+            //{
+            //    Status = 2
+            //};
+
+            //var result = await client.Task.Create(createObj);
+            //var result = await client.Task.GetAllByID(17001463650);
+            //var result = await client.Task.GetByID(17000498540);
+            //var result = await client.Task.UpdateByID(17000498540, updateObj);
+            //var result = await client.Task.DeleteByID(17000498540);
+            //var result = await client.Task.UpdateMarkByID(17000498540, updateObj);
+            //var result = await client.Task.DeleteMarkByID(17000498540);
+            //var result = await client.Task.CloneByID(17000498540, updateObj);
+            //var result = await client.Task.ForgetByID(17001220091);
+            //var result = await client.Task.DeleteBulk(deleteObj);
+            //var result = await client.Task.GetAllFields();
+
+            #endregion
+
+
+
+
 
 
             Console.WriteLine(result);
