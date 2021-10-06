@@ -1,6 +1,7 @@
 ﻿using Bitfox.Freshworks;
 using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkModels;
+using Bitfox.Freshworks.NetworkObjects;
 using Bitfox.Freshworks.Selectors;
 using Newtonsoft.Json.Linq;
 using System;
@@ -94,7 +95,7 @@ namespace Sample
             //var result = await client.Contact.GetAllByID(17001463640);
             //var result = await client.Contact.GetByID(17007472886);
             //var result = await client.Contact.UpdateByID(17007472886, updateObj);
-            //var result = await client.Contact.DeleteByID(17007472886); // TODO
+            //var result = await client.Contact.DeleteByID(17007472886);
             //var result = await client.Contact.CloneByID(17007472886, cloneObj);
             //var result = await client.Contact.ForgetByID(17007476714);
             //var result = await client.Contact.CreateBulk(assignObj);
@@ -105,13 +106,56 @@ namespace Sample
             #endregion
 
             #region Account
-            //client.Account
+
+            //AccountObject accountObj = new();
+            //accountObj.Account = new()
+            //{
+            //    Name = "John",
+            //    Address = "Doe",
+            //    City = "None",
+            //    State = "newContent@gmail.com",
+            //    ZipCode = "okido",
+            //    Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
+            //    Country = "Netherlands"
+            //};
+
+            //AccountObject accountUpdateObj = new();
+            //accountUpdateObj.Account = new()
+            //{
+            //    Name = "niek 2"
+            //};
+
+            //AccountObject accountCloneObj = new();
+            //accountCloneObj.Account = new()
+            //{
+            //    Name = "John"
+            //};
+
+            //AccountBulkDeleteObject deleteObj = new()
+            //{
+            //    SelectedIDs = new long[] { 17001220091 },
+            //    DeleteAssociatedContactsDeals = false
+            //};
+
+            //var result = await client.Account.Create(accountObj);
+            //var result = await client.Account.GetAllByID(17001463655);
+            //var result = await client.Account.GetByID(17001220076);
+            //var result = await client.Account.UpdateByID(17001219885, accountUpdateObj);
+            //var result = await client.Account.DeleteByID(17001219885);
+            //var result = await client.Account.CloneByID(17001220091, accountCloneObj);
+            //var result = await client.Account.ForgetByID(17001220091);
+            //var result = await client.Account.DeleteBulk(deleteObj);
+            //var result = await client.Account.GetAllFields();
+
+            #endregion
+
+            #region Deals
 
 
             #endregion
 
 
-            //Console.WriteLine(result);
+            Console.WriteLine(result);
 
 
 

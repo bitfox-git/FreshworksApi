@@ -30,6 +30,9 @@ namespace Bitfox.Freshworks
 
         public AccountPortal Account => new(BaseURL, apikey);
 
+        //public DealPortal Deal => new(BaseURL, apikey);
+
+
         internal CRMClient(string subdomain, string apikey)
         {
             this.subdomain = subdomain;

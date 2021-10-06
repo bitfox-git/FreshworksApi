@@ -14,5 +14,8 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("total")]
         public int? Total { get; set; } = null;
+
+        [JsonProperty("avatar_data")]
+        public AvatarData AvatarData { get; set; } = null;
     }
 }

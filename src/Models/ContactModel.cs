@@ -190,6 +190,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("lifecycle_stage_id")]
         public long? LifecycleStageID { get; set; } = null;
 
+
         /// <summary>
         /// 
         /// </summary>
