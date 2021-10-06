@@ -39,12 +39,13 @@ namespace Sample
             //var result = await client.Selector.GetLifecycleStages();
 
             // Contact
-            ContactModel contactModel = new()
+            ContactModel contactModel = new();
+            contactModel.Contact = new()
             {
                 FirstName = "John",
                 LastName = "Doe",
                 JobTitle = "None",
-                Email = "test9@gmail.com",
+                Email = "test12@gmail.com",
                 DisplayName = "okido",
                 Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
                 WorkNumber = "6121212",
@@ -58,21 +59,26 @@ namespace Sample
 
 
 
-            var result = await client.Contact.Create(contactModel);
-                //Create
-                //GetOnID
-                //GetAll
-                //UpdateOnID
-                //DeleteOnID
-                //Create
-                //GetOnID
-                //GetAll
-                //UpdateOnID
-                //CloneOnID
-                //DeleteOnID
-                //ForgetOnID
-                //DeleteOnBulk
-                //GetAllFields
+            // var result = await client.Contact.Create(contactModel);
+            // var result = await client.Contact.GetAll(17001463637);
+            // var result = await client.Contact.GetOnID(17007304795);
+            // var result = await client.Contact.UpdateOnID(17007304795, contactModel);
+            // var result = await client.Contact.DeleteOnID(17007333582);
+
+            //Create
+            //GetOnID
+            //GetAll
+            //UpdateOnID
+            //DeleteOnID
+            //Create
+            //GetOnID
+            //GetAll
+            //UpdateOnID
+            //CloneOnID
+            //DeleteOnID
+            //ForgetOnID
+            //DeleteOnBulk
+            //GetAllFields
 
             // notes, search, phone, files
 

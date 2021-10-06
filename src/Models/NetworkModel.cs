@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class NetworkModel
+    public class NetworkModel<TResponse>
     {
         protected readonly HttpClient Client = new();
 
-        public async Task<T> GetApiRequest<T>(string url, string apikey, bool getFirstItem = false)
+        protected async Task<TResponse> GetApiRequest(string url, string apikey, bool getFirstItem = false)
         {
             var request = new HttpRequestMessage
             {
@@ -27,7 +27,6 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-
             JsonSerializerSettings settings = new()
             {
                 ContractResolver = new CustomResolver()
@@ -38,26 +37,18 @@ namespace Bitfox.Freshworks.Models
             {
                 JObject obj = JObject.Parse(data);
                 string key = obj.Properties().Select(p => p.Name).ToList().First();
-                return obj[key].ToObject<T>();
+                return obj[key].ToObject<TResponse>();
             }
             else
             {
-                return JsonConvert.DeserializeObject<T>(data, settings);
+                return JsonConvert.DeserializeObject<TResponse>(data, settings);
             }
         }
 
-        public async Task<Result<Dictionary<string, T>>> PostApiRequest<T>(string url, string apikey, T body, string bodyName) where T: IUniqueID
+        protected async Task<Result<TResponse>> PostApiRequest<TRequest>(string url, string apikey, TRequest body)
         {
-            Dictionary<string, T> bodyReq = new();
-            bodyReq.Add(bodyName, body);
-
-            JsonSerializerSettings settings = new()
-            {
-                ContractResolver = new CustomResolver()
-            };
-
             // create json & remove unused content
-            var json = JsonConvert.SerializeObject(bodyReq, Formatting.None,
+            var json = JsonConvert.SerializeObject(body, Formatting.None,
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore
@@ -76,10 +67,66 @@ namespace Bitfox.Freshworks.Models
 
             var resp = await Client.SendAsync(request);
             var content = await resp.Content.ReadAsStringAsync();
-            var response = JsonConvert.DeserializeObject<Dictionary<string, T>>(content, settings);
-            return new Result<Dictionary<string, T>>(response);
+            JsonSerializerSettings settings = new()
+            {
+                ContractResolver = new CustomResolver()
+            };
+
+            var response = JsonConvert.DeserializeObject<TResponse>(content, settings);
+            return new Result<TResponse>(response);
         }
 
+        protected async Task<TResponse> UpdateApiRequest<TRequest>(string url, string apikey, TRequest body)
+        {
+            var serializesettings = new JsonSerializerSettings();
+            serializesettings.NullValueHandling = NullValueHandling.Ignore;
+            serializesettings.DefaultValueHandling = DefaultValueHandling.Ignore;
+
+            var json = JsonConvert.SerializeObject(body, serializesettings);
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Put,
+                RequestUri = new Uri(url),
+                Headers = {
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={apikey}" },
+
+
+                },
+                Content = new StringContent(json, Encoding.UTF8, "application/json")
+            };
+
+            var resp = await Client.SendAsync(request);
+            //if (!resp.IsSuccessStatusCode)
+            //{
+            //    throw new Exception(resp.ReasonPhrase);
+            //}
+
+            var content = await resp.Content.ReadAsStringAsync();
+
+            JsonSerializerSettings settings = new()
+            {
+                ContractResolver = new CustomResolver()
+            };
+
+            var response = JsonConvert.DeserializeObject<TResponse>(content, settings);
+            return response;
+        }
+
+        protected async Task<bool> DeleteApiRequest(string url, string apikey)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(url),
+                Headers = {
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={apikey}" }
+                }
+            };
+
+            var result = await Client.SendAsync(request);
+            return result.IsSuccessStatusCode;
+        }
 
     }
 }

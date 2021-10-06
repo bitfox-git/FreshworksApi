@@ -8,23 +8,30 @@ using System.Text;
 namespace Bitfox.Freshworks.Models
 {
 
-
-
-    [EndpointName("contacts")]
-    [JsonPluralName("contacts")]
-    [JsonSingularName("contact")]
-    [Include("lists")]
+    // [EndpointName("contacts")]
+    // [JsonPluralName("contacts")]
+    // [JsonSingularName("contact")]
+    // [Include("lists")]
     public class ContactModel : IUniqueID, IHasView
     {
+        // Req/Res
+        [JsonProperty("contact")]
+        public ContactModel Contact { get; set; } = null;
 
-        [JsonProperty("code")]
-        public int Code { get; set; }
+        [JsonProperty("contacts")]
+        public List<ContactModel> Contacts { get; set; } = null;
 
-        [JsonProperty("message")]
-        public string[] Message { get; set; }
+        [JsonProperty("meta")] 
+        public Meta Meta { get; set; } = null; 
+
+        // Res Error
+        [JsonProperty("errors")]
+        public Error Errors { get; set; } = null;
 
 
-        // READ-ONLY
+
+
+        // DATA
 
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
