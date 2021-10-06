@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.NetworkObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +10,18 @@ namespace Bitfox.Freshworks.Selectors
 {
     public class SelectionDeals: NetworkModel
     {
-        private readonly string BaseURL;
-        private readonly string ApiKey;
-
-        public SelectionDeals(string baseURL, string apikey)
-        {
-            BaseURL = baseURL;
-            ApiKey = apikey;
-        }
+        public SelectionDeals(string baseURL, string apikey): base(baseURL, apikey)
+        { }
 
         /// <summary>
         /// Fetch all existing deal stages' details of default pipeline in the Freshsales portal.
         /// Will give id, name, deal_pipeline_id of the deal stages.
         /// </summary>
         /// <returns>List of all deal stages</returns>
-        public async Task<List<DealStage>> GetStages()
+        public async Task<DealStagesObject> GetStages()
         {
-            string url = $"{BaseURL}/api/selector/deal_stages";
-            return await GetApiRequest<List<DealStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_stages";
+            return await GetApiRequest<DealStagesObject>(path);
         }
 
         /// <summary>
@@ -34,10 +29,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal types
         /// </summary>
         /// <returns>List of all deal types</returns>
-        public async Task<List<DealStage>> GetTypes()
+        public async Task<DealTypesObject> GetTypes()
         {
-            string url = $"{BaseURL}/api/selector/deal_types";
-            return await GetApiRequest<List<DealStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_types";
+            return await GetApiRequest<DealTypesObject>(path);
         }
 
         /// <summary>
@@ -45,10 +40,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal reasons
         /// </summary>
         /// <returns>List of all deal reasons</returns>
-        public async Task<List<DealStage>> GetReasons()
+        public async Task<DealReasonsObject> GetReasons()
         {
-            string url = $"{BaseURL}/api/selector/deal_reasons";
-            return await GetApiRequest<List<DealStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_reasons";
+            return await GetApiRequest<DealReasonsObject>(path);
         }
 
         /// <summary>
@@ -56,10 +51,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal pipelines
         /// </summary>
         /// <returns>List of all deal pipelines</returns>
-        public async Task<List<DealStage>> GetPipelines()
+        public async Task<DealPipelinesObject> GetPipelines()
         {
-            string url = $"{BaseURL}/api/selector/deal_pipelines";
-            return await GetApiRequest<List<DealStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_pipelines";
+            return await GetApiRequest<DealPipelinesObject>(path);
         }
 
         /// <summary>
@@ -68,10 +63,10 @@ namespace Bitfox.Freshworks.Selectors
         /// </summary>
         /// <param name="id">Owner ID</param>
         /// <returns>List of all deal pipelines based on ID</returns>
-        public async Task<List<DealStage>> GetPipelinesOnID(long id)
+        public async Task<DealStagesObject> GetPipelinesOnID(long id)
         {
-            string url = $"{BaseURL}/api/selector/deal_pipelines/{id}/deal_stages";
-            return await GetApiRequest<List<DealStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_pipelines/{id}/deal_stages";
+            return await GetApiRequest<DealStagesObject>(path);
         }
 
         /// <summary>
@@ -79,10 +74,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal payment statuses
         /// </summary>
         /// <returns>List of all deal payment statuses</returns>
-        public async Task<List<PaymentStatus>> GetPaymentStatuses()
+        public async Task<DealPaymentStatusesObject> GetPaymentStatuses()
         {
-            string url = $"{BaseURL}/api/selector/deal_payment_statuses";
-            return await GetApiRequest<List<PaymentStatus>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/deal_payment_statuses";
+            return await GetApiRequest<DealPaymentStatusesObject>(path);
         }
     }
 }

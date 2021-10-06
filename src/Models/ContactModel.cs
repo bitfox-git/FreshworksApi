@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -7,32 +8,8 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-
-    // [EndpointName("contacts")]
-    // [JsonPluralName("contacts")]
-    // [JsonSingularName("contact")]
-    // [Include("lists")]
-    public class ContactModel : IUniqueID, IHasView
+    public class ContactModel : ContactObjects
     {
-        // Req/Res
-        [JsonProperty("contact")]
-        public ContactModel Contact { get; set; } = null;
-
-        [JsonProperty("contacts")]
-        public List<ContactModel> Contacts { get; set; } = null;
-
-        [JsonProperty("meta")] 
-        public Meta Meta { get; set; } = null; 
-
-        // Res Error
-        [JsonProperty("errors")]
-        public Error Errors { get; set; } = null;
-
-
-
-
-        // DATA
-
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 

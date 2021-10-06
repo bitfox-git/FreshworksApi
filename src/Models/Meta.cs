@@ -10,9 +10,9 @@ namespace Bitfox.Freshworks.Models
     public class Meta
     {
         [JsonProperty("total_pages")]
-        public int TotalPages { get; set; }
-        
+        public int? TotalPages { get; set; } = null;
+
         [JsonProperty("total")]
-        public int Total { get; set;  }
+        public int? Total { get; set; } = null;
     }
 }

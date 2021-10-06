@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,6 @@ namespace Bitfox.Freshworks.Selectors
 {
     public class Selection : NetworkModel
     {
-        private readonly string BaseURL;
-        private readonly string ApiKey;
-
         /// <summary>
         /// Get data of all deals.
         /// </summary>
@@ -23,10 +21,8 @@ namespace Bitfox.Freshworks.Selectors
         /// </summary>
         public readonly SelectionSales Sales;
 
-        public Selection(string baseURL, string apikey)
+        public Selection(string baseURL, string apikey): base(baseURL, apikey)
         {
-            BaseURL = baseURL;
-            ApiKey = apikey;
             Deals = new SelectionDeals(baseURL, apikey);
             Sales = new SelectionSales(baseURL, apikey);
         }
@@ -36,10 +32,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the users
         /// </summary>
         /// <returns>List of all owners</returns>
-        public async Task<List<User>> GetOwners()
+        public async Task<UsersObject> GetOwners()
         {
-            string url = $"{BaseURL}/api/selector/owners";
-            return await GetApiRequest<List<User>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/owners";
+            return await GetApiRequest<UsersObject>(path);
         }
 
         /// <summary>
@@ -47,10 +43,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, currency code and other details of currencies
         /// </summary>
         /// <returns>List of all currencies</returns>
-        public async Task<List<Currency>> GetCurrencies()
+        public async Task<CurrenciesObject> GetCurrencies()
         {
-            string url = $"{BaseURL}/api/selector/currencies";
-            return await GetApiRequest<List<Currency>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/currencies";
+            return await GetApiRequest<CurrenciesObject>(path);
         }
 
         /// <summary>
@@ -58,10 +54,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the business types
         /// </summary>
         /// <returns>List of all business types</returns>
-        public async Task<List<BusinessType>> GetBusinessTypes()
+        public async Task<BusinessTypesObject> GetBusinessTypes()
         {
-            string url = $"{BaseURL}/api/selector/business_types";
-            return await GetApiRequest<List<BusinessType>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/business_types";
+            return await GetApiRequest<BusinessTypesObject>(path);
         }
 
         /// <summary>
@@ -69,10 +65,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the contact statuses.
         /// </summary>
         /// <returns>List of all contact statuses</returns>
-        public async Task<List<ContactStatus>> GetContactStatuses()
+        public async Task<ContactStatusesObject> GetContactStatuses()
         {
-            string url = $"{BaseURL}/api/selector/contact_statuses";
-            return await GetApiRequest<List<ContactStatus>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/contact_statuses";
+            return await GetApiRequest<ContactStatusesObject>(path);
         }
 
         /// <summary>
@@ -80,10 +76,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name and contact statuses of the lifecycle stage.
         /// </summary>
         /// <returns>List of all lifecycle stages</returns>
-        public async Task<List<LifecycleStage>> GetLifecycleStages()
+        public async Task<LifecycleStagesObject> GetLifecycleStages()
         {
-            string url = $"{BaseURL}/api/selector/lifecycle_stages";
-            return await GetApiRequest<List<LifecycleStage>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/lifecycle_stages";
+            return await GetApiRequest<LifecycleStagesObject>(path);
         }
 
         /// <summary>
@@ -91,10 +87,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the industry types
         /// </summary>
         /// <returns>List of all industry types</returns>
-        public async Task<List<IndustryType>> GetIndustryTypes()
+        public async Task<IndustryTypesObject> GetIndustryTypes()
         {
-            string url = $"{BaseURL}/api/selector/industry_types";
-            return await GetApiRequest<List<IndustryType>>(url, ApiKey, getFirstItem: true);
+            string path = $"/api/selector/industry_types";
+            return await GetApiRequest<IndustryTypesObject>(path);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Bitfox.Freshworks;
 using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.Selectors;
 using Newtonsoft.Json.Linq;
 using System;
@@ -18,7 +19,8 @@ namespace Sample
                                 .SetApiKey("OOuMhjaasZwwkfzO__tZFQ")
                                 .Build();
 
-            // Selection
+            #region Selection
+
             //var result = await client.Selection<Campaigns>();   // TODO: create sample data that we know, how
             //var result = await client.Selection<DealProducts>();// TODO: create sample data that we know, how
             //var result = await client.Selection<Territories>(); // TODO: create sample data that we know, how
@@ -38,56 +40,102 @@ namespace Sample
             //var result = await client.Selector.GetContactStatuses();
             //var result = await client.Selector.GetLifecycleStages();
 
-            // Contact
-            ContactModel contactModel = new();
-            contactModel.Contact = new()
-            {
-                FirstName = "John",
-                LastName = "Doe",
-                JobTitle = "None",
-                Email = "test12@gmail.com",
-                DisplayName = "okido",
-                Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
-                WorkNumber = "6121212",
-                MobileNumber = "+316121212",
-                Address = "Heiweg 6",
-                City = "Oud-Alblas",
-                State = "South-Holland",
-                ZipCode = "2969LC",
-                Country =  "Netherlands"
-            };
+            #endregion
+
+            #region Contact
+
+            //ContactObject contactObj = new();
+            //contactObj.Contact = new()
+            //{
+            //    FirstName = "John",
+            //    LastName = "Doe",
+            //    JobTitle = "None",
+            //    Email = "newContent@gmail.com",
+            //    DisplayName = "okido",
+            //    Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
+            //    WorkNumber = "6121212",
+            //    MobileNumber = "+316121212",
+            //    Address = "Heasdasiweg 6s",
+            //    City = "Ouerd-Albasdlas",
+            //    State = "South-Holland",
+            //    ZipCode = "2999LC",
+            //    Country = "Netherlands"
+            //};
+
+            //ContactObject updateObj = new();
+            //updateObj.Contact = new()
+            //{
+            //    FirstName = "John",
+            //    LastName = "Doe",
+            //    JobTitle = "None"
+            //};
+
+            //ContactObject cloneObj = new();
+            //cloneObj.Contact = new()
+            //{
+            //    FirstName = "John",
+            //    LastName = "Doe",
+            //    JobTitle = "None",
+            //    Email = "newContent3@gmail.com"
+            //};
+
+            //BulkAssignObject assignObj = new()
+            //{
+            //    OwnerID = 17007472886,
+            //    SelectedIDs = new long[] { 17001463640 }
+            //};
+
+            //BulkDeleteObject deleteObj = new()
+            //{
+            //    SelectedIDs = new long[] { 17001463630 }
+            //};
+
+            //var result = await client.Contact.Create(contactObj);
+            //var result = await client.Contact.GetAllByID(17001463640);
+            //var result = await client.Contact.GetByID(17007472886);
+            //var result = await client.Contact.UpdateByID(17007472886, updateObj);
+            //var result = await client.Contact.DeleteByID(17007472886); // TODO
+            //var result = await client.Contact.CloneByID(17007472886, cloneObj);
+            //var result = await client.Contact.ForgetByID(17007476714);
+            //var result = await client.Contact.CreateBulk(assignObj);
+            //var result = await client.Contact.DeleteBulk(deleteObj);
+            //var result = await client.Contact.GetAllFields();
+            //var result = await client.Contact.GetAllActivitiesByID(17007472886);
+
+            #endregion
+
+            #region Account
+            //client.Account
+
+
+            #endregion
+
+
+            //Console.WriteLine(result);
 
 
 
-            // var result = await client.Contact.Create(contactModel);
-            // var result = await client.Contact.GetAll(17001463637);
-            // var result = await client.Contact.GetOnID(17007304795);
-            // var result = await client.Contact.UpdateOnID(17007304795, contactModel);
-            // var result = await client.Contact.DeleteOnID(17007333582);
 
-            //Create
-            //GetOnID
-            //GetAll
-            //UpdateOnID
-            //DeleteOnID
-            //Create
-            //GetOnID
-            //GetAll
-            //UpdateOnID
-            //CloneOnID
-            //DeleteOnID
-            //ForgetOnID
-            //DeleteOnBulk
-            //GetAllFields
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             // notes, search, phone, files
 
 
             //var result = await client.Query<>();
-            //var result = await client.Query<Contact>().GetAll();
+            //var result = await client.Query<Contact>().GetAllByID();
             //var result = await client.Query<Contact>().GetByID(17000207787);
-
-            Console.WriteLine(result);
 
 
             //var y= myContact.updated_at;

@@ -1,46 +1,67 @@
-﻿using System.Threading.Tasks;
+﻿using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class BasePortal<TResponse>: NetworkModel<TResponse>
+    public class BasePortal<TCreateRequest, TUpdateOnIDRequest, TResponse> : NetworkModel
     {
-        protected readonly string BaseURL;
-        protected readonly string ApiKey;
+        public BasePortal(string baseURL, string apikey): base(baseURL, apikey)
+        { }
 
-        public BasePortal(string baseURL, string apikey)
+        // Base Panel Create
+        public async Task<TResponse> Create(TCreateRequest payload) 
         {
-            BaseURL = baseURL;
-            ApiKey = apikey;
+            var path = $"/";
+            return await PostApiRequest<TCreateRequest, TResponse>(path, payload);
         }
 
-        public async Task<Result<TResponse>> Create<TRequest>(TRequest body)
+        // Base Panel Get All
+        public async Task<TResponse> GetAllByID(long id)
         {
-            var url = $"{BaseURL}/";
-            return await PostApiRequest(url, ApiKey, body);
+            var path = $"/view/{id}";
+            return await GetApiRequest<TResponse>(path);
         }
 
-        public async Task<TResponse> GetAll(long viewID)
+        // Base Panel Get On ID
+        public async Task<TResponse> GetByID(long id)
         {
-            var url = $"{BaseURL}/view/{viewID}";
-            return await GetApiRequest(url, ApiKey);
+            var path = $"/{id}";
+            return await GetApiRequest<TResponse>(path);
         }
 
-        public async Task<TResponse> GetOnID(long contactID)
+        // Base Panel Update On ID
+        public async Task<TResponse> UpdateByID(long id, TUpdateOnIDRequest payload)
         {
-            var url = $"{BaseURL}/{contactID}";
-            return await GetApiRequest(url, ApiKey);
+            var path = $"/{id}";
+            return await UpdateApiRequest<TUpdateOnIDRequest, TResponse>(path, payload);
         }
 
-        public async Task<TResponse> UpdateOnID<TRequest>(long contactID, TRequest body)
+        // Base Panel Delete On ID
+        public async Task<bool> DeleteByID(long id)
         {
-            var url = $"{BaseURL}/{contactID}";
-            return await UpdateApiRequest(url, ApiKey, body);
+            var path = $"/{id}";
+            return await DeleteApiRequest(path);
         }
 
-        public async Task<bool> DeleteOnID(long contactID)
+        // Set Include and Page params to request 
+        protected string SetParams(string path, string include = null, int? page = null)
         {
-            var url = $"{BaseURL}/{contactID}";
-            return await DeleteApiRequest(url, ApiKey);
+            if (include != null || page != null)
+            {
+                path += "?";
+            }
+
+            if (page != null)
+            {
+                path += $"page={page}";
+            }
+
+            if (include != null)
+            {
+                path += $"include={include}";
+            }
+
+            return path;
         }
     }
 }

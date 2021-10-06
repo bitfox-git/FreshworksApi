@@ -4,9 +4,9 @@ using System.Collections.Generic;
 //   DealPipeline: {
 //        "partial": true,
 //        "id": 17000029663,
-//        "name": "Default Pipeline",
+//        "name": "null Pipeline",
 //        "position": 1,
-//        "is_default": true,
+//        "is_null": true,
 //        "rotting_days": 30,
 //        "configs": [
 //            {
@@ -69,48 +69,48 @@ namespace Bitfox.Freshworks.Models
     public class DealStage
     {
         [JsonProperty("id")]
-        public long ID { get; set; } = default;
+        public long? ID { get; set; } = null;
 
         [JsonProperty("partial")]
-        public bool Partial { get; set; } = default;
+        public bool? Partial { get; set; } = null;
 
         [JsonProperty("name")]
-        public string Name { get; set; } = default;
+        public string Name { get; set; } = null;
 
         [JsonProperty("position")]
-        public int Position { get; set; } = default;
+        public int? Position { get; set; } = null;
 
         [JsonProperty("forecast_type")]
-        public string ForecastType { get; set; } = default;
+        public string ForecastType { get; set; } = null;
 
         [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; } = default;
+        public string UpdatedAt { get; set; } = null;
 
         [JsonProperty("deal_pipeline_id")]
-        public long DealPipelineID { get; set; } = default;
+        public long? DealPipelineID { get; set; } = null;
 
         [JsonProperty("choice_type")]
-        public int ChoiceType { get; set; } = default;
+        public int? ChoiceType { get; set; } = null;
 
         [JsonProperty("probability")]
-        public int Probability { get; set; } = default;
+        public int? Probability { get; set; } = null;
 
         [JsonProperty("rotting_days")]
-        public int RottingDays { get; set; } = default;
+        public int? RottingDays { get; set; } = null;
 
         [JsonProperty("configs")]
-        public List<Config> Configs { get; set; } = default;
+        public List<Config> Configs { get; set; } = null;
 
         [JsonProperty("aggregated_field")]
-        public string AggregatedField { get; set; } = default;
+        public string AggregatedField { get; set; } = null;
 
         [JsonProperty("deal_stages")]
-        public List<DealStage> DealStages { get; set; } = default;
+        public List<DealStage> DealStages { get; set; } = null;
 
         [JsonProperty("is_deleted")]
-        public bool IsDeleted { get; set; } = default;
+        public bool? IsDeleted { get; set; } = null;
 
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; } = default;
+        [JsonProperty("is_null")]
+        public bool? Isnull { get; set; } = null;
     }
 }

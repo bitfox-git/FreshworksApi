@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bitfox.Freshworks.NetworkModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,54 +7,51 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class ContactPortal: BasePortal<ContactModel>
+    public class ContactPortal: BasePortal<ContactObject, ContactObject, ContactModel>
     {
-        public ContactPortal(string baseURL, string apikey): base($"{baseURL}/api/contacts", apikey)
+        public ContactPortal(string baseURL, string apikey) : base($"{baseURL}/api/contacts", apikey)
         { }
 
-        // REST 
-
-
-        // Bulk Assign user
-        public async Task<Result<ContactModel>> BulkAssignOwner(ContactModel body)
-        {
-            var url = $"{BaseURL}/bulk_assign_owner";
-            return await PostApiRequest(url, ApiKey, body);
-        }
-
         // Clone a user
-        public async Task<Result<ContactModel>> CloneContact(long contactID, ContactModel body)
+        public async Task<ContactModel> CloneByID(long id, ContactObject body, string include=null, int? page=null)
         {
-            var url = $"{BaseURL}/{contactID}/clone";
-            return await PostApiRequest(url, ApiKey, body);
+            var path = SetParams($"/{id}/clone", include, page);
+            return await PostApiRequest<ContactObject, ContactModel>(path, body);
         }
 
         // Forget a user
-        public async Task<bool> ForgetContact(long contactID)
+        public async Task<bool> ForgetByID(long id, string include=null, int? page=null)
         {
-            var url = $"{BaseURL}/{contactID}/forget";
-            return await DeleteApiRequest(url, ApiKey);
+            var path = SetParams($"/{id}/forget", include, page);
+            return await DeleteApiRequest(path);
+        }
+
+        // Bulk Assign user
+        public async Task<ContactModel> CreateBulk(BulkAssignObject body, string include = null, int? page=null)
+        {
+            var path = SetParams($"/bulk_assign_owner", include, page);
+            return await PostApiRequest<BulkAssignObject, ContactModel>(path, body);
         }
 
         // Bulk delete contacts
-        public async Task<Result<ContactModel>> BulkDeleteContacts(ContactModel body)
+        public async Task<ContactModel> DeleteBulk(BulkDeleteObject body, string include = null, int? page=null)
         {
-            var url = $"{BaseURL}/bulk_destroy";
-            return await PostApiRequest(url, ApiKey, body);
+            var path = SetParams($"/bulk_destroy", include, page);
+            return await PostApiRequest<BulkDeleteObject, ContactModel>(path, body);
         }
 
         // List all contact fields
-        public async Task<ContactModel> ListAllContactFields(long contactID)
+        public async Task<ContactModel> GetAllFields(string include = null, int? page = null)
         {
-            var url = $"{BaseURL}/{contactID}/activities.json";
-            return await GetApiRequest<ContactModel>(url, ApiKey);
+            var path = SetParams($"/../settings/contacts/fields", include, page);
+            return await GetApiRequest<ContactModel>(path);
         }
 
         // List all activities
-        // public async Task<ContactModel> ListAllActivities(long contactID)
-        // {
-        //     var url = $"{BaseURL}/{contactID}/activities.json";
-        //    return await GetApiRequest<ContactModel>(url, ApiKey);
-        //}
+        public async Task<ContactModel> GetAllActivitiesByID(long id, string include = null, int? page = null)
+        {
+            var path = SetParams($"/{id}/activities.json", include, page);
+            return await GetApiRequest<ContactModel>(path);
+        }
     }
 }
