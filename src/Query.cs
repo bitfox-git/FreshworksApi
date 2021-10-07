@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class Query<TEntity> where TEntity : IHasView
+    public class Query<TEntity> // where TEntity // : IHasView
     {
 
         //private readonly ICRMClient client;

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Selectors
 {
-    public class SelectionDeals: NetworkModel
+    public class SelectorDeals: NetworkModel
     {
-        public SelectionDeals(string baseURL, string apikey): base(baseURL, apikey)
+        public SelectorDeals(string baseURL, string apikey): base(baseURL, apikey)
         { }
 
         /// <summary>
@@ -18,10 +18,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name, deal_pipeline_id of the deal stages.
         /// </summary>
         /// <returns>List of all deal stages</returns>
-        public async Task<DealStagesObject> GetStages()
+        public async Task<SelectorParent> GetStages()
         {
-            string path = $"/api/selector/deal_stages";
-            return await GetApiRequest<DealStagesObject>(path);
+            string path = $"/deal_stages";
+            return await GetApiRequest<SelectorParent>(path);
         }
 
         /// <summary>
@@ -29,10 +29,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal types
         /// </summary>
         /// <returns>List of all deal types</returns>
-        public async Task<DealTypesObject> GetTypes()
+        public async Task<SelectorParent> GetTypes()
         {
-            string path = $"/api/selector/deal_types";
-            return await GetApiRequest<DealTypesObject>(path);
+            string path = $"/deal_types";
+            return await GetApiRequest<SelectorParent>(path);
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal reasons
         /// </summary>
         /// <returns>List of all deal reasons</returns>
-        public async Task<DealReasonsObject> GetReasons()
+        public async Task<SelectorParent> GetReasons()
         {
-            string path = $"/api/selector/deal_reasons";
-            return await GetApiRequest<DealReasonsObject>(path);
+            string path = $"/deal_reasons";
+            return await GetApiRequest<SelectorParent>(path);
         }
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal pipelines
         /// </summary>
         /// <returns>List of all deal pipelines</returns>
-        public async Task<DealPipelinesObject> GetPipelines()
+        public async Task<SelectorParent> GetPipelines()
         {
-            string path = $"/api/selector/deal_pipelines";
-            return await GetApiRequest<DealPipelinesObject>(path);
+            string path = $"/deal_pipelines";
+            return await GetApiRequest<SelectorParent>(path);
         }
 
         /// <summary>
@@ -63,10 +63,10 @@ namespace Bitfox.Freshworks.Selectors
         /// </summary>
         /// <param name="id">Owner ID</param>
         /// <returns>List of all deal pipelines based on ID</returns>
-        public async Task<DealStagesObject> GetPipelinesOnID(long id)
+        public async Task<SelectorParent> GetPipelinesOnID(long id)
         {
-            string path = $"/api/selector/deal_pipelines/{id}/deal_stages";
-            return await GetApiRequest<DealStagesObject>(path);
+            string path = $"/deal_pipelines/{id}/deal_stages";
+            return await GetApiRequest<SelectorParent>(path);
         }
 
         /// <summary>
@@ -74,10 +74,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal payment statuses
         /// </summary>
         /// <returns>List of all deal payment statuses</returns>
-        public async Task<DealPaymentStatusesObject> GetPaymentStatuses()
+        public async Task<SelectorParent> GetPaymentStatuses()
         {
-            string path = $"/api/selector/deal_payment_statuses";
-            return await GetApiRequest<DealPaymentStatusesObject>(path);
+            string path = $"/deal_payment_statuses";
+            return await GetApiRequest<SelectorParent>(path);
         }
     }
 }

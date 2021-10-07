@@ -14,7 +14,7 @@ namespace Bitfox.Freshworks
         /// <summary>
         /// Get data from the user portal.
         /// </summary>
-        ISelectorController Selector { get; }
+        SelectorController Selector { get; }
 
         /// <summary>
         /// Handles Contact Actions. [Create, Update, Delete etc.]
@@ -51,11 +51,13 @@ namespace Bitfox.Freshworks
         /// </summary>
         ISalesController Sales { get; }
 
-        /// <summary>
-        /// Handles Search Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        SearchEndpoints Search { get; }
-
+        /*
+            /// <summary>
+            /// // TODO
+            /// Handles Search Actions. [Create, Update, Delete etc.]
+            /// </summary>
+            SearchEndpoints Search { get; }
+        */
         /// <summary>
         /// Handles Phone Actions. [Create, Update, Delete etc.]
         /// </summary>

@@ -26,14 +26,14 @@ namespace Sample
             //var result = await client.Selection<Campaigns>();   // TODO: create sample data that we know, how
             //var result = await client.Selection<DealProducts>();// TODO: create sample data that we know, how
             //var result = await client.Selection<Territories>(); // TODO: create sample data that we know, how
-            //var result = await client.Selector.Deals.GetReasons();
-            //var result = await client.Selector.Deals.GetTypes();
-            //var result = await client.Selector.Deals.GetPaymentStatuses();
-            //var result = await client.Selector.Deals.GetPipelines();
-            //var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
-            //var result = await client.Selector.Sales.GetActivityTypes();
-            //var result = await client.Selector.Sales.GetActivityEntityTypes();
-            //var result = await client.Selector.Sales.GetActivityOutcomes();
+            // var result = await client.Selector.Deals.GetReasons();
+            // var result = await client.Selector.Deals.GetTypes();
+            // var result = await client.Selector.Deals.GetPaymentStatuses();
+            // var result = await client.Selector.Deals.GetPipelines();
+            // var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
+            // var result = await client.Selector.Sales.GetActivityTypes();
+            // var result = await client.Selector.Sales.GetActivityEntityTypes();
+            var result = await client.Selector.Sales.GetActivityOutcomes();
             //var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
             //var result = await client.Selector.GetOwners();
             //var result = await client.Selector.GetCurrencies();
@@ -41,6 +41,8 @@ namespace Sample
             //var result = await client.Selector.GetBusinessTypes();
             //var result = await client.Selector.GetContactStatuses();
             //var result = await client.Selector.GetLifecycleStages();
+
+            Console.WriteLine(result);
 
             #endregion
 
@@ -68,7 +70,7 @@ namespace Sample
             //var contact = await client.Contact.GetAllFields();
             //var contact = await client.Contact.GetAllActivitiesByID(17007472886);
 
-            Console.WriteLine(contact);
+            /*Console.WriteLine(contact);*/
 
             #endregion
 

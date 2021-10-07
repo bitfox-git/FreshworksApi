@@ -51,7 +51,7 @@ namespace Bitfox.Freshworks.Models
     [EndpointName("sales_accounts")]
     [JsonPluralName("sales_accounts")]
     [JsonSingularName("sales_account")]
-    public class SalesAccount : IUniqueID, IHasView
+    public class SalesAccount //: IUniqueID, IHasView
     {
         [JsonProperty("id")]
         public long? ID { get; set; }

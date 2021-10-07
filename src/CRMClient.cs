@@ -1,7 +1,6 @@
 ﻿using Bitfox.Freshworks.Controllers;
 using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkObjects;
 using Bitfox.Freshworks.Selectors;
 
 namespace Bitfox.Freshworks
@@ -19,7 +18,7 @@ namespace Bitfox.Freshworks
             }
         }
 
-        public ISelectorController Selector => new SelectorController(BaseURL, apikey);
+        public SelectorController Selector => new(BaseURL, apikey);
 
         public IContactController Contact => new ContactController(BaseURL, apikey);
 
@@ -35,7 +34,8 @@ namespace Bitfox.Freshworks
 
         public ISalesController Sales => new SalesController(BaseURL, apikey);
 
-        public SearchEndpoints Search => new(BaseURL, apikey);
+        // TODO
+        // public SearchEndpoints Search => new(BaseURL, apikey);
 
         public IPhoneController Phone => new PhoneController(BaseURL, apikey);
 
@@ -46,7 +46,5 @@ namespace Bitfox.Freshworks
             this.subdomain = subdomain;
             this.apikey = apikey;
         }
-
-
     }
 }
