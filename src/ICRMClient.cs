@@ -1,4 +1,7 @@
-﻿using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Controllers;
+using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.NetworkObjects;
 using Bitfox.Freshworks.Selectors;
 using System;
 using System.Collections.Generic;
@@ -11,64 +14,56 @@ namespace Bitfox.Freshworks
         /// <summary>
         /// Get data from the user portal.
         /// </summary>
-        /// <returns>Portal data.</returns>
-        Selection Selector { get; }
+        ISelectorController Selector { get; }
 
         /// <summary>
-        /// Get data from the contact portal.
+        /// Handles Contact Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        ContactEndpoints Contact { get; }
+        IContactController Contact { get; }
 
         /// <summary>
-        /// Get data from the account portal.
+        /// Handles Account Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        AccountEndpoints Account { get; }
+        IAccountController Account { get; }
 
         /// <summary>
-        /// Get data from the Deals portal.
+        /// Handles Deal Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        DealEndpoints Deal { get; }
+        IDealController Deal { get; }
 
         /// <summary>
-        /// Get data from the Deals portal.
+        /// Handles Note Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        TaskEndpoints Task { get; }
-
+        INoteController Note { get; }
 
         /// <summary>
-        /// Get data from the Deals portal.
+        /// Handles Task Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        AppointmentEndpoints Appointment { get; }
-
+        ITaskController Task { get; }
 
         /// <summary>
-        /// Get data from the Deals portal.
+        /// Handles Appointment Actions. [Create, Update, Delete etc.]
         /// </summary>
-        /// <returns>Portal data.</returns>
-        SalesEndpoints Sales { get; }
+        IAppointmentController Appointment { get; }
 
+        /// <summary>
+        /// Handles Sales Actions. [Create, Update, Delete etc.]
+        /// </summary>
+        ISalesController Sales { get; }
 
+        /// <summary>
+        /// Handles Search Actions. [Create, Update, Delete etc.]
+        /// </summary>
+        SearchEndpoints Search { get; }
 
+        /// <summary>
+        /// Handles Phone Actions. [Create, Update, Delete etc.]
+        /// </summary>
+        IPhoneController Phone { get; }
 
-
-        //Get Get { get; }
-        //Set Set { get; }
-        //Post Post { get; }
-
-
-        //Task<T> SelectorByID<T>(long id) where T : ISelector;
-
-        Query<T> Query<T>() where T : IHasView;
-
-        Task<Result<T>> Insert<T>(T value) where T : IUniqueID;
-
-        Task<T> Update<T>(T value) where T : IUniqueID;
-
-        Task<T> GetApiRequest<T>(string url);
+        /// <summary>
+        /// Handles File Actions. [Create, Update, Delete etc.]
+        /// </summary>
+        IFileController File { get; }
     }
 }

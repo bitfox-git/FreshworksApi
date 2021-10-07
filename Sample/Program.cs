@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
@@ -44,68 +45,36 @@ namespace Sample
             #endregion
 
             #region Contact
+            //ContactPayload payload = new();
 
-            //ContactObject contactObj = new();
-            //contactObj.Contact = new()
+            //payload.Contact = new()
             //{
-            //    FirstName = "John",
-            //    LastName = "Doe",
-            //    JobTitle = "None",
-            //    Email = "newContent@gmail.com",
-            //    DisplayName = "okido",
-            //    Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
-            //    WorkNumber = "6121212",
-            //    MobileNumber = "+316121212",
-            //    Address = "Heasdasiweg 6s",
-            //    City = "Ouerd-Albasdlas",
-            //    State = "South-Holland",
-            //    ZipCode = "2999LC",
-            //    Country = "Netherlands"
+            //    FirstName = "James",
+            //    LastName = "Sampleton (test)",
+            //    Email = "test1@email.com",
+            //    MobileNumber = "1-926-555-9503"
             //};
 
-            //ContactObject updateObj = new();
-            //updateObj.Contact = new()
-            //{
-            //    FirstName = "John",
-            //    LastName = "Doe",
-            //    JobTitle = "None"
-            //};
+            //var contact = await client.Contact.Create(payload);
+            //var contact = await client.Contact.GetByID(17007697582);
+            //var contact = await client.Contact.GetAllByID(17001463640);
+            //var contact = await client.Contact.UpdateByID(17007697582, payload);
+            //var contact = await client.Contact.DeleteByID(17007697582);
 
-            //ContactObject cloneObj = new();
-            //cloneObj.Contact = new()
-            //{
-            //    FirstName = "John",
-            //    LastName = "Doe",
-            //    JobTitle = "None",
-            //    Email = "newContent3@gmail.com"
-            //};
+            //var contact = await client.Contact.CloneByID(17007697582, payload);
+            //var contact = await client.Contact.ForgetByID(17007697582);
+            //var contact = await client.Contact.CreateBulk(payload);
+            //var contact = await client.Contact.DeleteBulk(payload);
+            //var contact = await client.Contact.GetAllFields();
+            //var contact = await client.Contact.GetAllActivitiesByID(17007472886);
 
-            //BulkAssignObject assignObj = new()
-            //{
-            //    OwnerID = 17007472886,
-            //    SelectedIDs = new long[] { 17001463640 }
-            //};
-
-            //BulkDeleteObject deleteObj = new()
-            //{
-            //    SelectedIDs = new long[] { 17001463630 }
-            //};
-
-            //var result = await client.Contact.Create(contactObj);
-            //var result = await client.Contact.GetAllByID(17001463640);
-            //var result = await client.Contact.GetByID(17007472886);
-            //var result = await client.Contact.UpdateByID(17007472886, updateObj);
-            //var result = await client.Contact.DeleteByID(17007472886);
-            //var result = await client.Contact.CloneByID(17007472886, cloneObj);
-            //var result = await client.Contact.ForgetByID(17007476714);
-            //var result = await client.Contact.CreateBulk(assignObj);
-            //var result = await client.Contact.DeleteBulk(deleteObj);
-            //var result = await client.Contact.GetAllFields();
-            //var result = await client.Contact.GetAllActivitiesByID(17007472886);
+            Console.WriteLine(contact);
 
             #endregion
 
             #region Account
+            AccountPayload payload = new();
+
 
             //AccountObject accountObj = new();
             //accountObj.Account = new()
@@ -186,6 +155,9 @@ namespace Sample
             #endregion
 
             #region Notes
+            //var result = client.Note.Create();
+            //var result = client.Note.UpdateByID();
+            //var result = client.Note.DeleteByID();
             #endregion
 
             #region Tasks
@@ -219,11 +191,10 @@ namespace Sample
 
             #endregion
 
-
             #region Appointments
 
-            //TaskObject createObj = new();
-            //createObj.Task = new()
+            //AppointmentObject createObj = new();
+            //createObj.Appointment = new()
             //{
             //    Title = "Okido",
             //    Description = "12",
@@ -231,32 +202,73 @@ namespace Sample
             //    OwnerID = 17000033771
             //};
 
-            //TaskObject updateObj = new();
-            //updateObj.Task = new()
+            //AppointmentObject updateObj = new();
+            //updateObj.Appointment = new()
             //{
             //    Status = 2
             //};
 
-            //var result = await client.Task.Create(createObj);
-            //var result = await client.Task.GetAllByID(17001463650);
-            //var result = await client.Task.GetByID(17000498540);
-            //var result = await client.Task.UpdateByID(17000498540, updateObj);
-            //var result = await client.Task.DeleteByID(17000498540);
-            //var result = await client.Task.UpdateMarkByID(17000498540, updateObj);
-            //var result = await client.Task.DeleteMarkByID(17000498540);
-            //var result = await client.Task.CloneByID(17000498540, updateObj);
-            //var result = await client.Task.ForgetByID(17001220091);
-            //var result = await client.Task.DeleteBulk(deleteObj);
-            //var result = await client.Task.GetAllFields();
+            //var result = await client.Appointment.Create(createObj);
+            //var result = await client.Appointment.GetAllByID(17001463650);
+            //var result = await client.Appointment.GetByID(17000498540);
+            //var result = await client.Appointment.UpdateByID(17000498540, updateObj);
+            //var result = await client.Appointment.DeleteByID(17000498540);
+            //var result = await client.Appointment.UpdateMarkByID(17000498540, updateObj);
+            //var result = await client.Appointment.DeleteMarkByID(17000498540);
+            //var result = await client.Appointment.CloneByID(17000498540, updateObj);
+            //var result = await client.Appointment.ForgetByID(17001220091);
+            //var result = await client.Appointment.DeleteBulk(deleteObj);
+            //var result = await client.Appointment.GetAllFields();
 
+            #endregion
+
+            #region Sales
+
+            //SalesObject createObj = new();
+            //createObj.Activity = new()
+            //{
+            //    Title = "Okido",
+            //    Description = "12",
+            //    TargetableID = "17001067154",
+            //    OwnerID = 17000033771
+            //};
+
+            //SalesObject updateObj = new();
+            //updateObj.Activity = new()
+            //{
+            //    Status = 2
+            //};
+
+            //var result = await client.Sales.Create(createObj);
+            //var result = await client.Sales.GetAllByID(17001463650);
+            //var result = await client.Sales.GetByID(17000498540);
+            //var result = await client.Sales.UpdateByID(17000498540, updateObj);
+            //var result = await client.Sales.DeleteByID(17000498540);
+            //var result = await client.Sales.UpdateMarkByID(17000498540, updateObj);
+            //var result = await client.Sales.DeleteMarkByID(17000498540);
+            //var result = await client.Sales.CloneByID(17000498540, updateObj);
+            //var result = await client.Sales.ForgetByID(17001220091);
+            //var result = await client.Sales.DeleteBulk(deleteObj);
+            //var result = await client.Sales.GetAllFields();
+
+            #endregion
+
+            #region Search
+            #endregion
+
+            #region Phone
+            //client.Phone.GetCallLogs(id);
+            #endregion
+
+            #region Files
+            //client.File.CreateFile();// TODO
+            //client.File.CreateLink();
+            //client.File.GetAllFilesAndLinksByID();
             #endregion
 
 
 
-
-
-
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
 
 
 
