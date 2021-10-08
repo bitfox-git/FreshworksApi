@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AppointmentModel : AppointmentParent
+    public class AppointmentModel
     {
         [JsonProperty("title")]
         public string Title { get; set; } = null;
@@ -34,7 +34,7 @@ namespace Bitfox.Freshworks.Models
         public string TargetableType { get; set; } = null;
 
         [JsonProperty("appointment_attendees_attributes")]
-        public List<AppointmentAttendees> AppointmentAttendeesAttributes { get; set; } = null;
+        public List<Attendee2> AppointmentAttendeesAttributes { get; set; } = null;
 
         [JsonProperty("success")]
         public string Success { get; set; } = null;

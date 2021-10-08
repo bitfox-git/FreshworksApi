@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Endpoints.Contact;
+using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class ContactParent: ErrorObject
+    public class ContactParent: ErrorObject, IContactPayload
     {
         [JsonProperty("contact")]
         public ContactModel Contact { get; set; } = null;
@@ -28,13 +29,13 @@ namespace Bitfox.Freshworks.Endpoints
         public long? OwnerID { get; set; } = null;
 
         [JsonProperty("activities")]
-        public List<ActivityObject> Activities { get; set; } = null;
+        public List<Activity> Activities { get; set; } = null;
 
         [JsonProperty("field_groups")]
-        public List<FieldGroupObject> FieldGroup { get; set; } = null;
+        public List<FieldGroup> FieldGroup { get; set; } = null;
 
         [JsonProperty("fields")]
-        public List<FieldObject> Fields { get; set; } = null;
+        public List<Field> Fields { get; set; } = null;
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;

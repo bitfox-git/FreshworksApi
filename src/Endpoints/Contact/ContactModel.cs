@@ -1,17 +1,11 @@
-﻿using Bitfox.Freshworks.Attributes;
-using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.NetworkModels;
-using Bitfox.Freshworks.NetworkObjects;
+﻿using Bitfox.Freshworks.Endpoints;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-
-    public class ContactModel: ContactParent
+    public class ContactModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
@@ -47,7 +41,7 @@ namespace Bitfox.Freshworks.Models
         public string Email { get; set; } = null;
 
         [JsonProperty("emails")]
-        public List<EmailModel> Emails { get; set; } = null;
+        public List<Email> Emails { get; set; } = null;
 
         [JsonProperty("time_zone")]
         public string TimeZone { get; set; } = null;
@@ -77,7 +71,7 @@ namespace Bitfox.Freshworks.Models
         public string WonDealsAmount { get; set; } = null;
 
         [JsonProperty("links")]
-        public LinkModel Links { get; set; } = null;
+        public Link Links { get; set; } = null;
 
         [JsonProperty("last_contacted_sales_activity_mode")]
         public string LastContactedSalesActivityMode { get; set; } = null;
@@ -136,8 +130,12 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("work_email")]
         public string WorkEmail { get; set; } = null;
 
+        /// <summary>
+        /// list of integers, seperated by semicolon
+        /// for example: 3;4;1
+        /// </summary>
         [JsonProperty("subscription_status")]
-        public int? SubscriptionStatus { get; set; } = null;
+        public string? SubscriptionStatus { get; set; } = null;
 
         [JsonProperty("customer_fit")]
         public int? CustomerFit { get; set; } = null;

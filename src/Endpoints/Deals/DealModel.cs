@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class DealModel: DealParent
+    public class DealModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
@@ -117,7 +117,7 @@ namespace Bitfox.Freshworks.Models
         public long? CreaterID { get; set; } = null;
 
         [JsonProperty("links")]
-        public LinkModel Links { get; set; } = null;
+        public Link Links { get; set; } = null;
 
         private JObject CustomField { get; set; } = null;
 

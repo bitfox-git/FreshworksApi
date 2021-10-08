@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SalesModel : SalesParent
+    public class SalesModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;

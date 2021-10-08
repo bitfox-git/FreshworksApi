@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkModels
 {
-    public class ActivityObject
+    public class Activity
     {
+
+        [JsonProperty("id")]
+        public string ID { get; set; } = null;
+
         [JsonProperty("action_data")]
-        public ActionDataObject ActionData { get; set; } = null;
+        public ActionData ActionData { get; set; } = null;
 
         [JsonProperty("created_at")]
         public DateTime? CreatedAt { get; set; } = null;
@@ -29,9 +33,6 @@ namespace Bitfox.Freshworks.NetworkModels
 
         [JsonProperty("targetable_type")]
         public string TargetableType { get; set; } = null;
-
-        [JsonProperty("id")]
-        public string ID { get; set; } = null;
 
         [JsonProperty("composite_id")]
         public string CompositeID { get; set; } = null;

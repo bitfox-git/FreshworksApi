@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class NetworkModel
+    public class Network
     {
         private readonly string BaseURL;
         private readonly string ApiKey;
         private readonly HttpClient Client = new();
 
-        public NetworkModel(string baseURL, string apikey)
+        public Network(string baseURL, string apikey)
         {
             BaseURL = baseURL;
             ApiKey = apikey;
@@ -38,11 +38,11 @@ namespace Bitfox.Freshworks.Models
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<TResponse>(
-                data, 
-                settings: new JsonSerializerSettings()
-                {
-                    ContractResolver = new CustomResolver()
-                }
+                data// , 
+                //settings: new JsonSerializerSettings()
+                //{
+                //    ContractResolver = new CustomResolver()
+                //}
             );
 
             // valid response 
@@ -81,11 +81,11 @@ namespace Bitfox.Freshworks.Models
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<TResponse>(
-                data,
-                settings: new JsonSerializerSettings()
-                {
-                    ContractResolver = new CustomResolver()
-                }
+                data//,
+                //settings: new JsonSerializerSettings()
+                //{
+                //    ContractResolver = new CustomResolver()
+                //}
             );
 
             // valid response 
@@ -124,11 +124,11 @@ namespace Bitfox.Freshworks.Models
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<TResponse>(
-                data,
-                settings: new JsonSerializerSettings()
-                {
-                    ContractResolver = new CustomResolver()
-                }
+                data// ,
+                //settings: new JsonSerializerSettings()
+                //{
+                //    ContractResolver = new CustomResolver()
+                //}
             );
 
             // valid response 
@@ -176,11 +176,11 @@ namespace Bitfox.Freshworks.Models
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<TResponse>(
-                data,
-                settings: new JsonSerializerSettings()
-                {
-                    ContractResolver = new CustomResolver()
-                }
+                data// ,
+                //settings: new JsonSerializerSettings()
+                //{
+                //    ContractResolver = new CustomResolver()
+                //}
             );
 
             // valid response 

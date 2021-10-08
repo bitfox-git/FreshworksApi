@@ -9,19 +9,13 @@ namespace Bitfox.Freshworks.Models
 {
     public class Config
     {
-        // {
-        //      "field_name": "amount",
-        //      "position": 1,
-        //      "highlight": true
-        // }
-
         [JsonProperty("field_name")]
-        public string FieldName { get; set; }
+        public string FieldName { get; set; } = null;
 
         [JsonProperty("position")]
-        public int Position { get; set; }
+        public int? Position { get; set; } = null;
 
         [JsonProperty("highlight")]
-        public bool Highlight { get; set; }
+        public bool? Highlight { get; set; } = null;
     }
 }

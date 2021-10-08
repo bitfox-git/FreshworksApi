@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.NetworkModels;
+using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SalesParent: ErrorObject
+    public class SalesParent: ErrorObject, ISalesPayload
     {
         [JsonProperty("sales_activity")]
         public SalesModel Activity { get; set; } = null;

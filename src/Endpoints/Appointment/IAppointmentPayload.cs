@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkObjects
 {
-    public class AppointmentPayload
+    public interface IAppointmentPayload
     {
         [JsonProperty("appointment")]
-        public AppointmentModel Appointment { get; set; } = null;
+        AppointmentModel Appointment { get; set; }
     }
 }

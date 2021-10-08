@@ -14,32 +14,32 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a item added to the rest of the content
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
-        Task<TaskModel> Create(TaskPayload payload);
+        Task<TaskParent> Create(ITaskPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Get all items from given ID.
         /// </summary>
         /// <param name="id">Content ID</param>
-        Task<TaskModel> GetAllByID(long id);
+        Task<TaskParent> GetAllByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Get Data from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<TaskModel> GetByID(long id);
+        Task<TaskParent> GetByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Update data of item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
         /// <param name="payload">Payload used to update item</param>
-        Task<TaskModel> UpdateByID(long id, TaskPayload payload);
+        Task<TaskParent> UpdateByID(long id, ITaskPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Remove Item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<bool> DeleteByID(long id);
+        Task<bool> DeleteByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// 
@@ -49,6 +49,6 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="include"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        Task<TaskModel> UpdateMarkByID(long id, TaskPayload body);
+        Task<TaskParent> UpdateMarkByID(long id, ITaskPayload body, string include = null, int? page = null);
     }
 }

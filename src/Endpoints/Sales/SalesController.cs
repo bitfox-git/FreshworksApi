@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SalesController: BaseController<SalesPayload, SalesModel>, ISalesController
+    public class SalesController: BaseController<ISalesPayload, SalesParent>, ISalesController
     {
         public SalesController(string baseURL, string apikey) : base($"{baseURL}/api/sales_activities", apikey)
         { }

@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.NetworkModels;
+using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AppointmentParent : ErrorObject
+    public class AppointmentParent : ErrorObject, IAppointmentPayload
     {
         [JsonProperty("appointment")]
         public AppointmentModel Appointment { get; set; } = null;
@@ -19,7 +20,7 @@ namespace Bitfox.Freshworks.Models
 
 
         [JsonProperty("appointment_attendees")]
-        public List<AppointmentAttendee> AppointmentAttendees { get; set; }
+        public List<AttendeeObject> AppointmentAttendees { get; set; }
 
 
         [JsonProperty("meta")]

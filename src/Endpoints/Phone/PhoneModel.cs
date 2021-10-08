@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Bitfox.Freshworks.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,41 +8,52 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class PhoneModel : PhoneParent
+    public class PhoneModel
     {
-        public bool call_direction { get; set; }
-        public string targetable_type { get; set; }
-        public Targetable targetable { get; set; }
-        public Note note { get; set; }
+        [JsonProperty("id")]
+        public long? ID { get; set; } = null;
 
+        [JsonProperty("call_direction")]
+        public bool? CallDirection { get; set; } = null;
 
-        public int id { get; set; }
-        public object call_duration { get; set; }
-        public object recording_duration { get; set; }
-        public string status { get; set; }
-        public object recording { get; set; }
-        public DateTime conversation_time { get; set; }
-        public int cost { get; set; }
-        public bool is_manual { get; set; }
-        public object phone_number_id { get; set; }
-        public object phone_caller_id { get; set; }
-        public int note_id { get; set; }
+        [JsonProperty("targetable")]
+        public Targetable Targetable { get; set; } = null;
 
+        [JsonProperty("targetable_type")]
+        public string TargetableType { get; set; } = null;
 
-        public class Targetable
-        {
-            public string id { get; set; }
-            public string first_name { get; set; }
-            public string last_name { get; set; }
-            public string work_number { get; set; }
-            public string mobile_number { get; set; }
-        }
+        [JsonProperty("note")]
+        public NoteModel Note { get; set; } = null;
 
-        public class Note
-        {
-            public string description { get; set; }
-        }
+        [JsonProperty("note_id")]
+        public long? NoteID { get; set; } = null;
 
+        [JsonProperty("call_duration")]
+        public string CallDuration { get; set; } = null;
+
+        [JsonProperty("recording_duration")]
+        public string RecordingDuration { get; set; } = null;
+
+        [JsonProperty("status")]
+        public string Status { get; set; } = null;
+
+        [JsonProperty("recording")]
+        public string Recording { get; set; } = null;
+
+        [JsonProperty("conversation_time")]
+        public DateTime? ConversationTime { get; set; } = null;
+
+        [JsonProperty("cost")]
+        public int? Cost { get; set; } = null;
+
+        [JsonProperty("is_manual")]
+        public bool? IsManual { get; set; } = null;
+
+        [JsonProperty("phone_number_id")]
+        public long? PhoneNumberID { get; set; } = null;
+
+        [JsonProperty("phone_caller_id")]
+        public long? PhoneCallerID { get; set; } = null;
 
     }
 }

@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class EmailModel
+    public class Email
     {
         [JsonProperty("id")]
-        public long ID { get; protected set; }
+        public long? ID { get; protected set; } = null;
 
         [JsonProperty("value")]
-        public string Value { get; protected set; }
+        public string Value { get; protected set; } = null;
 
         [JsonProperty("is_primary")]
-        public bool IsPrimary { get; protected set; }
+        public bool? IsPrimary { get; protected set; } = null;
 
         [JsonProperty("label")]
-        public object Label { get; protected set; }
+        public object Label { get; protected set; } = null;
 
         [JsonProperty("_destroy")]
-        public bool Destroy { get; protected set; }
+        public bool? Destroy { get; protected set; } = null;
     }
 }

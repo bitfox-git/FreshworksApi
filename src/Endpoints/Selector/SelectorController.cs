@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Selectors
 {
-    public class SelectorController : NetworkModel
+    public class SelectorController : Network
     {
         /// <summary>
         /// Get data of all deals.
@@ -28,44 +28,44 @@ namespace Bitfox.Freshworks.Selectors
         }
 
         // All Owners
-        public async Task<SelectorParent> GetOwners()
+        public async Task<SelectorParent> GetOwners(string include = null, int? page = null)
         {
-            string path = $"/owners";
+            string path = SetParams($"/owners", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
 
         // Available currencies
-        public async Task<SelectorParent> GetCurrencies()
+        public async Task<SelectorParent> GetCurrencies(string include = null, int? page = null)
         {
-            string path = $"/currencies";
+            string path = SetParams($"/currencies", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
 
         // All Business types 
-        public async Task<SelectorParent> GetBusinessTypes()
+        public async Task<SelectorParent> GetBusinessTypes(string include = null, int? page = null)
         {
-            string path = $"/business_types";
+            string path = SetParams($"/business_types", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
 
         // All statuses of contact
-        public async Task<SelectorParent> GetContactStatuses()
+        public async Task<SelectorParent> GetContactStatuses(string include = null, int? page = null)
         {
-            string path = $"/contact_statuses";
+            string path = SetParams($"/contact_statuses", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
 
         // All Lifecycle stages
-        public async Task<SelectorParent> GetLifecycleStages()
+        public async Task<SelectorParent> GetLifecycleStages(string include = null, int? page = null)
         {
-            string path = $"/lifecycle_stages";
+            string path = SetParams($"/lifecycle_stages", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
 
         // All industry types
-        public async Task<SelectorParent> GetIndustryTypes()
+        public async Task<SelectorParent> GetIndustryTypes(string include = null, int? page = null)
         {
-            string path = $"/industry_types";
+            string path = SetParams($"/industry_types", include, page);
             return await GetApiRequest<SelectorParent>(path);
         }
     }

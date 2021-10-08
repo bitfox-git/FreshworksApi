@@ -1,4 +1,4 @@
-﻿using Bitfox.Freshworks.Attributes;
+﻿
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -7,138 +7,94 @@ using System.Text;
 
 namespace Bitfox.Freshworks.Models
 {
-    // "id": 30001773156,
-    //"name": "Widgetz.io (sample)",
-    //"address": "160-6802 Aliquet Rd.",
-    //"city": "New Haven",
-    //"state": "Connecticut",
-    //"zipcode": "68089",
-    //"country": "United States",
-    //"number_of_employees": null,
-    //"annual_revenue": null,
-    //"website": "widgetz.io",
-    //"owner_id": 30000015422,
-    //"phone": "5036153947",
-    //"open_deals_amount": "0.0",
-    //"open_deals_count": 0,
-    //"won_deals_amount": "0.0",
-    //"won_deals_count": 0,
-    //"last_contacted": "2021-02-15T17:21:09+01:00",
-    //"last_contacted_mode": "Email Opened",
-    //"facebook": null,
-    //"twitter": null,
-    //"linkedin": null,
-    //"links": { },
-    //"custom_field": { },
-    //"created_at": "2021-02-25T16:26:07+01:00",
-    //"updated_at": "2021-03-29T12:16:06+02:00",
-    //"avatar": null,
-    //"parent_sales_account_id": null,
-    //"recent_note": null,
-    //"last_contacted_via_sales_activity": null,
-    //"last_contacted_sales_activity_mode": null,
-    //"completed_sales_sequences": null,
-    //"active_sales_sequences": null,
-    //"last_assigned_at": "2021-02-17T17:21:08+01:00",
-    //"tags": [
-    //    "depot",
-    //    "website"
-    //],
-    //"is_deleted": false,
-    //"team_user_ids": null
-
-
-    [EndpointName("sales_accounts")]
-    [JsonPluralName("sales_accounts")]
-    [JsonSingularName("sales_account")]
-    public class SalesAccount //: IUniqueID, IHasView
+    public class SalesAccount
     {
         [JsonProperty("id")]
-        public long? ID { get; set; }
+        public long? ID { get; set; } = null;
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null;
 
         [JsonProperty("address")]
-        public string Address { get; set; }
+        public string Address { get; set; } = null;
 
         [JsonProperty("city")]
-        public string City { get; set; }
+        public string City { get; set; } = null;
 
         [JsonProperty("state")]
-        public string State { get; set; }
+        public string State { get; set; } = null;
 
         [JsonProperty("zipcode")]
-        public string ZipCode { get; set; }
+        public string ZipCode { get; set; } = null;
 
         [JsonProperty("country")]
-        public string Country { get; set; }
+        public string Country { get; set; } = null;
 
         [JsonProperty("number_of_employees")]
-        public int? NumberOfEmployees { get; set; }
+        public int? NumberOfEmployees { get; set; } = null;
 
         [JsonProperty("annual_revenue")]
-        public double? AnnualRevenue { get; set; }
+        public double? AnnualRevenue { get; set; } = null;
 
         [JsonProperty("website")]
-        public string Website { get; set; }
+        public string Website { get; set; } = null;
 
         [JsonProperty("owner_id")]
-        public long? OwnerID { get; set; }
+        public long? OwnerID { get; set; } = null;
 
         [JsonProperty("phone")]
-        public string Phone { get; set; }
+        public string Phone { get; set; } = null;
 
         [JsonProperty("open_deals_amount")]
-        public double? OpenDealsAmount { get; set; }
+        public double? OpenDealsAmount { get; set; } = null;
 
         [JsonProperty("open_deals_count")]
-        public int? OpenDealsCount { get; set; }
+        public int? OpenDealsCount { get; set; } = null;
 
         [JsonProperty("won_deals_amount")]
-        public double? WonDealsAmount { get; set; }
+        public double? WonDealsAmount { get; set; } = null;
 
         [JsonProperty("won_deals_count")]
-        public int? WonDealsCount { get; set; }
+        public int? WonDealsCount { get; set; } = null;
 
         [JsonProperty("last_contacted")]
-        public DateTime? LastContacted { get; set; }
+        public DateTime? LastContacted { get; set; } = null;
 
         [JsonProperty("last_contacted_mode")]
         public string LastContactedMode { get; set;  }
 
         [JsonProperty("facebook")]
-        public string Facebook { get; set; }
+        public string Facebook { get; set; } = null;
 
         [JsonProperty("twitter")]
-        public string Twitter { get; set; }
+        public string Twitter { get; set; } = null;
 
         [JsonProperty("linkedin")]
-        public string Linkedin { get; set; }
+        public string Linkedin { get; set; } = null;
 
         [JsonProperty("parent_sales_account_id")]
         public long? ParentSalesAccountID {get;set; }
 
         [JsonProperty("create_at")]
-        public DateTime CreateAt { get; set; }
+        public DateTime? CreateAt { get; set; } = null;
 
         [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; } = null;
 
         [JsonProperty("last_assigned_at")]
-        public DateTime? LastAssignedAt { get; set; }
+        public DateTime? LastAssignedAt { get; set; } = null;
 
         [JsonProperty("tags")]
-        public List<string> Tags { get; set; }
+        public List<string> Tags { get; set; } = null;
 
         [JsonProperty("is_deleted")]
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; } = null;
 
 
         [JsonProperty("custom_field")]
-        public object CustomField { get; set; }
+        public object CustomField { get; set; } = null;
 
-        //public long team_user_ids { get; set; }
+        //public long team_user_ids { get; set; } = null;
 
 
         public T GetCustomFields<T>()

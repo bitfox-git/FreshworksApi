@@ -14,32 +14,32 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a item added to the rest of the content
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
-        Task<DealModel> Create(DealPayload payload);
+        Task<DealParent> Create(IDealPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Get all items from given ID.
         /// </summary>
         /// <param name="id">Content ID</param>
-        Task<DealModel> GetAllByID(long id);
+        Task<DealParent> GetAllByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Get Data from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<DealModel> GetByID(long id);
+        Task<DealParent> GetByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Update data of item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
         /// <param name="payload">Payload used to update item</param>
-        Task<DealModel> UpdateByID(long id, DealPayload payload);
+        Task<DealParent> UpdateByID(long id, IDealPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Remove Item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<bool> DeleteByID(long id);
+        Task<bool> DeleteByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Clone a deal by using his ID.
@@ -48,7 +48,7 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Content that can been updated</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<DealModel> CloneByID(long id, DealPayload body, string include = null, int? page = null);
+        Task<DealParent> CloneByID(long id, IDealPayload body, string include = null, int? page = null);
 
         /// <summary>
         /// Hard delete a Deal and all the associated data.
@@ -64,13 +64,13 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Contact IDs</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<DealModel> DeleteBulk(BulkDeleteObject body, string include = null, int? page = null);
+        Task<DealParent> DeleteBulk(BulkDelete body, string include = null, int? page = null);
 
         /// <summary>
         /// View all the deal fields.
         /// </summary>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<DealModel> GetAllFields(string path = "/../settings/deals/fields", string include = null, int? page = null);
+        Task<DealParent> GetAllFields(string path = "/../settings/deals/fields", string include = null, int? page = null);
     }
 }

@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
@@ -11,43 +7,43 @@ namespace Bitfox.Freshworks.Models
     {
 
         [JsonProperty("partial")]
-        public bool Partial { get; set; }
+        public bool? Partial { get; set; } = null;
 
         [JsonProperty("id")]
-        public long? ID { get; set; }
+        public long? ID { get; set; } = null;
 
         [JsonProperty("is_active")]
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; } = null;
 
         [JsonProperty("currency_code")]
-        public string CurrencyCode { get; set; }
+        public string CurrencyCode { get; set; } = null;
 
         [JsonProperty("exchange_rate")]
-        public string ExchangeRate { get; set; }
+        public string ExchangeRate { get; set; } = null;
 
         [JsonProperty("currency_type")]
-        public int CurrencyType { get; set; }
+        public int? CurrencyType { get; set; } = null;
 
         [JsonProperty("schedule_info")]
-        public string ScheduleInfo { get; set; }
+        public string ScheduleInfo { get; set; } = null;
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = null;
 
         [JsonProperty("position")]
-        public int Position { get; set; }
+        public int? Position { get; set; } = null;
 
         [JsonProperty("disabled")]
-        public bool Disabled { get; set; }
+        public bool? Disabled { get; set; } = null;
 
         [JsonProperty("default")]
-        public bool Default { get; set; }
+        public bool? Default { get; set; } = null;
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public string Type { get; set; } = null;
 
         [JsonProperty("contact_status_ids")]
-        public List<long> ContactStatusIDs { get; set; }
+        public List<long> ContactStatusIDs { get; set; } = null;
 
         [JsonProperty("forecast_type")]
         public string ForecastType { get; set; } = null;
@@ -83,13 +79,13 @@ namespace Bitfox.Freshworks.Models
         public bool? Isnull { get; set; } = null;
 
         [JsonProperty("lifecycle_stage_id")]
-        public long LifecycleStageID { get; set; } = default;
+        public long? LifecycleStageID { get; set; } = null;
 
         [JsonProperty("sales_activity_type_id")]
-        public long SalesActivityTypeID { get; set; } = default;
+        public long? SalesActivityTypeID { get; set; } = null;
 
         [JsonProperty("sales_activity_type_name")]
-        public string SalesActivityTypeName { get; set; } = default;
+        public string SalesActivityTypeName { get; set; } = null;
 
     }
 }

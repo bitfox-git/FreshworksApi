@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AccountModel : AccountParent
+    public class AccountModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
@@ -92,7 +92,7 @@ namespace Bitfox.Freshworks.Models
         public object LastContactedMode { get; set; } = null;
 
         [JsonProperty("links")]
-        public LinkModel Links { get; set; } = null;
+        public Link Links { get; set; } = null;
 
         [JsonProperty("avatar")]
         public object Avatar { get; set; } = null;

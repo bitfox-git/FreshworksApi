@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class NoteModel : NoteParent
+    public class NoteModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;

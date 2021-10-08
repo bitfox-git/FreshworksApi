@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class NotePayload : ErrorObject
+    public interface INotePayload
     {
         [JsonProperty("note")]
-        public NoteModel Note { get; set; } = null;
+        NoteModel Note { get; set; }
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkObjects
 {
-    public class AccountPayload: ErrorObject
+    public interface IAccountPayload
     {
         [JsonProperty("sales_account")]
-        public AccountModel Account { get; set; } = null;
+        AccountModel Account { get; set; }
     }
 }

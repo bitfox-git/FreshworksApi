@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class TaskController: BaseController<TaskPayload, TaskModel>, ITaskController
+    public class TaskController: BaseController<ITaskPayload, TaskParent>, ITaskController
     {
         public TaskController(string baseURL, string apikey) : base($"{baseURL}/api/tasks", apikey)
         { }
 
         // Mark Task
-        public async Task<TaskModel> UpdateMarkByID(long id, TaskPayload body)
+        public async Task<TaskParent> UpdateMarkByID(long id, ITaskPayload body, string include = null, int? page = null)
         {
-            var path = $"/{id}";
-            return await UpdateApiRequest<TaskPayload, TaskModel>(path, body);
+            var path = SetParams($"/{id}", include, page);
+            return await UpdateApiRequest<ITaskPayload, TaskParent>(path, body);
         }
     }
 }

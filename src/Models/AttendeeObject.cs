@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AppointmentAttendee
+    public class AttendeeObject
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;

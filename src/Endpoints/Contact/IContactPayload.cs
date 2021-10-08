@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.NetworkObjects
+namespace Bitfox.Freshworks.Endpoints.Contact
 {
-    public class TaskPayload
+    public interface IContactPayload
     {
-        [JsonProperty("task")]
-        public TaskModel Task { get; set; } = null;
+        [JsonProperty("contact")]
+        ContactModel Contact { get; set; }
     }
 }

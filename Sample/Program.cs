@@ -1,5 +1,6 @@
 ﻿using Bitfox.Freshworks;
 using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Endpoints.Contact;
 using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
@@ -23,9 +24,9 @@ namespace Sample
 
             #region Selection
 
-            //var result = await client.Selection<Campaigns>();   // TODO: create sample data that we know, how
-            //var result = await client.Selection<DealProducts>();// TODO: create sample data that we know, how
-            //var result = await client.Selection<Territories>(); // TODO: create sample data that we know, how
+            //var result = await client.Selection<Campaigns>();   // TODO
+            //var result = await client.Selection<DealProducts>();// TODO
+            //var result = await client.Selection<Territories>(); // TODO
             // var result = await client.Selector.Deals.GetReasons();
             // var result = await client.Selector.Deals.GetTypes();
             // var result = await client.Selector.Deals.GetPaymentStatuses();
@@ -33,28 +34,30 @@ namespace Sample
             // var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
             // var result = await client.Selector.Sales.GetActivityTypes();
             // var result = await client.Selector.Sales.GetActivityEntityTypes();
-            var result = await client.Selector.Sales.GetActivityOutcomes();
-            //var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
-            //var result = await client.Selector.GetOwners();
-            //var result = await client.Selector.GetCurrencies();
-            //var result = await client.Selector.GetIndustryTypes();
-            //var result = await client.Selector.GetBusinessTypes();
-            //var result = await client.Selector.GetContactStatuses();
-            //var result = await client.Selector.GetLifecycleStages();
+            // var result = await client.Selector.Sales.GetActivityOutcomes();
+            // var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
+            // var result = await client.Selector.GetOwners();
+            // var result = await client.Selector.GetCurrencies();
+            // var result = await client.Selector.GetIndustryTypes();
+            // var result = await client.Selector.GetBusinessTypes();
+            // var result = await client.Selector.GetContactStatuses();
+            // var result = await client.Selector.GetLifecycleStages();
 
-            Console.WriteLine(result);
+            // Console.WriteLine(result);
 
             #endregion
 
             #region Contact
-            //ContactPayload payload = new();
 
-            //payload.Contact = new()
+            //IContactPayload payload = new ContactParent
             //{
-            //    FirstName = "James",
-            //    LastName = "Sampleton (test)",
-            //    Email = "test1@email.com",
-            //    MobileNumber = "1-926-555-9503"
+            //    Contact = new ContactModel
+            //    {
+            //        FirstName = "James",
+            //        LastName = "Sampleton (test)",
+            //        Email = "test3@email.com",
+            //        MobileNumber = "1-926-555-9503"
+            //    }
             //};
 
             //var contact = await client.Contact.Create(payload);
@@ -70,12 +73,12 @@ namespace Sample
             //var contact = await client.Contact.GetAllFields();
             //var contact = await client.Contact.GetAllActivitiesByID(17007472886);
 
-            /*Console.WriteLine(contact);*/
+            //Console.WriteLine(contact);
 
             #endregion
 
             #region Account
-            AccountPayload payload = new();
+            //AccountPayload payload = new();
 
 
             //AccountObject accountObj = new();

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AccountParent: ErrorObject
+    public class AccountParent: ErrorObject, IAccountPayload
     {
         [JsonProperty("sales_account")]
         public AccountModel Account { get; set; } = null;
@@ -21,10 +21,10 @@ namespace Bitfox.Freshworks.Models
         public Meta Meta { get; set; } = null;
 
         [JsonProperty("field_groups")]
-        public List<FieldGroupObject> FieldGroup { get; set; } = null;
+        public List<FieldGroup> FieldGroup { get; set; } = null;
 
         [JsonProperty("fields")]
-        public List<FieldObject> Fields { get; set; } = null;
+        public List<Field> Fields { get; set; } = null;
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;

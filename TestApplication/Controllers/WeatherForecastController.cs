@@ -22,12 +22,12 @@ namespace TestApplication.Controllers
 
         public WeatherForecastController(ICRMClient client)
         {
-            var account = client.Query<SalesAccount>();
-            var response = account.GetAll();
+            //var account = client.Query<SalesAccount>();
+            //var response = account.GetAll();
 
 
 
-            Console.WriteLine(response);
+            //Console.WriteLine(response);
 
 
 

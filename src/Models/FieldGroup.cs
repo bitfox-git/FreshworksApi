@@ -2,7 +2,7 @@
 
 namespace Bitfox.Freshworks.NetworkModels
 {
-    public class FieldGroupObject
+    public class FieldGroup
     {
         [JsonProperty("id")]
         public string ID { get; set; } = null;

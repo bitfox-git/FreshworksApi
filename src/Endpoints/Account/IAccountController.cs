@@ -16,32 +16,32 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a item added to the rest of the content
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
-        Task<AccountModel> Create(AccountPayload payload);
+        Task<AccountParent> Create(IAccountPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Get all items from given ID.
         /// </summary>
         /// <param name="id">Content ID</param>
-        Task<AccountModel> GetAllByID(long id);
+        Task<AccountParent> GetAllByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Get Data from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<AccountModel> GetByID(long id);
+        Task<AccountParent> GetByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Update data of item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
         /// <param name="payload">Payload used to update item</param>
-        Task<AccountModel> UpdateByID(long id, AccountPayload payload);
+        Task<AccountParent> UpdateByID(long id, IAccountPayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Remove Item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<bool> DeleteByID(long id);
+        Task<bool> DeleteByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Clone account by using his ID.
@@ -50,7 +50,7 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Content that can been updated</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<AccountModel> CloneByID(long id, AccountPayload body, string include = null, int? page = null);
+        Task<AccountParent> CloneByID(long id, IAccountPayload body, string include = null, int? page = null);
 
         /// <summary>
         /// Hard delete a account and all the associated data.
@@ -66,14 +66,14 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Account IDs</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<AccountModel> DeleteBulk(BulkDeleteObject body, string include = null, int? page = null);
+        Task<AccountParent> DeleteBulk(BulkDelete body, string include = null, int? page = null);
 
         /// <summary>
         /// View all the account fields.
         /// </summary>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
-        Task<AccountModel> GetAllFields(string path = "/../settings/contacts/fields", string include = null, int? page = null);
+        Task<AccountParent> GetAllFields(string path = "/../settings/contacts/fields", string include = null, int? page = null);
 
     }
 }

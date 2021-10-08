@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkObjects
 {
-    public class FieldObject
+    public class Field
     {
         [JsonProperty("id")]
         public int? ID { get; set; } = null;

@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    public class NoteController: BaseController<NotePayload, NoteModel>, INoteController
+    public class NoteController: BaseController<INotePayload, NoteParent>, INoteController
     {
         public NoteController(string BaseURL, string apikey): base($"{BaseURL}/api/notes", apikey)
         { }
 
         // Delete Note
-        public async Task<NoteModel> DeleteNoteByID(long id)
+        public async Task<NoteParent> DeleteNoteByID(long id, string include = null, int? page = null)
         {
-            var path = SetParams($"/{id}");
-            return await DeleteApiRequest<NoteModel>(path);
+            var path = SetParams($"/{id}", include, page);
+            return await DeleteApiRequest<NoteParent>(path);
         }
 
     }

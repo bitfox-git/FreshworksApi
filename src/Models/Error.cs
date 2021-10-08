@@ -15,9 +15,9 @@ namespace Bitfox.Freshworks.Models
     public class Error
     {
         [JsonProperty("code")]
-        public int Code { get; set; }
+        public int? Code { get; set; } = null;
 
         [JsonProperty("message")]
-        public string[] Message { get; set; }
+        public List<string> Message { get; set; } = null;
     }
 }

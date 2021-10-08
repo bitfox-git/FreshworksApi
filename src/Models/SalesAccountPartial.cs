@@ -21,9 +21,9 @@ namespace Bitfox.Freshworks.Models
     public class ContactSalesAccountPartial
     {
         [JsonProperty("id")]
-        public long ID { get; set; }
+        public long? ID { get; set; } = null;
 
         [JsonProperty("is_primary")]
-        public bool IsPrimary { get; set; }
+        public bool? IsPrimary { get; set; } = null;
     }
 }

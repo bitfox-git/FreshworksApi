@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkModels
 {
-    public class ActionDataObject
+    public class ActionData
     {
         [JsonProperty("subscription_types_added")]
-        public string[] SubscriptionTypesAdded { get; set; }
+        public List<string> SubscriptionTypesAdded { get; set; } = null;
     }
 }

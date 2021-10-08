@@ -9,8 +9,8 @@ namespace Bitfox.Freshworks.Controllers
 {
     public interface IFileController
     {
-        Task<FileModel> CreateLink(FilePayload body);
+        Task<FileModel> CreateLink(IFilePayload body, string include = null, int? page = null);
 
-        Task<FileModel> GetAllFilesAndLinksByID(long id);
+        Task<FileModel> GetAllFilesAndLinksByID(long id, string include = null, int? page = null);
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class DealParent : ErrorObject
+    public class DealParent : ErrorObject, IDealPayload
     {
         [JsonProperty("deal")]
         public DealModel Deal { get; set; } = null;
@@ -32,11 +32,11 @@ namespace Bitfox.Freshworks.Models
 
 
         [JsonProperty("field_groups")]
-        public List<FieldGroupObject> FieldGroup { get; set; } = null;
+        public List<FieldGroup> FieldGroup { get; set; } = null;
 
 
         [JsonProperty("fields")]
-        public List<FieldObject> Fields { get; set; } = null;
+        public List<Field> Fields { get; set; } = null;
 
 
         [JsonProperty("message")]

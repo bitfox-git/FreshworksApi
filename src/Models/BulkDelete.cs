@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.NetworkModels
 {
-    public class BulkDeleteObject
+    public class BulkDelete
     {
         [JsonProperty("selected_ids")]
         public long[] SelectedIDs { get; set; } = null;

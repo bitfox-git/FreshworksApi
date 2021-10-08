@@ -14,19 +14,19 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a item added to the rest of the content
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
-        Task<NoteModel> Create(NotePayload payload);
+        Task<NoteParent> Create(INotePayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Update data of item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
         /// <param name="payload">Payload used to update item</param>
-        Task<NoteModel> UpdateByID(long id, NotePayload payload);
+        Task<NoteParent> UpdateByID(long id, INotePayload payload, string include = null, int? page = null);
 
         /// <summary>
         /// Remove Item from given ID.
         /// </summary>
         /// <param name="id">Item ID</param>
-        Task<NoteModel> DeleteNoteByID(long id);
+        Task<NoteParent> DeleteNoteByID(long id, string include = null, int? page = null);
     }
 }

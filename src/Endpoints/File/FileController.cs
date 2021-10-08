@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class FileController: BaseController<FilePayload, FileModel>, IFileController
+    public class FileController: BaseController<IFilePayload, FileParent>, IFileController
     {
         public FileController(string baseURL, string apikey) : base($"{baseURL}/api", apikey)
         { }
 
         // Create a link
-        public async Task<FileModel> CreateLink(FilePayload body)
+        public async Task<FileModel> CreateLink(IFilePayload body, string include = null, int? page = null)
         {
-            var path = $"/document_links";
-            return await PostApiRequest<FilePayload, FileModel>(path, body);
+            var path = SetParams($"/document_links", include, page);
+            return await PostApiRequest<IFilePayload, FileModel>(path, body);
         }
 
         // List all Files and Links
-        public async Task<FileModel> GetAllFilesAndLinksByID(long id)
+        public async Task<FileModel> GetAllFilesAndLinksByID(long id, string include = null, int? page = null)
         {
-            var path = $"/contacts/{id}/document_associations";
+            var path = SetParams($"/contacts/{id}/document_associations", include, page);
             return await GetApiRequest<FileModel>(path);
         }
 

@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Models
+namespace Bitfox.Freshworks.Endpoints
 {
-    public class ContactPayload : ErrorObject
+    public interface IPhonePayload
     {
-        [JsonProperty("contact")]
-        public ContactModel Contact { get; set; } = null;
+        [JsonProperty("phone_call")]
+        PhoneModel Call { get; set; }
     }
 }
- 

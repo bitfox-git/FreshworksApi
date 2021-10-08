@@ -14,6 +14,6 @@ namespace Bitfox.Freshworks.Controllers
         /// </summary>
         /// <param name="body">Payload model sended</param>
         /// <returns></returns>
-        Task<PhoneModel> GetCallLogs(PhonePayload body);
+        Task<PhoneParent> GetCallLogs(IPhonePayload body, string include = null, int? page = null);
     }
 }

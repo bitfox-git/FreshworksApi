@@ -10,12 +10,12 @@ namespace Bitfox.Freshworks.NetworkObjects
     public class WidgetCollaborationObject
     {
         [JsonProperty("convo_token")]
-        public string ConvoToken { get; set; }
+        public string ConvoToken { get; set; } = null;
 
         [JsonProperty("auth_token")]
-        public string AuthToken { get; set; }
+        public string AuthToken { get; set; } = null;
 
         [JsonProperty("encoded_jwt_token")]
-        public string EncodedJWTtoken { get; set; }
+        public string EncodedJWTtoken { get; set; } = null;
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public partial class TaskModel : TaskParent
+    public partial class TaskModel
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
@@ -50,9 +50,6 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("task_users_attributes")]
         public List<TaskUserAttribute> TaskUsersAttributes { get; set; } = null;
-
-
-
 
     }
 }

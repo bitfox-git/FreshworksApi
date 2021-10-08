@@ -10,6 +10,6 @@ namespace Bitfox.Freshworks.Models
     public class TaskUserAttribute
     {
         [JsonProperty("user_id")]
-        public string UserID { get; set; }
+        public string UserID { get; set; } = null;
     }
 }

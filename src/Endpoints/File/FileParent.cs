@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class FileParent : ErrorObject
+    public class FileParent : ErrorObject, IFilePayload
     {
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
@@ -19,5 +19,20 @@ namespace Bitfox.Freshworks.Endpoints
 
         [JsonProperty("document_links")]
         public List<FileModel> DocumentLinks { get; set; } = null;
+
+        [JsonProperty("url")]
+        public string Url { get; set; } = null;
+
+        [JsonProperty("is_shared")]
+        public bool? IsShared { get; set; } = null;
+
+        [JsonProperty("targetable_id")]
+        public long? TargetableID { get; set; } = null;
+
+        [JsonProperty("targetable_type")]
+        public string TargetableType { get; set; } = null;
+
+        [JsonProperty("name")]
+        public string Name { get; set; } = null;
     }
 }
