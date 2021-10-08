@@ -8,6 +8,6 @@ namespace Bitfox.Freshworks.Models
 {
     public interface IIncludes
     {
-        IncludesObject Includes { get; set; }
+        IncludesParent Includes { get; set; }
     }
 }

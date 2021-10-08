@@ -35,6 +35,6 @@ namespace Bitfox.Freshworks.Endpoints
         [JsonProperty("targetables")]
         public List<Targetable> Targetables { get; set; } = null;
 
-        public IncludesObject Includes { get; set; } = null;
+        public IncludesParent Includes { get; set; } = null;
     }
 }

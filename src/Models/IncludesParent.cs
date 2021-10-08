@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class IncludesObject: ErrorObject
+    public class IncludesParent: ErrorObject
     {
         //{
         //    "users": [],

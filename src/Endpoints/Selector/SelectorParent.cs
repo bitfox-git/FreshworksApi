@@ -61,6 +61,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("sales_activity_outcomes")]
         public List<SelectorModel> OutcomesTypes { get; set; } = null;
 
-        public IncludesObject Includes { get; set; } = null;
+        public IncludesParent Includes { get; set; } = null;
     }
 }
