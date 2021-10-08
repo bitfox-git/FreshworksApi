@@ -20,7 +20,7 @@ namespace Bitfox.Freshworks.Models
 
 
         [JsonProperty("appointment_attendees")]
-        public List<AttendeeObject> AppointmentAttendees { get; set; }
+        public List<AttendeeObject> AppointmentAttendees { get; set; } = null;
 
 
         [JsonProperty("meta")]

@@ -11,40 +11,50 @@ namespace Bitfox.Freshworks.Controllers
     public interface IDealController
     {
         /// <summary>
-        /// Create a item added to the rest of the content
+        /// Create a new deal item.
         /// </summary>
-        /// <param name="payload">Model used to create a item with.</param>
+        /// <param name="payload">New deal item payload</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<DealParent> Create(IDealPayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Get all items from given ID.
+        /// Get all deal informations from given user ID.
         /// </summary>
-        /// <param name="id">Content ID</param>
+        /// <param name="id">User ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<DealParent> GetAllByID(long id, string include = null, int? page = null);
 
         /// <summary>
-        /// Get Data from given ID.
+        /// Get deal information from deal ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Deal ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<DealParent> GetByID(long id, string include = null, int? page = null);
 
         /// <summary>
-        /// Update data of item from given ID.
+        /// Update deal information on deal ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Deal ID</param>
         /// <param name="payload">Payload used to update item</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<DealParent> UpdateByID(long id, IDealPayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Remove Item from given ID.
+        /// Remove contact by contact ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Deal ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<bool> DeleteByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Clone a deal by using his ID.
         /// </summary>
-        /// <param name="id">ID of deal, to copy from</param>
+        /// <param name="id">Deal ID</param>
         /// <param name="body">Content that can been updated</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>

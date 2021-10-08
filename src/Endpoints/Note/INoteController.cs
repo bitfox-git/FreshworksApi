@@ -11,22 +11,28 @@ namespace Bitfox.Freshworks.Controllers
     {
 
         /// <summary>
-        /// Create a item added to the rest of the content
+        /// Create a new note item.
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<NoteParent> Create(INotePayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Update data of item from given ID.
+        /// Update note by note ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
-        /// <param name="payload">Payload used to update item</param>
+        /// <param name="id">Note ID</param>
+        /// <param name="payload">Payload used to update note</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<NoteParent> UpdateByID(long id, INotePayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Remove Item from given ID.
+        /// Remove note by note ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Note ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<NoteParent> DeleteNoteByID(long id, string include = null, int? page = null);
     }
 }

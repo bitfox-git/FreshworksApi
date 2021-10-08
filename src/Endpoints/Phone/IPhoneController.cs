@@ -12,8 +12,9 @@ namespace Bitfox.Freshworks.Controllers
         /// <summary>
         /// Log all calls that are been made.
         /// </summary>
-        /// <param name="body">Payload model sended</param>
-        /// <returns></returns>
-        Task<PhoneParent> GetCallLogs(IPhonePayload body, string include = null, int? page = null);
+        /// <param name="payload">Data from who we log the calls</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
+        Task<PhoneParent> GetCallLogs(IPhonePayload payload, string include = null, int? page = null);
     }
 }

@@ -13,41 +13,51 @@ namespace Bitfox.Freshworks.Controllers
     {
 
         /// <summary>
-        /// Create a item added to the rest of the content
+        /// Create a new account item.
         /// </summary>
-        /// <param name="payload">Model used to create a item with.</param>
+        /// <param name="payload">New account account payload</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<AccountParent> Create(IAccountPayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Get all items from given ID.
+        /// Get all accounts from given user ID.
         /// </summary>
-        /// <param name="id">Content ID</param>
+        /// <param name="id">User ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<AccountParent> GetAllByID(long id, string include = null, int? page = null);
 
         /// <summary>
-        /// Get Data from given ID.
+        /// Get account information from account ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Account ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<AccountParent> GetByID(long id, string include = null, int? page = null);
 
         /// <summary>
-        /// Update data of item from given ID.
+        /// Update account information on account ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
-        /// <param name="payload">Payload used to update item</param>
+        /// <param name="id">Account ID</param>
+        /// <param name="payload">Payload used to update account</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<AccountParent> UpdateByID(long id, IAccountPayload payload, string include = null, int? page = null);
 
         /// <summary>
-        /// Remove Item from given ID.
+        /// Remove account by account ID.
         /// </summary>
-        /// <param name="id">Item ID</param>
+        /// <param name="id">Account ID</param>
+        /// <param name="include">Add extra content by response</param>
+        /// <param name="page">Limit response size</param>
         Task<bool> DeleteByID(long id, string include = null, int? page = null);
 
         /// <summary>
         /// Clone account by using his ID.
         /// </summary>
-        /// <param name="id">ID of account, to copy from</param>
-        /// <param name="body">Content that can been updated</param>
+        /// <param name="id">Account ID</param>
+        /// <param name="body">Content that will been updated</param>
         /// <param name="include">Add extra content by response</param>
         /// <param name="page">Limit response size</param>
         Task<AccountParent> CloneByID(long id, IAccountPayload body, string include = null, int? page = null);
