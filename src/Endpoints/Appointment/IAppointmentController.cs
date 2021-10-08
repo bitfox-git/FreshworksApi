@@ -14,41 +14,31 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a new contact item.
         /// </summary>
         /// <param name="payload">New appointment account payload.</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<AppointmentParent> Create(IAppointmentPayload payload, string include = null, int? page = null);
+        Task<AppointmentParent> Create(IAppointmentPayload payload, Params _params=null);
 
         /// <summary>
         /// Get all appointments from given user ID.
         /// </summary>
         /// <param name="id">User ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<AppointmentParent> GetAllByID(long id, string include = null, int? page = null);
+        Task<AppointmentParent> GetAllByID(long id, Params _params=null);
 
         /// <summary>
         /// Get appointment information from user ID.
         /// </summary>
         /// <param name="id">Appointment ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<AppointmentParent> GetByID(long id, string include = null, int? page = null);
+        Task<AppointmentParent> GetByID(long id, Params _params=null);
 
         /// <summary>
         /// Update appointment information on appointment ID.
         /// </summary>
         /// <param name="id">Appointment ID</param>
         /// <param name="payload">Payload used to update appointment</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<AppointmentParent> UpdateByID(long id, IAppointmentPayload payload, string include = null, int? page = null);
+        Task<AppointmentParent> UpdateByID(long id, IAppointmentPayload payload, Params _params=null);
 
         /// <summary>
         /// Remove appointment by appointment ID.
         /// </summary>
         /// <param name="id">Appointment ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<bool> DeleteByID(long id, string include = null, int? page = null);
+        Task<bool> DeleteByID(long id, Params _params=null);
     }
 }

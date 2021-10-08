@@ -15,17 +15,19 @@ namespace Bitfox.Freshworks.Endpoints
         { }
 
         // Create a link
-        public async Task<FileModel> CreateLink(IFilePayload body, string include = null, int? page = null)
+        public async Task<FileParent> CreateLink(IFilePayload body, Params _params=null)
         {
-            var path = SetParams($"/document_links", include, page);
-            return await PostApiRequest<IFilePayload, FileModel>(path, body);
+            string path = $"/document_links";
+            path = _params == null ? path : _params.AddPath(path);
+            return await PostApiRequest<IFilePayload, FileParent>(path, body);
         }
 
         // List all Files and Links
-        public async Task<FileModel> GetAllFilesAndLinksByID(long id, string include = null, int? page = null)
+        public async Task<FileParent> GetAllFilesAndLinksByID(long id, Params _params=null)
         {
-            var path = SetParams($"/contacts/{id}/document_associations", include, page);
-            return await GetApiRequest<FileModel>(path);
+            string path = $"/contacts/{id}/document_associations";
+            path = _params == null ? path : _params.AddPath(path);
+            return await GetApiRequest<FileParent>(path);
         }
 
 

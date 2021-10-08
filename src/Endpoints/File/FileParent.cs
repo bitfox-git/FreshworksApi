@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class FileParent : ErrorObject, IFilePayload
+    public class FileParent : ErrorObject, IFilePayload, IIncludes
     {
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
@@ -34,5 +34,7 @@ namespace Bitfox.Freshworks.Endpoints
 
         [JsonProperty("name")]
         public string Name { get; set; } = null;
+
+        public IncludesObject Includes { get; set; } = null;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,6 @@ namespace Bitfox.Freshworks.Controllers
         /// Log all calls that are been made.
         /// </summary>
         /// <param name="payload">Data from who we log the calls</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<PhoneParent> GetCallLogs(IPhonePayload payload, string include = null, int? page = null);
+        Task<PhoneParent> GetCallLogs(IPhonePayload payload, Params _params = null);
     }
 }

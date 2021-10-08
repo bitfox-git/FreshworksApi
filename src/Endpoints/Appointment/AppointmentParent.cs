@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AppointmentParent : ErrorObject, IAppointmentPayload
+    public class AppointmentParent : ErrorObject, IAppointmentPayload, IIncludes
     {
         [JsonProperty("appointment")]
         public AppointmentModel Appointment { get; set; } = null;
@@ -34,6 +34,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("contacts")]
         public List<ContactModel> Contacts { get; set; } = null;
 
-
+        public IncludesObject Includes { get; set; } = null;
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SelectorParent: ErrorObject
+    public class SelectorParent: ErrorObject, IIncludes
     {
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
@@ -61,5 +61,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("sales_activity_outcomes")]
         public List<SelectorModel> OutcomesTypes { get; set; } = null;
 
+        public IncludesObject Includes { get; set; } = null;
     }
 }

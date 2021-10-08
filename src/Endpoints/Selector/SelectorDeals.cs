@@ -18,9 +18,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name, deal_pipeline_id of the deal stages.
         /// </summary>
         /// <returns>List of all deal stages</returns>
-        public async Task<SelectorParent> GetStages(string include = null, int? page = null)
+        public async Task<SelectorParent> GetStages(Params _params=null)
         {
-            string path = SetParams($"/deal_stages", include, page);
+            string path = $"/deal_stages";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
 
@@ -29,9 +30,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal types
         /// </summary>
         /// <returns>List of all deal types</returns>
-        public async Task<SelectorParent> GetTypes(string include = null, int? page = null)
+        public async Task<SelectorParent> GetTypes(Params _params=null)
         {
-            string path = SetParams($"/deal_types", include, page);
+            string path = $"/deal_types";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
 
@@ -40,9 +42,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal reasons
         /// </summary>
         /// <returns>List of all deal reasons</returns>
-        public async Task<SelectorParent> GetReasons(string include = null, int? page = null)
+        public async Task<SelectorParent> GetReasons(Params _params=null)
         {
-            string path = SetParams($"/deal_reasons", include, page);
+            string path = $"/deal_reasons";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
 
@@ -51,9 +54,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal pipelines
         /// </summary>
         /// <returns>List of all deal pipelines</returns>
-        public async Task<SelectorParent> GetPipelines(string include = null, int? page = null)
+        public async Task<SelectorParent> GetPipelines(Params _params=null)
         {
-            string path = SetParams($"/deal_pipelines", include, page);
+            string path = $"/deal_pipelines";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
 
@@ -63,9 +67,10 @@ namespace Bitfox.Freshworks.Selectors
         /// </summary>
         /// <param name="id">Owner ID</param>
         /// <returns>List of all deal pipelines based on ID</returns>
-        public async Task<SelectorParent> GetPipelinesOnID(long id, string include = null, int? page = null)
+        public async Task<SelectorParent> GetPipelinesOnID(long id, Params _params=null)
         {
-            string path = SetParams($"/deal_pipelines/{id}/deal_stages", include, page);
+            string path = $"/deal_pipelines/{id}/deal_stages";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
 
@@ -74,9 +79,10 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the deal payment statuses
         /// </summary>
         /// <returns>List of all deal payment statuses</returns>
-        public async Task<SelectorParent> GetPaymentStatuses(string include = null, int? page = null)
+        public async Task<SelectorParent> GetPaymentStatuses(Params _params=null)
         {
-            string path = SetParams($"/deal_payment_statuses", include, page);
+            string path = $"/deal_payment_statuses";
+            path = _params == null ? path : _params.AddPath(path);
             return await GetApiRequest<SelectorParent>(path);
         }
     }

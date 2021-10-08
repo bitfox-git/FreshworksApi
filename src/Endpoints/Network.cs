@@ -23,7 +23,7 @@ namespace Bitfox.Freshworks.Models
         }
 
         // Get Http calls
-        protected async Task<TResponse> GetApiRequest<TResponse>(string path)
+        protected async Task<TResponse> GetApiRequest<TResponse>(string path) where TResponse: IIncludes
         {
             string url = BaseURL + path;
             var request = new HttpRequestMessage
@@ -37,7 +37,9 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
+
             var response = JsonConvert.DeserializeObject<TResponse>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
 
             // valid response 
             return response;
@@ -50,7 +52,7 @@ namespace Bitfox.Freshworks.Models
         /// <typeparam name="TResponse">Response object from the request</typeparam>
         /// <param name="path">Url Path</param>
         /// <param name="body">New payload that will used for new content</param>
-        protected async Task<TResponse> PostApiRequest<TRequest, TResponse>(string path, TRequest body)
+        protected async Task<TResponse> PostApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
         {
             string url = BaseURL + path;
 
@@ -74,7 +76,9 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
+
             var response = JsonConvert.DeserializeObject<TResponse>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
 
             // valid response 
             return response;
@@ -87,7 +91,7 @@ namespace Bitfox.Freshworks.Models
         /// <typeparam name="TResponse">Response object from the request</typeparam>
         /// <param name="path">Url Path</param>
         /// <param name="body">New payload that will update the old content</param>
-        protected async Task<TResponse> UpdateApiRequest<TRequest, TResponse>(string path, TRequest body)
+        protected async Task<TResponse> UpdateApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
         {
             string url = BaseURL + path;
             JsonSerializerSettings serializesettings = new()
@@ -109,7 +113,9 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
+
             var response = JsonConvert.DeserializeObject<TResponse>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
 
             // valid response 
             return response;
@@ -141,7 +147,7 @@ namespace Bitfox.Freshworks.Models
         /// </summary>
         /// <typeparam name="TResponse">Type of response model</typeparam>
         /// <param name="path">Url path</param>
-        protected async Task<TResponse> DeleteApiRequest<TResponse>(string path)
+        protected async Task<TResponse> DeleteApiRequest<TResponse>(string path) where TResponse : IIncludes
         {
             string url = BaseURL + path;
             var request = new HttpRequestMessage
@@ -155,37 +161,12 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
+
             var response = JsonConvert.DeserializeObject<TResponse>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
 
             // valid response 
             return response;
         }
-
-        /// <summary>
-        /// Set `include` or `page` param to the URL path.
-        /// </summary>
-        /// <param name="path">Url path</param>
-        /// <param name="include">Include objects to the original response object</param>
-        /// <param name="page">1 page contains 25 items, by using `page` we can limit response results</param>
-        protected static string SetParams(string path, string include = null, int? page = null)
-        {
-            if (include != null || page != null)
-            {
-                path += "?";
-            }
-
-            if (page != null)
-            {
-                path += $"page={page}";
-            }
-
-            if (include != null)
-            {
-                path += $"include={include}";
-            }
-
-            return path;
-        }
-
     }
 }

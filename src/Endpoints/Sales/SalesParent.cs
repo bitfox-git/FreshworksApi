@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SalesParent: ErrorObject, ISalesPayload
+    public class SalesParent: ErrorObject, ISalesPayload, IIncludes
     {
         [JsonProperty("sales_activity")]
         public SalesModel Activity { get; set; } = null;
@@ -21,6 +21,8 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
+
+        public IncludesObject Includes { get; set; } = null;
 
     }
 }

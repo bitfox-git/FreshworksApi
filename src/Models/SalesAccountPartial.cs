@@ -25,5 +25,17 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("is_primary")]
         public bool? IsPrimary { get; set; } = null;
+
+        [JsonProperty("avatar")]
+        public string Avatar { get; set; } = null;
+
+        [JsonProperty("name")]
+        public string Name { get; set; } = null;
+
+        [JsonProperty("partial")]
+        public bool? Partial { get; set; } = null;
+
+        [JsonProperty("website")]
+        public string Website { get; set; } = null;
     }
 }

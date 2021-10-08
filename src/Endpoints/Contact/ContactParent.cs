@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class ContactParent: ErrorObject, IContactPayload
+    public class ContactParent: ErrorObject, IContactPayload, IIncludes
     {
         [JsonProperty("contact")]
         public ContactModel Contact { get; set; } = null;
@@ -39,5 +39,7 @@ namespace Bitfox.Freshworks.Endpoints
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;
+
+        public IncludesObject Includes { get; set; } = null;
     }
 }

@@ -14,9 +14,10 @@ namespace Bitfox.Freshworks.Controllers
         { }
 
         // Delete Note
-        public async Task<NoteParent> DeleteNoteByID(long id, string include = null, int? page = null)
+        public async Task<NoteParent> DeleteNoteByID(long id, Params _params = null)
         {
-            var path = SetParams($"/{id}", include, page);
+            var path = $"/{id}";
+            path = _params == null ? path : _params.AddPath($"/{id}");
             return await DeleteApiRequest<NoteParent>(path);
         }
 

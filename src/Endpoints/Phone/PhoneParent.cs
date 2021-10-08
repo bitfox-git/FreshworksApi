@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class PhoneParent : ErrorObject, IPhonePayload
+    public class PhoneParent : ErrorObject, IPhonePayload, IIncludes
     {
         [JsonProperty("phone_call")]
         public PhoneModel Call { get; set; } = null;
@@ -34,5 +34,7 @@ namespace Bitfox.Freshworks.Endpoints
 
         [JsonProperty("targetables")]
         public List<Targetable> Targetables { get; set; } = null;
+
+        public IncludesObject Includes { get; set; } = null;
     }
 }

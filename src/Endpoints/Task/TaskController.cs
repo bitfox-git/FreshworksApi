@@ -14,9 +14,10 @@ namespace Bitfox.Freshworks.Models
         { }
 
         // Mark Task
-        public async Task<TaskParent> UpdateMarkByID(long id, ITaskPayload body, string include = null, int? page = null)
+        public async Task<TaskParent> UpdateMarkByID(long id, ITaskPayload body, Params _params=null)
         {
-            var path = SetParams($"/{id}", include, page);
+            string path = $"/{id}";
+            path = _params == null ? path : _params.AddPath(path);
             return await UpdateApiRequest<ITaskPayload, TaskParent>(path, body);
         }
     }

@@ -14,73 +14,55 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a new deal item.
         /// </summary>
         /// <param name="payload">New deal item payload</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> Create(IDealPayload payload, string include = null, int? page = null);
+        Task<DealParent> Create(IDealPayload payload, Params _params=null);
 
         /// <summary>
         /// Get all deal informations from given user ID.
         /// </summary>
         /// <param name="id">User ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> GetAllByID(long id, string include = null, int? page = null);
+        Task<DealParent> GetAllByID(long id, Params _params=null);
 
         /// <summary>
         /// Get deal information from deal ID.
         /// </summary>
         /// <param name="id">Deal ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> GetByID(long id, string include = null, int? page = null);
+        Task<DealParent> GetByID(long id, Params _params=null);
 
         /// <summary>
         /// Update deal information on deal ID.
         /// </summary>
         /// <param name="id">Deal ID</param>
         /// <param name="payload">Payload used to update item</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> UpdateByID(long id, IDealPayload payload, string include = null, int? page = null);
+        Task<DealParent> UpdateByID(long id, IDealPayload payload, Params _params=null);
 
         /// <summary>
         /// Remove contact by contact ID.
         /// </summary>
         /// <param name="id">Deal ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<bool> DeleteByID(long id, string include = null, int? page = null);
+        Task<bool> DeleteByID(long id, Params _params=null);
 
         /// <summary>
         /// Clone a deal by using his ID.
         /// </summary>
         /// <param name="id">Deal ID</param>
         /// <param name="body">Content that can been updated</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> CloneByID(long id, IDealPayload body, string include = null, int? page = null);
+        Task<DealParent> CloneByID(long id, IDealPayload body, Params _params=null);
 
         /// <summary>
         /// Hard delete a Deal and all the associated data.
         /// </summary>
         /// <param name="id">Given ID will been deleted</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<bool> ForgetByID(long id, string include = null, int? page = null);
+        Task<bool> ForgetByID(long id, Params _params=null);
 
         /// <summary>
         /// Delete deals in bulk.
         /// </summary>
         /// <param name="body">Contact IDs</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> DeleteBulk(BulkDelete body, string include = null, int? page = null);
+        Task<DealParent> DeleteBulk(BulkDelete body, Params _params=null);
 
         /// <summary>
         /// View all the deal fields.
         /// </summary>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<DealParent> GetAllFields(string path = "/../settings/deals/fields", string include = null, int? page = null);
+        Task<DealParent> GetAllFields(string path = "/../settings/deals/fields", Params _params=null);
     }
 }

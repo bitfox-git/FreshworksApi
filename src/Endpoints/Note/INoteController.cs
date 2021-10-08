@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,25 +15,19 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a new note item.
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<NoteParent> Create(INotePayload payload, string include = null, int? page = null);
+        Task<NoteParent> Create(INotePayload payload, Params _params=null);
 
         /// <summary>
         /// Update note by note ID.
         /// </summary>
         /// <param name="id">Note ID</param>
         /// <param name="payload">Payload used to update note</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<NoteParent> UpdateByID(long id, INotePayload payload, string include = null, int? page = null);
+        Task<NoteParent> UpdateByID(long id, INotePayload payload, Params _params=null);
 
         /// <summary>
         /// Remove note by note ID.
         /// </summary>
         /// <param name="id">Note ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<NoteParent> DeleteNoteByID(long id, string include = null, int? page = null);
+        Task<NoteParent> DeleteNoteByID(long id, Params _params=null);
     }
 }

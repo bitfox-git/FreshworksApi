@@ -16,89 +16,67 @@ namespace Bitfox.Freshworks.Controllers
         /// Create a new contact item.
         /// </summary>
         /// <param name="payload">New contact account payload</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> Create(IContactPayload payload, string include = null, int? page = null);
+        Task<ContactParent> Create(IContactPayload payload, Params _params=null);
 
         /// <summary>
         /// Get all contact information from given user ID.
         /// </summary>
         /// <param name="id">User ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> GetAllByID(long id, string include = null, int? page = null);
+        Task<ContactParent> GetAllByID(long id, Params _params = null);
 
         /// <summary>
         /// Get contact information from contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> GetByID(long id, string include = null, int? page = null);
+        Task<ContactParent> GetByID(long id, Params _params = null);
 
         /// <summary>
         /// Update contact information on contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
         /// <param name="payload">Payload used to update contact</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> UpdateByID(long id, IContactPayload payload, string include = null, int? page = null);
+        Task<ContactParent> UpdateByID(long id, IContactPayload payload, Params _params = null);
 
         /// <summary>
         /// Remove contact by contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<bool> DeleteByID(long id, string include = null, int? page = null);
+        Task<bool> DeleteByID(long id, Params _params = null);
 
         /// <summary>
         /// Clone contact by contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
         /// <param name="body">Content that will been updated</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> CloneByID(long id, IContactPayload body, string include = null, int? page = null);
+        Task<ContactParent> CloneByID(long id, IContactPayload body, Params _params = null);
 
         /// <summary>
         /// Hard delete a contact and all the associated data.
         /// </summary>
         /// <param name="id">Given ID will been deleted</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<bool> ForgetByID(long id, string include = null, int? page = null);
+        Task<bool> ForgetByID(long id, Params _params = null);
 
         /// <summary>
         /// Assign an owner to a list of contacts
         /// </summary>
         /// <param name="body">Owner ID and contact IDs</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> CreateBulk(BulkAssign body, string include = null, int? page = null);
+        Task<ContactParent> CreateBulk(BulkAssign body, Params _params = null);
 
         /// <summary>
         /// Delete contacts in bulk.
         /// </summary>
         /// <param name="body">Contact IDs</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> DeleteBulk(BulkDelete body, string include = null, int? page = null);
+        Task<ContactParent> DeleteBulk(BulkDelete body, Params _params = null);
 
         /// <summary>
         /// View all the contact fields.
         /// </summary>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> GetAllFields(string path="/../settings/contacts/fields", string include = null, int? page = null);
+        Task<ContactParent> GetAllFields(string path = "/../settings/contacts/fields", Params _params = null);
 
         /// <summary>
         /// Get the activities of a contact.
         /// </summary>
         /// <param name="id">ID of contact</param>
-        /// <param name="include">Add extra content by response</param>
-        /// <param name="page">Limit response size</param>
-        Task<ContactParent> GetAllActivitiesByID(long id, string include = null, int? page = null);
+        Task<ContactParent> GetAllActivitiesByID(long id, Params _params = null);
     }
 }
