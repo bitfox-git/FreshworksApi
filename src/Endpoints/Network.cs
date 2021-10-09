@@ -39,7 +39,7 @@ namespace Bitfox.Freshworks.Models
             var data = await result.Content.ReadAsStringAsync();
 
             var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
 
             // valid response 
             return response;
@@ -78,7 +78,7 @@ namespace Bitfox.Freshworks.Models
             var data = await result.Content.ReadAsStringAsync();
 
             var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
 
             // valid response 
             return response;
@@ -115,7 +115,7 @@ namespace Bitfox.Freshworks.Models
             var data = await result.Content.ReadAsStringAsync();
 
             var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
 
             // valid response 
             return response;
@@ -163,7 +163,7 @@ namespace Bitfox.Freshworks.Models
             var data = await result.Content.ReadAsStringAsync();
 
             var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesObject>(data);
+            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
 
             // valid response 
             return response;
