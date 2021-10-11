@@ -15,17 +15,10 @@ namespace TestApplication.Controllers
     {
         public WeatherForecastController(ICRMClient client)
         {
-            //client.Contact.
-            //var account = client.Query<SalesAccount>();
-            //var response = account.GetAll();
 
 
 
-            //Console.WriteLine(response);
 
-
-
-            //client.GetTest();
         }
 
         [HttpGet]
