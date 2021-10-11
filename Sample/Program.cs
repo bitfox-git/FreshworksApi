@@ -23,32 +23,87 @@ namespace Sample
                                 .SetApiKey("OOuMhjaasZwwkfzO__tZFQ")
                                 .Build();
 
+            Params _params = new Params()
+            {
+                Includes = new List<string>()
+                {
+                    "creater", "owner"
+                }
+            };
+
+
+
             #region Selection
 
-            //var result = await client.Selection<Campaigns>();   // TODO
-            //var result = await client.Selection<DealProducts>();// TODO
-            //var result = await client.Selection<Territories>(); // TODO
-            // var result = await client.Selector.Deals.GetReasons();
-            // var result = await client.Selector.Deals.GetTypes();
-            // var result = await client.Selector.Deals.GetPaymentStatuses();
-            // var result = await client.Selector.Deals.GetPipelines();
-            // var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
-            // var result = await client.Selector.Sales.GetActivityTypes();
-            // var result = await client.Selector.Sales.GetActivityEntityTypes();
-            // var result = await client.Selector.Sales.GetActivityOutcomes();
-            // var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
-            // var result = await client.Selector.GetOwners();
-            // var result = await client.Selector.GetCurrencies();
-            // var result = await client.Selector.GetIndustryTypes();
-            // var result = await client.Selector.GetBusinessTypes();
-            // var result = await client.Selector.GetContactStatuses();
-            // var result = await client.Selector.GetLifecycleStages();
+            //var result = await client.Selector.GetTerritories();
+            //var result = await client.Selector.GetCampaigns();
+            //var result = await client.Selector.GetOwners();
+            //var result = await client.Selector.GetCurrencies();
+            //var result = await client.Selector.GetContactStatuses();
+            //var result = await client.Selector.GetBusinessTypes();
+            //var result = await client.Selector.GetLifecycleStages();
+            //var result = await client.Selector.GetIndustryTypes();
+            //var result = await client.Selector.Sales.GetActivityTypes();
+            //var result = await client.Selector.Sales.GetActivityEntityTypes();
+            //var result = await client.Selector.Sales.GetActivityOutcomes();
+            //var result = await client.Selector.Sales.GetActivityOutcomesOnID(17000241379);
+            //var result = await client.Selector.Deals.GetReasons();
+            //var result = await client.Selector.Deals.GetTypes();
+            //var result = await client.Selector.Deals.GetPaymentStatuses();
+            //var result = await client.Selector.Deals.GetPipelines();
+            //var result = await client.Selector.Deals.GetPipelinesOnID(17000029663);
+            //var result = await client.Selector.Deals.GetProducts();// TODO (can't get response)
 
-            // Console.WriteLine(result);
+            //Console.WriteLine(result);
 
             #endregion
 
             #region Contact
+
+            //Params _params = new()
+            //{
+            //    Limit = 3,
+
+            //    Includes = new List<string>()
+            //    {
+            //        "users",
+            //        "targetable",
+            //        "owner",
+            //        "creater",
+            //        "updater",
+            //        "source",
+            //        "campaign",
+            //        "tasks",
+            //        "appointments",
+            //        "notes",
+            //        "deals",
+            //        "sales_accounts",
+            //        "territory",
+            //        "sales_account",
+            //        "territory",
+            //        "business_type",
+            //        "tasks",
+            //        "contacts",
+            //        "industry_type",
+            //        "child_sales_accounts",
+            //        "deal_stage",
+            //        "deal_type",
+            //        "deal_reason",
+            //        "deal_payment_status",
+            //        "deal_product",
+            //        "currency",
+            //        "probability",
+            //        "created_at",
+            //        "updated_at",
+            //        "field_group",
+            //        "user",
+            //        "users",
+            //        "targetable",
+            //        "appointment_attendees",
+            //        "owner",
+            //        "creater"
+            //    }
+            //};
 
             //IContactPayload payload = new ContactParent
             //{
@@ -61,68 +116,23 @@ namespace Sample
             //    }
             //};
 
-            Params _params = new()
-            {
-                Includes = new List<string>()
-                {
-                    "users",
-                    "targetable",
-                    "owner",
-                    "creater",
-                    "updater",
-                    "source",
-                    "campaign",
-                    "tasks",
-                    "appointments",
-                    "notes",
-                    "deals",
-                    "sales_accounts",
-                    "territory",
-                    "sales_account",
-                    "territory",
-                    "business_type",
-                    "tasks",
-                    "contacts",
-                    "industry_type",
-                    "child_sales_accounts",
-                    "deal_stage",
-                    "deal_type",
-                    "deal_reason",
-                    "deal_payment_status",
-                    "deal_product",
-                    "currency",
-                    "probability",
-                    "created_at",
-                    "updated_at",
-                    "field_group",
-                    "user",
-                    "users",
-                    "targetable",
-                    "appointment_attendees",
-                    "owner",
-                    "creater"
-                }
-            };
 
 
 
+            ////var contact = await client.Contact.Create(payload);
+            //var contact = await client.Contact.GetByID(17007697582, _params);
+            ////var contact = await client.Contact.GetAllByID(17001463640);
+            ////var contact = await client.Contact.UpdateByID(17007697582, payload);
+            ////var contact = await client.Contact.DeleteByID(17007697582);
 
-            //var contact = await client.Contact.Create(payload);
-            var contact = await client.Contact.GetByID(17007697582, _params);
-            //var contact = await client.Contact.GetAllByID(17001463640);
-            //var contact = await client.Contact.UpdateByID(17007697582, payload);
-            //var contact = await client.Contact.DeleteByID(17007697582);
+            ////var contact = await client.Contact.CloneByID(17007697582, payload);
+            ////var contact = await client.Contact.ForgetByID(17007697582);
+            ////var contact = await client.Contact.CreateBulk(payload);
+            ////var contact = await client.Contact.DeleteBulk(payload);
+            ////var contact = await client.Contact.GetAllFields();
+            ////var contact = await client.Contact.GetAllActivitiesByID(17007472886);
 
-            //var contact = await client.Contact.CloneByID(17007697582, payload);
-            //var contact = await client.Contact.ForgetByID(17007697582);
-            //var contact = await client.Contact.CreateBulk(payload);
-            //var contact = await client.Contact.DeleteBulk(payload);
-            //var contact = await client.Contact.GetAllFields();
-            //var contact = await client.Contact.GetAllActivitiesByID(17007472886);
-
-            Console.WriteLine(contact);
-
-            // ?limit=3
+            //Console.WriteLine(contact);
 
             #endregion
 
@@ -162,7 +172,12 @@ namespace Sample
 
             //var result = await client.Account.Create(accountObj);
             //var result = await client.Account.GetAllByID(17001463655);
-            //var result = await client.Account.GetByID(17001220076);
+            //var result = await client.Account.GetByID(17001140566);// _params
+
+
+
+
+
             //var result = await client.Account.UpdateByID(17001219885, accountUpdateObj);
             //var result = await client.Account.DeleteByID(17001219885);
             //var result = await client.Account.CloneByID(17001220091, accountCloneObj);
@@ -323,7 +338,7 @@ namespace Sample
 
 
 
-            //Console.WriteLine(result);
+            Console.WriteLine(result);
 
 
 

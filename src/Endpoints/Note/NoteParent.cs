@@ -9,6 +9,6 @@ namespace Bitfox.Freshworks.Endpoints
         [JsonProperty("note")]
         public NoteModel Note { get; set; } = null;
 
-        public IncludesParent Includes { get; set; } = null;
+        public Includes Includes { get; set; } = null;
     }
 }

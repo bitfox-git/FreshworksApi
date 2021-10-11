@@ -24,7 +24,7 @@ namespace Bitfox.Freshworks
 
         public IAccountController Account => new AccountController(BaseURL, apikey);
 
-        public IDealController Deal => new DealController(BaseURL, apikey);
+        public IDealController Deal => new Controllers.DealController(BaseURL, apikey);
 
         public INoteController Note => new NoteController(BaseURL, apikey);
 

@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,21 +36,10 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-
-            var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
-
-            // valid response 
-            return response;
+            return GetResponse<TResponse>(data);
         }
 
-        /// <summary>
-        /// HTTP request, that uses POST to create new content.
-        /// </summary>
-        /// <typeparam name="TRequest">Payload object that will been used for creating content</typeparam>
-        /// <typeparam name="TResponse">Response object from the request</typeparam>
-        /// <param name="path">Url Path</param>
-        /// <param name="body">New payload that will used for new content</param>
+        // Post Http calls
         protected async Task<TResponse> PostApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
         {
             string url = BaseURL + path;
@@ -76,21 +64,10 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-
-            var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
-
-            // valid response 
-            return response;
+            return GetResponse<TResponse>(data);
         }
 
-        /// <summary>
-        /// HTTP request, that uses PUT to update some content.
-        /// </summary>
-        /// <typeparam name="TRequest">Payload object that will been used for updating</typeparam>
-        /// <typeparam name="TResponse">Response object from the request</typeparam>
-        /// <param name="path">Url Path</param>
-        /// <param name="body">New payload that will update the old content</param>
+        // Put Http calls
         protected async Task<TResponse> UpdateApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
         {
             string url = BaseURL + path;
@@ -113,19 +90,10 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-
-            var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
-
-            // valid response 
-            return response;
+            return GetResponse<TResponse>(data);
         }
 
-        /// <summary>
-        /// HTTP request, that uses DELETE to remove some content.
-        /// </summary>
-        /// <param name="path">Url Path</param>
-        /// <returns> boolean `true` if succeeded</returns>
+        // Delete Http calls
         protected async Task<bool> DeleteApiRequest(string path)
         {
             string url = BaseURL + path;
@@ -142,11 +110,7 @@ namespace Bitfox.Freshworks.Models
             return result.IsSuccessStatusCode;
         }
 
-        /// <summary>
-        /// HTTP request, that uses DELETE to remove some content.
-        /// </summary>
-        /// <typeparam name="TResponse">Type of response model</typeparam>
-        /// <param name="path">Url path</param>
+        // Delete Http calls
         protected async Task<TResponse> DeleteApiRequest<TResponse>(string path) where TResponse : IIncludes
         {
             string url = BaseURL + path;
@@ -161,11 +125,40 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
+            return GetResponse<TResponse>(data);
+        }
 
-            var response = JsonConvert.DeserializeObject<TResponse>(data);
-            response.Includes = JsonConvert.DeserializeObject<IncludesParent>(data);
+        // Create response model
+        private static TResponse GetResponse<TResponse> (string data) where TResponse: IIncludes
+        {
+            JObject json = (JObject)JsonConvert.DeserializeObject(data);
+            TResponse response = json.ToObject<TResponse>();
+            Includes includes = new();
 
-            // valid response 
+            // get includes from properties
+            foreach (PropertyInfo prop in typeof(TResponse).GetProperties())
+            {
+                foreach (object attr in prop.GetCustomAttributes(true))
+                {
+                    if (attr.GetType() != typeof(JsonPropertyAttribute)) continue;
+                    string name = (attr as JsonPropertyAttribute).PropertyName;
+
+                    if (json.ContainsKey(name) && json.SelectToken(name) is JObject)
+                    {
+                        var include = json[name].ToObject<Includes>();
+                        includes.Update(include);
+                        json.Remove(name);
+                    }
+                }
+            }
+
+            // add includes to response
+            includes.Update(json.ToObject<Includes>());
+            if (!includes.HasNull())
+            {
+                response.Includes = includes;
+            }
+
             return response;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Endpoints.Selector.Response;
+using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkObjects;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Selectors
 {
-    public class SelectorSales: Network
+    public class SaleController: Network
     {
-        public SelectorSales(string baseURL, string apikey): base(baseURL, apikey)
+        public SaleController(string baseURL, string apikey): base(baseURL, apikey)
         { }
 
         /// <summary>
@@ -18,11 +19,11 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the sales activity types.
         /// </summary>
         /// <returns>List of all sales activity types</returns>
-        public async Task<SelectorParent> GetActivityTypes(Params _params=null)
+        public async Task<SalesResponse> GetActivityTypes(Params _params=null)
         {
             string path = $"/sales_activity_types";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<SelectorParent>(path);
+            return await GetApiRequest<SalesResponse>(path);
         }
 
         /// <summary>
@@ -30,11 +31,11 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the sales activity entity types.
         /// </summary>
         /// <returns>List of all sales activity entity types</returns>
-        public async Task<SelectorParent> GetActivityEntityTypes(Params _params=null)
+        public async Task<SalesResponse> GetActivityEntityTypes(Params _params=null)
         {
             string path = $"/sales_activity_entity_types";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<SelectorParent>(path);
+            return await GetApiRequest<SalesResponse>(path);
         }
 
         /// <summary>
@@ -42,11 +43,11 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name of the sales activity outcomes.
         /// </summary>
         /// <returns>List of all sales activity outcomes</returns>
-        public async Task<SelectorParent> GetActivityOutcomes(Params _params=null)
+        public async Task<SalesResponse> GetActivityOutcomes(Params _params=null)
         {
             string path = $"/sales_activity_outcomes";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<SelectorParent>(path);
+            return await GetApiRequest<SalesResponse>(path);
         }
 
         /// <summary>
@@ -54,11 +55,11 @@ namespace Bitfox.Freshworks.Selectors
         /// Will give id, name, sales_activity_type_id of the sales activity outcomes.
         /// </summary>
         /// <returns>List of all sales activity outcomes based on ID</returns>
-        public async Task<SelectorParent> GetActivityOutcomesOnID(long id, Params _params=null)
+        public async Task<SalesResponse> GetActivityOutcomesOnID(long id, Params _params=null)
         {
             string path = $"/sales_activity_types/{id}/sales_activity_outcomes";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<SelectorParent>(path);
+            return await GetApiRequest<SalesResponse>(path);
         }
     }
 }

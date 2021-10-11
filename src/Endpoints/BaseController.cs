@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Controllers;
+﻿
+using Bitfox.Freshworks.Controllers;
 using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;

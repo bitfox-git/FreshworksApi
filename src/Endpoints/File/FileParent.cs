@@ -35,6 +35,6 @@ namespace Bitfox.Freshworks.Endpoints
         [JsonProperty("name")]
         public string Name { get; set; } = null;
 
-        public IncludesParent Includes { get; set; } = null;
+        public Includes Includes { get; set; } = null;
     }
 }

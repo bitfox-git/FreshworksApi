@@ -22,7 +22,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        public IncludesParent Includes { get; set; } = null;
+        public Includes Includes { get; set; } = null;
 
     }
 }

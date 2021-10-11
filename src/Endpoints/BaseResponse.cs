@@ -1,17 +1,18 @@
 ﻿using Bitfox.Freshworks.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.NetworkModels
+namespace Bitfox.Freshworks.Endpoints
 {
-    public class ErrorObject: IErrors
+    public class BaseResponse: IIncludes
     {
         [JsonProperty("errors")]
-        public Error Error { get; set; } = null;
+        Error Error { get; set; } = null;
+
+        public Includes Includes { get; set; } = null;
     }
 }

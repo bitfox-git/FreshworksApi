@@ -40,6 +40,6 @@ namespace Bitfox.Freshworks.Endpoints
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        public IncludesParent Includes { get; set; } = null;
+        public Includes Includes { get; set; } = null;
     }
 }

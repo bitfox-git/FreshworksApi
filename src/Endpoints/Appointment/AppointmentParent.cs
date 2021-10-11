@@ -34,6 +34,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("contacts")]
         public List<ContactModel> Contacts { get; set; } = null;
 
-        public IncludesParent Includes { get; set; } = null;
+        public Includes Includes { get; set; } = null;
     }
 }

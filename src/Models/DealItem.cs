@@ -1,27 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using Bitfox.Freshworks.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Models
+namespace Bitfox.Freshworks.Endpoints.Selector
 {
-    public class DealStage
+    public class DealItem : UserItem
     {
-        [JsonProperty("id")]
-        public long? ID { get; set; } = null;
-
-        [JsonProperty("partial")]
-        public bool? Partial { get; set; } = null;
-
-        [JsonProperty("name")]
-        public string Name { get; set; } = null;
-
-        [JsonProperty("position")]
-        public int? Position { get; set; } = null;
-
         [JsonProperty("forecast_type")]
         public string ForecastType { get; set; } = null;
 
         [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; } = null;
+        public DateTime? UpdatedAt { get; set; } = null;
 
         [JsonProperty("deal_pipeline_id")]
         public long? DealPipelineID { get; set; } = null;
@@ -30,7 +23,10 @@ namespace Bitfox.Freshworks.Models
         public int? ChoiceType { get; set; } = null;
 
         [JsonProperty("probability")]
-        public int? Probability { get; set; } = null;
+        public int? probability { get; set; } = null;
+
+        [JsonProperty("is_default")]
+        public bool? IsDefault { get; set; } = null;
 
         [JsonProperty("rotting_days")]
         public int? RottingDays { get; set; } = null;
@@ -42,7 +38,7 @@ namespace Bitfox.Freshworks.Models
         public string AggregatedField { get; set; } = null;
 
         [JsonProperty("deal_stages")]
-        public List<DealStage> DealStages { get; set; } = null;
+        public List<DealItem> DealStages { get; set; } = null;
 
         [JsonProperty("is_deleted")]
         public bool? IsDeleted { get; set; } = null;
