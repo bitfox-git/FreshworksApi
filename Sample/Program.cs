@@ -23,6 +23,42 @@ namespace Sample
                                 .SetApiKey("OOuMhjaasZwwkfzO__tZFQ")
                                 .Build();
 
+            //        "users",
+            //        "targetable",
+            //        "owner",
+            //        "creater",
+            //        "updater",
+            //        "source",
+            //        "campaign",
+            //        "tasks",
+            //        "appointments",
+            //        "notes",
+            //        "deals",
+            //        "sales_accounts",
+            //        "territory",
+            //        "sales_account",
+            //        "territory",
+            //        "business_type",
+            //        "tasks",
+            //        "contacts",
+            //        "industry_type",
+            //        "child_sales_accounts",
+            //        "deal_stage",
+            //        "deal_type",
+            //        "deal_reason",
+            //        "deal_payment_status",
+            //        "deal_product",
+            //        "currency",
+            //        "probability",
+            //        "created_at",
+            //        "updated_at",
+            //        "field_group",
+            //        "user",
+            //        "users",
+            //        "targetable",
+            //        "appointment_attendees",
+            //        "owner",
+            //        "creater"
             Params _params = new Params()
             {
                 Includes = new List<string>()
@@ -60,77 +96,29 @@ namespace Sample
 
             #region Contact
 
-            //Params _params = new()
-            //{
-            //    Limit = 3,
+            IContactPayload payload = new ContactParent
+            {
+                Contact = new ContactModel
+                {
+                    FirstName = "James",
+                    LastName = "Sampleton (test)",
+                    Email = "test321@email.com",
+                    MobileNumber = "1-926-555-9503"
+                }
+            };
 
-            //    Includes = new List<string>()
-            //    {
-            //        "users",
-            //        "targetable",
-            //        "owner",
-            //        "creater",
-            //        "updater",
-            //        "source",
-            //        "campaign",
-            //        "tasks",
-            //        "appointments",
-            //        "notes",
-            //        "deals",
-            //        "sales_accounts",
-            //        "territory",
-            //        "sales_account",
-            //        "territory",
-            //        "business_type",
-            //        "tasks",
-            //        "contacts",
-            //        "industry_type",
-            //        "child_sales_accounts",
-            //        "deal_stage",
-            //        "deal_type",
-            //        "deal_reason",
-            //        "deal_payment_status",
-            //        "deal_product",
-            //        "currency",
-            //        "probability",
-            //        "created_at",
-            //        "updated_at",
-            //        "field_group",
-            //        "user",
-            //        "users",
-            //        "targetable",
-            //        "appointment_attendees",
-            //        "owner",
-            //        "creater"
-            //    }
-            //};
+            var result = await client.Contact.Create(payload);
+            //var result = await client.Contact.GetByID(17007697582, _params);
+            ////var result = await client.Contact.GetAllByID(17001463640);
+            ////var result = await client.Contact.UpdateByID(17007697582, payload);
+            ////var result = await client.Contact.DeleteByID(17007697582);
 
-            //IContactPayload payload = new ContactParent
-            //{
-            //    Contact = new ContactModel
-            //    {
-            //        FirstName = "James",
-            //        LastName = "Sampleton (test)",
-            //        Email = "test3@email.com",
-            //        MobileNumber = "1-926-555-9503"
-            //    }
-            //};
-
-
-
-
-            ////var contact = await client.Contact.Create(payload);
-            //var contact = await client.Contact.GetByID(17007697582, _params);
-            ////var contact = await client.Contact.GetAllByID(17001463640);
-            ////var contact = await client.Contact.UpdateByID(17007697582, payload);
-            ////var contact = await client.Contact.DeleteByID(17007697582);
-
-            ////var contact = await client.Contact.CloneByID(17007697582, payload);
-            ////var contact = await client.Contact.ForgetByID(17007697582);
-            ////var contact = await client.Contact.CreateBulk(payload);
-            ////var contact = await client.Contact.DeleteBulk(payload);
-            ////var contact = await client.Contact.GetAllFields();
-            ////var contact = await client.Contact.GetAllActivitiesByID(17007472886);
+            ////var result = await client.Contact.CloneByID(17007697582, payload);
+            ////var result = await client.Contact.ForgetByID(17007697582);
+            ////var result = await client.Contact.CreateBulk(payload);
+            ////var result = await client.Contact.DeleteBulk(payload);
+            ////var result = await client.Contact.GetAllFields();
+            ////var result = await client.Contact.GetAllActivitiesByID(17007472886);
 
             //Console.WriteLine(contact);
 

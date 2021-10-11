@@ -10,17 +10,17 @@ namespace Bitfox.Freshworks.Selectors
         /// <summary>
         /// Get data of all deals.
         /// </summary>
-        public readonly DealController Deals;
+        public readonly SelectorDealController Deals;
 
         /// <summary>
         /// Get data of all sales.
         /// </summary>
-        public readonly SaleController Sales;
+        public readonly SelectorSaleController Sales;
 
         public SelectorController(string baseURL, string apikey): base($"{baseURL}/api/selector", apikey)
         {
-            Deals = new DealController($"{baseURL}/api/selector", apikey);
-            Sales = new SaleController($"{baseURL}/api/selector", apikey);
+            Deals = new SelectorDealController($"{baseURL}/api/selector", apikey);
+            Sales = new SelectorSaleController($"{baseURL}/api/selector", apikey);
         }
 
         // All Territories

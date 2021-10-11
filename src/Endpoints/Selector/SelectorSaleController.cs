@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Selectors
 {
-    public class SaleController: Network
+    public class SelectorSaleController: Network
     {
-        public SaleController(string baseURL, string apikey): base(baseURL, apikey)
+        public SelectorSaleController(string baseURL, string apikey): base(baseURL, apikey)
         { }
 
         /// <summary>
