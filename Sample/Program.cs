@@ -96,29 +96,28 @@ namespace Sample
 
             #region Contact
 
-            IContactPayload payload = new ContactParent
-            {
-                Contact = new ContactModel
-                {
-                    FirstName = "James",
-                    LastName = "Sampleton (test)",
-                    Email = "test321@email.com",
-                    MobileNumber = "1-926-555-9503"
-                }
-            };
+            //IContactPayload payload = new ContactParent
+            //{
+            //    Contact = new ContactModel
+            //    {
+            //        FirstName = "James",
+            //        LastName = "Sampleton (test)",
+            //        Email = "test321@email.com",
+            //        MobileNumber = "1-926-555-9503"
+            //    }
+            //};
 
-            var result = await client.Contact.Create(payload);
-            //var result = await client.Contact.GetByID(17007697582, _params);
-            ////var result = await client.Contact.GetAllByID(17001463640);
-            ////var result = await client.Contact.UpdateByID(17007697582, payload);
-            ////var result = await client.Contact.DeleteByID(17007697582);
-
-            ////var result = await client.Contact.CloneByID(17007697582, payload);
-            ////var result = await client.Contact.ForgetByID(17007697582);
-            ////var result = await client.Contact.CreateBulk(payload);
-            ////var result = await client.Contact.DeleteBulk(payload);
-            ////var result = await client.Contact.GetAllFields();
-            ////var result = await client.Contact.GetAllActivitiesByID(17007472886);
+            //var result = await client.Contact.Create(payload);
+            //var result = await client.Contact.GetByID(17007795289, _params);
+            //var result = await client.Contact.GetAllByID(17001463640);
+            //var result = await client.Contact.UpdateByID(17007795289, payload);
+            //var result = await client.Contact.DeleteByID(17007795289);
+            //var result = await client.Contact.CloneByID(17007771004, payload);
+            //var result = await client.Contact.ForgetByID(17007795289);
+            //var result = await client.Contact.CreateBulk(payload);
+            //var result = await client.Contact.DeleteBulk(payload);
+            //var result = await client.Contact.GetAllFields(); 
+            //var result = await client.Contact.GetAllActivitiesByID(17007771004);
 
             //Console.WriteLine(contact);
 
