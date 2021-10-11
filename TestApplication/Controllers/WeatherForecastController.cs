@@ -13,26 +13,19 @@ namespace TestApplication.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        public WeatherForecastController(ICRMClient client)
+        private ILogger Logger { get; set; }
+        private ICRMClient Client { get; set; }
+
+        public WeatherForecastController(ILogger logger, ICRMClient client)
         {
-
-
-
-
+            Logger = logger;
+            Client = client;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<SelectorParent> Get()
         {
-            return null;
-            //var rng = new Random();
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //})
-            //.ToArray();
+            return await Client.Selector.GetOwners();
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class SelectorModel
+    internal class SelectorModel
     {
 
         [JsonProperty("partial")]

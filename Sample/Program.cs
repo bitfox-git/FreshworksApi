@@ -308,6 +308,7 @@ namespace Sample
             #endregion
 
             #region Search
+
             #endregion
 
             #region Phone
