@@ -1,4 +1,5 @@
 ﻿
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
 
-    public class AccountParent: ErrorObject, IAccountPayload, IIncludes
+    public class AccountParent: BaseResponse, IAccountPayload
     {
         [JsonProperty("sales_account")]
         public AccountModel Account { get; set; } = null;
@@ -30,7 +31,5 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;
-
-        public Includes Includes { get; set; } = null;
     }
 }

@@ -20,7 +20,7 @@ namespace Bitfox.Freshworks.Controllers
         /// Get all tasks information from given user ID.
         /// </summary>
         /// <param name="id">User ID</param>
-        Task<TaskParent> GetAllByID(long id, Params _params=null);
+        Task<TaskParent> GetAllByFilter(string filter, Params _params=null);
 
         /// <summary>
         /// Get task information from task ID.

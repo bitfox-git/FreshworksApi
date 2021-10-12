@@ -18,7 +18,9 @@ namespace Bitfox.Freshworks.Controllers
         {
             var path = $"/{id}";
             path = _params == null ? path : _params.AddPath($"/{id}");
-            return await DeleteApiRequest<NoteParent>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await DeleteApiRequest<NoteParent>(path, hasIncludes);
         }
 
     }

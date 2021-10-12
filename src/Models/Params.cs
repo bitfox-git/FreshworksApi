@@ -49,6 +49,13 @@ namespace Bitfox.Freshworks.Models
         /// </summary>
         public List<string> Includes { get; set; } = null;
 
+
+        /// <summary>
+        /// Amount of pages as limit (1 page is 25 items)
+        /// </summary>
+        public string Filter { get; set; } = null;
+
+
         /// <summary>
         /// Amount of pages as limit (1 page is 25 items)
         /// </summary>
@@ -64,7 +71,8 @@ namespace Bitfox.Freshworks.Models
         /// </summary>
         public string AddPath(string path)
         {
-            if (Includes != null || Page != null || Limit != null)
+            // TODO; there is a better way
+            if (Includes != null || Filter != null || Page != null || Limit != null)
             {
                 path += "?";
             }
@@ -87,10 +95,21 @@ namespace Bitfox.Freshworks.Models
                 }
             }
 
+            // Filter
+            if (Filter != null)
+            {
+                if (Includes != null)
+                {
+                    path += "&";
+                }
+
+                path += $"filter={Filter}";
+            }
+
             // Page
             if (Page != null)
             {
-                if(Includes != null)
+                if(Includes != null || Filter != null)
                 {
                     path += "&";
                 }
@@ -101,7 +120,7 @@ namespace Bitfox.Freshworks.Models
             // Limit
             if (Limit != null)
             {
-                if(Includes != null || Page != null)
+                if(Includes != null || Filter != null || Page != null)
                 {
                     path += "&";
                 }

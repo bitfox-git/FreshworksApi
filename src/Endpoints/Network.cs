@@ -22,7 +22,7 @@ namespace Bitfox.Freshworks.Models
         }
 
         // Get Http calls
-        protected async Task<TResponse> GetApiRequest<TResponse>(string path) where TResponse: IIncludes
+        protected async Task<TResponse> GetApiRequest<TResponse>(string path, bool hasIncludes) where TResponse: IIncludes
         {
             string url = BaseURL + path;
             var request = new HttpRequestMessage
@@ -36,11 +36,11 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-            return GetResponse<TResponse>(data);
+            return GetResponse<TResponse>(data, hasIncludes);
         }
 
         // Post Http calls
-        protected async Task<TResponse> PostApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
+        protected async Task<TResponse> PostApiRequest<TRequest, TResponse>(string path, TRequest body, bool hasIncludes) where TResponse : IIncludes
         {
             string url = BaseURL + path;
 
@@ -64,11 +64,11 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-            return GetResponse<TResponse>(data);
+            return GetResponse<TResponse>(data, hasIncludes);
         }
 
         // Put Http calls
-        protected async Task<TResponse> UpdateApiRequest<TRequest, TResponse>(string path, TRequest body) where TResponse : IIncludes
+        protected async Task<TResponse> UpdateApiRequest<TRequest, TResponse>(string path, TRequest body, bool hasIncludes) where TResponse : IIncludes
         {
             string url = BaseURL + path;
             JsonSerializerSettings serializesettings = new()
@@ -90,7 +90,7 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-            return GetResponse<TResponse>(data);
+            return GetResponse<TResponse>(data, hasIncludes);
         }
 
         // Delete Http calls
@@ -111,7 +111,7 @@ namespace Bitfox.Freshworks.Models
         }
 
         // Delete Http calls
-        protected async Task<TResponse> DeleteApiRequest<TResponse>(string path) where TResponse : IIncludes
+        protected async Task<TResponse> DeleteApiRequest<TResponse>(string path, bool hasIncludes) where TResponse : IIncludes
         {
             string url = BaseURL + path;
             var request = new HttpRequestMessage
@@ -125,38 +125,41 @@ namespace Bitfox.Freshworks.Models
 
             var result = await Client.SendAsync(request);
             var data = await result.Content.ReadAsStringAsync();
-            return GetResponse<TResponse>(data);
+            return GetResponse<TResponse>(data, hasIncludes);
         }
 
         // Create response model
-        private static TResponse GetResponse<TResponse> (string data) where TResponse: IIncludes
+        private static TResponse GetResponse<TResponse> (string data, bool hasIncludes) where TResponse: IIncludes
         {
             JObject json = (JObject)JsonConvert.DeserializeObject(data);
             TResponse response = json.ToObject<TResponse>();
-            Includes includes = new();
 
             // get includes from properties
-            foreach (PropertyInfo prop in typeof(TResponse).GetProperties())
+            if (hasIncludes)
             {
-                foreach (object attr in prop.GetCustomAttributes(true))
+                Includes includes = new();
+                foreach (PropertyInfo prop in typeof(TResponse).GetProperties())
                 {
-                    if (attr.GetType() != typeof(JsonPropertyAttribute)) continue;
-                    string name = (attr as JsonPropertyAttribute).PropertyName;
-
-                    if (json.ContainsKey(name) && json.SelectToken(name) is JObject)
+                    foreach (object attr in prop.GetCustomAttributes(true))
                     {
-                        var include = json[name].ToObject<Includes>();
-                        includes.Update(include);
-                        json.Remove(name);
+                        if (attr.GetType() != typeof(JsonPropertyAttribute)) continue;
+                        string name = (attr as JsonPropertyAttribute).PropertyName;
+
+                        if (json.ContainsKey(name) && json.SelectToken(name) is JObject)
+                        {
+                            var include = json[name].ToObject<Includes>();
+                            includes.Update(include);
+                            json.Remove(name);
+                        }
                     }
                 }
-            }
 
-            // add includes to response
-            includes.Update(json.ToObject<Includes>());
-            if (!includes.HasNull())
-            {
-                response.Includes = includes;
+                // add includes to response
+                includes.Update(json.ToObject<Includes>());
+                if (!includes.HasNull())
+                {
+                    response.Includes = includes;
+                }
             }
 
             return response;

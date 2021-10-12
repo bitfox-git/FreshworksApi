@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.NetworkModels;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class DealParent : ErrorObject, IDealPayload, IIncludes
+    public class DealParent : BaseResponse, IDealPayload
     {
         [JsonProperty("deal")]
         public DealModel Deal { get; set; } = null;
@@ -41,7 +42,5 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;
-
-        public Includes Includes { get; set; } = null;
     }
 }

@@ -36,6 +36,18 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("creater_id")]
         public long? CreaterID { get; set; } = null;
 
+        [JsonProperty("completed_date")]
+        public DateTime? CompletedDate { get; set; } = null;
+
+        [JsonProperty("updater_id")]
+        public long? UpdaterID { get; set; } = null;
+
+        [JsonProperty("outcome_id")]
+        public long? OutcomeID { get; set; } = null;
+
+        [JsonProperty("task_type_id")]
+        public long? TaskTypeID { get; set; } = null;
+
         [JsonProperty("user_ids")]
         public List<long> UserIDs { get; set; } = null;
 
@@ -43,7 +55,7 @@ namespace Bitfox.Freshworks.Models
         public Targetable Targetable { get; set; } = null;
 
         [JsonProperty("targetable_id")]
-        public string TargetableID { get; set; } = null;
+        public long? TargetableID { get; set; } = null;
 
         [JsonProperty("targetable_type")]
         public string TargetableType { get; set; } = null;

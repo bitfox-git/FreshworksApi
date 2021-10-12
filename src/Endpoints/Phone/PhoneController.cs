@@ -18,7 +18,9 @@ namespace Bitfox.Freshworks.Endpoints
         {
             string path = $"/document_links";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<IPhonePayload, PhoneParent>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<IPhonePayload, PhoneParent>(path, body, hasIncludes);
         }
     }
 }

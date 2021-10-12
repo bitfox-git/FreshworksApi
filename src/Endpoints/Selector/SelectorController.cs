@@ -28,7 +28,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/territories";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<TerritoriesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TerritoriesResponse>(path, hasIncludes);
         }
 
         // All Campaigns
@@ -36,7 +38,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/campaigns";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<CampaignsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<CampaignsResponse>(path, hasIncludes);
         }
 
         // All Owners
@@ -44,7 +48,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/owners";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<UsersResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<UsersResponse>(path, hasIncludes);
         }
 
         // Available currencies
@@ -52,7 +58,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/currencies";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<CurrenciesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<CurrenciesResponse>(path, hasIncludes);
         }
 
         // All statuses of contact
@@ -60,7 +68,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/contact_statuses";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<ContactStatusesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<ContactStatusesResponse>(path, hasIncludes);
         }
 
         // All Business types 
@@ -68,7 +78,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/business_types";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<BusinessTypesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<BusinessTypesResponse>(path, hasIncludes);
         }
 
         // All Lifecycle stages
@@ -76,7 +88,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/lifecycle_stages";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<LifecycleStagesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<LifecycleStagesResponse>(path, hasIncludes);
         }
 
         // All industry types
@@ -84,7 +98,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/industry_types";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<IndustryTypesResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<IndustryTypesResponse>(path, hasIncludes);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.NetworkModels;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.NetworkModels;
 using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using System;
@@ -9,28 +10,22 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class TaskParent: ErrorObject, ITaskPayload, IIncludes
+    public class TaskParent: BaseResponse, ITaskPayload
     {
         [JsonProperty("task")]
         public TaskModel Task { get; set; } = null;
 
-
         [JsonProperty("tasks")]
         public List<TaskModel> Tasks { get; set; } = null;
-
 
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
 
-
         [JsonProperty("contacts")]
         public List<ContactModel> Contacts { get; set; } = null;
-
-        public Includes Includes { get; set; } = null;
 
     }
 }

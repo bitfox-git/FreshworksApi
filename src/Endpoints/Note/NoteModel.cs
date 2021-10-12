@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bitfox.Freshworks.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,24 @@ namespace Bitfox.Freshworks.Endpoints
 
         [JsonProperty("created_at")]
         public DateTime? CreatedAt { get; set; } = null;
+        
+        [JsonProperty("creater_id")]
+        public long? CreaterID { get; set; } = null;
 
         [JsonProperty("updated_at")]
         public DateTime? UpdatedAt { get; set; } = null;
+
+        [JsonProperty("url")]
+        public string Url { get; set; } = null;
+
+        [JsonProperty("duration")]
+        public string Duration { get; set; } = null;
+
+        [JsonProperty("has_access")]
+        public bool? HasAccess { get; set; } = null;
+
+        [JsonProperty("collab_context")]
+        public ColabContext CollabContext { get; set; } = null;
 
     }
 }

@@ -13,12 +13,28 @@ namespace Bitfox.Freshworks.Models
         public TaskController(string baseURL, string apikey) : base($"{baseURL}/api/tasks", apikey)
         { }
 
+        // Get All Tasks
+        public async Task<TaskParent> GetAllByFilter(string filter, Params _params = null)
+        {
+            if (_params == null)
+            {
+                _params = new Params();
+            }
+            _params.Filter = filter;
+            string path = _params.AddPath("");
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TaskParent>(path, hasIncludes);
+        }
+
         // Mark Task
         public async Task<TaskParent> UpdateMarkByID(long id, ITaskPayload body, Params _params=null)
         {
             string path = $"/{id}";
             path = _params == null ? path : _params.AddPath(path);
-            return await UpdateApiRequest<ITaskPayload, TaskParent>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await UpdateApiRequest<ITaskPayload, TaskParent>(path, body, hasIncludes);
         }
     }
 }

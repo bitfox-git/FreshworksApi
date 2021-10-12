@@ -19,7 +19,9 @@ namespace Bitfox.Freshworks.Endpoints
         {
             string path = $"/document_links";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<IFilePayload, FileParent>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<IFilePayload, FileParent>(path, body, hasIncludes);
         }
 
         // List all Files and Links
@@ -27,7 +29,9 @@ namespace Bitfox.Freshworks.Endpoints
         {
             string path = $"/contacts/{id}/document_associations";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<FileParent>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<FileParent>(path, hasIncludes);
         }
 
 

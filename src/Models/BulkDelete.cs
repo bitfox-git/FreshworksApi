@@ -11,5 +11,9 @@ namespace Bitfox.Freshworks.NetworkModels
     {
         [JsonProperty("selected_ids")]
         public long[] SelectedIDs { get; set; } = null;
+
+        [JsonProperty("delete_associated_contacts_deals")]
+        public bool? DeleteAssociatedContactDeals { get; set; } = null;
+
     }
 }

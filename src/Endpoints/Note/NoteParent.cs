@@ -4,11 +4,15 @@ using Newtonsoft.Json;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public class NoteParent: ErrorObject, INotePayload, IIncludes
+    public class NoteParent: BaseResponse, INotePayload
     {
         [JsonProperty("note")]
         public NoteModel Note { get; set; } = null;
 
-        public Includes Includes { get; set; } = null;
+        [JsonProperty("meta")]
+        public Meta Meta { get; set; } = null;
+
+        [JsonProperty("success")]
+        public string Success { get; set; } = null;
     }
 }

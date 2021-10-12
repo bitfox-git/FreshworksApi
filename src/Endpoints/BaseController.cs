@@ -22,7 +22,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<TRequest, TResponse>(path, payload);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<TRequest, TResponse>(path, payload, hasIncludes);
         }
 
         // Get Items on content ID
@@ -30,7 +32,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/view/{id}";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<TResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TResponse>(path, hasIncludes);
         }
 
         // Get Item on ID
@@ -38,7 +42,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<TResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TResponse>(path, hasIncludes);
         }
 
         // Update Item on ID
@@ -46,7 +52,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}";
             path = _params == null ? path : _params.AddPath(path);
-            return await UpdateApiRequest<TRequest, TResponse>(path, payload);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await UpdateApiRequest<TRequest, TResponse>(path, payload, hasIncludes);
         }
 
         // Delete Item on ID
@@ -54,6 +62,7 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}";
             path = _params == null ? path : _params.AddPath(path);
+
             return await DeleteApiRequest(path);
         }
 
@@ -62,7 +71,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}/clone";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<TRequest, TResponse>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<TRequest, TResponse>(path, body, hasIncludes);
         }
 
         // Forget Item by giving ID
@@ -70,6 +81,7 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}/forget";
             path = _params == null ? path : _params.AddPath(path);
+
             return await DeleteApiRequest(path);
         }
 
@@ -78,7 +90,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/bulk_assign_owner";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<BulkAssign, TResponse>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<BulkAssign, TResponse>(path, body, hasIncludes);
         }
 
         // Delete Bulk of item IDs
@@ -86,14 +100,18 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/bulk_destroy";
             path = _params == null ? path : _params.AddPath(path);
-            return await PostApiRequest<BulkDelete, TResponse>(path, body);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await PostApiRequest<BulkDelete, TResponse>(path, body, hasIncludes);
         }
 
         // Get All Fields 
         public async Task<TResponse> GetAllFields(string path, Params _params=null)
         {
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<TResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TResponse>(path, hasIncludes);
         }
 
         // Get All Activities
@@ -101,7 +119,9 @@ namespace Bitfox.Freshworks.Models
         {
             string path = $"/{id}/activities.json";
             path = _params == null ? path :_params.AddPath(path);
-            return await GetApiRequest<TResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<TResponse>(path, hasIncludes);
         }
 
     }

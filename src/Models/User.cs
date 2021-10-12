@@ -10,6 +10,9 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [JsonProperty("uuid")]
+        public string Uuid { get; set; } = null;
+
         [JsonProperty("display_name")]
         public string DisplayName { get; set; } = null;
 
@@ -30,6 +33,5 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("type")]
         public string Type { get; set; } = null;
-
     }
 }

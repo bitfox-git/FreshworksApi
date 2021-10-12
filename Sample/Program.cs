@@ -124,126 +124,139 @@ namespace Sample
             #endregion
 
             #region Account
-            //AccountPayload payload = new();
 
-
-            //AccountObject accountObj = new();
-            //accountObj.Account = new()
+            //AccountParent parent = new()
             //{
-            //    Name = "John",
-            //    Address = "Doe",
-            //    City = "None",
-            //    State = "newContent@gmail.com",
-            //    ZipCode = "okido",
-            //    Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
-            //    Country = "Netherlands"
+            //    Account = new()
+            //    {
+            //        Name = "John qwerty",
+            //        Address = "Doe",
+            //        City = "None",
+            //        State = "newContent1@gmail.com",
+            //        ZipCode = "okido",
+            //        Avatar = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
+            //        Country = "Netherlands"
+            //    }
             //};
 
-            //AccountObject accountUpdateObj = new();
-            //accountUpdateObj.Account = new()
+            //AccountParent update = new()
             //{
-            //    Name = "niek 2"
+            //    Account = new()
+            //    {
+            //        Name = "niek 2"
+            //    }
             //};
 
-            //AccountObject accountCloneObj = new();
-            //accountCloneObj.Account = new()
+            //BulkDelete delete = new()
             //{
-            //    Name = "John"
+            //    SelectedIDs = new long[] { 17001140566 },
+            //    DeleteAssociatedContactDeals = false
             //};
 
-            //AccountBulkDeleteObject deleteObj = new()
-            //{
-            //    SelectedIDs = new long[] { 17001220091 },
-            //    DeleteAssociatedContactsDeals = false
-            //};
-
-            //var result = await client.Account.Create(accountObj);
-            //var result = await client.Account.GetAllByID(17001463655);
+            //var result = await client.Account.Create(parent);
             //var result = await client.Account.GetByID(17001140566);// _params
-
-
-
-
-
-            //var result = await client.Account.UpdateByID(17001219885, accountUpdateObj);
-            //var result = await client.Account.DeleteByID(17001219885);
-            //var result = await client.Account.CloneByID(17001220091, accountCloneObj);
+            //var result = await client.Account.GetAllByID(17001463655);
+            //var result = await client.Account.UpdateByID(17001140566, update);
+            //var result = await client.Account.DeleteByID(17001463655);
+            //var result = await client.Account.CloneByID(17001140566, update);
             //var result = await client.Account.ForgetByID(17001220091);
-            //var result = await client.Account.DeleteBulk(deleteObj);
+            //var result = await client.Account.DeleteBulk(delete);
             //var result = await client.Account.GetAllFields();
 
             #endregion
 
             #region Deals
 
-            //DealObject createObj = new();
-            //createObj.Deal = new()
+            //DealParent parent = new()
             //{
-            //    Name = "Okido",
-            //    Amount = "12",
-            //    CurrencyID = 17000029017,
-            //    SalesAccountID = 17001067154,
-            //    OwnerID = 17000033771
+            //    Deal = new()
+            //    {
+            //        Name = "Okido 222",
+            //        Amount = "12",
+            //        CurrencyID = 17000029017,
+            //        SalesAccountID = 17001067154,
+            //        OwnerID = 17000033771
+            //    }
             //};
 
-            //DealObject updateObj = new();
-            //updateObj.Deal = new()
+            //DealParent update = new()
             //{
-            //    Name = "niek 2"
+            //    Deal = new()
+            //    {
+            //        Name = "niek 2"
+            //    }
             //};
 
-
-            //BulkDeleteObject deleteObj = new()
+            //BulkDelete delete = new()
             //{
-            //    SelectedIDs = new long[] { 17000498540 }
+            //    SelectedIDs = new long[] { 17000506403 }
             //};
 
-            //var result = await client.Deal.Create(createObj);
-            //var result = await client.Deal.GetAllByID(17001463650);
-            //var result = await client.Deal.GetByID(17000498540);
-            //var result = await client.Deal.UpdateByID(17000498540, updateObj);
-            //var result = await client.Deal.DeleteByID(17000498540);
-            //var result = await client.Deal.CloneByID(17000498540, updateObj);
-            //var result = await client.Deal.ForgetByID(17001220091);
-            //var result = await client.Deal.DeleteBulk(deleteObj);
+            //var result = await client.Deal.Create(parent);
+            //var result = await client.Deal.GetByID(17000506403);// _params
+            //var result = await client.Deal.GetAllByID(17001463652);
+            //var result = await client.Deal.UpdateByID(17000506403, update);
+            //var result = await client.Deal.DeleteByID(17001463652);
+            //var result = await client.Deal.CloneByID(17000506403, update);
+            //var result = await client.Deal.ForgetByID(17000506403);
+            //var result = await client.Deal.DeleteBulk(delete);
             //var result = await client.Deal.GetAllFields();
 
             #endregion
 
             #region Notes
-            //var result = client.Note.Create();
-            //var result = client.Note.UpdateByID();
-            //var result = client.Note.DeleteByID();
+
+            //NoteParent parent = new()
+            //{
+            //    Note = new()
+            //    {
+            //        Description = "Test from code",
+            //        TargetableType = "SalesAccount",
+            //        TargetableID = 17001160974
+            //    }
+            //};
+
+            //NoteParent update = new()
+            //{
+            //    Note = new()
+            //    {
+            //        Description = "niek 2",
+            //        TargetableID = 17001160974
+            //    }
+            //};
+
+            //var result = await client.Note.Create(parent);
+            //var result = await client.Note.UpdateByID(17001572816, update);
+            //var result = await client.Note.DeleteNoteByID(17001572826);
+
             #endregion
 
             #region Tasks
-
-            //TaskObject createObj = new();
-            //createObj.Task = new()
+            //TaskParent parent = new()
             //{
-            //    Title = "Okido",
-            //    Description = "12",
-            //    TargetableID = "17001067154",
-            //    OwnerID = 17000033771
+            //    Task = new()
+            //    {
+            //        Title = "(Sample) okido",
+            //        Description = "Send the proposal document and follow up with this contact after it.",
+            //        OwnerID = 17000033771,
+            //        CreaterID = 17000033771,
+            //        UpdaterID = 17000033771
+            //    }
             //};
 
-            //TaskObject updateObj = new();
-            //updateObj.Task = new()
+            //TaskParent update = new()
             //{
-            //    Status = 2
+            //    Task = new()
+            //    {
+            //        Title = "(Sample) Send the proposal document"
+            //    }
             //};
 
-            //var result = await client.Task.Create(createObj);
-            //var result = await client.Task.GetAllByID(17001463650);
-            //var result = await client.Task.GetByID(17000498540);
-            //var result = await client.Task.UpdateByID(17000498540, updateObj);
-            //var result = await client.Task.DeleteByID(17000498540);
-            //var result = await client.Task.UpdateMarkByID(17000498540, updateObj);
-            //var result = await client.Task.DeleteMarkByID(17000498540);
-            //var result = await client.Task.CloneByID(17000498540, updateObj);
-            //var result = await client.Task.ForgetByID(17001220091);
-            //var result = await client.Task.DeleteBulk(deleteObj);
-            //var result = await client.Task.GetAllFields();
+            //var result = await client.Task.Create(parent);
+            //var result = await client.Task.GetByID(17000369384); // _params
+            //var result = await client.Task.GetAllByFilter("open");
+            //var result = await client.Task.UpdateByID(17000369384, update);
+            //var result = await client.Task.DeleteByID(17000369384);
 
             #endregion
 

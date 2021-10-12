@@ -24,7 +24,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_products";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -36,7 +38,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_stages";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -48,7 +52,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_types";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -60,7 +66,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_reasons";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -72,7 +80,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_pipelines";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -85,7 +95,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_pipelines/{id}/deal_stages";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
 
         /// <summary>
@@ -97,7 +109,9 @@ namespace Bitfox.Freshworks.Selectors
         {
             string path = $"/deal_payment_statuses";
             path = _params == null ? path : _params.AddPath(path);
-            return await GetApiRequest<DealsResponse>(path);
+            bool hasIncludes = _params != null && _params.Includes != null;
+
+            return await GetApiRequest<DealsResponse>(path, hasIncludes);
         }
     }
 }
