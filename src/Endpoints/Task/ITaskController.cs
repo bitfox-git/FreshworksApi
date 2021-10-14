@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface ITaskController
     {
         /// <summary>
-        /// Create a new task item.
+        /// Insert a new task item.
         /// </summary>
         /// <param name="payload">New task payload.</param>
         Task<TaskParent> Create(ITaskPayload payload, Params _params=null);

@@ -1,0 +1,64 @@
+﻿using Bitfox.Freshworks.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bitfox.Freshworks.Models
+{
+    public class CustomResolver: DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            //return base.CreateProperty(member, memberSerialization);
+            JsonProperty prop = base.CreateProperty(member, memberSerialization);
+
+            if (member.GetCustomAttribute<JsonPropertyNameBasedOnSingularNameOfT>() != null)
+            {
+                Type itemType = prop.PropertyType;
+                JsonSingularNameAttribute att = itemType.GetCustomAttribute<JsonSingularNameAttribute>();
+                if (att!=null) {
+                    prop.PropertyName = att.SingularName;
+                }
+                //prop.PropertyName = att != null ? att.SingularName : itemType.Name;
+            }
+
+            if (member.GetCustomAttribute<JsonPropertyNameBasedOnPluralNameOfT>() != null)
+            {
+                Type itemType = prop.PropertyType;
+                Type T = itemType;
+
+                //List<T>
+                if (itemType.IsGenericType)
+                {
+                    T= itemType.GenericTypeArguments[0];
+                }
+                //T[] 
+                if (itemType.IsArray)
+                {
+                    T = itemType.GetElementType();
+                }
+
+                //
+
+                JsonPluralNameAttribute att = T.GetCustomAttribute<JsonPluralNameAttribute>();
+                if (att != null)
+                {
+                    prop.PropertyName = att.PluralName;
+                }
+                //prop.PropertyName = att != null ? att.SingularName : itemType.Name;
+            }
+
+            return prop;
+        }
+
+
+
+
+
+    }
+}

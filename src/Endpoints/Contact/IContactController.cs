@@ -13,7 +13,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface IContactController
     {
         /// <summary>
-        /// Create a new contact item.
+        /// Insert a new contact item.
         /// </summary>
         /// <param name="payload">New contact account payload</param>
         Task<ContactParent> Create(IContactPayload payload, Params _params=null);

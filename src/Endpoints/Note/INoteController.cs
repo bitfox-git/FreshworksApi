@@ -12,7 +12,7 @@ namespace Bitfox.Freshworks.Controllers
     {
 
         /// <summary>
-        /// Create a new note item.
+        /// Insert a new note item.
         /// </summary>
         /// <param name="payload">Model used to create a item with.</param>
         Task<NoteParent> Create(INotePayload payload, Params _params=null);

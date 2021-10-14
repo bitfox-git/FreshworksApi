@@ -12,7 +12,7 @@ namespace Bitfox.Freshworks.Models
     //            "U bent niet bevoegd om deze bewerking uit te voeren."
     //        ]
     //}
-    public class Error
+    public class Errors
     {
         [JsonProperty("code")]
         public int? Code { get; set; } = null;

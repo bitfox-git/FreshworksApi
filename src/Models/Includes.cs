@@ -6,37 +6,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
+    //{
+    //    "users": [],
+    //    "lead_source": [],
+    //    "campaigns": [],
+    //    "tasks": [],
+    //    "appointments": [],
+    //    "notes": [],
+    //    "deals": [],
+    //    "territories": [],
+    //    "sales_accounts": [],
+    //    "dynamic name": {
+    //        "sales_accounts": [],
+    //        "owner_id": null,
+    //        "creater_id": 17000033771,
+    //        "updater_id": 17000033771,
+    //        "lead_source_id": null,
+    //        "campaign_id": null,
+    //        "task_ids": [],
+    //        "appointment_ids": [],
+    //        "note_ids": [],
+    //        "deal_ids": [],
+    //        "territory_id": null,
+    //        "sales_account_id": null
+    //    }
+    //}
+
     public class Includes
     {
-        //{
-        //    "users": [],
-        //    "lead_source": [],
-        //    "campaigns": [],
-        //    "tasks": [],
-        //    "appointments": [],
-        //    "notes": [],
-        //    "deals": [],
-        //    "territories": [],
-        //    "sales_accounts": [],
-        //    "dynamic name": {
-        //        "sales_accounts": [],
-        //        "owner_id": null,
-        //        "creater_id": 17000033771,
-        //        "updater_id": 17000033771,
-        //        "lead_source_id": null,
-        //        "campaign_id": null,
-        //        "task_ids": [],
-        //        "appointment_ids": [],
-        //        "note_ids": [],
-        //        "deal_ids": [],
-        //        "territory_id": null,
-        //        "sales_account_id": null
-        //    }
-        //}
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
 
@@ -97,19 +99,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("sales_account_id")]
         public long? SalesAccountID { get; set; } = null;
 
-        public void Update(Includes model)
-        {
-            foreach (var propertyInfo in typeof(Includes).GetProperties())
-            {
-                var obj = propertyInfo.GetValue(model);
-                if (obj != null)
-                {
-                    propertyInfo.SetValue(this, obj);
-                }
-            }
-        }
-
-        public bool HasNull()
+        public bool IsEmpty()
         {
             var values = GetType()
                      .GetProperties()
@@ -118,5 +108,56 @@ namespace Bitfox.Freshworks.Models
 
             return (values.Count == 0);
         }
+
+        public bool Update<TEntity>(string content)
+        {
+            Includes model = JsonConvert.DeserializeObject<Includes>(content);
+            bool hasData = false;
+
+            // update this includes
+            foreach (var property in typeof(Includes).GetProperties())
+            {
+                var obj = property.GetValue(model, null);
+                if (obj != null)
+                {
+                    property.SetValue(this, obj);
+                    hasData = true;
+                }
+            }
+
+            return hasData;
+        }
+
+
+
+
+
+
+        //private static List<string> GetProperties(object obj)
+        //{
+        //    List<string> properties = new();
+        //    foreach (PropertyInfo prop in obj.GetType().GetProperties())
+        //    {
+        //        properties.Add(prop.Name);
+        //    }
+
+        //    return properties;
+        //}
+
+        //private static List<string> GetJsonProperties(object obj)
+        //{
+        //    List<string> properties = new();
+        //    foreach (PropertyInfo prop in obj.GetType().GetProperties())
+        //    {
+        //        var attr = prop.GetCustomAttribute(typeof(JsonPropertyAttribute), false);
+        //        var property = attr as JsonPropertyAttribute;
+        //        if (property == null) continue;
+
+        //        properties.Add(property.PropertyName);
+        //    }
+
+        //    return properties;
+        //}
+
     }
 }

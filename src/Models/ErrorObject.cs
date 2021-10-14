@@ -12,6 +12,6 @@ namespace Bitfox.Freshworks.NetworkModels
     public class ErrorObject: IErrors
     {
         [JsonProperty("errors")]
-        public Error Error { get; set; } = null;
+        public Errors Error { get; set; } = null;
     }
 }

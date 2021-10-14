@@ -14,7 +14,7 @@ namespace Bitfox.Freshworks.Endpoints
         public FileController(string baseURL, string apikey) : base($"{baseURL}/api", apikey)
         { }
 
-        // Create a link
+        // Insert a link
         public async Task<FileParent> CreateLink(IFilePayload body, Params _params=null)
         {
             string path = $"/document_links";

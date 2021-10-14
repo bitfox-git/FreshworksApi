@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface IAppointmentController
     {
         /// <summary>
-        /// Create a new contact item.
+        /// Insert a new contact item.
         /// </summary>
         /// <param name="payload">New appointment account payload.</param>
         Task<AppointmentParent> Create(IAppointmentPayload payload, Params _params=null);

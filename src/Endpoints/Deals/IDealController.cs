@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface IDealController
     {
         /// <summary>
-        /// Create a new deal item.
+        /// Insert a new deal item.
         /// </summary>
         /// <param name="payload">New deal item payload</param>
         Task<DealParent> Create(IDealPayload payload, Params _params=null);

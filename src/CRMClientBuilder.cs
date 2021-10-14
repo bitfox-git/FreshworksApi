@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bitfox.Freshworks.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,6 @@ namespace Bitfox.Freshworks
         public ICRMClient Build()
         {
             return new CRMClient(subdomain, apikey);
-
         }
 
     }

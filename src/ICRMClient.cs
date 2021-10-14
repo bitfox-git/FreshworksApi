@@ -11,61 +11,103 @@ namespace Bitfox.Freshworks
 {
     public interface ICRMClient
     {
-        /// <summary>
-        /// Get data from the user portal.
-        /// </summary>
-        SelectorController Selector { get; }
 
         /// <summary>
-        /// Handles Contact Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        IContactController Contact { get; }
-
-        /// <summary>
-        /// Handles Account Actions. [Create, Update, Delete etc.]
+        /// Handles Account Actions. [Insert, Update, Delete etc.]
         /// </summary>
         IAccountController Account { get; }
 
-        /// <summary>
-        /// Handles Deal Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        IDealController Deal { get; }
+        Task<T> Insert<T>(T item) where T: IHasInsert;
 
-        /// <summary>
-        /// Handles Note Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        INoteController Note { get; }
+        Task<T> Update<T>(T item) where T : IHasUpdate;
 
-        /// <summary>
-        /// Handles Task Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        ITaskController Task { get; }
+        Task<T> Clone<T>(T item) where T : IHasClone;
 
-        /// <summary>
-        /// Handles Appointment Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        IAppointmentController Appointment { get; }
+        Query<T> Query<T>() where T : IHasView, IResult;
 
-        /// <summary>
-        /// Handles Sales Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        ISalesController Sales { get; }
+        Task<bool> Delete<T>(T item) where T : IHasDelete;
 
-        /*
-            /// <summary>
-            /// // TODO
-            /// Handles Search Actions. [Create, Update, Delete etc.]
-            /// </summary>
-            SearchEndpoints Search { get; }
-        */
-        /// <summary>
-        /// Handles Phone Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        IPhoneController Phone { get; }
+        Task<bool> Delete<T>(long? id);
 
-        /// <summary>
-        /// Handles File Actions. [Create, Update, Delete etc.]
-        /// </summary>
-        IFileController File { get; }
+        Task<T> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
+
+        //Task<T> Forget<T>(T item) where T : IHasForget;
+
+        //Task<T> Forget<T>(long? id);
+
+
+
+        //IAccountController Account { get; }
+
+
+        //Task<T> GetView<T>(long id) where T : IHasView;
+
+        //Task<T> GetView<T>(T item) where T : IHasView, IHasUniqueID;
+
+        //Task<T> GetAllByID<T>(T item) where T : IHasView, IHasUniqueID;
+
+        //Task<T> GetAllByID<T>(long id) where T : IHasView;
+
+        //Task<T> UpdateView<T>(T item) where T : IHasUpdate, IHasUniqueID;
+
+
+
+
+        ///// <summary>
+        ///// Get data from the user portal.
+        ///// </summary>
+        //SelectorController Selector { get; }
+
+        ///// <summary>
+        ///// Handles Contact Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IContactController Contact { get; }
+
+        ///// <summary>
+        ///// Handles Account Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IAccountController Account { get; }
+
+        ///// <summary>
+        ///// Handles Deal Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IDealController Deal { get; }
+
+        ///// <summary>
+        ///// Handles Note Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //INoteController Note { get; }
+
+        ///// <summary>
+        ///// Handles Task Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //ITaskController Task { get; }
+
+        ///// <summary>
+        ///// Handles Appointment Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IAppointmentController Appointment { get; }
+
+        ///// <summary>
+        ///// Handles Sales Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //ISalesController Sales { get; }
+
+        ///*
+        //    /// <summary>
+        //    /// // TODO
+        //    /// Handles Search Actions. [Insert, Update, Delete etc.]
+        //    /// </summary>
+        //    SearchEndpoints Search { get; }
+        //*/
+        ///// <summary>
+        ///// Handles Phone Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IPhoneController Phone { get; }
+
+        ///// <summary>
+        ///// Handles File Actions. [Insert, Update, Delete etc.]
+        ///// </summary>
+        //IFileController File { get; }
     }
 }

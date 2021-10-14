@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface IFileController
     {
         /// <summary>
-        /// Create a new file link item.
+        /// Insert a new file link item.
         /// </summary>
         /// <param name="payload">New file link payload</param>
         Task<FileParent> CreateLink(IFilePayload payload, Params _params=null);

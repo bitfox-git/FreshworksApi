@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.NetworkModels;
+using Bitfox.Freshworks.NetworkObjects;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,8 +11,75 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class AccountModel
+
+    [EndpointName("/api/sales_accounts")]
+    //[JsonSingularName("sales_account")]
+    //[JsonPluralName("sales_accounts")]
+    public class AccountModel: IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget                , IHasUniqueID, IIncludes, IResult
     {
+        [JsonParentProperty]
+        [JsonProperty("Errors")]
+        public Errors Error { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("sales_account")]
+        public AccountModel Account { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("sales_accounts")]
+        public List<AccountModel> Accounts { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("selected_ids")]
+        public List<int> SelectedIDs { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("delete_associated_contacts_deals")]
+        public bool? DeleteAssociatedContactsDeals { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("meta")]
+        public Meta Meta { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("field_groups")]
+        public List<FieldGroup> FieldGroup { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("fields")]
+        public List<Field> Fields { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("message")]
+        public string Message { get; set; } = null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        ///  Content data below
+        /// </summary>
+
+
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
@@ -141,6 +211,14 @@ namespace Bitfox.Freshworks.Models
         {
             CustomField = JObject.FromObject(value);
         }
+
+
+
+
+
+        /////
+        ///
+        public Includes Includes { get; set; } = null;
 
     }
 }

@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Endpoints
     public class BaseResponse: IIncludes
     {
         [JsonProperty("errors")]
-        Error Error { get; set; } = null;
+        Errors Error { get; set; } = null;
 
         public Includes Includes { get; set; } = null;
     }

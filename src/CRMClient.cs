@@ -1,50 +1,86 @@
 ﻿using Bitfox.Freshworks.Controllers;
-using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.Selectors;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : ICRMClient
+    public class CRMClient : BaseController, ICRMClient, IAccountController
     {
-        private readonly string subdomain;
-        private readonly string apikey;
+        public IAccountController Account => this;
 
-        public string BaseURL
-        {
-            get
-            {
-                return $"https://{subdomain}.myfreshworks.com/crm/sales";
-            }
-        }
+        internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
+        { }
 
-        public SelectorController Selector => new(BaseURL, apikey);
 
-        public IContactController Contact => new ContactController(BaseURL, apikey);
 
-        public IAccountController Account => new AccountController(BaseURL, apikey);
+        //public async Task<T> Insert<T>(T body) where T: IHasInsert
+        //{
+        //    string endpoint = GetEndpoint<T>();
+        //    return await PostApiRequest(endpoint, body);
+        //}
 
-        public IDealController Deal => new Controllers.DealController(BaseURL, apikey);
+        //public async Task<T> GetView<T>(T item) where T : IHasView, IHasUniqueID
+        //{
+        //    return await GetView<T>((long)item.ID);
+        //}
 
-        public INoteController Note => new NoteController(BaseURL, apikey);
+        //public async Task<T> GetView<T>(long id) where T: IHasView
+        //{
+        //    string endpoint = $"{GetEndpoint<T>()}/{id}";
+        //    return await GetApiRequest<T>(endpoint);
+        //}
 
-        public ITaskController Task => new TaskController(BaseURL, apikey);
+        //public async Task<T> GetAllByID<T>(T item) where T : IHasView, IHasUniqueID
+        //{
+        //    return await GetAllByID<T>((long)item.ID);
+        //}
 
-        public IAppointmentController Appointment => new AppointmentController(BaseURL, apikey);
+        //public async Task<T> GetAllByID<T>(long id) where T : IHasView
+        //{
+        //    string endpoint = $"{GetEndpoint<T>()}/view/{id}";
+        //    return await GetApiRequest<T>(endpoint);
+        //}
 
-        public ISalesController Sales => new SalesController(BaseURL, apikey);
+        //public async Task<T> UpdateView<T>(T item) where T : IHasUpdate, IHasUniqueID
+        //{
+        //    string endpoint = $"{GetEndpoint<T>()}/{item.ID}";
+        //    return await UpdateApiRequest<T>(endpoint, item);
+        //}
 
-        // TODO
-        // public SearchEndpoints Search => new(BaseURL, apikey);
+        //public Query<T> Query<T>()// where T : IHasView
+        //{
+        //    return new Query<T>(BaseURL, ApiKey);
+        //}
 
-        public IPhoneController Phone => new PhoneController(BaseURL, apikey);
 
-        public IFileController File => new FileController(BaseURL, apikey);
 
-        internal CRMClient(string subdomain, string apikey)
-        {
-            this.subdomain = subdomain;
-            this.apikey = apikey;
-        }
+        //public SelectorController Selector => new(BaseURL, apikey);
+
+        //public IContactController Contact => new ContactController(BaseURL, apikey);
+
+
+        //public IDealController Deal => new Controllers.DealController(BaseURL, apikey);
+
+        //public INoteController Note => new NoteController(BaseURL, apikey);
+
+        //public ITaskController Task => new TaskController(BaseURL, apikey);
+
+        //public IAppointmentController Appointment => new AppointmentController(BaseURL, apikey);
+
+        //public ISalesController Sales => new SalesController(BaseURL, apikey);
+
+        //// TODO
+        //// public SearchEndpoints Search => new(BaseURL, apikey);
+
+        //public IPhoneController Phone => new PhoneController(BaseURL, apikey);
+
+        //public IFileController File => new FileController(BaseURL, apikey);
+
+        //internal CRMClient(string subdomain, string apikey)
+        //{
+        //    this.subdomain = subdomain;
+        //    this.apikey = apikey;
+        //}
     }
 }

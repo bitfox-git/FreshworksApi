@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface ISalesController
     {
         /// <summary>
-        /// Create a new sale item.
+        /// Insert a new sale item.
         /// </summary>
         /// <param name="payload">New sale payload</param>
         Task<SalesParent> Create(ISalesPayload payload, Params _params=null);
