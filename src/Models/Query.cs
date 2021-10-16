@@ -6,38 +6,72 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Query<TEntity>: Network where TEntity: IHasView, IResult
+    public class Query: Network
     {
         private List<string> includes = new();
 
         public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
         { }
 
-        public Query<TEntity> Include(string include)
+        public Query Include(string include)
         {
             includes.Add(include);
             return this;
         }
 
-        public async Task<Result<TEntity>> GetByID(long id)
+        public async Task<Result<TEntity>> GetByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID
         {
+            return await GetByID<TEntity>((long)body.ID);
+        }
+
+        public async Task<Result<TEntity>> GetByID<TEntity>(long? id) where TEntity : IHasView
+        {
+            if(id == null)
+            {
+                throw new ArgumentException($"ID is missing in request");
+            }
+
             var endpoint = GetEndpoint<TEntity>();
             var uri = $"{endpoint}/{id}";
 
             //add includes
             uri += includes.Count > 0 ? $"?include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
         }
 
-        public async Task<Result<TEntity>> GetAllByID(long viewID)
+        public async Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID
         {
+            return await GetAllByID<TEntity>((long)body.ID);
+        }
+
+        public async Task<Result<TEntity>> GetAllByID<TEntity>(long? id) where TEntity : IHasView
+        {
+            if (id == null)
+            {
+                throw new ArgumentException($"ID is missing in request");
+            }
+
             var endpoint = GetEndpoint<TEntity>();
-            var uri = $"{endpoint}/view/{viewID}";
+            var uri = $"{endpoint}/view/{id}";
 
             //add includes
             uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
         }
+
+        public async Task<Result<TEntity>> GetAllFields<TEntity>() where TEntity: IHasFields
+        {
+            var uri = $"/api/settings/sales_accounts/fields";
+
+            //add includes
+            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
+            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
+        }
+
+        // TESTs
+
+
+
 
         //public async Task<Result<TEntity>> GetPage(long viewID, int page)
         //{

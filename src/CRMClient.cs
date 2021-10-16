@@ -1,12 +1,16 @@
 ﻿using Bitfox.Freshworks.Controllers;
+using Bitfox.Freshworks.Endpoints.Selector;
 using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks.Selectors;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : BaseController, ICRMClient, IAccountController
+    public class CRMClient : BaseController, ICRMClient, ISelectorController, IAccountController
     {
+        public ISelectorController Selector => this;
+
         public IAccountController Account => this;
 
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)

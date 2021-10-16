@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    class ContactController : BaseController<IContactPayload, ContactParent>, IContactController
+    class ContactController// : BaseController<IContactPayload, ContactParent>, IContactController
     {
-        public ContactController(string BaseURL, string apikey) : base($"{BaseURL}/api/contacts", apikey)
+        public ContactController(string BaseURL, string apikey) //: base($"{BaseURL}/api/contacts", apikey)
         { }
     }
 }

@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public interface IHasDeleteBulk
+    public interface IHasFields
     {
-        List<long> SelectedIDs { get; set; }
-
-        bool? DeleteAssociatedContactsDeals { get; set; }
     }
 }

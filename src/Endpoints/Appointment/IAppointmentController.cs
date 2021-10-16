@@ -39,6 +39,6 @@ namespace Bitfox.Freshworks.Controllers
         /// Remove appointment by appointment ID.
         /// </summary>
         /// <param name="id">Appointment ID</param>
-        Task<bool> DeleteByID(long id, Params _params=null);
+        //Task<bool> DeleteByID(long id, Params _params=null);
     }
 }

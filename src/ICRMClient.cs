@@ -1,5 +1,6 @@
 ﻿using Bitfox.Freshworks.Controllers;
 using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Endpoints.Selector;
 using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkObjects;
 using Bitfox.Freshworks.Selectors;
@@ -11,29 +12,38 @@ namespace Bitfox.Freshworks
 {
     public interface ICRMClient
     {
+        /// <summary>
+        /// Handles data based on subdomain. [ Query ]
+        /// </summary>
+        ISelectorController Selector { get; }
 
         /// <summary>
         /// Handles Account Actions. [Insert, Update, Delete etc.]
         /// </summary>
         IAccountController Account { get; }
 
-        Task<T> Insert<T>(T item) where T: IHasInsert;
+        Task<Result<T>> Insert<T>(T item) where T: IHasInsert;
 
-        Task<T> Update<T>(T item) where T : IHasUpdate;
+        Task<Result<T>> Update<T>(T item) where T : IHasUpdate;
 
-        Task<T> Clone<T>(T item) where T : IHasClone;
+        Task<Result<T>> Clone<T>(T item) where T : IHasClone;
 
-        Query<T> Query<T>() where T : IHasView, IResult;
+        Query Query();
 
-        Task<bool> Delete<T>(T item) where T : IHasDelete;
+        Task<Result<bool>> Delete<T>(T item) where T : IHasDelete;
 
-        Task<bool> Delete<T>(long? id);
+        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
 
-        Task<T> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
+        Task<Result<T>> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
 
-        //Task<T> Forget<T>(T item) where T : IHasForget;
+        Task<Result<bool>> Forget<T>(T item) where T : IHasForget;
 
-        //Task<T> Forget<T>(long? id);
+        Task<Result<bool>> Forget<T>(long? id) where T : IHasForget;
+
+        // TESTS
+        Task<Result<Selector>> GetOwners();
+
+        Task<Result<TEntity>> GetFilters<TEntity>() where TEntity : IHasFilters;
 
 
 

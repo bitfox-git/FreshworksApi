@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    public class DealController : BaseController<IDealPayload, DealParent>, IDealController
+    public class DealController// : BaseController<IDealPayload, DealParent>, IDealController
     {
-        public DealController(string BaseURL, string apikey) : base($"{BaseURL}/api/deals", apikey)
+        public DealController(string BaseURL, string apikey)// : base($"{BaseURL}/api/deals", apikey)
         { }
 
     }

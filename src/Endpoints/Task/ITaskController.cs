@@ -35,11 +35,11 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="payload">Payload used to update task</param>
         Task<TaskParent> UpdateByID(long id, ITaskPayload payload, Params _params=null);
 
-        /// <summary>
-        /// Remove Task by task ID.
-        /// </summary>
-        /// <param name="id">Task ID</param>
-        Task<bool> DeleteByID(long id, Params _params=null);
+        ///// <summary>
+        ///// Remove Task by task ID.
+        ///// </summary>
+        ///// <param name="id">Task ID</param>
+        //Task<bool> DeleteByID(long id, Params _params=null);
 
         /// <summary>
         /// Mark a task as done.

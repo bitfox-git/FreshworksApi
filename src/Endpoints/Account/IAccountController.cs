@@ -15,39 +15,60 @@ namespace Bitfox.Freshworks.Controllers
         /// Insert a new account item.
         /// </summary>
         /// <param name="body">New account account payload</param>
-        Task<TEntity> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+
+        /// <summary>
+        /// Get Account Filters
+        /// </summary>
+        Task<Result<TEntity>> GetFilters<TEntity>() where TEntity : IHasFilters;
+
+        /// <summary>
+        /// Get content from account information.
+        /// </summary>
+        Query Query();
 
         /// <summary>
         /// Update account information on account ID.
         /// </summary>
         /// <param name="body">Account ID and content used for update</param>
-        Task<TEntity> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
+        Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
 
         /// <summary>
         /// Clone account by using his ID.
         /// </summary>
         /// <param name="body">Account ID and content used for cloning</param>
-        Task<TEntity> Clone<TEntity>(TEntity body) where TEntity : IHasClone;
+        Task<Result<TEntity>> Clone<TEntity>(TEntity body) where TEntity : IHasClone;
 
-        /// <summary>
-        /// Get content from account information.
-        /// </summary>
-        Query<TEntity> Query<TEntity>() where TEntity : IHasView, IResult;
 
         /// <summary>
         /// Remove account by account ID.
         /// </summary>
         /// <param name="body">Account ID</param>
-        Task<bool> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
 
         /// <summary>
         /// Remove account by account ID.
         /// </summary>
         /// <param name="id">Account ID</param>
-        Task<bool> Delete<TEntity>(long? id);
+        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
 
+        /// <summary>
+        /// Hard delete a account and all the associated data.
+        /// </summary>
+        /// <param name="body">Account contains ID that will been deleted</param>
+        Task<Result<bool>> Forget<TEntity>(TEntity body) where TEntity : IHasForget;
 
+        /// <summary>
+        /// Hard delete a account and all the associated data.
+        /// </summary>
+        /// <param name="id">ID that will been deleted</param>
+        Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget;
 
+        /// <summary>
+        /// Delete Accounts in bulk.
+        /// </summary>
+        /// <param name="body">Account contains needed data for deletion</param>
+        Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk;
 
         //    /// <summary>
         //    /// Get account information from account ID.
@@ -75,11 +96,6 @@ namespace Bitfox.Freshworks.Controllers
         //    /// <param name="id">Given ID will been deleted</param>
         //    Task<bool> ForgetByID(long id, Params _params=null);
 
-        //    /// <summary>
-        //    /// Delete Accounts in bulk.
-        //    /// </summary>
-        //    /// <param name="body">Account IDs</param>
-        //    Task<AccountModel> DeleteBulk(BulkDelete body, Params _params=null);
 
         //    /// <summary>
         //    /// View all the account fields.

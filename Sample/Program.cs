@@ -160,9 +160,9 @@ namespace Sample
             //    FirstName = "niek"
             //};
 
-            AccountModel account = new()
+            Account account = new()
             {
-                ID = 17001334059
+                ID = 17001334058
             };
 
             //var result = await client.Insert(account);
@@ -177,10 +177,10 @@ namespace Sample
             //var result = await client.Account.Clone(account);
             //var result = await client.Account.Clone<AccountModel>(account);
 
-            //var result = await client.Query<AccountModel>()
+            //var result = await client.Query()
             //                        .Include("owner")
             //                        .Include("tasks")
-            //                        .GetByID(17001294725);
+            //                        .GetByID<AccountModel>(17001294725);
             //var result = await client.Account.Query<AccountModel>()
             //                        .Include("owner")
             //                        .Include("tasks")
@@ -191,13 +191,15 @@ namespace Sample
             //var result = await client.Account.Query<AccountModel>()
             //                        .Include("page")
             //                        .GetAllByID(17001463655);
+            //var result = await client.Query().GetAllFields<AccountModel>();
+            //var result = await client.Account.Query().GetAllFields<AccountModel>();
 
             //var result = await client.Delete(account);
             //var result = await client.Account.Delete(account);
             //var result = await client.Account.Delete<AccountModel>(account);
             //var result = await client.Account.Delete<AccountModel>(17001140566);
 
-            var result = await client.DeleteBulk(account);
+            //var result = await client.DeleteBulk(account);
             //var result = await client.Account.DeleteBulk(account);
             //var result = await client.Account.DeleteBulk<AccountModel>(account);
 
@@ -248,7 +250,7 @@ namespace Sample
 
 
 
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
 
 
             //await client.Account.CloneByID(17001140566);

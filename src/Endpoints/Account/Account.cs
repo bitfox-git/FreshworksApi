@@ -11,27 +11,20 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-
     [EndpointName("/api/sales_accounts")]
-    //[JsonSingularName("sales_account")]
-    //[JsonPluralName("sales_accounts")]
-    public class AccountModel: IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget                , IHasUniqueID, IIncludes, IResult
+    public class Account: IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID                //, IHasUniqueID, IIncludes, IResult
     {
         [JsonParentProperty]
-        [JsonProperty("Errors")]
-        public Errors Error { get; set; } = null;
-
-        [JsonParentProperty]
         [JsonProperty("sales_account")]
-        public AccountModel Account { get; set; } = null;
+        public Account Content { get; set; } = null;
 
         [JsonParentProperty]
         [JsonProperty("sales_accounts")]
-        public List<AccountModel> Accounts { get; set; } = null;
+        public List<Account> Accounts { get; set; } = null;
 
         [JsonParentProperty]
         [JsonProperty("selected_ids")]
-        public List<int> SelectedIDs { get; set; } = null;
+        public List<long> SelectedIDs { get; set; } = null;
 
         [JsonParentProperty]
         [JsonProperty("delete_associated_contacts_deals")]
@@ -52,6 +45,10 @@ namespace Bitfox.Freshworks.Models
         [JsonParentProperty]
         [JsonProperty("message")]
         public string Message { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("filters")]
+        public List<Filter> Filters { get; set; } = null;
 
 
 
@@ -211,14 +208,6 @@ namespace Bitfox.Freshworks.Models
         {
             CustomField = JObject.FromObject(value);
         }
-
-
-
-
-
-        /////
-        ///
-        public Includes Includes { get; set; } = null;
 
     }
 }

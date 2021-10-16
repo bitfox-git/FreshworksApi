@@ -41,7 +41,7 @@ namespace Bitfox.Freshworks.Controllers
         /// Remove contact by contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
-        Task<bool> DeleteByID(long id, Params _params = null);
+        //Task<bool> DeleteByID(long id, Params _params = null);
 
         /// <summary>
         /// Clone contact by contact ID.
@@ -50,11 +50,11 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Content that will been updated</param>
         Task<ContactParent> CloneByID(long id, IContactPayload body, Params _params = null);
 
-        /// <summary>
-        /// Hard delete a contact and all the associated data.
-        /// </summary>
-        /// <param name="id">Given ID will been deleted</param>
-        Task<bool> ForgetByID(long id, Params _params = null);
+        ///// <summary>
+        ///// Hard delete a contact and all the associated data.
+        ///// </summary>
+        ///// <param name="id">Given ID will been deleted</param>
+        //Task<bool> ForgetByID(long id, Params _params = null);
 
         /// <summary>
         /// Assign an owner to a list of contacts

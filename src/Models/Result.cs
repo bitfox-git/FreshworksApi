@@ -9,30 +9,50 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Result<TEntity> where TEntity: IResult
+    public class Result<TEntity>
     {
         public object Content { get; set; }
 
         public Includes Includes { get; set; } = new();
 
+        [JsonProperty("errors")]
         public Errors Error { get; set; } = null;
 
-        public Result(string content)
+        public Result(string content, bool hasIncludes=false)
         {
-            TEntity body = JsonConvert.DeserializeObject<TEntity>(content);
+            if (content == null) return;
 
-            // set Error
-            if (body.Error != null)
+            Errors error = null;
+            try
             {
-                Error = body.Error;
-            }
+                error = JsonConvert.DeserializeObject<Result<TEntity>>(content).Error;
+            } 
+            catch(Exception)
+            { }
+            
             // set Content
-            else if (!IsEmpty(body))
+            if (error != null)
             {
-                SetContent(body);
+                Error = error;
+            }
+            else
+            {
+                var body = JsonConvert.DeserializeObject<TEntity>(content);
 
-                // Add includes
-                _ = Includes.Update<TEntity>(content);
+
+                // TODO: has missing properties in TEntity
+
+
+                if (!IsEmpty(body))
+                {
+                    SetContent(body);
+
+                    // Add includes
+                    if (hasIncludes)
+                    {
+                        _ = Includes.Update<TEntity>(content);
+                    }
+                }
             }
 
             if(Includes.IsEmpty())
@@ -60,9 +80,9 @@ namespace Bitfox.Freshworks.Models
                 }
             }
 
-            if (objects.Count > 1)
+            if (objects.Count == 0 || objects.Count > 1)
             {
-                Content = objects;
+                Content = body;
             }
             else
             {
@@ -72,8 +92,12 @@ namespace Bitfox.Freshworks.Models
 
         private static bool IsEmpty(TEntity obj)
         {
-            var values = obj.GetType()
-                     .GetProperties()
+            var props = obj.GetType().GetProperties();
+
+            // TEntity is `bool` for example
+            if (props.Length == 0) return false;
+
+            var values = props
                      .Where(field => field.GetValue(obj) != null)
                      .ToList();
 

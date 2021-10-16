@@ -35,11 +35,11 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="payload">Payload used to update item</param>
         Task<DealParent> UpdateByID(long id, IDealPayload payload, Params _params=null);
 
-        /// <summary>
-        /// Remove contact by contact ID.
-        /// </summary>
-        /// <param name="id">Deal ID</param>
-        Task<bool> DeleteByID(long id, Params _params=null);
+        ///// <summary>
+        ///// Remove contact by contact ID.
+        ///// </summary>
+        ///// <param name="id">Deal ID</param>
+        //Task<bool> DeleteByID(long id, Params _params=null);
 
         /// <summary>
         /// Clone a deal by using his ID.
@@ -48,11 +48,11 @@ namespace Bitfox.Freshworks.Controllers
         /// <param name="body">Content that can been updated</param>
         Task<DealParent> CloneByID(long id, IDealPayload body, Params _params=null);
 
-        /// <summary>
-        /// Hard delete a Deal and all the associated data.
-        /// </summary>
-        /// <param name="id">Given ID will been deleted</param>
-        Task<bool> ForgetByID(long id, Params _params=null);
+        ///// <summary>
+        ///// Hard delete a Deal and all the associated data.
+        ///// </summary>
+        ///// <param name="id">Given ID will been deleted</param>
+        //Task<bool> ForgetByID(long id, Params _params=null);
 
         /// <summary>
         /// Delete deals in bulk.
