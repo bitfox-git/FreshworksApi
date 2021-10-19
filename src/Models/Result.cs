@@ -1,7 +1,9 @@
 ﻿using Bitfox.Freshworks.Attributes;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,55 +15,100 @@ namespace Bitfox.Freshworks.Models
     {
         public object Content { get; set; }
 
+        private TEntity Body { get; set; }
+
         public Includes Includes { get; set; } = new();
 
         [JsonProperty("errors")]
-        public Errors Error { get; set; } = null;
+        public Error Error { get; set; } = null;
 
-        public Result(string content, bool hasIncludes=false)
+        public Result(string body, bool hasIncludes=false)
         {
-            if (content == null) return;
-
-            Errors error = null;
-            try
+            if (!HandleError(body))
             {
-                error = JsonConvert.DeserializeObject<Result<TEntity>>(content).Error;
-            } 
-            catch(Exception)
-            { }
-            
-            // set Content
-            if (error != null)
-            {
-                Error = error;
-            }
-            else
-            {
-                var body = JsonConvert.DeserializeObject<TEntity>(content);
-
-
-                // TODO: has missing properties in TEntity
-
-
-                if (!IsEmpty(body))
-                {
-                    SetContent(body);
-
-                    // Add includes
-                    if (hasIncludes)
-                    {
-                        _ = Includes.Update<TEntity>(content);
-                    }
-                }
-            }
-
-            if(Includes.IsEmpty())
-            {
-                Includes = null;
+                HandleBody(body, hasIncludes);
             }
         }
 
-        private void SetContent(TEntity body)
+        private bool HandleError(string body)
+        {
+            if (body == null) return true;
+
+            var settings = new JsonSerializerSettings
+            {
+                Error = (se, ev) => { 
+                    ev.ErrorContext.Handled = true; 
+                }
+            };
+            var error = JsonConvert.DeserializeObject<Result<TEntity>>(body, settings);
+
+            // error handling
+            if (error != null && error.Error != null)
+            {
+                Error = error.Error;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void HandleBody(string fullBody, bool hasIncludes)
+        {
+            try
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    MissingMemberHandling = MissingMemberHandling.Error
+                };
+                Body = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new JsonSerializationException(
+                    $"{ex.Message}\n Failed on Content:\n" + fullBody
+                );
+            }
+
+
+            if (HasBody())
+            {
+                SetBody();
+
+                // Set response body to Includes
+                if (hasIncludes)
+                {
+                    _ = Includes.Update<TEntity>(fullBody);
+                }
+
+                if (Includes.IsEmpty())
+                {
+                    Includes = null;
+                } 
+            }
+            else
+            {
+                Content = Body;
+            }
+        }
+
+        private bool HasBody()
+        {
+            var props = Body.GetType().GetProperties();
+
+            // TEntity is `bool` for example
+            if (props.Length == 0) return false;
+
+            // TEntity has no values
+            var propsValues = props
+                     .Where(field => field.GetValue(Body) != null)
+                     .ToList();
+
+            return (propsValues.Count > 0);
+        }
+
+        private void SetBody()
         {
             List<object> objects = new();
 
@@ -69,10 +116,10 @@ namespace Bitfox.Freshworks.Models
             {
                 foreach (object attr in prop.GetCustomAttributes(true))
                 {
-                    if (attr.GetType() == typeof(JsonParentPropertyAttribute))
+                    if (attr is JsonParentPropertyAttribute)
                     {
-                        var obj = prop.GetValue(body);
-                        if(obj != null)
+                        var obj = prop.GetValue(Body);
+                        if (obj != null)
                         {
                             objects.Add(obj);
                         }
@@ -80,29 +127,21 @@ namespace Bitfox.Freshworks.Models
                 }
             }
 
-            if (objects.Count == 0 || objects.Count > 1)
+            if (objects.Count > 1)
             {
-                Content = body;
+                Content = Body;
             }
-            else
+            else if (objects.Count == 1)
             {
                 Content = objects[0];
             }
+            else
+            {
+                throw new ArgumentOutOfRangeException(
+                    $"Do not contain JsonParentPropertyAttribute in json model"
+                );
+            }
         }
 
-        private static bool IsEmpty(TEntity obj)
-        {
-            var props = obj.GetType().GetProperties();
-
-            // TEntity is `bool` for example
-            if (props.Length == 0) return false;
-
-            var values = props
-                     .Where(field => field.GetValue(obj) != null)
-                     .ToList();
-
-            return (values.Count == 0);
-        }
-    
     }
 }

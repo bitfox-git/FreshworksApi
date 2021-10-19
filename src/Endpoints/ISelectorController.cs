@@ -1,82 +1,14 @@
-﻿using Bitfox.Freshworks.Controllers;
-using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.Endpoints.Selector;
-using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkObjects;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks
+namespace Bitfox.Freshworks.Endpoints.Selector
 {
-    public interface ICRMClient
+    public interface ISelectorController
     {
-        /// <summary>
-        /// Handles data based on subdomain. [ Query ]
-        /// </summary>
-        ISelectorController Selector { get; }
-
-        /// <summary>
-        /// Handles Contacts Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IContactController Contact { get; }
-
-        /// <summary>
-        /// Handles Account Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IAccountController Account { get; }
-
-        /// <summary>
-        /// Handles Deals Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IDealController Deal { get; }
-
-        /// <summary>
-        /// Handles Notes Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        INoteController Note { get; }
-
-        /// <summary>
-        /// Handles Task Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        ITaskController Task { get; }
-
-        /// <summary>
-        /// Handles Appointment Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IAppointmentController Appointment { get; }
-
-        /// <summary>
-        /// Handles Appointment Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        ISaleController Sales { get; }
-
-
-        Task<Result<T>> Insert<T>(T item) where T : IHasInsert<T>, new();
-
-        Task<Result<T>> Update<T>(T item) where T : IHasUpdate;
-        
-        Task<Result<T>> Clone<T>(T item) where T : IHasClone;
-        
-        Query Query();
-        
-        Task<Result<bool>> Delete<T>(T item) where T : IHasDelete;
-        
-        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
-        
-        Task<Result<T>> AssignBulk<T>(T item) where T : IHasAssignBulk;
-        
-        Task<Result<T>> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
-        
-        Task<Result<bool>> Forget<T>(T item) where T : IHasForget;
-        
-        Task<Result<bool>> Forget<T>(long? id) where T : IHasForget;
-        
-        Task<Result<TEntity>> Filters<TEntity>() where TEntity : IHasFilters;
-
-
-        // Selector
-
         /// <summary>
         /// Fetch all existing sales activity types' details in the Freshsales portal.
         /// Will give id, name of the sales activity types.
@@ -179,13 +111,11 @@ namespace Bitfox.Freshworks
         /// Get all lifecycle stages from this subdomain
         /// </summary>
         Task<Result<Selector>> GetLifecycleStages();
-
+        
         /// <summary>
         /// Get all industry types from this subdomain
         /// </summary>
         Task<Result<Selector>> GetIndustryTypes();
-
-
 
     }
 }

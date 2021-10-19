@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Endpoints
 {
-    public interface IPhonePayload
-    {
-        [JsonProperty("phone_call")]
-        PhoneModel Call { get; set; }
-    }
+    //public interface IPhonePayload
+    //{
+    //    [JsonProperty("phone_call")]
+    //    PhoneModel Call { get; set; }
+    //}
 }

@@ -10,11 +10,23 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [JsonProperty("user_id")]
+        public string UserID { get; set; } = null;
+
         [JsonProperty("uuid")]
         public string Uuid { get; set; } = null;
 
         [JsonProperty("display_name")]
         public string DisplayName { get; set; } = null;
+
+        [JsonProperty("first_name")]
+        public string FirstName { get; set; } = null;
+
+        [JsonProperty("last_name")]
+        public string LastName { get; set; } = null;
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; } = null;
@@ -33,5 +45,14 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("type")]
         public string Type { get; set; } = null;
+
+        [JsonProperty("value")]
+        public string Value { get; set; } = null;
+
+        [JsonProperty("position")]
+        public int Position { get; set; }
+
+        [JsonProperty("partial")]
+        public bool Partial { get; set; }
     }
 }

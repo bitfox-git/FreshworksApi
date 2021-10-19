@@ -9,10 +9,19 @@ namespace Bitfox.Freshworks.Models
 {
     public class Attendee
     {
-        [JsonProperty("type")]
-        public string Type { get; set; } = null;
-
         [JsonProperty("id")]
         public int? ID { get; set; } = null;
+
+        [JsonProperty("attendee")]
+        public Attendee SingleAttendee { get; set; } = null;
+
+        [JsonProperty("attendee_id")]
+        public long? AttendeeID { get; set; } = null;
+
+        [JsonProperty("attendee_type")]
+        public string AttendeeType { get; set; } = null;
+
+        [JsonProperty("type")]
+        public string Type { get; set; } = null;
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    public interface IPhoneController
-    {
-        /// <summary>
-        /// Log all calls that are been made.
-        /// </summary>
-        /// <param name="payload">Data from who we log the calls</param>
-        Task<PhoneParent> GetCallLogs(IPhonePayload payload, Params _params = null);
-    }
+    //public interface IPhoneController
+    //{
+    //    /// <summary>
+    //    /// Log all calls that are been made.
+    //    /// </summary>
+    //    /// <param name="payload">Data from who we log the calls</param>
+    //    Task<PhoneParent> GetCallLogs(IPhonePayload payload, Params _params = null);
+    //}
 }

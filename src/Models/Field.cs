@@ -21,7 +21,7 @@ namespace Bitfox.Freshworks.NetworkObjects
         [JsonProperty("type")]
         public string Type { get; set; } = null;
 
-        [JsonProperty("_default")]
+        [JsonProperty("default")]
         public bool? Default { get; set; } = null;
 
         [JsonProperty("actionable")]
@@ -48,5 +48,19 @@ namespace Bitfox.Freshworks.NetworkObjects
         [JsonProperty("field_group_id")]
         public string FieldGroupID { get; set; } = null;
 
+        [JsonProperty("auto_suggest_url")]
+        public string AutoSuggestURL { get; set; } = null;
+
+        [JsonProperty("creatable")]
+        public bool? Creatable { get; set; } = null;
+
+        [JsonProperty("creatable_data_key")]
+        public string CreatableDataKey { get; set; } = null;
+
+        [JsonProperty("multiple")]
+        public bool? Multiple { get; set; } = null;
+
+        [JsonProperty("model")]
+        public string Model { get; set; } = null;
     }
 }

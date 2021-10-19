@@ -25,48 +25,148 @@ namespace Bitfox.Freshworks.Tests
         }
 
         [Fact]
-        public async Task<Account> InsertAccountOnSuccess()
+        public async Task InsertAccountOnSuccess()
+        {
+            Account account = await CreateAccount();
+
+            _ = await RemoveAccount(account);
+        }
+
+        [Fact]
+        public async Task GetAccountFiltersOnSuccess()
+        {
+            _ = await GetAccountFilters();
+        }
+
+        [Fact]
+        public async Task GetAccountByIDOnSuccess()
+        {
+            Account account = await GetAccountByID();
+
+            _ = await RemoveAccount(account);
+        }
+
+        [Fact]
+        public async Task GetAccountByIDAndIncludesOnSuccess()
+        {
+            Account account = await GetAccountByIDAndSelectors();
+
+            _ = await RemoveAccount(account.SalesAccount);
+        }
+
+        [Fact]
+        public async Task GetAllAccountsByIDOnSuccess()
+        {
+            _ = await GetAllAccountsByID();
+        }
+
+        [Fact]
+        public async Task UpdateAccountOnSuccess()
+        {
+            Account account = await CreateAccount();
+
+            account = await UpdateAccount(account);
+
+            _ = await RemoveAccount(account);
+        }
+
+        [Fact]
+        public async Task CloneAccountOnSuccess()
+        {
+            var account = await CreateAccount();
+            var clonedAccount = await CloneAccount(account);
+
+            _ = await RemoveAccount(account);
+            _ = await RemoveAccount(clonedAccount);
+
+        }
+
+        [Fact]
+        public async Task DeleteAccountOnSuccess()
+        {
+            // get account
+            Account account = await CreateAccount();
+
+            _ = await RemoveAccount(account);
+        }
+
+        [Fact]
+        public async Task ForgetAccountOnSuccess()
+        {
+            Account account = await CreateAccount();
+
+            _ = await ForgetAccount(account);
+        }
+
+        [Fact]
+        public async Task DeleteBulkAccountOnSuccess()
+        {
+            Account account = await CreateAccount();
+
+            _ = await DeleteAccountBulk(account);
+        }
+
+        [Fact]
+        public async Task AllFieldsAccountOnSuccess()
+        {
+            _ = await AllAccountFields();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        private async Task<Account> GetAccountFilters()
+        {
+            var result = await _client.Filters<Account>();
+            //var result = await _client.Account.Filters<Account>();
+
+            Assert.Null(result.Error);
+            Assert.NotNull(result.Content);
+            Assert.Null(result.Includes);
+            return GetResponse(result) as Account;
+
+        }
+
+        private async Task<Account> CreateAccount()
         {
             // get owner id
-            var owners = await _selectors.GetOwnersOnSuccess();
-            var owner = owners[0];
+            var owners = await _selectors.GetOwners();
+            var owner = owners.Users[0];
 
             Account account = new()
             {
-                Name = $"TEST Random Name:({GetCurrentTime()})",
+                Name = $"TEST INSERT Name:({GetCurrentTime()})",
                 OwnerID = owner.ID
             };
 
-            // Commands
+            // execute creation
             var result = await _client.Insert(account);
-            //var result = await client.Account.Insert(account);
+
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
             Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            return result.Content as Account;
         }
 
-        [Fact]
-        public async Task<Account> GetAccountFiltersOnSuccess()
+        private async Task<bool> RemoveAccount(Account account)
         {
-            // Commands
-            var result = await _client.GetFilters<Account>();
-            //var result = await _client.Account.GetFilters<Account>();
+            // execute
+            var result = await _client.Delete(account);
+            //var result = await _client.Account.Delete(account);
+            //var result = await _client.Delete<Account>(account.ID);
+            //var result = await _client.Account.Delete<Account>(account.ID);
 
-            Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            Assert.True((bool)result.Content);
+            return (bool)result.Content;
         }
 
-        [Fact]
-        public async Task<Account> GetByIDAccountOnSuccess()
+        private async Task<Account> GetAccountByID()
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
+            var account = await CreateAccount();
 
-            // Commands
+            // exucute get account
             var result = await _client.Query().GetByID(account);
             //var result = await _client.Query().GetByID<Account>(account.ID);
             //var result = await _client.Account.Query().GetByID(account);
@@ -78,14 +178,25 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> GetByIDAndIncludesAccountOnSuccess()
+        private async Task<Account> GetAccountByIDAndSelectors()
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
+            // create account
+            var account = await CreateAccount();
 
-            // Commands
-            var result = await _client.Query().Include("owner").GetByID(account);
+            // exucute get account
+            var result = await _client.Query()
+                .Include("owner")
+                .Include("creater")
+                .Include("updater")
+                .Include("territory")
+                .Include("business_type")
+                .Include("tasks")
+                .Include("appointments")
+                .Include("contacts")
+                .Include("deals")
+                .Include("industry_type")
+                .Include("child_sales_accounts")
+                .GetByID(account);
             //var result = await _client.Query().Include("owner").GetByID<Account>(account.ID);
             //var result = await _client.Account.Query().Include("owner").GetByID(account);
             //var result = await _client.Account.Query().Include("owner").GetByID<Account>(account.ID);
@@ -93,22 +204,17 @@ namespace Bitfox.Freshworks.Tests
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
             Assert.NotNull(result.Includes);
-
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> GetAllByIDAccountOnSuccess()
+        private async Task<Account> GetAllAccountsByID()
         {
             // get account
-            var filters = await GetAccountFiltersOnSuccess();
+            var filters = await GetAccountFilters();
             var content = filters.Filters[0];
-            Account account = new()
-            {
-                ID = content.ID
-            };
+            Account account = new(){ ID = content.ID };
 
-            // Commands
+            // execute
             var result = await _client.Query().GetAllByID(account);
             //var result = await _client.Query().GetAllByID<Account>(content.ID);
             //var result = await _client.Account.Query().GetAllByID(account);
@@ -120,14 +226,11 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> UpdateAccountOnSuccess()
+        private async Task<Account> UpdateAccount(Account account)
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
             account.Name = $"TEST Random Name:({GetCurrentTime()})";
 
-            // Commands
+            // execute
             var result = await _client.Update(account);
             //var result = await _client.Account.Update(account);
 
@@ -137,11 +240,8 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> CloneAccountOnSuccess()
+        private async Task<Account> CloneAccount(Account account)
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
             account.Name = $"TEST Clone Name:({GetCurrentTime()})";
 
             // Commands
@@ -154,47 +254,20 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> DeleteAccountOnSuccess()
+        private async Task<bool> ForgetAccount(Account account)
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
-
-            // Commands
-            var result = await _client.Delete(account);
-            //var result = await _client.Account.Delete(account);
-            //var result = await _client.Delete<Account>(account.ID);
-            //var result = await _client.Account.Delete<Account>(account.ID);
-
-            Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
-        }
-
-        [Fact]
-        public async Task<Account> ForgetAccountOnSuccess()
-        {
-            // get account
-            var account = await InsertAccountOnSuccess();
-
-            // Commands
+            // execute
             var result = await _client.Forget(account);
             //var result = await _client.Account.Forget(account);
             //var result = await _client.Forget<Account>(account.ID);
             //var result = await _client.Account.Forget<Account>(account.ID);
 
-            Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            Assert.True((bool)result.Content);
+            return (bool)result.Content;
         }
 
-        [Fact]
-        public async Task<Account> DeleteBulkAccountOnSuccess()
+        private async Task<Account> DeleteAccountBulk(Account account)
         {
-            // get account
-            var account = await InsertAccountOnSuccess();
             Account bulk = new()
             {
                 SelectedIDs = new List<long> { (long)account.ID },
@@ -211,18 +284,21 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Account;
         }
 
-        [Fact]
-        public async Task<Account> AllFieldsAccountOnSuccess()
+        public async Task<Account> AllAccountFields()
         {
             // Commands
             var result = await _client.Query().GetAllFields<Account>();
             //var result = await _client.Account.Query().GetAllFields<Account>();
-            
+
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
             Assert.Null(result.Includes);
             return GetResponse(result) as Account;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
 
         private object GetResponse<TEntity>(Result<TEntity> result)
         {

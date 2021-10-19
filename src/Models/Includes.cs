@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.Endpoints.Contact;
+using Bitfox.Freshworks.Endpoints.Sales;
 using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json;
 using System;
@@ -11,36 +14,64 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    //{
-    //    "users": [],
-    //    "lead_source": [],
-    //    "campaigns": [],
-    //    "tasks": [],
-    //    "appointments": [],
-    //    "notes": [],
-    //    "deals": [],
-    //    "territories": [],
-    //    "sales_accounts": [],
-    //    "dynamic name": {
-    //        "sales_accounts": [],
-    //        "owner_id": null,
-    //        "creater_id": 17000033771,
-    //        "updater_id": 17000033771,
-    //        "lead_source_id": null,
-    //        "campaign_id": null,
-    //        "task_ids": [],
-    //        "appointment_ids": [],
-    //        "note_ids": [],
-    //        "deal_ids": [],
-    //        "territory_id": null,
-    //        "sales_account_id": null
-    //    }
-    //}
-
     public class Includes
     {
+        // parents
+        [JsonParentProperty]
+        [JsonProperty("sales_account")]
+        public Account SalesAccount { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("business_types")]
+        public List<BusinessType> BusinessTypes { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("contacts")]
+        public List<Contact> Contacts { get; set; } = null;
+
+        [JsonParentProperty]
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("industry_types")]
+        public List<IndustryType> IndustryTypes { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("child_sales_accounts")]
+        public List<Sale> ChildSalesAccounts { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("deals")]
+        public List<User> Deals { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("territories")]
+        public List<User> Territories { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("tasks")]
+        public List<User> Tasks { get; set; } = null;
+
+        [JsonParentProperty]
+        [JsonProperty("appointments")]
+        public List<User> Appointments { get; set; } = null;
+
+        // children
+        [JsonProperty("task_ids")]
+        public List<long> TaskIDs { get; set; } = null;
+
+        [JsonProperty("contact_ids")]
+        public List<long> ContactIDs { get; set; } = null;
+
+        [JsonProperty("deal_ids")]
+        public List<long> DealIDs { get; set; } = null;
+
+        [JsonProperty("child_sales_account_ids")]
+        public List<long> ChildSalesAccountIDs { get; set; } = null;
+
+        [JsonProperty("industry_type_id")]
+        public long? IndustryTypeID { get; set; } = null;
 
         [JsonProperty("lead_source")]
         public List<User> LeadSource { get; set; } = null;
@@ -48,20 +79,8 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("campaigns")]
         public List<User> Campaigns { get; set; } = null;
 
-        [JsonProperty("tasks")]
-        public List<User> Tasks { get; set; } = null;
-
-        [JsonProperty("appointments")]
-        public List<User> Appointments { get; set; } = null;
-
         [JsonProperty("notes")]
         public List<User> Notes { get; set; } = null;
-
-        [JsonProperty("deals")]
-        public List<User> Deals { get; set; } = null;
-
-        [JsonProperty("territories")]
-        public List<Territory> Territories { get; set; } = null;
 
         [JsonProperty("sales_accounts")]
         public List<User> SalesAccounts { get; set; } = null;
@@ -81,17 +100,11 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("campaign_id")]
         public long? CampaignID { get; set; } = null;
 
-        [JsonProperty("task_ids")]
-        public List<long> TaskIDs { get; set; } = null;
-
         [JsonProperty("appointment_ids")]
         public List<long> AppointmentIDs { get; set; } = null;
 
         [JsonProperty("note_ids")]
         public List<long> NoteIDs { get; set; } = null;
-
-        [JsonProperty("deal_ids")]
-        public List<long> DealIDs { get; set; } = null;
 
         [JsonProperty("territory_id")]
         public long? TerritoryID { get; set; } = null;
@@ -111,7 +124,22 @@ namespace Bitfox.Freshworks.Models
 
         public bool Update<TEntity>(string content)
         {
-            Includes model = JsonConvert.DeserializeObject<Includes>(content);
+            Includes model;
+            try
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    MissingMemberHandling = MissingMemberHandling.Error
+                };
+                model = JsonConvert.DeserializeObject<Includes>(content, settings);
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new JsonSerializationException(
+                    $"{ex.Message}\n Failed on Content:\n" + content
+                );
+            }
+
             bool hasData = false;
 
             // update this includes
@@ -127,37 +155,6 @@ namespace Bitfox.Freshworks.Models
 
             return hasData;
         }
-
-
-
-
-
-
-        //private static List<string> GetProperties(object obj)
-        //{
-        //    List<string> properties = new();
-        //    foreach (PropertyInfo prop in obj.GetType().GetProperties())
-        //    {
-        //        properties.Add(prop.Name);
-        //    }
-
-        //    return properties;
-        //}
-
-        //private static List<string> GetJsonProperties(object obj)
-        //{
-        //    List<string> properties = new();
-        //    foreach (PropertyInfo prop in obj.GetType().GetProperties())
-        //    {
-        //        var attr = prop.GetCustomAttribute(typeof(JsonPropertyAttribute), false);
-        //        var property = attr as JsonPropertyAttribute;
-        //        if (property == null) continue;
-
-        //        properties.Add(property.PropertyName);
-        //    }
-
-        //    return properties;
-        //}
 
     }
 }

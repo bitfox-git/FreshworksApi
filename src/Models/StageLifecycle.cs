@@ -21,7 +21,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("disabled")]
         public bool? Disabled { get; set; } = null;
 
-        [JsonProperty("_default")]
+        [JsonProperty("default")]
         public bool? Default { get; set; } = null;
 
         [JsonProperty("type")]
