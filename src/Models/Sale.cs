@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Endpoints.Sales
 {
     [EndpointName("/api/sales_activities")]
-    public class Sale : Includes, IHasInsert<Sale>, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
+    public class Sale : Includes, IHasInsert, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("sales_activity")]
         public Sale Item { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("sales_activities")]
         public List<Sale> Activities { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
@@ -175,21 +175,22 @@ namespace Bitfox.Freshworks.Endpoints.Sales
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 
+        [JsonProperty("partial")]
+        public bool? Partial { get; set; } = null;
+
+        [JsonProperty("position")]
+        public int? Position { get; set; } = null;
 
 
-        public T GetCustomFields<T>()
+        public void CatchInsertExceptions()
         {
-
-            if (CustomField == null) return default(T);
-            var job = (JObject)CustomField;
-            return job.ToObject<T>();
+            throw new NotImplementedException();
         }
 
-        public void SetCustomFields<T>(T value)
+        public void CatchUpdateExceptions()
         {
-            CustomField = JObject.FromObject(value);
+            throw new NotImplementedException();
         }
-
 
 
     }

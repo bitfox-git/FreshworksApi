@@ -9,5 +9,7 @@ namespace Bitfox.Freshworks.Models
     public interface IHasClone
     {
         long? ID { get; set; }
+
+        void CatchCloneExceptions();
     }
 }

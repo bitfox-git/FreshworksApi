@@ -9,5 +9,7 @@ namespace Bitfox.Freshworks.Models
     public interface IHasDelete
     {
         long? ID { get; set; }
+
+        void CatchDeleteExceptions();
     }
 }

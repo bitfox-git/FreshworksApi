@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Endpoints.Appointment
 {
     [EndpointName("/api/appointments")]
-    public class Appointment: Includes, IHasInsert<Appointment>, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
+    public class Appointment: Includes, IHasInsert, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("appointment")]
         public Appointment Item { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("appointment_attendees")]
         public List<Attendee> AppointmentAttendees { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
@@ -59,7 +59,14 @@ namespace Bitfox.Freshworks.Endpoints.Appointment
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 
+        public void CatchInsertExceptions()
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public void CatchUpdateExceptions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

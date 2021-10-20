@@ -15,7 +15,7 @@ namespace Bitfox.Freshworks.Controllers
         /// Insert a new note item.
         /// </summary>
         /// <param name="body">New note item payload</param>
-        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert<TEntity>, new();
+        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
 
         /// <summary>
         /// Update note information on note ID.

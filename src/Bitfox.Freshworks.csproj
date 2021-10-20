@@ -30,7 +30,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Endpoints\Search\" />
+    <Folder Include="Endpoint\Search\" />
   </ItemGroup>
 
 </Project>

@@ -10,6 +10,10 @@ namespace Bitfox.Freshworks.Models
     {
         List<long> SelectedIDs { get; set; }
 
-        bool? DeleteAssociatedContactsDeals { get; set; }
+        bool? DeleteAssociatedContactDeals { get; set; }
+
+        void CatchDeleteBulkExceptions();
+
+
     }
 }

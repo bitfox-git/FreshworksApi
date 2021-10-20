@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public interface IHasInsert<TEntity>
+    public interface IHasInsert
     { 
-        TEntity Item { get; set; }
-
-
-
-
-
+        void CatchInsertExceptions();
     }
 }

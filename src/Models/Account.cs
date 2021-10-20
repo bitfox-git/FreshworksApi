@@ -13,39 +13,37 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/sales_accounts")]
-    public class Account: Includes, IHasInsert<Account>, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
+    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
     {
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("sales_account")]
         public Account Item { get; set; } = null;
 
-
-
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("delete_associated_contacts_deals")]
-        public bool? DeleteAssociatedContactsDeals { get; set; } = null;
+        public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("fields")]
         public List<Field> Fields { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
@@ -158,18 +156,123 @@ namespace Bitfox.Freshworks.Models
         public bool? HasConnections { get; set; } = null;
 
         [JsonProperty("custom_field")]
-        private JObject CustomField { get; set; } = null;
+        public JObject CustomField { get; set; } = null;
 
-        public T GetCustomFields<T>()
+        [JsonProperty("error_code")]
+        public int? ErrorCode { get; set; } = null;
+        
+
+        public void CatchInsertExceptions()
         {
-            if (CustomField == null) return default;
-            var job = (JObject)CustomField;
-            return job.ToObject<T>();
+            List<string> exceptions = new();
+
+            if (Name == null)
+            {
+                exceptions.Add("Required key `Name` is missing.");
+            }
+            
+            if (OwnerID == null)
+            {
+                exceptions.Add("Required key `OwnerID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
-        public void SetCustomFields<T>(T value)
+        public void CatchUpdateExceptions()
         {
-            CustomField = JObject.FromObject(value);
+            List<string> exceptions = new();
+
+            if (Name == null)
+            {
+                exceptions.Add("Required key `Name` is missing.");
+            }
+            
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
+
+        public void CatchCloneExceptions()
+        {
+            List<string> exceptions = new();
+
+            if (Name == null)
+            {
+                exceptions.Add("Required key `Name` is missing.");
+            }
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
+        }
+
+        public void CatchDeleteExceptions()
+        {
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
+        }
+
+        public void CatchForgetExceptions()
+        {
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
+        }
+
+        public void CatchDeleteBulkExceptions()
+        {
+            List<string> exceptions = new();
+
+            if (SelectedIDs == null)
+            {
+                exceptions.Add("Required key `SelectedIDs` is missing.");
+            }
+
+            if (DeleteAssociatedContactDeals == null)
+            {
+                exceptions.Add("Required key `DeleteAssociatedContactDeals` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
+        }
+    
     }
 }

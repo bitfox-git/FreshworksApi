@@ -8,35 +8,36 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    public interface IAppointmentController
+    public interface ITaskController
     {
         /// <summary>
-        /// Insert a new Task item.
+        /// Insert a new task item.
         /// </summary>
-        /// <param name="body">New appointment item payload</param>
-        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert<TEntity>, new();
+        /// <param name="body">New task item payload</param>
+        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
 
         /// <summary>
-        /// Get content from appointment information.
+        /// Get content from task information.
         /// </summary>
         Query Query();
 
         /// <summary>
-        /// Update appointment information on appointment ID.
+        /// Update task information on task ID.
         /// </summary>
-        /// <param name="body">Appointment ID and appointment used for update</param>
+        /// <param name="body">Task ID and Task used for update</param>
         Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
 
         /// <summary>
-        /// Remove appointment by appointment ID.
+        /// Remove task by task ID.
         /// </summary>
-        /// <param name="body">Appointment ID</param>
+        /// <param name="body">Task ID</param>
         Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
 
         /// <summary>
-        /// Remove contact by contact ID.
+        /// Remove task by task ID.
         /// </summary>
-        /// <param name="id">Contact ID</param>
+        /// <param name="id">Task ID</param>
         Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+
     }
 }

@@ -51,7 +51,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Contact contact = await GetContactByIDAndSelectors();
 
-            _ = await RemoveContact(contact);
+            _ = await RemoveContact(contact.Item);
         }
 
         [Fact]
@@ -101,17 +101,32 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task AssignBulkContactOnSuccess()
         {
-            Contact contact = await CreateContact();
+            var owners = await _client.GetOwners();
+            var owner = (owners.Content as List<User>)[0];
 
-            _ = await DeleteContactBulk(contact);
+            Contact contact = await CreateContact();
+            contact.OwnerID = owner.ID;
+
+            _ = await AssignContactBulk(contact);
+            _ = await RemoveContact(contact);
         }
 
         [Fact]
         public async Task DeleteBulkContactOnSuccess()
         {
-            Contact contact = await CreateContact();
+            var owners = await _client.GetOwners();
+            var owner = (owners.Content as List<User>)[0];
 
-            _ = await DeleteContactBulk(contact);
+            Contact contact = await CreateContact();
+            contact.OwnerID = owner.ID;
+
+            Contact delete = new()
+            {
+                SelectedIDs = new List<long> { (long)contact.ID }
+            };
+
+            _ = await AssignContactBulk(contact);
+            _ = await DeleteContactBulk(delete);
         }
 
         [Fact]
@@ -125,6 +140,7 @@ namespace Bitfox.Freshworks.Tests
         {
             _ = await AllContactFields();
         }
+
 
 
 
@@ -153,8 +169,8 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Contact> GetContactFilters()
         {
-            var result = await _client.Filters<Contact>();
-            //var result = await _client.Contact.Filters<Contact>();
+            var result = await _client.FetchAll<Contact>();
+            //var result = await _client.Contact.FetchAll<Contact>();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -194,7 +210,8 @@ namespace Bitfox.Freshworks.Tests
         private async Task<Contact> GetContactByIDAndSelectors()
         {
             // create Contact
-            var Contact = await CreateContact();
+            var content = await CreateContact();
+            Contact contact = new() { ID = content.ID };
 
             // exucute get Contact
             var result = await _client.Query()
@@ -209,10 +226,10 @@ namespace Bitfox.Freshworks.Tests
                 .Include("deals")
                 .Include("industry_type")
                 .Include("child_sales_Contacts")
-                .GetByID(Contact);
-            //var result = await _client.Query().Include("owner").GetByID<Contact>(Contact.ID);
-            //var result = await _client.Contact.Query().Include("owner").GetByID(Contact);
-            //var result = await _client.Contact.Query().Include("owner").GetByID<Contact>(Contact.ID);
+                .GetByID(contact);
+            //var result = await _client.Query().Include("owner").GetByID<Contact>(contact.ID);
+            //var result = await _client.Contact.Query().Include("owner").GetByID(contact);
+            //var result = await _client.Contact.Query().Include("owner").GetByID<Contact>(contact.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -224,11 +241,11 @@ namespace Bitfox.Freshworks.Tests
         {
             // get Contact
             var filters = await GetContactFilters();
-            var content = filters.Contacts[0];
-            Contact Contact = new() { ID = content.ID };
+            var content = filters.Filters[0];
+            Contact contact = new() { ID = content.ID };
 
             // execute
-            var result = await _client.Query().GetAllByID(Contact);
+            var result = await _client.Query().GetAllByID(contact);
             //var result = await _client.Query().GetAllByID<Contact>(content.ID);
             //var result = await _client.Contact.Query().GetAllByID(Contact);
             //var result = await _client.Contact.Query().GetAllByID<Contact>(content.ID);
@@ -239,13 +256,17 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Contact;
         }
 
-        private async Task<Contact> UpdateContact(Contact Contact)
+        private async Task<Contact> UpdateContact(Contact contact)
         {
-            Contact.DisplayName = $"TEST Random Name:({GetCurrentTime()})";
+            Contact newContact = new()
+            {
+                ID = contact.ID,
+                FirstName = $"TEST Random Name"
+            };
 
             // execute
-            var result = await _client.Update(Contact);
-            //var result = await _client.Contact.Update(Contact);
+            var result = await _client.Update(newContact);
+            //var result = await _client.Contact.Update(newContact);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -253,13 +274,23 @@ namespace Bitfox.Freshworks.Tests
             return GetResponse(result) as Contact;
         }
 
-        private async Task<Contact> CloneContact(Contact Contact)
+        private async Task<Contact> CloneContact(Contact contact)
         {
-            Contact.DisplayName = $"TEST Clone Name:({GetCurrentTime()})";
+            string name = GetCurrentTime()
+                .Replace(" ", "")
+                .Replace("/", "")
+                .Replace(":", "");
+
+            Contact newContact = new()
+            {
+                ID = contact.ID,
+                FirstName = $"TEST Clone Name:({GetCurrentTime()})",
+                Email = $"{name}@gmail.com"
+            };
 
             // Commands
-            var result = await _client.Clone(Contact);
-            //var result = await _client.Contact.Clone(Contact);
+            var result = await _client.Clone(newContact);
+            //var result = await _client.Contact.Clone(newContact);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -279,12 +310,29 @@ namespace Bitfox.Freshworks.Tests
             return (bool)result.Content;
         }
 
-        private async Task<Contact> DeleteContactBulk(Contact Contact)
+        private async Task<string> AssignContactBulk(Contact contact)
         {
             Contact bulk = new()
             {
-                SelectedIDs = new List<long> { (long)Contact.ID },
-                DeleteAssociatedContactsDeals = true
+                SelectedIDs = new List<long> { (long)contact.ID },
+                OwnerID = contact.OwnerID
+            };
+
+            // Commands
+            var result = await _client.AssignBulk(bulk);
+            //var result = await _client.Contact.AssignBulk(bulk);
+
+            Assert.Null(result.Error);
+            Assert.NotNull(result.Content);
+            Assert.Null(result.Includes);
+            return result.Content as string;
+        }
+
+        private async Task<string> DeleteContactBulk(Contact contact)
+        {
+            Contact bulk = new()
+            {
+                SelectedIDs = contact.SelectedIDs
             };
 
             // Commands
@@ -294,7 +342,7 @@ namespace Bitfox.Freshworks.Tests
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
             Assert.Null(result.Includes);
-            return GetResponse(result) as Contact;
+            return result.Content as string;
         }
 
         public async Task<Contact> AllContactFields()
@@ -308,10 +356,6 @@ namespace Bitfox.Freshworks.Tests
             Assert.Null(result.Includes);
             return GetResponse(result) as Contact;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
 
         private object GetResponse<TEntity>(Result<TEntity> result)
         {

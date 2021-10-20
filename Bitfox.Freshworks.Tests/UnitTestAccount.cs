@@ -51,7 +51,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await GetAccountByIDAndSelectors();
 
-            _ = await RemoveAccount(account.SalesAccount);
+            _ = await RemoveAccount(account.Item);
         }
 
         [Fact]
@@ -118,8 +118,8 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Account> GetAccountFilters()
         {
-            var result = await _client.Filters<Account>();
-            //var result = await _client.Account.Filters<Account>();
+            var result = await _client.FetchAll<Account>();
+            //var result = await _client.Account.FetchAll<Account>();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -132,7 +132,7 @@ namespace Bitfox.Freshworks.Tests
         {
             // get owner id
             var owners = await _selectors.GetOwners();
-            var owner = owners.Users[0];
+            var owner = (owners as List<User>)[0];
 
             Account account = new()
             {
@@ -271,7 +271,7 @@ namespace Bitfox.Freshworks.Tests
             Account bulk = new()
             {
                 SelectedIDs = new List<long> { (long)account.ID },
-                DeleteAssociatedContactsDeals = true
+                DeleteAssociatedContactDeals = true
             };
 
             // Commands

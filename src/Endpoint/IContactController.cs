@@ -16,7 +16,7 @@ namespace Bitfox.Freshworks.Controllers
         /// Insert a new contact item.
         /// </summary>
         /// <param name="body">New contact item payload</param>
-        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert<TEntity>, new();
+        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
 
         /// <summary>
         /// Get content from contact information.

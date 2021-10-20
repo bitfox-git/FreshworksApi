@@ -1,5 +1,4 @@
-﻿using Bitfox.Freshworks.Endpoints.Sales;
-using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Models;
 using Bitfox.Freshworks.NetworkObjects;
 using System;
 using System.Collections.Generic;
@@ -9,35 +8,35 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Controllers
 {
-    public interface ISaleController
+    public interface IAppointmentController
     {
         /// <summary>
-        /// Insert a new Sales item.
+        /// Insert a new Task item.
         /// </summary>
         /// <param name="body">New appointment item payload</param>
-        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert<TEntity>, new();
+        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
 
         /// <summary>
-        /// Get content from Sales information.
+        /// Get content from appointment information.
         /// </summary>
         Query Query();
 
         /// <summary>
-        /// Update Sales information on Sales ID.
+        /// Update appointment information on appointment ID.
         /// </summary>
-        /// <param name="body">Sales ID and Sales used for update</param>
+        /// <param name="body">Appointment ID and appointment used for update</param>
         Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
 
         /// <summary>
-        /// Remove Sales by Sales ID.
+        /// Remove appointment by appointment ID.
         /// </summary>
-        /// <param name="body">Sales ID</param>
+        /// <param name="body">Appointment ID</param>
         Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
 
         /// <summary>
-        /// Remove Sales by Sales ID.
+        /// Remove contact by contact ID.
         /// </summary>
-        /// <param name="id">Sales ID</param>
+        /// <param name="id">Contact ID</param>
         Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
     }
 }

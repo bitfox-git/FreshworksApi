@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Endpoints.Note
 {
     [EndpointName("/api/notes")]
-    public class Note: IHasInsert<Note>, IHasUpdate, IHasDelete
+    public class Note: IHasInsert, IHasUpdate, IHasDelete
     {
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("note")]
         public Note Item { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 
@@ -59,6 +59,15 @@ namespace Bitfox.Freshworks.Endpoints.Note
         public ColabContext CollabContext { get; set; } = null;
 
 
+        public void CatchInsertExceptions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CatchUpdateExceptions()
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

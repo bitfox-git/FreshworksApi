@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Endpoints.Task
 {
     [EndpointName("/api/tasks")]
-    public class Task : Includes, IHasInsert<Task>, IHasUpdate, IHasView, IHasDelete, IHasFilters, IHasUniqueID
+    public class Task : Includes, IHasInsert, IHasUpdate, IHasView, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("task")]
         public Task Item { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
@@ -67,5 +67,16 @@ namespace Bitfox.Freshworks.Endpoints.Task
         [JsonProperty("task_users_attributes")]
         public List<User> TaskUsersAttributes { get; set; } = null;
 
+
+
+        public void CatchInsertExceptions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CatchUpdateExceptions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

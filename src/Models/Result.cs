@@ -116,7 +116,7 @@ namespace Bitfox.Freshworks.Models
             {
                 foreach (object attr in prop.GetCustomAttributes(true))
                 {
-                    if (attr is JsonParentPropertyAttribute)
+                    if (attr is JsonReturnParentPropertyAttribute)
                     {
                         var obj = prop.GetValue(Body);
                         if (obj != null)
@@ -138,7 +138,7 @@ namespace Bitfox.Freshworks.Models
             else
             {
                 throw new ArgumentOutOfRangeException(
-                    $"Do not contain JsonParentPropertyAttribute in json model"
+                    $"Do not contain JsonReturnParentPropertyAttribute in json model"
                 );
             }
         }

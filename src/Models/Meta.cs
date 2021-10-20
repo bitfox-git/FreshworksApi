@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,6 @@ namespace Bitfox.Freshworks.Models
         public int? Total { get; set; } = null;
 
         [JsonProperty("avatar_data")]
-        public AvatarData AvatarData { get; set; } = null;
+        public JObject AvatarData { get; set; } = null;
     }
 }

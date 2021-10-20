@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bitfox.Freshworks.Attributes;
 using Bitfox.Freshworks.Endpoints.Contact;
+using Bitfox.Freshworks.Endpoints.Deals;
 using Bitfox.Freshworks.Endpoints.Sales;
 using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json;
@@ -16,44 +17,58 @@ namespace Bitfox.Freshworks.Models
 {
     public class Includes
     {
-        // parents
-        [JsonParentProperty]
+        // Parents
+        [JsonReturnParentProperty]
         [JsonProperty("sales_account")]
         public Account SalesAccount { get; set; } = null;
 
-        [JsonParentProperty]
-        [JsonProperty("business_types")]
-        public List<BusinessType> BusinessTypes { get; set; } = null;
+        [JsonProperty("sales_accounts")]
+        public List<Account> SalesAccounts { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
+        [JsonProperty("contact")]
+        public Contact Contact { get; set; } = null;
+
+        [JsonReturnParentProperty]
         [JsonProperty("contacts")]
         public List<Contact> Contacts { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
+        [JsonProperty("deal")]
+        public Deal Deal { get; set; } = null;
+
+        [JsonReturnParentProperty]
+        [JsonProperty("deals")]
+        public List<Deal> Deals { get; set; } = null;
+
+
+
+
+        [JsonReturnParentProperty]
+        [JsonProperty("business_types")]
+        public List<BusinessType> BusinessTypes { get; set; } = null;
+
+        [JsonReturnParentProperty]
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("industry_types")]
         public List<IndustryType> IndustryTypes { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("child_sales_accounts")]
         public List<Sale> ChildSalesAccounts { get; set; } = null;
 
-        [JsonParentProperty]
-        [JsonProperty("deals")]
-        public List<User> Deals { get; set; } = null;
-
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("territories")]
         public List<User> Territories { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("tasks")]
         public List<User> Tasks { get; set; } = null;
 
-        [JsonParentProperty]
+        [JsonReturnParentProperty]
         [JsonProperty("appointments")]
         public List<User> Appointments { get; set; } = null;
 
@@ -82,8 +97,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("notes")]
         public List<User> Notes { get; set; } = null;
 
-        [JsonProperty("sales_accounts")]
-        public List<User> SalesAccounts { get; set; } = null;
 
         [JsonProperty("owner_id")]
         public long? OwnerID { get; set; } = null;

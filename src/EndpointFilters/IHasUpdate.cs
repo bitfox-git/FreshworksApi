@@ -9,5 +9,7 @@ namespace Bitfox.Freshworks.Models
     public interface IHasUpdate
     { 
         long? ID { get; set; }
+
+        void CatchUpdateExceptions();
     }
 }

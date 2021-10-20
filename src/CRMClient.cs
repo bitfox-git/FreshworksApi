@@ -1,13 +1,14 @@
 ﻿using Bitfox.Freshworks.Controllers;
+using Bitfox.Freshworks.Endpoints.Sales;
 using Bitfox.Freshworks.Endpoints.Selector;
 using Bitfox.Freshworks.Models;
+using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : BaseController, ICRMClient,
-        ISelectorController,
+    public class CRMClient : Network, ICRMClient,
         IContactController,
         IAccountController,
         IDealController,
@@ -16,7 +17,7 @@ namespace Bitfox.Freshworks
         IAppointmentController,
         ISaleController
     {
-        public ISelectorController Selector => this;
+        public ISelectorController Selector => new Query(BaseURL, ApiKey);
 
         public IContactController Contact => this;
 
@@ -36,75 +37,92 @@ namespace Bitfox.Freshworks
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
 
+        public async Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert
+        {
+            body.CatchInsertExceptions();
+            string endpoint = GetEndpoint<TEntity>();
+            return await PostApiRequest(endpoint, body);
+        }
+
+        public Query Query()
+        {
+            return new Query(BaseURL, ApiKey);
+        }
 
 
-        //public async Task<T> Insert<T>(T body) where T: IHasInsert
-        //{
-        //    string endpoint = GetEndpoint<T>();
-        //    return await PostApiRequest(endpoint, body);
-        //}
-
-        //public async Task<T> GetView<T>(T item) where T : IHasView, IHasUniqueID
-        //{
-        //    return await GetView<T>((long)item.ID);
-        //}
-
-        //public async Task<T> GetView<T>(long id) where T: IHasView
-        //{
-        //    string endpoint = $"{GetEndpoint<T>()}/{id}";
-        //    return await GetApiRequest<T>(endpoint);
-        //}
-
-        //public async Task<T> GetAllByID<T>(T item) where T : IHasView, IHasUniqueID
-        //{
-        //    return await GetAllByID<T>((long)item.ID);
-        //}
-
-        //public async Task<T> GetAllByID<T>(long id) where T : IHasView
-        //{
-        //    string endpoint = $"{GetEndpoint<T>()}/view/{id}";
-        //    return await GetApiRequest<T>(endpoint);
-        //}
-
-        //public async Task<T> UpdateView<T>(T item) where T : IHasUpdate, IHasUniqueID
-        //{
-        //    string endpoint = $"{GetEndpoint<T>()}/{item.ID}";
-        //    return await UpdateApiRequest<T>(endpoint, item);
-        //}
-
-        //public Query<T> Query<T>()// where T : IHasView
-        //{
-        //    return new Query<T>(BaseURL, ApiKey);
-        //}
+        // TODO into Query
+        public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
+        {
+            string endpoint = $"{GetEndpoint<TEntity>()}/filters";
+            return await GetApiRequest<TEntity>(endpoint, false);
+        }
 
 
 
-        //public SelectorController Selector => new(BaseURL, apikey);
 
-        //public IContactController Contact => new ContactController(BaseURL, apikey);
+        public async Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate
+        {
+            body.CatchUpdateExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
+            return await UpdateApiRequest(endpoint, body);
+        }
 
+        public async Task<Result<TEntity>> Clone<TEntity>(TEntity body) where TEntity : IHasClone
+        {
+            body.CatchCloneExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}/clone";
+            return await PostApiRequest(endpoint, body);
+        }
 
-        //public IDealController Deal => new Controllers.DealController(BaseURL, apikey);
+        public async Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete
+        {
+            if (id == null)
+            {
+                throw new ArgumentException($"ID is required for removing the view.");
+            }
 
-        //public INoteController Note => new NoteController(BaseURL, apikey);
+            string endpoint = $"{GetEndpoint<TEntity>()}/{id}";
+            return await DeleteApiRequest(endpoint);
+        }
 
-        //public ITaskController Task => new TaskController(BaseURL, apikey);
+        public async Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete
+        {
+            body.CatchDeleteExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
+            return await DeleteApiRequest(endpoint);
+        }
 
-        //public IAppointmentController Appointment => new AppointmentController(BaseURL, apikey);
+        public async Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget
+        {
+            if (id == null)
+            {
+                throw new ArgumentException($"ID is required for removing the view.");
+            }
 
-        //public ISalesController Sales => new SalesController(BaseURL, apikey);
+            string endpoint = $"{GetEndpoint<TEntity>()}/{id}/forget";
+            return await DeleteApiRequest(endpoint);
+        }
 
-        //// TODO
-        //// public SearchEndpoints Search => new(BaseURL, apikey);
+        public async Task<Result<bool>> Forget<TEntity>(TEntity body) where TEntity : IHasForget
+        {
+            body.CatchForgetExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}/forget";
+            return await DeleteApiRequest(endpoint);
+        }
 
-        //public IPhoneController Phone => new PhoneController(BaseURL, apikey);
+        public async Task<Result<TEntity>> AssignBulk<TEntity>(TEntity body) where TEntity : IHasAssignBulk
+        {
+            body.CatchAssignBulkExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/bulk_assign_owner";
+            return await PostApiRequest(endpoint, body);
+        }
 
-        //public IFileController File => new FileController(BaseURL, apikey);
+        public async Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk
+        {
+            body.CatchDeleteBulkExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/bulk_destroy";
+            return await PostApiRequest(endpoint, body);
+        }
 
-        //internal CRMClient(string subdomain, string apikey)
-        //{
-        //    this.subdomain = subdomain;
-        //    this.apikey = apikey;
-        //}
     }
 }
