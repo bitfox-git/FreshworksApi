@@ -101,7 +101,7 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task AssignBulkContactOnSuccess()
         {
-            var owners = await _client.GetOwners();
+            var owners = await _client.Query().GetOwners();
             var owner = (owners.Content as List<User>)[0];
 
             Contact contact = await CreateContact();
@@ -114,7 +114,7 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task DeleteBulkContactOnSuccess()
         {
-            var owners = await _client.GetOwners();
+            var owners = await _client.Query().GetOwners();
             var owner = (owners.Content as List<User>)[0];
 
             Contact contact = await CreateContact();

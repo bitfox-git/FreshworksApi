@@ -17,7 +17,7 @@ namespace Bitfox.Freshworks
         IAppointmentController,
         ISaleController
     {
-        public ISelectorController Selector => new Query(BaseURL, ApiKey);
+        public ISelectorController Selector => Query();
 
         public IContactController Contact => this;
 
@@ -31,11 +31,21 @@ namespace Bitfox.Freshworks
 
         public IAppointmentController Appointment => this;
 
-        public ISaleController Sales => this;
-
+        public ISaleController Sale => this;
 
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
+
+        public Query Query()
+        {
+            return new Query(BaseURL, ApiKey);
+        }
+
+        public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
+        {
+            string endpoint = $"{GetEndpoint<TEntity>()}/filters";
+            return await GetApiRequest<TEntity>(endpoint, false);
+        }
 
         public async Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert
         {
@@ -43,22 +53,6 @@ namespace Bitfox.Freshworks
             string endpoint = GetEndpoint<TEntity>();
             return await PostApiRequest(endpoint, body);
         }
-
-        public Query Query()
-        {
-            return new Query(BaseURL, ApiKey);
-        }
-
-
-        // TODO into Query
-        public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
-        {
-            string endpoint = $"{GetEndpoint<TEntity>()}/filters";
-            return await GetApiRequest<TEntity>(endpoint, false);
-        }
-
-
-
 
         public async Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate
         {
