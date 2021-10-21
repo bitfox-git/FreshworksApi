@@ -23,7 +23,7 @@ namespace Bitfox.Freshworks.Models
         }
 
         // Get Http calls
-        protected async Task<Result<TEntity>> GetApiRequest<TEntity>(string path, bool hasIncludes=false)
+        protected async Task<Result<TEntity>> GetApiRequest<TEntity>(string path)
         {
             string url = BaseURL + path;
             var request = new HttpRequestMessage
@@ -37,7 +37,7 @@ namespace Bitfox.Freshworks.Models
 
             var resp = await Client.SendAsync(request);
             var content = await resp.Content.ReadAsStringAsync();
-            return new Result<TEntity>(content, hasIncludes);
+            return new Result<TEntity>(content);
         }
 
         // Post Http calls
@@ -95,6 +95,23 @@ namespace Bitfox.Freshworks.Models
         }
 
         // Delete Http calls
+        protected async Task<Result<TEntity>> DeleteApiRequest<TEntity>(string path)
+        {
+            string url = BaseURL + path;
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(url),
+                Headers = {
+                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" }
+                }
+            };
+
+            var resp = await Client.SendAsync(request);
+            var content = await resp.Content.ReadAsStringAsync();
+            return new Result<TEntity>(content);
+        }
+
         protected async Task<Result<bool>> DeleteApiRequest(string path)
         {
             string url = BaseURL + path;

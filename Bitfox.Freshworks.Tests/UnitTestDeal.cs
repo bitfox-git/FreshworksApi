@@ -35,7 +35,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await CreateDeal();
 
-            _ = await RemoveDeal(deal.Item);
+            _ = await RemoveDeal(deal.Deal);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await GetDealByID();
 
-            _ = await RemoveDeal(deal);
+            _ = await RemoveDeal(deal.Deal);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await GetDealByIDAndSelectors();
 
-            _ = await RemoveDeal(deal.Item);
+            _ = await RemoveDeal(deal.Deal);
         }
 
         [Fact]
@@ -65,19 +65,19 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await CreateDeal();
 
-            deal = await UpdateDeal(deal.Item);
+            deal = await UpdateDeal(deal.Deal);
 
-            _ = await RemoveDeal(deal.Item);
+            _ = await RemoveDeal(deal.Deal);
         }
 
         [Fact]
         public async Task CloneDealOnSuccess()
         {
             var deal = await CreateDeal();
-            var clonedDeal = await CloneDeal(deal.Item);
+            var clonedDeal = await CloneDeal(deal.Deal);
 
-            _ = await RemoveDeal(deal.Item);
-            _ = await RemoveDeal(clonedDeal.Item);
+            _ = await RemoveDeal(deal.Deal);
+            _ = await RemoveDeal(clonedDeal.Deal);
 
         }
 
@@ -86,7 +86,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await CreateDeal();
 
-            _ = await RemoveDeal(deal.Item);
+            _ = await RemoveDeal(deal.Deal);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await CreateDeal();
 
-            _ = await ForgetDeal(deal.Item);
+            _ = await ForgetDeal(deal.Deal);
         }
 
         [Fact]
@@ -102,7 +102,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Deal deal = await CreateDeal();
 
-            _ = await DeleteDealBulk(deal.Item);
+            _ = await DeleteDealBulk(deal.Deal);
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
 
         }
@@ -127,7 +127,7 @@ namespace Bitfox.Freshworks.Tests
         {
             // get owner id
             var owners = await _selectors.GetOwners();
-            var owner = (owners as List<User>)[0];
+            var owner = owners[0];
 
             Deal deal = new()
             {
@@ -142,7 +142,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -163,14 +163,14 @@ namespace Bitfox.Freshworks.Tests
             var deal = await CreateDeal();
 
             // exucute get account
-            var result = await _client.Query().GetByID(deal.Item);
+            var result = await _client.Query().GetByID(deal.Deal);
             //var result = await _client.Query().GetByID<Deal>(deal.ID);
             //var result = await _client.Deal.Query().GetByID(deal);
             //var result = await _client.Deal.Query().GetByID<Deal>(deal.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -192,14 +192,13 @@ namespace Bitfox.Freshworks.Tests
                 .Include("deals")
                 .Include("industry_type")
                 .Include("child_sales_accounts")
-                .GetByID(deal.Item);
+                .GetByID(deal.Deal);
             //var result = await _client.Query().Include("owner").GetByID<Deal>(deal.Item.ID);
             //var result = await _client.Deal.Query().Include("owner").GetByID(deal.Item);
             //var result = await _client.Deal.Query().Include("owner").GetByID<Deal>(deal.Item.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.NotNull(result.Includes);
             return result.Content as Deal;
         }
 
@@ -218,7 +217,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -232,7 +231,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -246,7 +245,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -276,7 +275,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
 
@@ -288,14 +287,9 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content as Deal;
         }
-
-
-
-
-
 
         private static string GetCurrentTime()
         {

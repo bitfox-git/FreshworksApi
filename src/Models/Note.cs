@@ -58,15 +58,74 @@ namespace Bitfox.Freshworks.Endpoints.Note
         [JsonProperty("collab_context")]
         public ColabContext CollabContext { get; set; } = null;
 
+        public void CatchDeleteExceptions()
+        {
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
+        }
 
         public void CatchInsertExceptions()
         {
-            throw new NotImplementedException();
+            List<string> exceptions = new();
+
+            if (Description == null)
+            {
+                exceptions.Add("Required key `Description` is missing.");
+            }
+
+            if (TargetableType == null)
+            {
+                exceptions.Add("Required key `TargetableType` is missing.");
+            }
+
+            if (TargetableID == null)
+            {
+                exceptions.Add("Required key `TargetableID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
         public void CatchUpdateExceptions()
         {
-            throw new NotImplementedException();
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (Description == null)
+            {
+                exceptions.Add("Required key `Description` is missing.");
+            }
+
+            if (TargetableType == null)
+            {
+                exceptions.Add("Required key `TargetableType` is missing.");
+            }
+
+            if (TargetableID == null)
+            {
+                exceptions.Add("Required key `TargetableID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
 

@@ -14,7 +14,7 @@ namespace Bitfox.Freshworks.Endpoints
     //    { }
 
     //    //// Manual call log
-    //    //public async Task<PhoneParent> GetCallLogs(IPhonePayload body, Params _params=null)
+    //    //public async Tasks<PhoneParent> GetCallLogs(IPhonePayload body, Params _params=null)
     //    //{
     //    //    string path = $"/document_links";
     //    //    path = _params == null ? path : _params.AddPath(path);

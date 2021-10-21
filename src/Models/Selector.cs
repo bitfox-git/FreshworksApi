@@ -12,35 +12,15 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Endpoints.Selector
 {
     [EndpointName("/api/selector")]
-    public class Selector
+    public class Selector: Includes
     {
-        [JsonReturnParentProperty]
-        [JsonProperty("business_types")]
-        public List<User> BusinessTypes { get; set; } = null;
-
-        [JsonReturnParentProperty]
-        [JsonProperty("campaigns")]
-        public List<User> Campaigns { get; set; } = null;
-
         [JsonReturnParentProperty]
         [JsonProperty("contact_statuses")]
         public List<ContactStatus> Statuses { get; set; } = null;
 
         [JsonReturnParentProperty]
-        [JsonProperty("users")]
-        public List<User> Users { get; set; } = null;
-
-        [JsonReturnParentProperty]
-        [JsonProperty("industry_types")]
-        public List<User> IndustryTypes { get; set; } = null;
-
-        [JsonReturnParentProperty]
         [JsonProperty("lifecycle_stages")]
         public List<StageLifecycle> Stages { get; set; } = null;
-
-        [JsonReturnParentProperty]
-        [JsonProperty("territories")]
-        public List<User> Territories { get; set; } = null;
 
         [JsonReturnParentProperty]
         [JsonProperty("currencies")]

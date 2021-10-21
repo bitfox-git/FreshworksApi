@@ -15,7 +15,7 @@ namespace Bitfox.Freshworks.Endpoints
     //    { }
 
     //    //// Insert a link
-    //    //public async Task<FileParent> CreateLink(IFilePayload body, Params _params=null)
+    //    //public async Tasks<FileParent> CreateLink(IFilePayload body, Params _params=null)
     //    //{
     //    //    string path = $"/document_links";
     //    //    path = _params == null ? path : _params.AddPath(path);
@@ -25,7 +25,7 @@ namespace Bitfox.Freshworks.Endpoints
     //    //}
 
     //    //// List all Files and Links
-    //    //public async Task<FileParent> GetAllFilesAndLinksByID(long id, Params _params=null)
+    //    //public async Tasks<FileParent> GetAllFilesAndLinksByID(long id, Params _params=null)
     //    //{
     //    //    string path = $"/contacts/{id}/document_associations";
     //    //    path = _params == null ? path : _params.AddPath(path);

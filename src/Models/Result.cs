@@ -1,13 +1,4 @@
-﻿using Bitfox.Freshworks.Attributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Bitfox.Freshworks.Models
 {
@@ -15,18 +6,14 @@ namespace Bitfox.Freshworks.Models
     {
         public object Content { get; set; }
 
-        private TEntity Body { get; set; }
-
-        public Includes Includes { get; set; } = new();
-
         [JsonProperty("errors")]
         public Error Error { get; set; } = null;
 
-        public Result(string body, bool hasIncludes=false)
+        public Result(string body)
         {
             if (!HandleError(body))
             {
-                HandleBody(body, hasIncludes);
+                HandleBody(body);
             }
         }
 
@@ -54,7 +41,7 @@ namespace Bitfox.Freshworks.Models
             }
         }
 
-        private void HandleBody(string fullBody, bool hasIncludes)
+        private void HandleBody(string fullBody)
         {
             try
             {
@@ -62,7 +49,8 @@ namespace Bitfox.Freshworks.Models
                 {
                     MissingMemberHandling = MissingMemberHandling.Error
                 };
-                Body = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
+
+                Content = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
             }
             catch (JsonSerializationException ex)
             {
@@ -70,78 +58,6 @@ namespace Bitfox.Freshworks.Models
                     $"{ex.Message}\n Failed on Content:\n" + fullBody
                 );
             }
-
-
-            if (HasBody())
-            {
-                SetBody();
-
-                // Set response body to Includes
-                if (hasIncludes)
-                {
-                    _ = Includes.Update<TEntity>(fullBody);
-                }
-
-                if (Includes.IsEmpty())
-                {
-                    Includes = null;
-                } 
-            }
-            else
-            {
-                Content = Body;
-            }
         }
-
-        private bool HasBody()
-        {
-            var props = Body.GetType().GetProperties();
-
-            // TEntity is `bool` for example
-            if (props.Length == 0) return false;
-
-            // TEntity has no values
-            var propsValues = props
-                     .Where(field => field.GetValue(Body) != null)
-                     .ToList();
-
-            return (propsValues.Count > 0);
-        }
-
-        private void SetBody()
-        {
-            List<object> objects = new();
-
-            foreach (PropertyInfo prop in typeof(TEntity).GetProperties())
-            {
-                foreach (object attr in prop.GetCustomAttributes(true))
-                {
-                    if (attr is JsonReturnParentPropertyAttribute)
-                    {
-                        var obj = prop.GetValue(Body);
-                        if (obj != null)
-                        {
-                            objects.Add(obj);
-                        }
-                    }
-                }
-            }
-
-            if (objects.Count > 1)
-            {
-                Content = Body;
-            }
-            else if (objects.Count == 1)
-            {
-                Content = objects[0];
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException(
-                    $"Do not contain JsonReturnParentPropertyAttribute in json model"
-                );
-            }
-        }
-
     }
 }

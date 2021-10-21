@@ -17,10 +17,6 @@ namespace Bitfox.Freshworks.Endpoints.Deals
     public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
     {
         [JsonReturnParentProperty]
-        [JsonProperty("deal")]
-        public Deal Item { get; set; } = null;
-
-        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 

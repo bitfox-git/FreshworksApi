@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Query: BaseController, ISelectorController
+    public class Query: Network, ISelectorController
     {
-        private List<string> includes = new();
+        private List<string> Includes = new();
 
         public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
         { }
 
         public Query Include(string include)
         {
-            includes.Add(include);
+            Includes.Add(include);
             return this;
         }
 
@@ -36,8 +36,8 @@ namespace Bitfox.Freshworks.Models
             var uri = $"{endpoint}/{id}";
 
             //add includes
-            uri += includes.Count > 0 ? $"?include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
+            uri += Includes.Count > 0 ? $"?include={string.Join(",", Includes)}" : "";
+            return await GetApiRequest<TEntity>(uri);
         }
 
         public async Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID
@@ -56,8 +56,18 @@ namespace Bitfox.Freshworks.Models
             var uri = $"{endpoint}/view/{id}";
 
             //add includes
-            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
+            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
+            return await GetApiRequest<TEntity>(uri);
+        }
+
+        public async Task<Result<TEntity>> GetAllByFilter<TEntity>(string filter) where TEntity : IHasView
+        {
+            var endpoint = GetEndpoint<TEntity>();
+            var uri = $"{endpoint}?filter={filter}";
+
+            //add includes
+            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
+            return await GetApiRequest<TEntity>(uri);
         }
 
         public async Task<Result<TEntity>> GetAllActivitiesByID<TEntity>(TEntity body) where TEntity : IHasActivities, IHasUniqueID
@@ -76,8 +86,8 @@ namespace Bitfox.Freshworks.Models
             var uri = $"{endpoint}/{id}/activities.json";
 
             //add includes
-            uri += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(uri, (includes.Count > 0));
+            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
+            return await GetApiRequest<TEntity>(uri);
         }
 
         public async Task<Result<TEntity>> GetAllFields<TEntity>() where TEntity: IHasFields
@@ -87,8 +97,123 @@ namespace Bitfox.Freshworks.Models
             string url = $"/api/settings/{lastName}/fields";
 
             //add includes
-            url += includes.Count > 0 ? $"&include={string.Join(",", includes)}" : "";
-            return await GetApiRequest<TEntity>(url, (includes.Count > 0));
+            url += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
+            return await GetApiRequest<TEntity>(url);
+        }
+
+        // Selectors
+        public async Task<Result<Selector>> GetSalesActivityTypes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_types";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetSalesActivityEntityTypes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_entity_types";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetSalesActivityOutcomes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_outcomes";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetSalesActivityOutcomesByID(long id)
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_types/{id}/sales_activity_outcomes";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealProducts()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_products";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealStages()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_stages";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealTypes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_types";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealReasons()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_reasons";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealPipelines()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_pipelines";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealPipelinesByID(long id)
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_pipelines/{id}/deal_stages";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetDealPaymentStatuses()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/deal_payment_statuses";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetTerritories()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/territories";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetCampaigns()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/campaigns";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetOwners()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/owners";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetCurrencies()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/currencies";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetContactStatuses()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/contact_statuses";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetBusinessTypes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/business_types";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetLifecycleStages()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/lifecycle_stages";
+            return await GetApiRequest<Selector>(endpoint);
+        }
+
+        public async Task<Result<Selector>> GetIndustryTypes()
+        {
+            string endpoint = $"{GetEndpoint<Selector>()}/industry_types";
+            return await GetApiRequest<Selector>(endpoint);
         }
 
     }

@@ -14,6 +14,6 @@ namespace Bitfox.Freshworks.Controllers
     //    /// Log all calls that are been made.
     //    /// </summary>
     //    /// <param name="payload">Data from who we log the calls</param>
-    //    Task<PhoneParent> GetCallLogs(IPhonePayload payload, Params _params = null);
+    //    Tasks<PhoneParent> GetCallLogs(IPhonePayload payload, Params _params = null);
     //}
 }

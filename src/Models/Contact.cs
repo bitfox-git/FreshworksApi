@@ -16,10 +16,6 @@ namespace Bitfox.Freshworks.Endpoints.Contact
     public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasUniqueID
     {
         [JsonReturnParentProperty]
-        [JsonProperty("contact")]
-        public Contact Item { get; set; } = null;
-
-        [JsonReturnParentProperty]
         [JsonProperty("activities")]
         public List<Activity> Activities { get; set; } = null;
 

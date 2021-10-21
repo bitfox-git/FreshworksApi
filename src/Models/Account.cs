@@ -16,10 +16,6 @@ namespace Bitfox.Freshworks.Models
     public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
     {
         [JsonReturnParentProperty]
-        [JsonProperty("sales_account")]
-        public Account Item { get; set; } = null;
-
-        [JsonReturnParentProperty]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 

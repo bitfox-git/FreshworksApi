@@ -11,7 +11,7 @@ namespace Bitfox.Freshworks.Controllers
     public interface IAppointmentController
     {
         /// <summary>
-        /// Insert a new Task item.
+        /// Insert a new Tasks item.
         /// </summary>
         /// <param name="body">New appointment item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;

@@ -29,7 +29,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await CreateAccount();
 
-            _ = await RemoveAccount(account);
+            _ = await RemoveAccount(account.Account);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await GetAccountByID();
 
-            _ = await RemoveAccount(account);
+            _ = await RemoveAccount(account.Account);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await GetAccountByIDAndSelectors();
 
-            _ = await RemoveAccount(account.Item);
+            _ = await RemoveAccount(account.Account);
         }
 
         [Fact]
@@ -65,19 +65,19 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await CreateAccount();
 
-            account = await UpdateAccount(account);
+            account = await UpdateAccount(account.Account);
 
-            _ = await RemoveAccount(account);
+            _ = await RemoveAccount(account.Account);
         }
 
         [Fact]
         public async Task CloneAccountOnSuccess()
         {
             var account = await CreateAccount();
-            var clonedAccount = await CloneAccount(account);
+            var clonedAccount = await CloneAccount(account.Account);
 
-            _ = await RemoveAccount(account);
-            _ = await RemoveAccount(clonedAccount);
+            _ = await RemoveAccount(account.Account);
+            _ = await RemoveAccount(clonedAccount.Account);
 
         }
 
@@ -87,7 +87,7 @@ namespace Bitfox.Freshworks.Tests
             // get account
             Account account = await CreateAccount();
 
-            _ = await RemoveAccount(account);
+            _ = await RemoveAccount(account.Account);
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await CreateAccount();
 
-            _ = await ForgetAccount(account);
+            _ = await ForgetAccount(account.Account);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await CreateAccount();
 
-            _ = await DeleteAccountBulk(account);
+            _ = await DeleteAccountBulk(account.Account);
         }
 
         [Fact]
@@ -112,10 +112,6 @@ namespace Bitfox.Freshworks.Tests
             _ = await AllAccountFields();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-
         private async Task<Account> GetAccountFilters()
         {
             var result = await _client.FetchAll<Account>();
@@ -123,8 +119,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            return result.Content as Account;
 
         }
 
@@ -132,7 +127,7 @@ namespace Bitfox.Freshworks.Tests
         {
             // get owner id
             var owners = await _selectors.GetOwners();
-            var owner = (owners as List<User>)[0];
+            var owner = owners[0];
 
             Account account = new()
             {
@@ -146,7 +141,6 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
             return result.Content as Account;
         }
 
@@ -167,15 +161,15 @@ namespace Bitfox.Freshworks.Tests
             var account = await CreateAccount();
 
             // exucute get account
-            var result = await _client.Query().GetByID(account);
-            //var result = await _client.Query().GetByID<Account>(account.ID);
-            //var result = await _client.Account.Query().GetByID(account);
-            //var result = await _client.Account.Query().GetByID<Account>(account.ID);
+            var result = await _client.Query().GetByID(account.Account);
+            //var result = await _client.Query().GetByID<Account>(account.Account.ID);
+            //var result = await _client.Account.Query().GetByID(account.Account);
+            //var result = await _client.Account.Query().GetByID<Account>(account.Account.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            
+            return result.Content as Account;
         }
 
         private async Task<Account> GetAccountByIDAndSelectors()
@@ -196,15 +190,14 @@ namespace Bitfox.Freshworks.Tests
                 .Include("deals")
                 .Include("industry_type")
                 .Include("child_sales_accounts")
-                .GetByID(account);
+                .GetByID(account.Account);
             //var result = await _client.Query().Include("owner").GetByID<Account>(account.ID);
             //var result = await _client.Account.Query().Include("owner").GetByID(account);
             //var result = await _client.Account.Query().Include("owner").GetByID<Account>(account.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.NotNull(result.Includes);
-            return GetResponse(result) as Account;
+            return result.Content as Account;
         }
 
         private async Task<Account> GetAllAccountsByID()
@@ -222,8 +215,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            return result.Content as Account;
         }
 
         private async Task<Account> UpdateAccount(Account account)
@@ -236,8 +228,8 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            
+            return result.Content as Account;
         }
 
         private async Task<Account> CloneAccount(Account account)
@@ -250,8 +242,7 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            return result.Content as Account;
         }
 
         private async Task<bool> ForgetAccount(Account account)
@@ -280,8 +271,8 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
+            
+            return result.Content as Account;
         }
 
         public async Task<Account> AllAccountFields()
@@ -292,26 +283,8 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return GetResponse(result) as Account;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-
-        private object GetResponse<TEntity>(Result<TEntity> result)
-        {
-            if (result.Content != null)
-            {
-                _console.WriteLine($"The result content type: {result.Content.GetType()}");
-                return result.Content;
-            }
-            else
-            {
-                _console.WriteLine($"The result error message: {result.Error.Message}");
-                return null;
-            }
+            
+            return result.Content as Account;
         }
 
         private static string GetCurrentTime()

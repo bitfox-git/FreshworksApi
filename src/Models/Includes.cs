@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.Endpoints.Appointment;
 using Bitfox.Freshworks.Endpoints.Contact;
 using Bitfox.Freshworks.Endpoints.Deals;
 using Bitfox.Freshworks.Endpoints.Sales;
+using Bitfox.Freshworks.Endpoints.Task;
 using Bitfox.Freshworks.NetworkModels;
 using Newtonsoft.Json;
 using System;
@@ -20,10 +22,10 @@ namespace Bitfox.Freshworks.Models
         // Parents
         [JsonReturnParentProperty]
         [JsonProperty("sales_account")]
-        public Account SalesAccount { get; set; } = null;
+        public Account Account { get; set; } = null;
 
         [JsonProperty("sales_accounts")]
-        public List<Account> SalesAccounts { get; set; } = null;
+        public List<Account> Accounts { get; set; } = null;
 
         [JsonReturnParentProperty]
         [JsonProperty("contact")]
@@ -40,6 +42,23 @@ namespace Bitfox.Freshworks.Models
         [JsonReturnParentProperty]
         [JsonProperty("deals")]
         public List<Deal> Deals { get; set; } = null;
+
+        [JsonReturnParentProperty]
+        [JsonProperty("task")]
+        public TaskModel Task { get; set; } = null;
+
+        [JsonReturnParentProperty]
+        [JsonProperty("tasks")]
+        public List<TaskModel> Tasks { get; set; } = null;
+
+        [JsonReturnParentProperty]
+        [JsonProperty("appointment")]
+        public List<Appointment> Appointment { get; set; } = null;
+
+        [JsonReturnParentProperty]
+        [JsonProperty("appointments")]
+        public List<Appointment> Appointments { get; set; } = null;
+
 
 
 
@@ -64,13 +83,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("territories")]
         public List<User> Territories { get; set; } = null;
 
-        [JsonReturnParentProperty]
-        [JsonProperty("tasks")]
-        public List<User> Tasks { get; set; } = null;
 
-        [JsonReturnParentProperty]
-        [JsonProperty("appointments")]
-        public List<User> Appointments { get; set; } = null;
 
         // children
         [JsonProperty("task_ids")]

@@ -33,7 +33,7 @@ namespace Bitfox.Freshworks
         INoteController Note { get; }
 
         /// <summary>
-        /// Handles Task Actions. [Insert, Update, Delete etc.]
+        /// Handles Tasks Actions. [Insert, Update, Delete etc.]
         /// </summary>
         ITaskController Task { get; }
 
@@ -85,6 +85,7 @@ namespace Bitfox.Freshworks
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="item">Item that needs to been deleted</param>
         Task<Result<bool>> Delete<T>(T item) where T : IHasDelete;
+        Task<Result<T>> Delete<T>(T item, bool hasBodyOnResponse) where T : IHasDelete;
         
         /// <summary>
         /// Delete item that contains in database.

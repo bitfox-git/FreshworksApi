@@ -24,19 +24,19 @@ namespace Bitfox.Freshworks.Controllers
         /// <summary>
         /// Update task information on task ID.
         /// </summary>
-        /// <param name="body">Task ID and Task used for update</param>
+        /// <param name="body">Tasks ID and Tasks used for update</param>
         Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
 
         /// <summary>
         /// Remove task by task ID.
         /// </summary>
-        /// <param name="body">Task ID</param>
+        /// <param name="body">Tasks ID</param>
         Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
 
         /// <summary>
         /// Remove task by task ID.
         /// </summary>
-        /// <param name="id">Task ID</param>
+        /// <param name="id">Tasks ID</param>
         Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
 
     }

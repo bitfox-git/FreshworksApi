@@ -1,4 +1,6 @@
+using Bitfox.Freshworks.Endpoints.Selector;
 using Bitfox.Freshworks.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -136,226 +138,228 @@ namespace Bitfox.Freshworks.Tests
 
         public async Task<object> GetSalesActivityTypes()
         {
-            var result = await _client.GetOwners();
-            //var result = await _client.object.GetOwners();
+            var result = await _client.Selector.GetSalesActivityTypes();
+            //var result = await _client.Query().GetSalesActivityTypes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
         }
 
         public async Task<object> GetSalesActivityEntityTypes()
         {
-            var result = await _client.GetSalesActivityEntityTypes();
-            //var result = await _client.object.GetSalesActivityEntityTypes();
+            var result = await _client.Selector.GetSalesActivityEntityTypes();
+            //var result = await _client.Query().GetSalesActivityEntityTypes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
         }
 
         public async Task<object> GetSalesActivityOutcomes()
         {
-            var result = await _client.GetSalesActivityOutcomes();
-            //var result = await _client.object.GetSalesActivityOutcomes();
+            var result = await _client.Selector.GetSalesActivityOutcomes();
+            //var result = await _client.Query().GetSalesActivityOutcomes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
         }
 
         public async Task<object> GetSalesActivityOutcomesByID(long id)
         {
-            var result = await _client.GetSalesActivityOutcomesByID(id);
-            //var result = await _client.object.GetSalesActivityOutcomesByID(id);
+            var result = await _client.Selector.GetSalesActivityOutcomesByID(id);
+            //var result = await _client.Query().GetSalesActivityOutcomesByID(id);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealProducts()
         {
-            var result = await _client.GetDealProducts();
-            //var result = await _client.object.GetDealProducts();
+            var result = await _client.Selector.GetDealProducts();
+            //var result = await _client.Query().GetDealProducts();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealStages()
         {
-            var result = await _client.GetDealStages();
-            //var result = await _client.object.GetDealStages();
+            var result = await _client.Selector.GetDealStages();
+            //var result = await _client.Query().GetDealStages();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealTypes()
         {
-            var result = await _client.GetDealTypes();
-            //var result = await _client.object.GetDealTypes();
+            var result = await _client.Selector.GetDealTypes();
+            //var result = await _client.Query().GetDealTypes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealReasons()
         {
-            var result = await _client.GetDealReasons();
-            //var result = await _client.object.GetDealReasons();
+            var result = await _client.Selector.GetDealReasons();
+            //var result = await _client.Query().GetDealReasons();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealPipelines()
         {
-            var result = await _client.GetDealPipelines();
-            //var result = await _client.object.GetDealPipelines();
+            var result = await _client.Selector.GetDealPipelines();
+            //var result = await _client.Query().GetDealPipelines();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealPipelinesByID(long id)
         {
-            var result = await _client.GetDealPipelinesByID(id);
-            //var result = await _client.object.GetDealPipelinesByID(id);
+            var result = await _client.Selector.GetDealPipelinesByID(id);
+            //var result = await _client.Query().GetDealPipelinesByID(id);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetDealPaymentStatuses()
         {
-            var result = await _client.GetDealPaymentStatuses();
-            //var result = await _client.object.GetDealPaymentStatuses();
+            var result = await _client.Selector.GetDealPaymentStatuses();
+            //var result = await _client.Query().GetDealPaymentStatuses();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetTerritories()
         {
-            var result = await _client.GetTerritories();
-            //var result = await _client.object.GetTerritories();
+            var result = await _client.Selector.GetTerritories();
+            //var result = await _client.Query().GetTerritories();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetCampaigns()
         {
-            var result = await _client.GetCampaigns();
-            //var result = await _client.object.GetCampaigns();
+            var result = await _client.Selector.GetCampaigns();
+            //var result = await _client.Query().GetCampaigns();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
-        public async Task<object> GetOwners()
+        public async Task<List<User>> GetOwners()
         {
-            var result = await _client.GetOwners();
-            //var result = await _client.object.GetOwners();
+            var result = await _client.Selector.GetOwners();
+            //var result = await _client.Query().GetOwners();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
-            return result.Content;
+
+            var selector = result.Content as Selector;
+            return selector.Users;
         }
 
         public async Task<object> GetCurrencies()
         {
-            var result = await _client.GetCurrencies();
-            //var result = await _client.object.GetCurrencies();
+            var result = await _client.Selector.GetCurrencies();
+            //var result = await _client.Query().GetCurrencies();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetContactStatuses()
         {
-            var result = await _client.GetContactStatuses();
-            //var result = await _client.object.GetContactStatuses();
+            var result = await _client.Selector.GetContactStatuses();
+            //var result = await _client.Query().GetContactStatuses();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetBusinessTypes()
         {
-            var result = await _client.GetBusinessTypes();
-            //var result = await _client.object.GetBusinessTypes();
+            var result = await _client.Selector.GetBusinessTypes();
+            //var result = await _client.Query().GetBusinessTypes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetLifecycleStages()
         {
-            var result = await _client.GetLifecycleStages();
-            //var result = await _client.object.GetLifecycleStages();
+            var result = await _client.Selector.GetLifecycleStages();
+            //var result = await _client.Query().GetLifecycleStages();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
 
         public async Task<object> GetIndustryTypes()
         {
-            var result = await _client.GetIndustryTypes();
-            //var result = await _client.object.GetIndustryTypes();
+            var result = await _client.Selector.GetIndustryTypes();
+            //var result = await _client.Query().GetIndustryTypes();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            Assert.Null(result.Includes);
+            
             return result.Content;
 
         }
+    
     }
 }

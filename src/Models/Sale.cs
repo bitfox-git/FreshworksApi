@@ -181,10 +181,54 @@ namespace Bitfox.Freshworks.Endpoints.Sales
         [JsonProperty("position")]
         public int? Position { get; set; } = null;
 
+        public void CatchDeleteExceptions()
+        {
+            throw new NotImplementedException();
+        }
 
         public void CatchInsertExceptions()
         {
-            throw new NotImplementedException();
+            List<string> exceptions = new();
+
+            if (Title == null)
+            {
+                exceptions.Add("Required key `Title` is missing.");
+            }
+
+            if (StartDate == null)
+            {
+                exceptions.Add("Required key `StartDate` is missing.");
+            }
+
+            if (EndDate == null)
+            {
+                exceptions.Add("Required key `EndDate` is missing.");
+            }
+
+            if (SalesActivityTypeID == null)
+            {
+                exceptions.Add("Required key `SalesActivityTypeID` is missing.");
+            }
+
+            if (Notes == null)
+            {
+                exceptions.Add("Required key `Notes` is missing.");
+            }
+
+            if (TargetableID == null)
+            {
+                exceptions.Add("Required key `TargetableID` is missing.");
+            }
+
+            if (TargetableType == null)
+            {
+                exceptions.Add("Required key `TargetableType` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
         public void CatchUpdateExceptions()

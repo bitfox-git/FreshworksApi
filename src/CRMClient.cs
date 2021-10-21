@@ -44,7 +44,7 @@ namespace Bitfox.Freshworks
         public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
         {
             string endpoint = $"{GetEndpoint<TEntity>()}/filters";
-            return await GetApiRequest<TEntity>(endpoint, false);
+            return await GetApiRequest<TEntity>(endpoint);
         }
 
         public async Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert
@@ -84,6 +84,13 @@ namespace Bitfox.Freshworks
             body.CatchDeleteExceptions();
             string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
             return await DeleteApiRequest(endpoint);
+        }
+
+        public async Task<Result<TEntity>> Delete<TEntity>(TEntity body, bool hasBodyAsResponse) where TEntity : IHasDelete
+        {
+            body.CatchDeleteExceptions();
+            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
+            return await DeleteApiRequest<TEntity>(endpoint);
         }
 
         public async Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget
