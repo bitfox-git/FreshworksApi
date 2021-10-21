@@ -1,64 +1,59 @@
 ﻿using Bitfox.Freshworks.Attributes;
-using Bitfox.Freshworks.Endpoints.Deals;
-using Bitfox.Freshworks.Endpoints.Sales;
 using Bitfox.Freshworks.Models;
+using Bitfox.Freshworks;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Selector
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/selector")]
     public class Selector: Includes
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("contact_statuses")]
-        public List<ContactStatus> Statuses { get; set; } = null;
+        public List<Contact> Statuses { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("lifecycle_stages")]
         public List<StageLifecycle> Stages { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("currencies")]
         public List<Currency> Currencies { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("sales_activity_types")]
         public List<Sale> SalesTypes { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("sales_activity_entity_types")]
         public List<Sale> SalesEntityTypes { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("sales_activity_outcomes")]
         public List<Sale> OutcomesTypes { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_products")]
         public List<Deal> DealProducts { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_stages")]
         public List<Deal> DealStages { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_types")]
         public List<Deal> DealTypes { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_reasons")]
         public List<Deal> DealReasons { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_payment_statuses")]
         public List<Deal> PaymentStatuses { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("deal_pipelines")]
         public List<Deal> DealPipelines { get; set; } = null;
     }

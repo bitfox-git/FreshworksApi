@@ -1,5 +1,4 @@
-﻿using Bitfox.Freshworks.Endpoints.Deals;
-using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

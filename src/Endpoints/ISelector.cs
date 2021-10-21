@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Selector
+namespace Bitfox.Freshworks.Endpoints
 {
-    public interface ISelectorController
+    public interface ISelector
     {
         /// <summary>
         /// Fetch all existing sales activity types' details in the Freshsales portal.

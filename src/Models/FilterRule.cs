@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class PhoneNumber
+    public class FilterRule
     {
-        [JsonProperty("id")]
-        public long? ID { get; set; } = null;
+        [JsonProperty("attribute ")]
+        public string Attribute { get; set; } = null;
+
+        [JsonProperty("operator")]
+        public string Operator { get; set; } = null;
 
         [JsonProperty("value")]
         public string Value { get; set; } = null;
 
-        [JsonProperty("label")]
-        public string Label { get; set; } = null;
-
-        [JsonProperty("_destroy")]
-        public bool? Destroy { get; set; } = null;
     }
 }

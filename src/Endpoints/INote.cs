@@ -1,5 +1,5 @@
 ﻿using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.Endpoints.Note;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Controllers
+namespace Bitfox.Freshworks.Endpoints
 {
-    public interface INoteController
+    public interface INote
     {
+        /// <summary>
+        /// Include data to this model.
+        /// </summary>
+        /// <param name="include">name of table</param>
+        IQuery Include(string include);
+
         /// <summary>
         /// Insert a new note item.
         /// </summary>
         /// <param name="body">New note item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+
+
+        /// <summary>
+        /// Get content from Sales information.
+        /// </summary>
+        IQuery Query();
 
         /// <summary>
         /// Update note information on note ID.

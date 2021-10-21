@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Note
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/notes")]
     public class Note: IHasInsert, IHasUpdate, IHasDelete
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("note")]
         public Note Item { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 

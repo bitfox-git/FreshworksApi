@@ -1,6 +1,4 @@
-﻿using Bitfox.Freshworks.Endpoints.Sales;
-using Bitfox.Freshworks.Endpoints.Selector;
-using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,26 +22,26 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task InsertTaskOnSuccess()
         {
-            //Account account = 
-            //Sale sale = await CreateSale();
+            var account = await CreateAccount();
+            Sale sale = await CreateSale(account);
 
-            //_ = await RemoveSale(sale.Item);
+            _ = await RemoveSale(sale.Item);
         }
 
         [Fact]
         public async Task GetTaskByIDOnSuccess()
         {
-            //Sale sale = await GetSaleByID();
+            Sale sale = await GetSaleByID();
 
-            //_ = await RemoveSale(sale.Item);
+            _ = await RemoveSale(sale.Item);
         }
 
         [Fact]
         public async Task GetTaskByIDAndIncludesOnSuccess()
         {
-            //Sale sale = await GetSaleByIDAndSelectors();
+            Sale sale = await GetSaleByIDAndSelectors();
 
-            //_ = await RemoveSale(sale.Item);
+            _ = await RemoveSale(sale.Item);
         }
 
         [Fact]
@@ -55,20 +53,22 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task UpdateTaskOnSuccess()
         {
-            //Sale sale = await CreateSale();
+            var account = await CreateAccount();
+            Sale sale = await CreateSale(account);
 
-            //sale = await UpdateTask(sale.Item);
+            sale = await UpdateTask(sale.Item);
 
-            //_ = await RemoveSale(sale.Item);
+            _ = await RemoveSale(sale.Item);
         }
 
         [Fact]
         public async Task DeleteTaskOnSuccess()
         {
             // get Tasks
-            //Sale sale = await CreateSale();
+            var account = await CreateAccount();
+            Sale sale = await CreateSale(account);
 
-            //_ = await RemoveSale(sale.Item);
+            _ = await RemoveSale(sale.Item);
         }
 
         private async Task<Sale> CreateSale(Account account)
@@ -108,49 +108,51 @@ namespace Bitfox.Freshworks.Tests
             return result.Content as Sale;
         }
 
-        //private async Task<Sale> GetSaleByID()
-        //{
-        //    var sale = await CreateSale();
+        private async Task<Sale> GetSaleByID()
+        {
+            var account = await CreateAccount();
+            var sale = await CreateSale(account);
 
-        //    // exucute get Tasks
-        //    var result = await _client.Query().GetByID(sale.Item);
-        //    //var result = await _client.Query().GetByID<Sale>(sale.Item.ID);
-        //    //var result = await _client.Sale.Query().GetByID(sale.Item);
-        //    //var result = await _client.Sale.Query().GetByID<Sale>(sale.Item.ID);
+            // exucute get Tasks
+            var result = await _client.Query().GetByID(sale.Item);
+            //var result = await _client.Query().GetByID<Sale>(sale.Item.ID);
+            //var result = await _client.Sale.Query().GetByID(sale.Item);
+            //var result = await _client.Sale.Query().GetByID<Sale>(sale.Item.ID);
 
-        //    Assert.Null(result.Error);
-        //    Assert.NotNull(result.Content);
-        //    return result.Content as Sale;
-        //}
+            Assert.Null(result.Error);
+            Assert.NotNull(result.Content);
+            return result.Content as Sale;
+        }
 
-        //private async Task<Sale> GetSaleByIDAndSelectors()
-        //{
-        //    // create Tasks
-        //    var content = await CreateSale();
-        //    Sale sale = new() { ID = content.Item.ID };
+        private async Task<Sale> GetSaleByIDAndSelectors()
+        {
+            // create Tasks
+            var account = await CreateAccount();
+            var content = await CreateSale(account);
+            Sale sale = new() { ID = content.Item.ID };
 
-        //    // exucute get Tasks
-        //    var result = await _client.Query()
-        //        .Include("owner")
-        //        .Include("creater")
-        //        .Include("updater")
-        //        .Include("territory")
-        //        .Include("business_type")
-        //        .Include("tasks")
-        //        .Include("Sales")
-        //        .Include("Tasks")
-        //        .Include("deals")
-        //        .Include("industry_type")
-        //        .Include("child_sales_Tasks")
-        //        .GetByID(sale);
-        //    //var result = await _client.Query().Include("owner").GetByID<Sale>(sale.Item.ID);
-        //    //var result = await _client.Sale.Query().Include("owner").GetByID(Sale);
-        //    //var result = await _client.Sale.Query().Include("owner").GetByID<Sale>(sale.Item.ID);
+            // exucute get Tasks
+            var result = await _client.Query()
+                .Include("owner")
+                .Include("creater")
+                .Include("updater")
+                .Include("territory")
+                .Include("business_type")
+                .Include("tasks")
+                .Include("Sales")
+                .Include("Tasks")
+                .Include("deals")
+                .Include("industry_type")
+                .Include("child_sales_Tasks")
+                .GetByID(sale);
+            //var result = await _client.Query().Include("owner").GetByID<Sale>(sale.Item.ID);
+            //var result = await _client.Sale.Query().Include("owner").GetByID(Sale);
+            //var result = await _client.Sale.Query().Include("owner").GetByID<Sale>(sale.Item.ID);
 
-        //    Assert.Null(result.Error);
-        //    Assert.NotNull(result.Content);
-        //    return result.Content as Sale;
-        //}
+            Assert.Null(result.Error);
+            Assert.NotNull(result.Content);
+            return result.Content as Sale;
+        }
 
         private async Task<Sale> GetAllTasksByFilter()
         {
@@ -177,6 +179,23 @@ namespace Bitfox.Freshworks.Tests
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
             return result.Content as Sale;
+        }
+
+        private async Task<Account> CreateAccount()
+        {
+            // get owner id
+            var owners = await _client.Selector.GetOwners();
+            var owner = (owners.Content as Selector).Users[0];
+
+            Account acc = new()
+            {
+                Name = $"TEST INSERT Name:({DateTime.Now})",
+                OwnerID = owner.ID
+            };
+
+            // execute creation
+            var output = await _client.Insert(acc);
+            return (output.Content as Account).Account;
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using Bitfox.Freshworks.Controllers;
-using Bitfox.Freshworks.Endpoints.Selector;
+using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
 using System.Threading.Tasks;
 
@@ -10,47 +11,57 @@ namespace Bitfox.Freshworks
         /// <summary>
         /// Handles data based on subdomain. [ Query ]
         /// </summary>
-        ISelectorController Selector { get; }
+        ISelector Selector { get; }
+
+        /// <summary>
+        /// Search data on subdomain. [ Query ]
+        /// </summary>
+        ISearch Search { get; }
 
         /// <summary>
         /// Handles Contacts Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        IContactController Contact { get; }
+        IContact Contact { get; }
 
         /// <summary>
         /// Handles Account Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        IAccountController Account { get; }
+        IAccount Account { get; }
 
         /// <summary>
         /// Handles Deals Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        IDealController Deal { get; }
+        IDeal Deal { get; }
 
         /// <summary>
         /// Handles Notes Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        INoteController Note { get; }
+        INote Note { get; }
 
         /// <summary>
         /// Handles Tasks Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        ITaskController Task { get; }
+        ITask Task { get; }
 
         /// <summary>
         /// Handles Appointment Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        IAppointmentController Appointment { get; }
+        IAppointment Appointment { get; }
 
         /// <summary>
         /// Handles Appointment Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        ISaleController Sale { get; }
+        ISale Sale { get; }
+
+        /// <summary>
+        /// Handles Phone Actions. [Insert, Update, Delete etc.]
+        /// </summary>
+        IPhone Phone { get; }
 
         /// <summary>
         /// Query data from database. [ GET ]
         /// </summary>
-        Query Query();
+        IQuery Query();
 
         /// <summary>
         /// Get all panel data. [ GET ]
@@ -121,5 +132,22 @@ namespace Bitfox.Freshworks
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="item">Item that needs to been Deleting a bulk</param>
         Task<Result<T>> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
+
+
+        /// <summary>
+        /// Get all content of TEntity from database, than filter data on SearchOnFilter model.
+        /// </summary>
+        /// <typeparam name="TEntity">Model you want to get data from</typeparam>
+        /// <param name="body">The Content that you want to filter</param>
+        Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch;
+
+        /// <summary>
+        /// Lookup in data with some filters specified.
+        /// </summary>
+        /// <param name="query">lookup for this string in models</param>
+        /// <param name="field">data from given field ()</param>
+        /// <param name="entities">entities to get data from</param>
+        /// <returns></returns>
+        Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities);
     }
 }

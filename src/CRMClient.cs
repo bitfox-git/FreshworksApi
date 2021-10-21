@@ -1,44 +1,58 @@
-﻿using Bitfox.Freshworks.Controllers;
-using Bitfox.Freshworks.Endpoints.Sales;
-using Bitfox.Freshworks.Endpoints.Selector;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
 using System;
-using System.Runtime.InteropServices;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : Network, ICRMClient,
-        IContactController,
-        IAccountController,
-        IDealController,
-        INoteController,
-        ITaskController,
-        IAppointmentController,
-        ISaleController
+    public class CRMClient : Network, 
+        ICRMClient,
+        ISearch,
+        IContact,
+        IAccount,
+        IDeal,
+        INote,
+        ITask,
+        IAppointment,
+        ISale,
+        IPhone
     {
-        public ISelectorController Selector => Query();
+        private readonly List<string> Includes = new();
 
-        public IContactController Contact => this;
+        public ISelector Selector => Query();
 
-        public IAccountController Account => this;
+        public ISearch Search => this;
 
-        public IDealController Deal => this;
+        public IContact Contact => this;
 
-        public INoteController Note => this;
+        public IAccount Account => this;
 
-        public ITaskController Task => this;
+        public IDeal Deal => this;
 
-        public IAppointmentController Appointment => this;
+        public INote Note => this;
 
-        public ISaleController Sale => this;
+        public ITask Task => this;
+
+        public IAppointment Appointment => this;
+
+        public ISale Sale => this;
+
+        public IPhone Phone => this;
 
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
 
-        public Query Query()
+        public IQuery Include(string include)
         {
-            return new Query(BaseURL, ApiKey);
+            Includes.Add(include);
+            return Query();
+        }
+
+        public IQuery Query()
+        {
+            return new Query(BaseURL, ApiKey, Includes);
         }
 
         public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
@@ -123,6 +137,34 @@ namespace Bitfox.Freshworks
             body.CatchDeleteBulkExceptions();
             string endpoint = $"{GetEndpoint<TEntity>()}/bulk_destroy";
             return await PostApiRequest(endpoint, body);
+        }
+
+        public async Task<Result<Search>> SearchOnQuery(string query)
+        {
+            var endpoint = GetEndpoint<Search>();
+            var uri = $"{endpoint}?q={query}";
+            //uri = AddIncludes(uri);
+
+            return await GetApiRequest<Search>(uri);
+        }
+
+        public async Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity: IHasFilteredSearch
+        {
+            string[] paths = GetEndpoint<TEntity>().Split("/");
+            string target = paths[^1];
+            if (target.EndsWith("s"))
+            {
+                target = target[0..^1];
+            }
+
+            string endpoint = $"{GetEndpoint<SearchFilter>()}/{target}";
+            return await PostApiRequest(endpoint, body);
+        }
+
+        public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
+        {
+            string endpoint = $"{GetEndpoint<SearchLookup>()}?q={query}&f={field}&entities={entities}";
+            return await GetApiRequest<SearchLookup>(endpoint);
         }
 
     }

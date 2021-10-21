@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Bitfox.Freshworks.Models
 {
@@ -50,7 +51,14 @@ namespace Bitfox.Freshworks.Models
                     MissingMemberHandling = MissingMemberHandling.Error
                 };
 
-                Content = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
+                if(fullBody.StartsWith("["))
+                {
+                    Content = JsonConvert.DeserializeObject<List<TEntity>>(fullBody, settings);
+                }
+                else
+                {
+                    Content = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
+                }
             }
             catch (JsonSerializationException ex)
             {

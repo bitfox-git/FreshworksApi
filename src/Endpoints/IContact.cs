@@ -1,17 +1,22 @@
 ﻿using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.Endpoints.Contact;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Controllers
+namespace Bitfox.Freshworks.Endpoints
 {
-    public interface IContactController
+    public interface IContact
     {
+        /// <summary>
+        /// Include data to this model.
+        /// </summary>
+        /// <param name="include">name of table</param>
+        IQuery Include(string include);
+
         /// <summary>
         /// Insert a new contact item.
         /// </summary>
@@ -21,7 +26,7 @@ namespace Bitfox.Freshworks.Controllers
         /// <summary>
         /// Get content from contact information.
         /// </summary>
-        Query Query();
+        IQuery Query();
 
         /// <summary>
         /// Update contact information on contact ID.

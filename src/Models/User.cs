@@ -34,6 +34,9 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("is_active")]
         public bool? IsActive { get; set; } = null;
 
+        [JsonProperty("user_profile_attributes")]
+        public UserAttribute UserProfileAttributes { get; set; } = null;
+
         [JsonProperty("work_number")]
         public string WorkNumber { get; set; } = null;
 

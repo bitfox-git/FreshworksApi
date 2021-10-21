@@ -1,7 +1,6 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkModels;
-using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,39 +9,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Contact
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/contacts")]
-    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasUniqueID
+    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
-        [JsonReturnParentProperty]
         [JsonProperty("activities")]
         public List<Activity> Activities { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("fields")]
         public List<Field> Fields { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
-        [JsonReturnParentProperty]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
+        [JsonProperty("outcomes")]
+        public List<Outcome> Outcomes { get; set; } = null;
 
         // Childs
         [JsonProperty("id")]
@@ -56,6 +50,18 @@ namespace Bitfox.Freshworks.Endpoints.Contact
 
         [JsonProperty("display_name")]
         public string DisplayName { get; set; } = null;
+
+        [JsonProperty("name")]
+        public string Name { get; set; } = null;
+
+        [JsonProperty("position")]
+        public int? Position { get; set; } = null;
+
+        [JsonProperty("forecast_type")]
+        public string ForecastType { get; set; } = null;
+
+        [JsonProperty("sales_activity_entity_types")]
+        public List<Sale> SalesActivityEntityTypes { get; set; } = null;
 
         [JsonProperty("avatar")]
         public string Avatar { get; set; } = null;
@@ -182,7 +188,7 @@ namespace Bitfox.Freshworks.Endpoints.Contact
         public int? WhatsappSubscriptionStatus { get; set; } = null;
 
         [JsonProperty("phone_numbers")]
-        public List<PhoneNumber> PhoneNumbers { get; set; } = null;
+        public List<Phone> PhoneNumbers { get; set; } = null;
 
         [JsonProperty("facebook")]
         public string Facebook { get; set; } = null;
@@ -215,6 +221,9 @@ namespace Bitfox.Freshworks.Endpoints.Contact
         [JsonProperty("connections_searched_today")]
         public bool? ConnectionsSearchedToday { get; set; } = null;
 
+        [JsonProperty("partial")]
+        public bool? Partial { get; set; } = null;
+
         [JsonProperty("lifecycle_stage_id")]
         public long? LifecycleStageID { get; set; } = null;
 
@@ -223,6 +232,9 @@ namespace Bitfox.Freshworks.Endpoints.Contact
 
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
+
+
+
 
         public void CatchInsertExceptions()
         {

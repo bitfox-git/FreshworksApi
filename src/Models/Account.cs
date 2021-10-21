@@ -1,6 +1,5 @@
 ﻿using Bitfox.Freshworks.Attributes;
-using Bitfox.Freshworks.NetworkModels;
-using Bitfox.Freshworks.NetworkObjects;
+using Bitfox.Freshworks.EndpointFilters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,33 +12,33 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/sales_accounts")]
-    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
+    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("fields")]
         public List<Field> Fields { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
@@ -66,6 +65,12 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("business_type_id")]
         public long? BusinessTypeID { get; set; } = null;
+        
+        [JsonProperty("sales_activity_entity_types")]
+        public List<Sale> SalesActivityEntityTypes { get; set; } = null;
+
+        [JsonProperty("is_primary")]
+        public bool? IsPrimary { get; set; } = null;
 
         [JsonProperty("number_of_employees")]
         public int? NumberOfEmployees { get; set; } = null;
@@ -144,6 +149,9 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("is_deleted")]
         public bool? IsDeleted { get; set; } = null;
+
+        [JsonProperty("partial")]
+        public bool? Partial { get; set; } = null;
 
         [JsonProperty("team_user_ids")]
         public object TeamUserIDs { get; set; } = null;

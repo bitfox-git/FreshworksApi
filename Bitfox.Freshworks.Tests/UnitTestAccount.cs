@@ -6,22 +6,17 @@ using Xunit;
 using Xunit.Abstractions;
 using System.Threading;
 using System.Collections.Generic;
-using Bitfox.Freshworks.Endpoints.Selector;
 
 namespace Bitfox.Freshworks.Tests
 {
     [Collection("Client Collection")]
     public class UnitTestAccount
     {
-        private readonly ITestOutputHelper _console;
         private readonly ICRMClient _client;
-        private readonly UnitTestSelectors _selectors;
 
-        public UnitTestAccount(ITestOutputHelper console, ClientFixture clientFixture)
+        public UnitTestAccount(ClientFixture clientFixture)
         {
-            _console = console;
             _client = clientFixture.Client;
-            _selectors = new UnitTestSelectors(console, clientFixture);
         }
 
         [Fact]
@@ -126,12 +121,12 @@ namespace Bitfox.Freshworks.Tests
         private async Task<Account> CreateAccount()
         {
             // get owner id
-            var owners = await _selectors.GetOwners();
-            var owner = owners[0];
+            var owners = await _client.Selector.GetOwners();
+            var owner = (owners.Content as Selector).Users[0];
 
             Account account = new()
             {
-                Name = $"TEST INSERT Name:({GetCurrentTime()})",
+                Name = $"TEST INSERT Name:({DateTime.Now})",
                 OwnerID = owner.ID
             };
 
@@ -178,7 +173,7 @@ namespace Bitfox.Freshworks.Tests
             var account = await CreateAccount();
 
             // exucute get account
-            var result = await _client.Query()
+            var result = await _client.Account
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -191,9 +186,6 @@ namespace Bitfox.Freshworks.Tests
                 .Include("industry_type")
                 .Include("child_sales_accounts")
                 .GetByID(account.Account);
-            //var result = await _client.Query().Include("owner").GetByID<Account>(account.ID);
-            //var result = await _client.Account.Query().Include("owner").GetByID(account);
-            //var result = await _client.Account.Query().Include("owner").GetByID<Account>(account.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
@@ -220,7 +212,7 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Account> UpdateAccount(Account account)
         {
-            account.Name = $"TEST Random Name:({GetCurrentTime()})";
+            account.Name = $"TEST Random Name:({DateTime.Now})";
 
             // execute
             var result = await _client.Update(account);
@@ -234,7 +226,7 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Account> CloneAccount(Account account)
         {
-            account.Name = $"TEST Clone Name:({GetCurrentTime()})";
+            account.Name = $"TEST Clone Name:({DateTime.Now})";
 
             // Commands
             var result = await _client.Clone(account);
@@ -283,13 +275,8 @@ namespace Bitfox.Freshworks.Tests
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Content);
-            
             return result.Content as Account;
         }
 
-        private static string GetCurrentTime()
-        {
-            return DateTime.Now.ToString();
-        }
     }
 }

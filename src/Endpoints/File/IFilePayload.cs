@@ -1,5 +1,4 @@
-﻿using Bitfox.Freshworks.NetworkModels;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Bitfox.Freshworks.Endpoints
 {

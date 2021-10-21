@@ -8,20 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Sales
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/sales_activities")]
     public class Sale : Includes, IHasInsert, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("sales_activity")]
         public Sale Item { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("sales_activities")]
         public List<Sale> Activities { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
@@ -32,6 +32,9 @@ namespace Bitfox.Freshworks.Endpoints.Sales
 
         [JsonProperty("title")]
         public string Title { get; set; } = null;
+
+        [JsonProperty("notes")]
+        public string Note { get; set; } = null;
 
         [JsonProperty("start_date")]
         public DateTime? StartDate { get; set; } = null;
@@ -119,7 +122,7 @@ namespace Bitfox.Freshworks.Endpoints.Sales
 
 
         [JsonProperty("custom_field")]
-        public object CustomField { get; set; } = null;
+        public JObject CustomField { get; set; } = null;
 
         [JsonProperty("internal_name")]
         public string InternalName { get; set; } = null;
@@ -172,6 +175,30 @@ namespace Bitfox.Freshworks.Endpoints.Sales
         [JsonProperty("checkedin_at")]
         public DateTime? CheckedinAt { get; set; } = null;
 
+        [JsonProperty("conversation_id")]
+        public long? ConversationID { get; set; } = null;
+
+        [JsonProperty("checkedout_latitude")]
+        public long? CheckedoutLatitude { get; set; } = null;
+
+        [JsonProperty("checkedout_longitude")]
+        public long? CheckedoutLongitude { get; set; } = null;
+
+        [JsonProperty("checkedout_location")]
+        public long? CheckedoutLocation { get; set; } = null;
+
+        [JsonProperty("checkedout_at")]
+        public long? CheckedoutAt { get; set; } = null;
+
+        [JsonProperty("checkedin_duration")]
+        public long? CheckedinDuration { get; set; } = null;
+
+        [JsonProperty("completed_date")]
+        public DateTime? CompletedDate { get; set; } = null;
+
+        [JsonProperty("status")]
+        public int? Status { get; set; } = null;
+
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 
@@ -183,7 +210,17 @@ namespace Bitfox.Freshworks.Endpoints.Sales
 
         public void CatchDeleteExceptions()
         {
-            throw new NotImplementedException();
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
         public void CatchInsertExceptions()
@@ -210,11 +247,6 @@ namespace Bitfox.Freshworks.Endpoints.Sales
                 exceptions.Add("Required key `SalesActivityTypeID` is missing.");
             }
 
-            if (Notes == null)
-            {
-                exceptions.Add("Required key `Notes` is missing.");
-            }
-
             if (TargetableID == null)
             {
                 exceptions.Add("Required key `TargetableID` is missing.");
@@ -233,7 +265,17 @@ namespace Bitfox.Freshworks.Endpoints.Sales
 
         public void CatchUpdateExceptions()
         {
-            throw new NotImplementedException();
+            List<string> exceptions = new();
+
+            if (ID == null)
+            {
+                exceptions.Add("Required key `ID` is missing.");
+            }
+
+            if (exceptions.Count > 0)
+            {
+                throw new MissingFieldException(string.Join("\n", exceptions));
+            }
         }
 
 

@@ -1,5 +1,5 @@
-using Bitfox.Freshworks.Endpoints.Selector;
 using Bitfox.Freshworks.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -41,8 +41,9 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task GetSalesActivityOutcomesByIDOnSuccess()
         {
-            Assert.True(false);
-            //_ = await GetSalesActivityOutcomesByID();
+            var output = await GetSalesActivityTypes();
+            long id = (long)(output as Selector).SalesTypes[0].ID;
+            _ = await GetSalesActivityOutcomesByID(id);
         }
 
         [Fact]
@@ -78,8 +79,9 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task GetDealPipelinesByIDOnSuccess()
         {
-            Assert.True(false);
-            //_ = await GetDealPipelinesByID();
+            var output = await GetDealPipelines();
+            long id = (long)(output as Selector).DealPipelines[0].ID;
+            _ = await GetDealPipelinesByID(id);
         }
 
         [Fact]

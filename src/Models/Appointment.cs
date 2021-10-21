@@ -7,28 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Appointment
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/appointments")]
     public class Appointment: Includes, IHasInsert, IHasView, IHasUpdate, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("appointment")]
         public Appointment Item { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("appointment_attendees")]
         public List<Attendee> AppointmentAttendees { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("conferences")]
         public List<Conference> Conferences { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("success")]
         public string Success { get; set; } = null;
 

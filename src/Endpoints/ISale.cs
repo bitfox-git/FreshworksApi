@@ -1,42 +1,48 @@
-﻿using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkObjects;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Controllers
+namespace Bitfox.Freshworks.Endpoints
 {
-    public interface IAppointmentController
+    public interface ISale
     {
         /// <summary>
-        /// Insert a new Tasks item.
+        /// Include data to this model.
+        /// </summary>
+        /// <param name="include">name of table</param>
+        IQuery Include(string include);
+
+        /// <summary>
+        /// Insert a new Sales item.
         /// </summary>
         /// <param name="body">New appointment item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
 
         /// <summary>
-        /// Get content from appointment information.
+        /// Get content from Sales information.
         /// </summary>
-        Query Query();
+        IQuery Query();
 
         /// <summary>
-        /// Update appointment information on appointment ID.
+        /// Update Sales information on Sales ID.
         /// </summary>
-        /// <param name="body">Appointment ID and appointment used for update</param>
+        /// <param name="body">Sales ID and Sales used for update</param>
         Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
 
         /// <summary>
-        /// Remove appointment by appointment ID.
+        /// Remove Sales by Sales ID.
         /// </summary>
-        /// <param name="body">Appointment ID</param>
+        /// <param name="body">Sales ID</param>
         Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
 
         /// <summary>
-        /// Remove contact by contact ID.
+        /// Remove Sales by Sales ID.
         /// </summary>
-        /// <param name="id">Contact ID</param>
+        /// <param name="id">Sales ID</param>
         Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
     }
 }

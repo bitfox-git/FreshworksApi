@@ -1,6 +1,4 @@
-﻿using Bitfox.Freshworks.Endpoints.Contact;
-using Bitfox.Freshworks.Endpoints.Selector;
-using Bitfox.Freshworks.Models;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,7 +138,7 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Contact> CreateContact()
         {
-            string name = GetCurrentTime()
+            string name = DateTime.Now.ToString()
                 .Replace(" ", "")
                 .Replace("/", "")
                 .Replace(":", "");
@@ -266,7 +264,7 @@ namespace Bitfox.Freshworks.Tests
 
         private async Task<Contact> CloneContact(Contact contact)
         {
-            string name = GetCurrentTime()
+            string name = DateTime.Now.ToString()
                 .Replace(" ", "")
                 .Replace("/", "")
                 .Replace(":", "");
@@ -274,7 +272,7 @@ namespace Bitfox.Freshworks.Tests
             Contact newContact = new()
             {
                 ID = contact.ID,
-                FirstName = $"TEST Clone Name:({GetCurrentTime()})",
+                FirstName = $"TEST Clone Name:({DateTime.Now})",
                 Email = $"{name}@gmail.com"
             };
 
@@ -345,11 +343,6 @@ namespace Bitfox.Freshworks.Tests
             Assert.NotNull(result.Content);
             
             return result.Content as Contact;
-        }
-
-        private static string GetCurrentTime()
-        {
-            return DateTime.Now.ToString();
         }
         
     }

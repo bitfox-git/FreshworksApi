@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.NetworkModels
+namespace Bitfox.Freshworks.Models
 {
     public class Activity
     {

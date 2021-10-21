@@ -1,5 +1,4 @@
-﻿using Bitfox.Freshworks.Endpoints.Selector;
-using Bitfox.Freshworks.Endpoints.Task;
+﻿using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

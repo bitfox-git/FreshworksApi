@@ -7,24 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Task
+namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/tasks")]
     public class TaskModel : Includes, IHasInsert, IHasUpdate, IHasView, IHasDelete, IHasFilters, IHasUniqueID
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("task")]
         public TaskModel Item { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("success")]
         public int? Success { get; set; } = null;
 

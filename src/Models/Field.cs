@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.NetworkObjects
+namespace Bitfox.Freshworks.Models
 {
     public class Field
     {

@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Endpoints.Selector;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.EndpointFilters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class Query: Network, ISelectorController
+    public class Query: Network, IQuery
     {
-        private List<string> Includes = new();
+        private readonly List<string> Includes = new();
 
-        public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
-        { }
+        public Query(string BaseURL, string apikey, List<string> includes) : base(BaseURL, apikey)
+        {
+            Includes = includes;
+        }
 
-        public Query Include(string include)
+        public IQuery Include(string include)
         {
             Includes.Add(include);
             return this;
@@ -34,9 +37,9 @@ namespace Bitfox.Freshworks.Models
 
             var endpoint = GetEndpoint<TEntity>();
             var uri = $"{endpoint}/{id}";
+            uri = AddIncludes(uri);
 
             //add includes
-            uri += Includes.Count > 0 ? $"?include={string.Join(",", Includes)}" : "";
             return await GetApiRequest<TEntity>(uri);
         }
 
@@ -54,9 +57,8 @@ namespace Bitfox.Freshworks.Models
 
             var endpoint = GetEndpoint<TEntity>();
             var uri = $"{endpoint}/view/{id}";
+            uri = AddIncludes(uri);
 
-            //add includes
-            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
             return await GetApiRequest<TEntity>(uri);
         }
 
@@ -64,9 +66,8 @@ namespace Bitfox.Freshworks.Models
         {
             var endpoint = GetEndpoint<TEntity>();
             var uri = $"{endpoint}?filter={filter}";
+            uri = AddIncludes(uri);
 
-            //add includes
-            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
             return await GetApiRequest<TEntity>(uri);
         }
 
@@ -84,9 +85,8 @@ namespace Bitfox.Freshworks.Models
 
             var endpoint = GetEndpoint<TEntity>();
             var uri = $"{endpoint}/{id}/activities.json";
+            uri = AddIncludes(uri);
 
-            //add includes
-            uri += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
             return await GetApiRequest<TEntity>(uri);
         }
 
@@ -94,12 +94,54 @@ namespace Bitfox.Freshworks.Models
         {
             var endpoint = GetEndpoint<TEntity>();
             string lastName = endpoint.Split("/").Last();
-            string url = $"/api/settings/{lastName}/fields";
+            string uri = $"/api/settings/{lastName}/fields";
+            uri = AddIncludes(uri);
 
-            //add includes
-            url += Includes.Count > 0 ? $"&include={string.Join(",", Includes)}" : "";
-            return await GetApiRequest<TEntity>(url);
+            return await GetApiRequest<TEntity>(uri);
         }
+
+        public async Task<Result<Search>> SearchOnQuery(string query)
+        {
+            var endpoint = GetEndpoint<Search>();
+            var uri = $"{endpoint}?q={query}";
+            uri = AddIncludes(uri);
+
+            return await GetApiRequest<Search>(uri);
+        }
+
+        public async Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch
+        {
+            string[] paths = GetEndpoint<TEntity>().Split("/");
+            string target = paths[^1];
+            if (target.EndsWith("s"))
+            {
+                target = target[0..^1];
+            }
+
+            string endpoint = $"{GetEndpoint<SearchFilter>()}/{target}";
+            return await PostApiRequest(endpoint, body);
+        }
+
+        public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
+        {
+            string endpoint = $"{GetEndpoint<SearchLookup>()}?q={query}&f={field}&entities={entities}";
+            return await GetApiRequest<SearchLookup>(endpoint);
+        }
+
+        private string AddIncludes(string uri)
+        {
+            if(Includes.Count > 0)
+            {
+                uri += uri.Contains("?") ? "&" : "?";
+                uri += $"include={string.Join(",", Includes)}";
+            }
+
+            return uri;
+        }
+
+
+
+
 
         // Selectors
         public async Task<Result<Selector>> GetSalesActivityTypes()
@@ -215,6 +257,7 @@ namespace Bitfox.Freshworks.Models
             string endpoint = $"{GetEndpoint<Selector>()}/industry_types";
             return await GetApiRequest<Selector>(endpoint);
         }
+
 
     }
 }

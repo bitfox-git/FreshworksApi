@@ -1,15 +1,17 @@
-﻿using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Bitfox.Freshworks.Endpoints;
+using Bitfox.Freshworks.Models;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Controllers
+namespace Bitfox.Freshworks.Endpoints
 {
-    public interface ITaskController
+    public interface ITask
     {
+        /// <summary>
+        /// Include data to this model.
+        /// </summary>
+        /// <param name="include">name of table</param>
+        IQuery Include(string include);
+
         /// <summary>
         /// Insert a new task item.
         /// </summary>
@@ -19,7 +21,7 @@ namespace Bitfox.Freshworks.Controllers
         /// <summary>
         /// Get content from task information.
         /// </summary>
-        Query Query();
+        IQuery Query();
 
         /// <summary>
         /// Update task information on task ID.

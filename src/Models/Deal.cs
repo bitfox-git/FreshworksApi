@@ -1,7 +1,6 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
-using Bitfox.Freshworks.NetworkModels;
-using Bitfox.Freshworks.NetworkObjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -10,41 +9,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bitfox.Freshworks.Endpoints.Deals
+namespace Bitfox.Freshworks.Models
 {
 
     [EndpointName("/api/deals")]
-    public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasUniqueID
+    public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
-        [JsonReturnParentProperty]
+        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("fields")]
         public List<Field> Fields { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
-        [JsonReturnParentProperty]
+        
         [JsonProperty("error_code")]
         public int? ErrorCode { get; set; } = null;
 
