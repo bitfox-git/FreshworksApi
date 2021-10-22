@@ -1,5 +1,4 @@
 ﻿using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,11 @@ namespace Bitfox.Freshworks.Endpoints
     public interface INote
     {
         /// <summary>
+        /// Query data from database. [ GET ]
+        /// </summary>
+        IQuery Query { get; }
+
+        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
@@ -22,12 +26,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">New note item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
-
-
-        /// <summary>
-        /// Get content from Sales information.
-        /// </summary>
-        IQuery Query();
 
         /// <summary>
         /// Update note information on note ID.

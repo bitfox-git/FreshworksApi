@@ -1,4 +1,5 @@
 ﻿using Bitfox.Freshworks.Attributes;
+using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

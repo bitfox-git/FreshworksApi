@@ -113,8 +113,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Account.FetchAll<Account>();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
 
         }
 
@@ -122,7 +122,7 @@ namespace Bitfox.Freshworks.Tests
         {
             // get owner id
             var owners = await _client.Selector.GetOwners();
-            var owner = (owners.Content as Selector).Users[0];
+            var owner = owners.Value.Users[0];
 
             Account account = new()
             {
@@ -135,8 +135,8 @@ namespace Bitfox.Freshworks.Tests
 
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
         }
 
         private async Task<bool> RemoveAccount(Account account)
@@ -147,8 +147,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Delete<Account>(account.ID);
             //var result = await _client.Account.Delete<Account>(account.ID);
 
-            Assert.True((bool)result.Content);
-            return (bool)result.Content;
+            Assert.True((bool)result.Value);
+            return (bool)result.Value;
         }
 
         private async Task<Account> GetAccountByID()
@@ -156,15 +156,15 @@ namespace Bitfox.Freshworks.Tests
             var account = await CreateAccount();
 
             // exucute get account
-            var result = await _client.Query().GetByID(account.Account);
-            //var result = await _client.Query().GetByID<Account>(account.Account.ID);
-            //var result = await _client.Account.Query().GetByID(account.Account);
-            //var result = await _client.Account.Query().GetByID<Account>(account.Account.ID);
+            var result = await _client.Query.GetByID(account.Account);
+            //var result = await _client.Query.GetByID<Account>(account.Account.ID);
+            //var result = await _client.Account.Query.GetByID(account.Account);
+            //var result = await _client.Account.Query.GetByID<Account>(account.Account.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Account;
+            return result.Value as Account;
         }
 
         private async Task<Account> GetAccountByIDAndSelectors()
@@ -188,8 +188,8 @@ namespace Bitfox.Freshworks.Tests
                 .GetByID(account.Account);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
         }
 
         private async Task<Account> GetAllAccountsByID()
@@ -200,14 +200,14 @@ namespace Bitfox.Freshworks.Tests
             Account account = new(){ ID = content.ID };
 
             // execute
-            var result = await _client.Query().GetAllByID(account);
-            //var result = await _client.Query().GetAllByID<Account>(content.ID);
-            //var result = await _client.Account.Query().GetAllByID(account);
-            //var result = await _client.Account.Query().GetAllByID<Account>(content.ID);
+            var result = await _client.Query.GetAllByID(account);
+            //var result = await _client.Query.GetAllByID<Account>(content.ID);
+            //var result = await _client.Account.Query.GetAllByID(account);
+            //var result = await _client.Account.Query.GetAllByID<Account>(content.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
         }
 
         private async Task<Account> UpdateAccount(Account account)
@@ -219,9 +219,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Account.Update(account);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Account;
+            return result.Value as Account;
         }
 
         private async Task<Account> CloneAccount(Account account)
@@ -233,8 +233,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Account.Clone(account);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
         }
 
         private async Task<bool> ForgetAccount(Account account)
@@ -245,8 +245,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Forget<Account>(account.ID);
             //var result = await _client.Account.Forget<Account>(account.ID);
 
-            Assert.True((bool)result.Content);
-            return (bool)result.Content;
+            Assert.True((bool)result.Value);
+            return (bool)result.Value;
         }
 
         private async Task<Account> DeleteAccountBulk(Account account)
@@ -262,20 +262,20 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Account.DeleteBulk(bulk);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Account;
+            return result.Value as Account;
         }
 
         public async Task<Account> AllAccountFields()
         {
             // Commands
-            var result = await _client.Query().GetAllFields<Account>();
-            //var result = await _client.Account.Query().GetAllFields<Account>();
+            var result = await _client.Query.GetAllFields<Account>();
+            //var result = await _client.Account.Query.GetAllFields<Account>();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Account;
+            Assert.NotNull(result.Value);
+            return result.Value as Account;
         }
 
     }

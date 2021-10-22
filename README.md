@@ -1,98 +1,70 @@
 [![nuget badge](https://img.shields.io/nuget/v/Bitfox.Freshworks.svg)](https://www.nuget.org/packages/Bitfox.Freshworks/)
 
 # Freshworks Client  
-Samples and documentation for the `Bitfox.Freshworks`, a .NET 5.0 library for the Freshworks REST API.  
+Goto [freshworks](https://www.freshworks.com/crm/login/) and login to `Your CRM Domain` . Than get your `Api-Key` from:   
+`https://<Your CRM Domain>.myfreshworks.com/crm/sales/personal-settings/api-settings`
 
-This repository contains the documentation and code samples for how to use Freshworks library NuGet package listed as `Bitfox.Freshworks`.
-
-## Getting started  
-1. Make sure to have a account on [freshworks](https://www.freshworks.com/crm/login/) 
-2. Include the [Bitfox.Freshworks](./https://www.nuget.org/packages/Bitfox.Freshworks) Nuget package to your project.  
-3. Capture your `<API Key>` from `https://<CRM Domain Name>.myfreshworks.com/crm/sales/personal-settings/api-settings`  
-We need this key for configuration.
-
-## Code snippets
-### <b>Sample client in a Console application:</b>
-``` C#
-    static async Task Main(string[] args)
-    {
-        ICRMClient client = new CRMClientBuilder()
-                            .SetSubdomain("<CRM Domain Name>")
-                            .SetApiKey("<API Key>")
-                            .Build();
-        
-        SelectorParent result = await client.Selector.GetOwners();
-        Console.WriteLine(result);
-    }
+### Simple Usage
+Made a connection to your crm domain:
+```csharp
+var _client = new CRMClientBuilder()
+    .SetSubdomain("<Your CRM Domain>")
+    .SetApiKey("<Api-Key>")
+    .Build();
 ```
 
-### <b>Sample client in a Web application:</b>
-1. Add `services.AddFreshworks();` into `Startup.cs`, sample:
-```C#
-    public void ConfigureServices(IServiceCollection services)
-    {
-        // services.AddFreshworks((IConfiguration)Configuration); 
-        // or
-        services.AddFreshworks();
-        services.AddControllers();
-    }
-```
-2. Open `appsettings.json` file and set the `<CRM Domain Name>` and `<API Key>`, sample:
-```json
-{
-    // ...
+`INSERT`:
+```csharp
+// var output = await _client.Selector.GetOwners(id:123);
+// var result = await _client.Query.GetOwners();
+var result = await _client.GetOwners();
+var owner = result.Value.Users[0];
 
-    "FreshworkOptions": {
-        "Domain": "<CRM Domain Name>",
-        "ApiKey": "<API Key>"
-    }
-}
-```
-3. Use it in Controllers, sample:
-```C#
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
-    {
-        private ILogger Logger { get; set; }
-        private ICRMClient Client { get; set; }
+var account = new Account();
+account.Name = "Account name";
+account.OwnerID = owner.ID;
 
-        public WeatherForecastController(ILogger logger, ICRMClient client)
-        {
-            Logger = logger;
-            Client = client;
-        }
-
-        [HttpGet]
-        public async Task<SelectorParent> Get()
-        {
-            return await Client.Selector.GetOwners();
-        }
-    }
+// var output = await _client.Account.Insert(account);
+var output = await _client.Insert(account);
 ```
 
-### <b>Options</b>
-You can as well add extra options to your request by adding the `Params` class to your request.
-```C#
-Params _params = new()
-{
-    Includes = new List<string>() { "users" },
-    Page = 1,
-    Limit = 3
-};
+`UPDATE`:
+```csharp
+account.Name = $"Updated Account name";
 
-var result = await Client.Selector.GetOwners(_params);
+// var output = await _client.Account.Update(account);
+var output = await _client.Update(account);
 ```
-Where `Includes` option you can add different content to this response.  
-1 `Page` means that you get a response off the items [0-25].  
-3 `Limit` means a maximum limit of 3 items.
 
-<!-- 
-### <b>Data Filters included in Freshworks client</b>
-Inside the Freshworks client we include extra filtering options on returned data. -->
+`GET`:
+```csharp
+// var output = await _client.Account.GetByID<Account>(id:123);
+// var output = await _client.Account.GetByID(account);
+// var output = await _client.GetByID<Account>(id:123);
+var output = await _client.GetByID(account);
+```
+
+`DELETE`:
+```csharp
+// var output = await _client.Account.Delete<Account>(id:123);
+// var output = await _client.Account.Delete(id:123);
+// var output = await _client.Delete<Account>(id:123);
+var output = await _client.Delete(account);
+```
+
+`<returns>`:  
+`output.Error` = Error message when something goes wrong.  
+`output.Value` = A single Value as response.  
+`output.Values`= A List of values as response.  
 
 
+When your are using a section, for example `_client.Account`, you only get the possible calls to this section.  
+Any Error or miss behaviour please leave a issue, Thanks.
 
+  
+Kind Regards,
+
+Niek Tuytel
 
 
 

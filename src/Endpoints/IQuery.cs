@@ -10,28 +10,27 @@ namespace Bitfox.Freshworks.Endpoints
 {
     public interface IQuery: ISelector, ISearch
     {
-        /// <summary>
-        /// Include data to this model.
-        /// </summary>
-        /// <param name="include">name of table</param>
         IQuery Include(string include);
 
-        Task<Result<TEntity>> GetByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID;
+        Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID;
 
-        Task<Result<TEntity>> GetByID<TEntity>(long? id) where TEntity : IHasView;
+        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
 
-        Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID;
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
 
-        Task<Result<TEntity>> GetAllByID<TEntity>(long? id) where TEntity : IHasView;
+        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
 
-        Task<Result<TEntity>> GetAllByFilter<TEntity>(string filter) where TEntity : IHasView;
+        Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView;
 
-        Task<Result<TEntity>> GetAllActivitiesByID<TEntity>(TEntity body) where TEntity : IHasActivities, IHasUniqueID;
+        Task<Result<T>> GetAllFileAndLinks<T>(T body) where T: IHasFileAndLinks;
 
-        Task<Result<TEntity>> GetAllActivitiesByID<TEntity>(long? id) where TEntity : IHasActivities;
+        Task<Result<T>> GetAllFileAndLinks<T>(long? id) where T : IHasFileAndLinks;
 
-        Task<Result<TEntity>> GetAllFields<TEntity>() where TEntity : IHasFields;
+        Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID;
 
+        Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities;
+
+        Task<Result<T>> GetAllFields<T>() where T : IHasFields;
 
 
     }

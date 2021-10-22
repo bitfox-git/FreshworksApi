@@ -12,25 +12,43 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/contacts")]
-    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasFileAndLinks, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
+
         [JsonProperty("activities")]
         public List<Activity> Activities { get; set; } = null;
+
 
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
+
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
+
 
         [JsonProperty("fields")]
         public List<Field> Fields { get; set; } = null;
 
+
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
+
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
+
+        [JsonProperty("documents")]
+        public List<File> Files { get; set; } = null;
+
+        [JsonProperty("document_links")]
+        public List<FileLink> FileLinks { get; set; } = null;
+
+        [JsonProperty("document_associations")]
+        public List<FileAssociation> FileAssociations { get; set; } = null;
+
+
+        
 
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;

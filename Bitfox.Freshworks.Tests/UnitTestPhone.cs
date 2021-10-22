@@ -24,7 +24,7 @@ namespace Bitfox.Freshworks.Tests
             Phone phone = new() { };
             var result = await _client.Insert(phone);
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
         }
 

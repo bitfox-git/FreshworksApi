@@ -30,6 +30,9 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("user_name")]
         public string UserName { get; set; } = null;
 
+        [JsonProperty("url")]
+        public string Url { get; set; } = null;
+
         [JsonProperty("current_user_permissions")]
         public List<string> CurrentUserPermissions { get; set; } = null;
 

@@ -13,7 +13,7 @@ namespace Bitfox.Freshworks.Models
 {
 
     [EndpointName("/api/deals")]
-    public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
         
         [JsonProperty("meta")]

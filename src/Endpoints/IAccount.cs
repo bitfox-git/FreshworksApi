@@ -11,6 +11,11 @@ namespace Bitfox.Freshworks.Endpoints
     public interface IAccount
     {
         /// <summary>
+        /// Query data from database. [ GET ]
+        /// </summary>
+        IQuery Query { get; }
+
+        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
@@ -26,11 +31,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// Get Account Filters
         /// </summary>
         Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters;
-
-        /// <summary>
-        /// Get content from account information.
-        /// </summary>
-        IQuery Query();
 
         /// <summary>
         /// Update account information on account ID.

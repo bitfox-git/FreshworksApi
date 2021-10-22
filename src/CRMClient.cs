@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : Network, 
+    public class CRMClient : Query, 
         ICRMClient,
         ISearch,
         IContact,
@@ -17,11 +17,13 @@ namespace Bitfox.Freshworks
         ITask,
         IAppointment,
         ISale,
-        IPhone
+        IPhone,
+        IFile
     {
-        private readonly List<string> Includes = new();
 
-        public ISelector Selector => Query();
+        public IQuery Query => this;
+
+        public ISelector Selector => this;
 
         public ISearch Search => this;
 
@@ -41,19 +43,10 @@ namespace Bitfox.Freshworks
 
         public IPhone Phone => this;
 
+        public IFile File => this;
+
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
-
-        public IQuery Include(string include)
-        {
-            Includes.Add(include);
-            return Query();
-        }
-
-        public IQuery Query()
-        {
-            return new Query(BaseURL, ApiKey, Includes);
-        }
 
         public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
         {
@@ -66,6 +59,23 @@ namespace Bitfox.Freshworks
             body.CatchInsertExceptions();
             string endpoint = GetEndpoint<TEntity>();
             return await PostApiRequest(endpoint, body);
+        }
+
+        public async Task<Result<TEntity>> InsertForm<TEntity>(TEntity body) where TEntity : IHasInsertForm
+        {
+            body.CatchInsertFormExceptions();
+            string endpoint = GetEndpoint<TEntity>();
+
+            Dictionary<string, string> files = new();
+            files.Add("file", body.FilePath);
+
+            Dictionary<string, string> parameters = new();
+            parameters.Add("file_name", body.NewFileName);
+            parameters.Add("is_shared", body.IsShared.ToString());
+            parameters.Add("targetable_id", body.TargetableID.ToString());
+            parameters.Add("targetable_type", body.TargetableType.ToString());
+
+            return await PostApiFormRequest<TEntity>(endpoint, files, parameters);
         }
 
         public async Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate
@@ -137,34 +147,6 @@ namespace Bitfox.Freshworks
             body.CatchDeleteBulkExceptions();
             string endpoint = $"{GetEndpoint<TEntity>()}/bulk_destroy";
             return await PostApiRequest(endpoint, body);
-        }
-
-        public async Task<Result<Search>> SearchOnQuery(string query)
-        {
-            var endpoint = GetEndpoint<Search>();
-            var uri = $"{endpoint}?q={query}";
-            //uri = AddIncludes(uri);
-
-            return await GetApiRequest<Search>(uri);
-        }
-
-        public async Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity: IHasFilteredSearch
-        {
-            string[] paths = GetEndpoint<TEntity>().Split("/");
-            string target = paths[^1];
-            if (target.EndsWith("s"))
-            {
-                target = target[0..^1];
-            }
-
-            string endpoint = $"{GetEndpoint<SearchFilter>()}/{target}";
-            return await PostApiRequest(endpoint, body);
-        }
-
-        public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
-        {
-            string endpoint = $"{GetEndpoint<SearchLookup>()}?q={query}&f={field}&entities={entities}";
-            return await GetApiRequest<SearchLookup>(endpoint);
         }
 
     }

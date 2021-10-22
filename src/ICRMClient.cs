@@ -1,13 +1,17 @@
-﻿using Bitfox.Freshworks.Controllers;
-using Bitfox.Freshworks.Endpoints;
+﻿using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Models;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks
 {
-    public interface ICRMClient
+    public interface ICRMClient: IQuery
     {
+        /// <summary>
+        /// Query data from database. [ GET ]
+        /// </summary>
+        IQuery Query { get; }
+
         /// <summary>
         /// Handles data based on subdomain. [ Query ]
         /// </summary>
@@ -59,9 +63,10 @@ namespace Bitfox.Freshworks
         IPhone Phone { get; }
 
         /// <summary>
-        /// Query data from database. [ GET ]
+        /// Handles File Actions. [Insert, Update, Delete etc.]
         /// </summary>
-        IQuery Query();
+        IFile File { get; }
+
 
         /// <summary>
         /// Get all panel data. [ GET ]
@@ -75,6 +80,13 @@ namespace Bitfox.Freshworks
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="item">Item that needs to insert</param>
         Task<Result<T>> Insert<T>(T item) where T : IHasInsert;
+
+        /// <summary>
+        /// Insert item into database.
+        /// </summary>
+        /// <typeparam name="T">Type of item and response</typeparam>
+        /// <param name="body">Item that needs to insert</param>
+        Task<Result<T>> InsertForm<T>(T body) where T : IHasInsertForm;
 
         /// <summary>
         /// Update item that contains in database.
@@ -138,7 +150,7 @@ namespace Bitfox.Freshworks
         /// Get all content of TEntity from database, than filter data on SearchOnFilter model.
         /// </summary>
         /// <typeparam name="TEntity">Model you want to get data from</typeparam>
-        /// <param name="body">The Content that you want to filter</param>
+        /// <param name="body">The Value that you want to filter</param>
         Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch;
 
         /// <summary>

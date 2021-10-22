@@ -10,12 +10,10 @@ namespace Bitfox.Freshworks.Models
 {
     public class Query: Network, IQuery
     {
-        private readonly List<string> Includes = new();
+        protected List<string> Includes = new();
 
-        public Query(string BaseURL, string apikey, List<string> includes) : base(BaseURL, apikey)
-        {
-            Includes = includes;
-        }
+        public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
+        { }
 
         public IQuery Include(string include)
         {
@@ -43,12 +41,12 @@ namespace Bitfox.Freshworks.Models
             return await GetApiRequest<TEntity>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID
+        public async Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasAllView, IHasUniqueID
         {
             return await GetAllByID<TEntity>((long)body.ID);
         }
 
-        public async Task<Result<TEntity>> GetAllByID<TEntity>(long? id) where TEntity : IHasView
+        public async Task<Result<TEntity>> GetAllByID<TEntity>(long? id) where TEntity : IHasAllView
         {
             if (id == null)
             {
@@ -68,6 +66,23 @@ namespace Bitfox.Freshworks.Models
             var uri = $"{endpoint}?filter={filter}";
             uri = AddIncludes(uri);
 
+            return await GetApiRequest<TEntity>(uri);
+        }
+
+        public async Task<Result<TEntity>> GetAllFileAndLinks<TEntity>(TEntity body) where TEntity : IHasFileAndLinks
+        {
+            return await GetAllFileAndLinks<TEntity>((long)body.ID);
+        }
+
+        public async Task<Result<TEntity>> GetAllFileAndLinks<TEntity>(long? id) where TEntity : IHasFileAndLinks
+        {
+            if (id == null)
+            {
+                throw new ArgumentException($"ID is missing in request");
+            }
+
+            var paths = GetEndpoint<TEntity>().Split("\\");
+            var uri = $"{paths[^1]}/{id}/document_associations";
             return await GetApiRequest<TEntity>(uri);
         }
 

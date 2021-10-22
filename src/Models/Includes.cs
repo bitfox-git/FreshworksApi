@@ -154,7 +154,7 @@ namespace Bitfox.Freshworks.Models
             catch (JsonSerializationException ex)
             {
                 throw new JsonSerializationException(
-                    $"{ex.Message}\n Failed on Content:\n" + content
+                    $"{ex.Message}\n Failed on Value:\n" + content
                 );
             }
 

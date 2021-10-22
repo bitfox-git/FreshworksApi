@@ -38,7 +38,7 @@ namespace Bitfox.Freshworks.Tests
 
             // execute creation
             var output = await _client.Insert(account);
-            account = (output.Content as Account).Account;
+            account = (output.Value as Account).Account;
 
             #endregion
 
@@ -65,7 +65,7 @@ namespace Bitfox.Freshworks.Tests
 
             // execute creation
             var output = await _client.Insert(account);
-            account = (output.Content as Account).Account;
+            account = (output.Value as Account).Account;
 
             #endregion
 
@@ -94,7 +94,7 @@ namespace Bitfox.Freshworks.Tests
 
             // execute creation
             var output = await _client.Insert(account);
-            account = (output.Content as Account).Account;
+            account = (output.Value as Account).Account;
 
             #endregion
 
@@ -105,7 +105,7 @@ namespace Bitfox.Freshworks.Tests
             _ = await _client.Delete(account);
         }
 
-        private async Task<Note> CreateNote(Account account)
+        public async Task<Note> CreateNote(Account account)
         {
             Note note = new()
             {
@@ -119,11 +119,11 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Note.Insert(note);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Note;
+            Assert.NotNull(result.Value);
+            return result.Value as Note;
         }
 
-        private async Task<Note> UpdateNote(Account account, Note note)
+        public async Task<Note> UpdateNote(Account account, Note note)
         {
             Note update = new()
             {
@@ -138,11 +138,11 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Note.Update(update);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Note;
+            Assert.NotNull(result.Value);
+            return result.Value as Note;
         }
 
-        private async Task<Note> RemoveNote(Note note)
+        public async Task<Note> RemoveNote(Note note)
         {
             // execute
             var result = await _client.Delete<Note>(note, hasBodyOnResponse:true);
@@ -150,9 +150,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Delete<Note>(note.ID);
             //var result = await _client.Note.Delete<Note>(note.ID);
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
-            return result.Content as Note;
+            return result.Value as Note;
         }
 
         private static string GetCurrentTime()

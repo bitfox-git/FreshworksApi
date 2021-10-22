@@ -144,9 +144,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetSalesActivityTypes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
         }
 
         public async Task<object> GetSalesActivityEntityTypes()
@@ -155,9 +155,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetSalesActivityEntityTypes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
         }
 
         public async Task<object> GetSalesActivityOutcomes()
@@ -166,9 +166,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetSalesActivityOutcomes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
         }
 
         public async Task<object> GetSalesActivityOutcomesByID(long id)
@@ -177,9 +177,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetSalesActivityOutcomesByID(id);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -189,9 +189,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealProducts();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -201,9 +201,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealStages();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -213,9 +213,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealTypes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -225,9 +225,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealReasons();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -237,9 +237,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealPipelines();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -249,9 +249,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealPipelinesByID(id);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -261,9 +261,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetDealPaymentStatuses();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -273,9 +273,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetTerritories();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -285,9 +285,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetCampaigns();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -297,9 +297,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetOwners();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
 
-            var selector = result.Content as Selector;
+            var selector = result.Value as Selector;
             return selector.Users;
         }
 
@@ -309,9 +309,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetCurrencies();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -321,9 +321,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetContactStatuses();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -333,9 +333,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetBusinessTypes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -345,9 +345,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetLifecycleStages();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
 
@@ -357,9 +357,9 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Query().GetIndustryTypes();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content;
+            return result.Value;
 
         }
     

@@ -110,19 +110,19 @@ namespace Bitfox.Freshworks.Tests
             _ = await AllDealFields();
         }
 
-        private async Task<Deal> GetDealFilters()
+        public async Task<Deal> GetDealFilters()
         {
             var result = await _client.FetchAll<Deal>();
             //var result = await _client.Deal.FetchAll<Deal>();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
 
         }
 
-        private async Task<Deal> CreateDeal()
+        public async Task<Deal> CreateDeal()
         {
             // get owner id
             var owners = await _selectors.GetOwners();
@@ -140,12 +140,12 @@ namespace Bitfox.Freshworks.Tests
 
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
-        private async Task<bool> RemoveDeal(Deal deal)
+        public async Task<bool> RemoveDeal(Deal deal)
         {
             // execute
             var result = await _client.Delete(deal);
@@ -153,33 +153,33 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Delete<Deal>(deal.ID);
             //var result = await _client.Deal.Delete<Deal>(deal.ID);
 
-            Assert.True((bool)result.Content);
-            return (bool)result.Content;
+            Assert.True((bool)result.Value);
+            return (bool)result.Value;
         }
 
-        private async Task<Deal> GetDealByID()
+        public async Task<Deal> GetDealByID()
         {
             var deal = await CreateDeal();
 
             // exucute get account
-            var result = await _client.Query().GetByID(deal.Deal);
-            //var result = await _client.Query().GetByID<Deal>(deal.ID);
-            //var result = await _client.Deal.Query().GetByID(deal);
-            //var result = await _client.Deal.Query().GetByID<Deal>(deal.ID);
+            var result = await _client.Query.GetByID(deal.Deal);
+            //var result = await _client.Query.GetByID<Deal>(deal.ID);
+            //var result = await _client.Deal.Query.GetByID(deal);
+            //var result = await _client.Deal.Query.GetByID<Deal>(deal.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
-        private async Task<Deal> GetDealByIDAndSelectors()
+        public async Task<Deal> GetDealByIDAndSelectors()
         {
             // create account
             var deal = await CreateDeal();
 
             // exucute get account
-            var result = await _client.Query()
+            var result = await _client.Query
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -197,11 +197,11 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Deal.Query().Include("owner").GetByID<Deal>(deal.Item.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Deal;
+            Assert.NotNull(result.Value);
+            return result.Value as Deal;
         }
 
-        private async Task<Deal> GetAllDealsByID()
+        public async Task<Deal> GetAllDealsByID()
         {
             // get account
             var filters = await GetDealFilters();
@@ -209,18 +209,18 @@ namespace Bitfox.Freshworks.Tests
             Deal deal = new() { ID = content.ID };
 
             // execute
-            var result = await _client.Query().GetAllByID(deal);
-            //var result = await _client.Query().GetAllByID<Deal>(deal.ID);
-            //var result = await _client.Deal.Query().GetAllByID(deal);
-            //var result = await _client.Deal.Query().GetAllByID<Deal>(deal.ID);
+            var result = await _client.Query.GetAllByID(deal);
+            //var result = await _client.Query.GetAllByID<Deal>(deal.ID);
+            //var result = await _client.Deal.Query.GetAllByID(deal);
+            //var result = await _client.Deal.Query.GetAllByID<Deal>(deal.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
-        private async Task<Deal> UpdateDeal(Deal deal)
+        public async Task<Deal> UpdateDeal(Deal deal)
         {
             deal.Name = $"TEST Random Name:({GetCurrentTime()})";
 
@@ -229,12 +229,12 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Deal.Update(deal);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
-        private async Task<Deal> CloneDeal(Deal deal)
+        public async Task<Deal> CloneDeal(Deal deal)
         {
             deal.Name = $"TEST Clone Name:({GetCurrentTime()})";
 
@@ -243,12 +243,12 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Deal.Clone(deal);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
-        private async Task<bool> ForgetDeal(Deal deal)
+        public async Task<bool> ForgetDeal(Deal deal)
         {
             // execute
             var result = await _client.Forget(deal);
@@ -256,11 +256,11 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Forget<Deal>(deal.ID);
             //var result = await _client.Deal.Forget<Deal>(deal.ID);
 
-            Assert.True((bool)result.Content);
-            return (bool)result.Content;
+            Assert.True((bool)result.Value);
+            return (bool)result.Value;
         }
 
-        private async Task<Deal> DeleteDealBulk(Deal deal)
+        public async Task<Deal> DeleteDealBulk(Deal deal)
         {
             Deal bulk = new()
             {
@@ -273,21 +273,21 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Deal.DeleteBulk(bulk);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
         public async Task<Deal> AllDealFields()
         {
             // Commands
-            var result = await _client.Query().GetAllFields<Deal>();
-            //var result = await _client.Deal.Query().GetAllFields<Deal>();
+            var result = await _client.Query.GetAllFields<Deal>();
+            //var result = await _client.Deal.Query.GetAllFields<Deal>();
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             
-            return result.Content as Deal;
+            return result.Value as Deal;
         }
 
         private static string GetCurrentTime()

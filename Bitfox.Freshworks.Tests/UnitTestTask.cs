@@ -77,10 +77,10 @@ namespace Bitfox.Freshworks.Tests
             _ = await RemoveTask(task.Item);
         }
 
-        private async Task<TaskModel> CreateTask()
+        public async Task<TaskModel> CreateTask()
         {
             var owners = await _client.Selector.GetOwners();
-            var owner = (owners.Content as Selector).Users[0];
+            var owner = (owners.Value as Selector).Users[0];
 
             TaskModel task = new()
             {
@@ -97,11 +97,11 @@ namespace Bitfox.Freshworks.Tests
             var result = await _client.Insert(task);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> RemoveTask(TaskModel task)
+        public async Task<TaskModel> RemoveTask(TaskModel task)
         {
             // execute
             var result = await _client.Delete(task, hasBodyOnResponse:true);
@@ -109,34 +109,34 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Delete<Tasks>(task.ID, hasBodyOnResponse:true);
             //var result = await _client.Tasks.Delete<Tasks>(task.ID, hasBodyOnResponse:true);
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
-            return result.Content as TaskModel;
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> GetTaskByID()
+        public async Task<TaskModel> GetTaskByID()
         {
             var task = await CreateTask();
 
             // exucute get Tasks
-            var result = await _client.Query().GetByID(task.Item);
-            //var result = await _client.Query().GetByID<Tasks>(Tasks.Tasks.ID);
-            //var result = await _client.Tasks.Query().GetByID(Tasks.Tasks);
-            //var result = await _client.Tasks.Query().GetByID<Tasks>(Tasks.Tasks.ID);
+            var result = await _client.Query.GetByID(task.Item);
+            //var result = await _client.Query.GetByID<Tasks>(Tasks.Tasks.ID);
+            //var result = await _client.Tasks.Query.GetByID(Tasks.Tasks);
+            //var result = await _client.Tasks.Query.GetByID<Tasks>(Tasks.Tasks.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> GetTaskByIDAndSelectors()
+        public async Task<TaskModel> GetTaskByIDAndSelectors()
         {
             // create Tasks
             var content = await CreateTask();
             TaskModel task = new() { ID = content.Item.ID };
 
             // exucute get Tasks
-            var result = await _client.Query()
+            var result = await _client.Query
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -149,29 +149,29 @@ namespace Bitfox.Freshworks.Tests
                 .Include("industry_type")
                 .Include("child_sales_Tasks")
                 .GetByID(task);
-            //var result = await _client.Query().Include("owner").GetByID<Tasks>(Tasks.ID);
-            //var result = await _client.Tasks.Query().Include("owner").GetByID(Tasks);
-            //var result = await _client.Tasks.Query().Include("owner").GetByID<Tasks>(Tasks.ID);
+            //var result = await _client.Query.Include("owner").GetByID<Tasks>(Tasks.ID);
+            //var result = await _client.Tasks.Query.Include("owner").GetByID(Tasks);
+            //var result = await _client.Tasks.Query.Include("owner").GetByID<Tasks>(Tasks.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> GetAllTasksByFilter()
+        public async Task<TaskModel> GetAllTasksByFilter()
         {
             // execute
-            var result = await _client.Query().GetAllByFilter<TaskModel>("open");
-            //var result = await _client.Query().GetAllByFilter<TaskModel>(content.ID);
-            //var result = await _client.Tasks.Query().GetAllByFilter(content);
-            //var result = await _client.Tasks.Query().GetAllByFilter<TaskModel>(content.ID);
+            var result = await _client.Query.GetAllByFilter<TaskModel>("open");
+            //var result = await _client.Query.GetAllByFilter<TaskModel>(content.ID);
+            //var result = await _client.Tasks.Query.GetAllByFilter(content);
+            //var result = await _client.Tasks.Query.GetAllByFilter<TaskModel>(content.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> UpdateTask(TaskModel task)
+        public async Task<TaskModel> UpdateTask(TaskModel task)
         {
             TaskModel newTask = new()
             {
@@ -184,11 +184,11 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Tasks.Update(newTask);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
 
-        private async Task<TaskModel> UpdateAsDoneTask(TaskModel task)
+        public async Task<TaskModel> UpdateAsDoneTask(TaskModel task)
         {
             TaskModel newTask = new()
             {
@@ -201,8 +201,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Tasks.Update(newTask);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as TaskModel;
+            Assert.NotNull(result.Value);
+            return result.Value as TaskModel;
         }
     }
 }

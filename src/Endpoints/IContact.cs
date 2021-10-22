@@ -12,6 +12,11 @@ namespace Bitfox.Freshworks.Endpoints
     public interface IContact
     {
         /// <summary>
+        /// Query data from database. [ GET ]
+        /// </summary>
+        IQuery Query { get; }
+
+        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
@@ -22,11 +27,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">New contact item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
-
-        /// <summary>
-        /// Get content from contact information.
-        /// </summary>
-        IQuery Query();
 
         /// <summary>
         /// Update contact information on contact ID.

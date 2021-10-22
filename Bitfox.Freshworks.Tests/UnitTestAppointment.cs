@@ -68,7 +68,7 @@ namespace Bitfox.Freshworks.Tests
             _ = await RemoveAppointment(appointment.Item);
         }
 
-        private async Task<Appointment> CreateAppointment()
+        public async Task<Appointment> CreateAppointment()
         {
             Appointment appointment = new()
             {
@@ -81,11 +81,11 @@ namespace Bitfox.Freshworks.Tests
             var result = await _client.Insert(appointment);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Appointment;
+            Assert.NotNull(result.Value);
+            return result.Value as Appointment;
         }
 
-        private async Task<Appointment> RemoveAppointment(Appointment task)
+        public async Task<Appointment> RemoveAppointment(Appointment task)
         {
             // execute
             var result = await _client.Delete(task, hasBodyOnResponse: true);
@@ -93,34 +93,34 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Delete<Tasks>(task.ID, hasBodyOnResponse:true);
             //var result = await _client.Tasks.Delete<Tasks>(task.ID, hasBodyOnResponse:true);
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
-            return result.Content as Appointment;
+            return result.Value as Appointment;
         }
 
-        private async Task<Appointment> GetAppointmentByID()
+        public async Task<Appointment> GetAppointmentByID()
         {
             var appointment =  await CreateAppointment();
 
             // exucute get Tasks
-            var result = await _client.Query().GetByID(appointment.Item);
-            //var result = await _client.Query().GetByID<Appointment>(appointment.Item.ID);
-            //var result = await _client.Appointment.Query().GetByID(appointment.Item);
-            //var result = await _client.Appointment.Query().GetByID<Appointment>(appointment.Item.ID);
+            var result = await _client.Query.GetByID(appointment.Item);
+            //var result = await _client.Query.GetByID<Appointment>(appointment.Item.ID);
+            //var result = await _client.Appointment.Query.GetByID(appointment.Item);
+            //var result = await _client.Appointment.Query.GetByID<Appointment>(appointment.Item.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Appointment;
+            Assert.NotNull(result.Value);
+            return result.Value as Appointment;
         }
 
-        private async Task<Appointment> GetAppointmentByIDAndSelectors()
+        public async Task<Appointment> GetAppointmentByIDAndSelectors()
         {
             // create Tasks
             var content = await CreateAppointment();
             Appointment appointment = new() { ID = content.Item.ID };
 
             // exucute get Tasks
-            var result = await _client.Query()
+            var result = await _client.Query
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -138,21 +138,21 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Appointment.Query().Include("owner").GetByID<Appointment>(appointment.Item.ID);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Appointment;
+            Assert.NotNull(result.Value);
+            return result.Value as Appointment;
         }
 
-        private async Task<Appointment> GetAllTasksByFilter()
+        public async Task<Appointment> GetAllTasksByFilter()
         {
             // execute
-            var result = await _client.Query().GetAllByFilter<Appointment>("upcoming");
+            var result = await _client.Query.GetAllByFilter<Appointment>("upcoming");
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Appointment;
+            Assert.NotNull(result.Value);
+            return result.Value as Appointment;
         }
 
-        private async Task<Appointment> UpdateTask(Appointment task)
+        public async Task<Appointment> UpdateTask(Appointment task)
         {
             Appointment newAppointment =  new()
             {
@@ -165,8 +165,8 @@ namespace Bitfox.Freshworks.Tests
             //var result = await _client.Appointment.Update(newAppointment);
 
             Assert.Null(result.Error);
-            Assert.NotNull(result.Content);
-            return result.Content as Appointment;
+            Assert.NotNull(result.Value);
+            return result.Value as Appointment;
         }
 
     }

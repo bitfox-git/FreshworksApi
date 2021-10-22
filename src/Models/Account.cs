@@ -1,5 +1,6 @@
 ﻿using Bitfox.Freshworks.Attributes;
 using Bitfox.Freshworks.EndpointFilters;
+using Bitfox.Freshworks.Endpoints;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/sales_accounts")]
-    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasFileAndLinks, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
         
         [JsonProperty("selected_ids")]
@@ -41,6 +42,19 @@ namespace Bitfox.Freshworks.Models
         
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
+
+
+        [JsonProperty("documents")]
+        public List<File> Files { get; set; } = null;
+
+
+        [JsonProperty("document_links")]
+        public List<FileLink> FileLinks { get; set; } = null;
+
+
+        [JsonProperty("document_associations")]
+        public List<FileAssociation> FileAssociations { get; set; } = null;
+
 
         [JsonProperty("id")]
         public long? ID { get; set; } = null;

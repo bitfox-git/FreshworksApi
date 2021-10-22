@@ -22,7 +22,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Get all content of TEntity from database, than filter data on SearchOnFilter model.
         /// </summary>
         /// <typeparam name="TEntity">Model you want to get data from</typeparam>
-        /// <param name="body">The Content that you want to filter</param>
+        /// <param name="body">The Value that you want to filter</param>
         Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch;
 
         /// <summary>

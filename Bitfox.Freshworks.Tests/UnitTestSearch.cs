@@ -22,14 +22,15 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task SearchOnSuccess()
         {
-            var result = await _client.Query()
+            var result = await _client
                 .Include("contact")
                 .Include("user")
                 .Include("sales_account")
                 .Include("deal")
                 .SearchOnQuery("sample");
 
-            Assert.NotNull(result.Content);
+            Assert.Null(result.Value);
+            Assert.NotNull(result.Values);
             Assert.Null(result.Error);
         }
 
@@ -42,7 +43,7 @@ namespace Bitfox.Freshworks.Tests
             SearchFilter filter = new();
             var result = await _client.SearchOnFilter<Contact>(filter);
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
         }
 
@@ -51,7 +52,7 @@ namespace Bitfox.Freshworks.Tests
         {
             var result = await _client.SearchOnLookup("janesampleton@gmail.com", "email", "contact");
 
-            Assert.NotNull(result.Content);
+            Assert.NotNull(result.Value);
             Assert.Null(result.Error);
         }
 

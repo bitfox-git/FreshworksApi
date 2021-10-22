@@ -5,7 +5,9 @@ namespace Bitfox.Freshworks.Models
 {
     public class Result<TEntity>
     {
-        public object Content { get; set; }
+        public TEntity Value { get; set; }
+
+        public List<TEntity> Values { get; set; }
 
         [JsonProperty("errors")]
         public Error Error { get; set; } = null;
@@ -53,17 +55,17 @@ namespace Bitfox.Freshworks.Models
 
                 if(fullBody.StartsWith("["))
                 {
-                    Content = JsonConvert.DeserializeObject<List<TEntity>>(fullBody, settings);
+                    Values = JsonConvert.DeserializeObject<List<TEntity>>(fullBody, settings);
                 }
                 else
                 {
-                    Content = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
+                    Value = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
                 }
             }
             catch (JsonSerializationException ex)
             {
                 throw new JsonSerializationException(
-                    $"{ex.Message}\n Failed on Content:\n" + fullBody
+                    $"{ex.Message}\n Failed on Value:\n" + fullBody
                 );
             }
         }

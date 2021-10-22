@@ -3,14 +3,15 @@ using Bitfox.Freshworks.EndpointFilters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    [EndpointName("/api/documents")]
-    public class File : IHasInsertForm
+    [EndpointName("/api/document_links")]
+    public class FileLink: IHasInsert
     {
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
@@ -21,29 +22,20 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("msg")]
         public string Message { get; set; } = null;
 
-        [JsonProperty("thumbnail_url")]
-        public string ThumbnailURL { get; set; } = null;
-
         [JsonProperty("name")]
         public string Name { get; set; } = null;
 
         [JsonProperty("is_shared")]
         public bool? IsShared { get; set; } = null;
 
-        [JsonProperty("content_file_size")]
-        public int? ContentFileSize { get; set; } = null;
+        [JsonProperty("targetable_id")]
+        public long? TargetableID { get; set; } = null;
 
-        [JsonProperty("content_content_type")]
-        public string ContentContentType { get; set; } = null;
-
-        [JsonProperty("content_updated_at")]
-        public DateTime? ContentUpdatedAt { get; set; } = null;
-
-        [JsonProperty("content_file_size_readable")]
-        public string ContentFileSizeReadable { get; set; } = null;
+        [JsonProperty("targetable_type")]
+        public string TargetableType { get; set; } = null;
 
         [JsonProperty("created_at")]
-        public DateTime? CreatedAt { get; set; } = null;
+        public string CreatedAt { get; set; } = null;
 
         [JsonProperty("is_attached")]
         public bool? IsAttached { get; set; } = null;
@@ -51,27 +43,13 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("creater_id")]
         public long? CreaterID { get; set; } = null;
 
-
-        public string FilePath { get; set; } = null;
-
-        public string NewFileName { get; set; } = null;
-
-        public long? TargetableID { get; set; } = null;
-
-        public string TargetableType { get; set; } = null;
-
-        public void CatchInsertFormExceptions()
+        public void CatchInsertExceptions()
         {
             List<string> exceptions = new();
 
-            if (FilePath == null)
+            if (URL == null)
             {
-                exceptions.Add("Required key `FilePath` is missing.");
-            }
-
-            if (NewFileName == null)
-            {
-                exceptions.Add("Required key `NewFileName` is missing.");
+                exceptions.Add("Required key `URL` is missing.");
             }
 
             if (IsShared == null)
@@ -87,6 +65,11 @@ namespace Bitfox.Freshworks.Models
             if (TargetableType == null)
             {
                 exceptions.Add("Required key `TargetableType` is missing.");
+            }
+
+            if (Name == null)
+            {
+                exceptions.Add("Required key `Name` is missing.");
             }
 
             if (exceptions.Count > 0)
