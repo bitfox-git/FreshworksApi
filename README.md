@@ -16,8 +16,11 @@ var _client = new CRMClientBuilder()
 
 `INSERT`:
 ```csharp
+// get owner
 var result = await _client.GetOwners();
 var owner = result.Value.Users[0];
+
+// create account on owner
 var account = new Account();
 account.Name = "Account name";
 account.OwnerID = owner.ID;
