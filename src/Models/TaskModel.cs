@@ -30,21 +30,28 @@ namespace Bitfox.Freshworks.Models
 
 
         // Childs
+
+        [IsRequiredOn(nameof(IHasDelete))]
+        [IsRequiredOn(nameof(IHasUpdate))]
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
         [JsonProperty("status")]
         public int? Status { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("title")]
         public string Title { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("description")]
         public string Description { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("created_at")]
         public DateTime? CreatedAt { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("updated_at")]
         public DateTime? UpdatedAt { get; set; } = null;
 
@@ -56,6 +63,18 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("outcome_id")]
         public long? OutcomeID { get; set; } = null;
+
+        [IsRequiredOn(nameof(IHasInsert))]
+        [JsonProperty("owner_id")]
+        public long? OwnerID { get; set; } = null;
+
+        [IsRequiredOn(nameof(IHasInsert))]
+        [JsonProperty("creater_id")]
+        public long? CreaterID { get; set; } = null;
+
+        [IsRequiredOn(nameof(IHasInsert))]
+        [JsonProperty("updater_id")]
+        public long? UpdaterID { get; set; } = null;
 
         [JsonProperty("task_type_id")]
         public long? TaskTypeID { get; set; } = null;
@@ -73,86 +92,7 @@ namespace Bitfox.Freshworks.Models
         public string TargetableType { get; set; } = null;
 
         [JsonProperty("task_users_attributes")]
-        public List<User> TaskUsersAttributes { get; set; } = null;
-
-        public void CatchDeleteExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchInsertExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Title == null)
-            {
-                exceptions.Add("Required key `Title` is missing.");
-            }
-
-            if (Description == null)
-            {
-                exceptions.Add("Required key `Description` is missing.");
-            }
-
-            if (CreatedAt == null)
-            {
-                exceptions.Add("Required key `CreatedAt` is missing.");
-            }
-
-            if (UpdatedAt == null)
-            {
-                exceptions.Add("Required key `UpdatedAt` is missing.");
-            }
-
-            if (OwnerID == null)
-            {
-                exceptions.Add("Required key `OwnerID` is missing.");
-            }
-
-            if (CreaterID == null)
-            {
-                exceptions.Add("Required key `CreaterID` is missing.");
-            }
-
-            if (UpdaterID == null)
-            {
-                exceptions.Add("Required key `UpdaterID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-
-        }
-
-        public void CatchUpdateExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-    
-    
-    
+        public List<User> TaskUsersAttributes { get; set; } = null;    
     
     }
 }

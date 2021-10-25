@@ -28,21 +28,28 @@ namespace Bitfox.Freshworks.Models
 
 
         // Childs
+
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasDelete))]
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("title")]
         public string Title { get; set; } = null;
 
         [JsonProperty("notes")]
         public string Note { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("start_date")]
         public DateTime? StartDate { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("end_date")]
         public DateTime? EndDate { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("sales_activity_type_id")]
         public long? SalesActivityTypeID { get; set; } = null;
 
@@ -158,9 +165,11 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("conversation_time")]
         public DateTime? ConversationTime { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("targetable_id")]
         public long? TargetableID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("targetable_type")]
         public string TargetableType { get; set; } = null;
 
@@ -208,76 +217,6 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("position")]
         public int? Position { get; set; } = null;
-
-        public void CatchDeleteExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchInsertExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Title == null)
-            {
-                exceptions.Add("Required key `Title` is missing.");
-            }
-
-            if (StartDate == null)
-            {
-                exceptions.Add("Required key `StartDate` is missing.");
-            }
-
-            if (EndDate == null)
-            {
-                exceptions.Add("Required key `EndDate` is missing.");
-            }
-
-            if (SalesActivityTypeID == null)
-            {
-                exceptions.Add("Required key `SalesActivityTypeID` is missing.");
-            }
-
-            if (TargetableID == null)
-            {
-                exceptions.Add("Required key `TargetableID` is missing.");
-            }
-
-            if (TargetableType == null)
-            {
-                exceptions.Add("Required key `TargetableType` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchUpdateExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
 
 
     }

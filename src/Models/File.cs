@@ -27,6 +27,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("name")]
         public string Name { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("is_shared")]
         public bool? IsShared { get; set; } = null;
 
@@ -51,50 +52,17 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("creater_id")]
         public long? CreaterID { get; set; } = null;
 
-
+        [IsRequiredOn(nameof(IHasInsert))]
         public string FilePath { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         public string NewFileName { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         public long? TargetableID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         public string TargetableType { get; set; } = null;
-
-        public void CatchInsertFormExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (FilePath == null)
-            {
-                exceptions.Add("Required key `FilePath` is missing.");
-            }
-
-            if (NewFileName == null)
-            {
-                exceptions.Add("Required key `NewFileName` is missing.");
-            }
-
-            if (IsShared == null)
-            {
-                exceptions.Add("Required key `IsShared` is missing.");
-            }
-
-            if (TargetableID == null)
-            {
-                exceptions.Add("Required key `TargetableID` is missing.");
-            }
-
-            if (TargetableType == null)
-            {
-                exceptions.Add("Required key `TargetableType` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-
-        }
 
     }
 }

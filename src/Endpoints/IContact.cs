@@ -1,6 +1,5 @@
 ﻿using Bitfox.Freshworks.EndpointFilters;
 using Bitfox.Freshworks.Endpoints;
-using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;

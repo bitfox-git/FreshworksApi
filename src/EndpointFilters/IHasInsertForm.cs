@@ -17,7 +17,5 @@ namespace Bitfox.Freshworks.EndpointFilters
         long? TargetableID { get; set; }
 
         string TargetableType { get; set; }
-
-        void CatchInsertFormExceptions();
     }
 }

@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     public interface IHasInsert
-    { 
-        void CatchInsertExceptions();
-    }
+    { }
 }

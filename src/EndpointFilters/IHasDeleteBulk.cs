@@ -12,7 +12,7 @@ namespace Bitfox.Freshworks.Models
 
         bool? DeleteAssociatedContactDeals { get; set; }
 
-        void CatchDeleteBulkExceptions();
+        //void CatchDeleteBulkExceptions();
 
 
     }

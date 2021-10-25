@@ -25,15 +25,25 @@ namespace Bitfox.Freshworks.Models
         public string Success { get; set; } = null;
 
         // Childs
+
+
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasDelete))]
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("targetable_type")]
         public string TargetableType { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("targetable_id")]
         public long? TargetableID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("description")]
         public string Description { get; set; } = null;
 
@@ -58,75 +68,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("collab_context")]
         public ColabContext CollabContext { get; set; } = null;
 
-        public void CatchDeleteExceptions()
-        {
-            List<string> exceptions = new();
 
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchInsertExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Description == null)
-            {
-                exceptions.Add("Required key `Description` is missing.");
-            }
-
-            if (TargetableType == null)
-            {
-                exceptions.Add("Required key `TargetableType` is missing.");
-            }
-
-            if (TargetableID == null)
-            {
-                exceptions.Add("Required key `TargetableID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchUpdateExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (Description == null)
-            {
-                exceptions.Add("Required key `Description` is missing.");
-            }
-
-            if (TargetableType == null)
-            {
-                exceptions.Add("Required key `TargetableType` is missing.");
-            }
-
-            if (TargetableID == null)
-            {
-                exceptions.Add("Required key `TargetableID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
 
 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    public class FreshworkConfig
+    public class FreshworkConfiguration
     {
         public const string Name = "FreshworkOptions";
 
@@ -16,7 +16,7 @@ namespace Bitfox.Freshworks.Models
 
         public string ApiKey { get; set; }
 
-        public FreshworkConfig(IConfiguration configuration)
+        public FreshworkConfiguration(IConfiguration configuration)
         {
             configuration.GetSection(Name).Bind(this);
         }

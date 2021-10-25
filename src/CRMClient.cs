@@ -4,6 +4,7 @@ using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Bitfox.Freshworks.Attributes;
 
 namespace Bitfox.Freshworks
 {
@@ -54,14 +55,15 @@ namespace Bitfox.Freshworks
 
         public async Task<Result<T>> Insert<T>(T body) where T : IHasInsert
         {
-            body.CatchInsertExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasInsert));
+
             string endpoint = GetEndpoint<T>();
             return await PostApiRequest(endpoint, body);
         }
 
         public async Task<Result<T>> InsertForm<T>(T body) where T : IHasInsertForm
         {
-            body.CatchInsertFormExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasForget));
             string endpoint = GetEndpoint<T>();
 
             Dictionary<string, string> files = new();
@@ -78,14 +80,16 @@ namespace Bitfox.Freshworks
 
         public async Task<Result<T>> Update<T>(T body) where T : IHasUpdate
         {
-            body.CatchUpdateExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasUpdate));
+
             string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
             return await UpdateApiRequest(endpoint, body);
         }
 
         public async Task<Result<T>> Clone<T>(T body) where T : IHasClone
         {
-            body.CatchCloneExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasUpdate));
+
             string endpoint = $"{GetEndpoint<T>()}/{body.ID}/clone";
             return await PostApiRequest(endpoint, body);
         }
@@ -103,14 +107,16 @@ namespace Bitfox.Freshworks
 
         public async Task<Result<bool>> Delete<T>(T body) where T : IHasDelete
         {
-            body.CatchDeleteExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasDelete));
+
             string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
             return await DeleteApiRequest(endpoint);
         }
 
         public async Task<Result<T>> Delete<T>(T body, bool hasBodyAsResponse) where T : IHasDelete
         {
-            body.CatchDeleteExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasDelete));
+
             string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
             return await DeleteApiRequest<T>(endpoint);
         }
@@ -128,21 +134,24 @@ namespace Bitfox.Freshworks
 
         public async Task<Result<bool>> Forget<T>(T body) where T : IHasForget
         {
-            body.CatchForgetExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasForget));
+
             string endpoint = $"{GetEndpoint<T>()}/{body.ID}/forget";
             return await DeleteApiRequest(endpoint);
         }
 
         public async Task<Result<T>> AssignBulk<T>(T body) where T : IHasAssignBulk
         {
-            body.CatchAssignBulkExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasAssignBulk));
+
             string endpoint = $"{GetEndpoint<T>()}/bulk_assign_owner";
             return await PostApiRequest(endpoint, body);
         }
 
         public async Task<Result<T>> DeleteBulk<T>(T body) where T : IHasDeleteBulk
         {
-            body.CatchDeleteBulkExceptions();
+            IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasDeleteBulk));
+
             string endpoint = $"{GetEndpoint<T>()}/bulk_destroy";
             return await PostApiRequest(endpoint, body);
         }

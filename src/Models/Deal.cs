@@ -15,7 +15,6 @@ namespace Bitfox.Freshworks.Models
     [EndpointName("/api/deals")]
     public class Deal: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
-        
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 
@@ -35,11 +34,11 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        
+        [IsRequiredOn(nameof(IHasDeleteBulk))]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
-        
+        [IsRequiredOn(nameof(IHasDeleteBulk))]
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
@@ -49,12 +48,24 @@ namespace Bitfox.Freshworks.Models
 
         // Childs
 
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasClone))]
+        [IsRequiredOn(nameof(IHasDelete))]
+        [IsRequiredOn(nameof(IHasForget))]
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasUpdate))]
+        [IsRequiredOn(nameof(IHasClone))]
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("name")]
         public string Name { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
+        [JsonProperty("owner_id")]
+        public new long? OwnerID { get; set; } = null;
+        
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("amount")]
         public string Amount { get; set; } = null;
 
@@ -191,123 +202,5 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("deal_prediction_last_updated_at")]
         public DateTime? DealPredictionLastUpdateAt { get; set; } = null;
 
-
-        public void CatchInsertExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Name == null)
-            {
-                exceptions.Add("Required key `Name` is missing.");
-            }
-            
-            if (OwnerID == null)
-            {
-                exceptions.Add("Required key `OwnerID` is missing.");
-            }
-            
-            if (Amount == null)
-            {
-                exceptions.Add("Required key `Amount` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchUpdateExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Name == null)
-            {
-                exceptions.Add("Required key `Name` is missing.");
-            }
-            
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchCloneExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Name == null)
-            {
-                exceptions.Add("Required key `Name` is missing.");
-            }
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchDeleteExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchForgetExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchDeleteBulkExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (SelectedIDs == null)
-            {
-                exceptions.Add("Required key `SelectedIDs` is missing.");
-            }
-
-            if (DeleteAssociatedContactDeals == null)
-            {
-                exceptions.Add("Required key `DeleteAssociatedContactDeals` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-    
     }
 }

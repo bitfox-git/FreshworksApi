@@ -10,6 +10,6 @@ namespace Bitfox.Freshworks.Models
     { 
         long? ID { get; set; }
 
-        void CatchUpdateExceptions();
+        //void CatchUpdateExceptions();
     }
 }

@@ -34,18 +34,24 @@ namespace Bitfox.Freshworks.Models
 
         // Childs
 
+
+        [IsRequiredOn(nameof(IHasDelete))]
+        [IsRequiredOn(nameof(IHasUpdate))]
         [JsonProperty("id")]
         public long? ID { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("title")]
         public string Title { get; set; } = null;
 
         [JsonProperty("description")]
         public string Description { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("from_date")]
         public string FromDate { get; set; } = null;
 
+        [IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("end_date")]
         public string EndDate { get; set; } = null;
 
@@ -121,60 +127,5 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("appointment_attendees_attributes")]
         public List<Attendee> AppointmentAttendeesAttributes { get; set; } = null;
 
-
-        public void CatchDeleteExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchInsertExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (Title == null)
-            {
-                exceptions.Add("Required key `Title` is missing.");
-            }
-
-            if (FromDate == null)
-            {
-                exceptions.Add("Required key `FromDate` is missing.");
-            }
-
-            if (EndDate == null)
-            {
-                exceptions.Add("Required key `EndDate` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
-
-        public void CatchUpdateExceptions()
-        {
-            List<string> exceptions = new();
-
-            if (ID == null)
-            {
-                exceptions.Add("Required key `ID` is missing.");
-            }
-
-            if (exceptions.Count > 0)
-            {
-                throw new MissingFieldException(string.Join("\n", exceptions));
-            }
-        }
     }
 }

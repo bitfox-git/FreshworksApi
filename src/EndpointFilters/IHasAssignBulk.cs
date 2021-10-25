@@ -11,7 +11,5 @@ namespace Bitfox.Freshworks.Models
         List<long> SelectedIDs { get; set; }
 
         long? OwnerID { get; set; }
-
-        void CatchAssignBulkExceptions();
     }
 }

@@ -116,9 +116,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("_destroy")]
         public bool? Destroy { get; set; } = null;
 
-        public void CatchInsertExceptions()
-        { }
-
 
 
 

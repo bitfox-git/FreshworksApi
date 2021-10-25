@@ -25,7 +25,7 @@ namespace Bitfox.Freshworks.Tests
             IConfiguration configuration = configurationBuilder.Build();
 
             // Create client
-            FreshworkConfig options = new(configuration);
+            FreshworkConfiguration options = new(configuration);
             Client = new CRMClientBuilder(options).Build();
         }
     }
