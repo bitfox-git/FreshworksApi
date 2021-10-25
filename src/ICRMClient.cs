@@ -62,7 +62,6 @@ namespace Bitfox.Freshworks
         /// </summary>
         IFile File { get; }
 
-
         /// <summary>
         /// Get all panel data. [ GET ]
         /// </summary>
