@@ -20,9 +20,6 @@ namespace Bitfox.Freshworks
         IPhone,
         IFile
     {
-
-        public IQuery Query => this;
-
         public ISelector Selector => this;
 
         public ISearch Search => this;
@@ -48,23 +45,23 @@ namespace Bitfox.Freshworks
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
 
-        public async Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters
+        public async Task<Result<T>> FetchAll<T>() where T : IHasFilters
         {
-            string endpoint = $"{GetEndpoint<TEntity>()}/filters";
-            return await GetApiRequest<TEntity>(endpoint);
+            string endpoint = $"{GetEndpoint<T>()}/filters";
+            return await GetApiRequest<T>(endpoint);
         }
 
-        public async Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert
+        public async Task<Result<T>> Insert<T>(T body) where T : IHasInsert
         {
             body.CatchInsertExceptions();
-            string endpoint = GetEndpoint<TEntity>();
+            string endpoint = GetEndpoint<T>();
             return await PostApiRequest(endpoint, body);
         }
 
-        public async Task<Result<TEntity>> InsertForm<TEntity>(TEntity body) where TEntity : IHasInsertForm
+        public async Task<Result<T>> InsertForm<T>(T body) where T : IHasInsertForm
         {
             body.CatchInsertFormExceptions();
-            string endpoint = GetEndpoint<TEntity>();
+            string endpoint = GetEndpoint<T>();
 
             Dictionary<string, string> files = new();
             files.Add("file", body.FilePath);
@@ -75,77 +72,77 @@ namespace Bitfox.Freshworks
             parameters.Add("targetable_id", body.TargetableID.ToString());
             parameters.Add("targetable_type", body.TargetableType.ToString());
 
-            return await PostApiFormRequest<TEntity>(endpoint, files, parameters);
+            return await PostApiFormRequest<T>(endpoint, files, parameters);
         }
 
-        public async Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate
+        public async Task<Result<T>> Update<T>(T body) where T : IHasUpdate
         {
             body.CatchUpdateExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
+            string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
             return await UpdateApiRequest(endpoint, body);
         }
 
-        public async Task<Result<TEntity>> Clone<TEntity>(TEntity body) where TEntity : IHasClone
+        public async Task<Result<T>> Clone<T>(T body) where T : IHasClone
         {
             body.CatchCloneExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}/clone";
+            string endpoint = $"{GetEndpoint<T>()}/{body.ID}/clone";
             return await PostApiRequest(endpoint, body);
         }
 
-        public async Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete
+        public async Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete
         {
             if (id == null)
             {
                 throw new ArgumentException($"ID is required for removing the view.");
             }
 
-            string endpoint = $"{GetEndpoint<TEntity>()}/{id}";
+            string endpoint = $"{GetEndpoint<T>()}/{id}";
             return await DeleteApiRequest(endpoint);
         }
 
-        public async Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete
+        public async Task<Result<bool>> Delete<T>(T body) where T : IHasDelete
         {
             body.CatchDeleteExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
+            string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
             return await DeleteApiRequest(endpoint);
         }
 
-        public async Task<Result<TEntity>> Delete<TEntity>(TEntity body, bool hasBodyAsResponse) where TEntity : IHasDelete
+        public async Task<Result<T>> Delete<T>(T body, bool hasBodyAsResponse) where T : IHasDelete
         {
             body.CatchDeleteExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}";
-            return await DeleteApiRequest<TEntity>(endpoint);
+            string endpoint = $"{GetEndpoint<T>()}/{body.ID}";
+            return await DeleteApiRequest<T>(endpoint);
         }
 
-        public async Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget
+        public async Task<Result<bool>> Forget<T>(long? id) where T : IHasForget
         {
             if (id == null)
             {
                 throw new ArgumentException($"ID is required for removing the view.");
             }
 
-            string endpoint = $"{GetEndpoint<TEntity>()}/{id}/forget";
+            string endpoint = $"{GetEndpoint<T>()}/{id}/forget";
             return await DeleteApiRequest(endpoint);
         }
 
-        public async Task<Result<bool>> Forget<TEntity>(TEntity body) where TEntity : IHasForget
+        public async Task<Result<bool>> Forget<T>(T body) where T : IHasForget
         {
             body.CatchForgetExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/{body.ID}/forget";
+            string endpoint = $"{GetEndpoint<T>()}/{body.ID}/forget";
             return await DeleteApiRequest(endpoint);
         }
 
-        public async Task<Result<TEntity>> AssignBulk<TEntity>(TEntity body) where TEntity : IHasAssignBulk
+        public async Task<Result<T>> AssignBulk<T>(T body) where T : IHasAssignBulk
         {
             body.CatchAssignBulkExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/bulk_assign_owner";
+            string endpoint = $"{GetEndpoint<T>()}/bulk_assign_owner";
             return await PostApiRequest(endpoint, body);
         }
 
-        public async Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk
+        public async Task<Result<T>> DeleteBulk<T>(T body) where T : IHasDeleteBulk
         {
             body.CatchDeleteBulkExceptions();
-            string endpoint = $"{GetEndpoint<TEntity>()}/bulk_destroy";
+            string endpoint = $"{GetEndpoint<T>()}/bulk_destroy";
             return await PostApiRequest(endpoint, body);
         }
 

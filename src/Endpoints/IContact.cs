@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Endpoints;
+﻿using Bitfox.Freshworks.EndpointFilters;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
@@ -12,11 +13,6 @@ namespace Bitfox.Freshworks.Endpoints
     public interface IContact
     {
         /// <summary>
-        /// Query data from database. [ GET ]
-        /// </summary>
-        IQuery Query { get; }
-
-        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
@@ -27,6 +23,34 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">New contact item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+
+        /// <summary>
+        /// Get A Account on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="body">New account account payload</param>
+        Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID;
+
+        /// <summary>
+        /// Get A Account on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="id">Account ID</param>
+        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+
+        /// <summary>
+        /// Get All Accounts on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="body">New account account payload</param>
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+
+        /// <summary>
+        /// Get All Accounts on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="id">Account ID</param>
+        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
 
         /// <summary>
         /// Update contact information on contact ID.
@@ -75,6 +99,26 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">Contact contains needed data for deletion</param>
         Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk;
+
+        /// <summary>
+        /// Get Contact Activities
+        /// </summary>
+        Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID;
+
+        /// <summary>
+        /// Get Contact Activities
+        /// </summary>
+        Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities;
+
+        /// <summary>
+        /// Get Contact Fields
+        /// </summary>
+        Task<Result<T>> GetAllFields<T>() where T : IHasFields;
+
+        /// <summary>
+        /// Get Contact Filters
+        /// </summary>
+        Task<Result<T>> FetchAll<T>() where T : IHasFilters;
 
     }
 }

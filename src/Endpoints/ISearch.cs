@@ -33,5 +33,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// <param name="entities">entities to get data from</param>
         /// <returns></returns>
         Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities);
+
     }
 }

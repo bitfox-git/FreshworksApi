@@ -30,7 +30,7 @@ var output = await _client.Insert(account);
 
 `UPDATE`:
 ```csharp
-account.Name = $"Updated Account name";
+account.Name = "Updated Account name";
 
 var output = await _client.Update(account);
 ```

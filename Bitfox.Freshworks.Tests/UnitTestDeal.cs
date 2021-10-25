@@ -162,10 +162,10 @@ namespace Bitfox.Freshworks.Tests
             var deal = await CreateDeal();
 
             // exucute get account
-            var result = await _client.Query.GetByID(deal.Deal);
-            //var result = await _client.Query.GetByID<Deal>(deal.ID);
-            //var result = await _client.Deal.Query.GetByID(deal);
-            //var result = await _client.Deal.Query.GetByID<Deal>(deal.ID);
+            var result = await _client.GetByID(deal.Deal);
+            //var result = await _client.GetByID<Deal>(deal.ID);
+            //var result = await _client.Deal.GetByID(deal);
+            //var result = await _client.Deal.GetByID<Deal>(deal.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -179,7 +179,7 @@ namespace Bitfox.Freshworks.Tests
             var deal = await CreateDeal();
 
             // exucute get account
-            var result = await _client.Query
+            var result = await _client
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -209,10 +209,10 @@ namespace Bitfox.Freshworks.Tests
             Deal deal = new() { ID = content.ID };
 
             // execute
-            var result = await _client.Query.GetAllByID(deal);
-            //var result = await _client.Query.GetAllByID<Deal>(deal.ID);
-            //var result = await _client.Deal.Query.GetAllByID(deal);
-            //var result = await _client.Deal.Query.GetAllByID<Deal>(deal.ID);
+            var result = await _client.GetAllByID(deal);
+            //var result = await _client.GetAllByID<Deal>(deal.ID);
+            //var result = await _client.Deal.GetAllByID(deal);
+            //var result = await _client.Deal.GetAllByID<Deal>(deal.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -281,8 +281,8 @@ namespace Bitfox.Freshworks.Tests
         public async Task<Deal> AllDealFields()
         {
             // Commands
-            var result = await _client.Query.GetAllFields<Deal>();
-            //var result = await _client.Deal.Query.GetAllFields<Deal>();
+            var result = await _client.GetAllFields<Deal>();
+            //var result = await _client.Deal.GetAllFields<Deal>();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

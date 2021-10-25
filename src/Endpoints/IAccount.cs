@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Endpoints;
+﻿using Bitfox.Freshworks.EndpointFilters;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
@@ -11,67 +12,96 @@ namespace Bitfox.Freshworks.Endpoints
     public interface IAccount
     {
         /// <summary>
-        /// Query data from database. [ GET ]
-        /// </summary>
-        IQuery Query { get; }
-
-        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
         IQuery Include(string include);
 
         /// <summary>
-        /// Insert a new account item.
+        /// Get Account Fields
         /// </summary>
-        /// <param name="body">New account account payload</param>
-        Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+        Task<Result<T>> GetAllFields<T>() where T : IHasFields;
 
         /// <summary>
         /// Get Account Filters
         /// </summary>
-        Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters;
+        Task<Result<T>> FetchAll<T>() where T : IHasFilters;
+
+        /// <summary>
+        /// Insert a new account item.
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="body">New account account payload</param>
+        Task<Result<T>> Insert<T>(T body) where T : IHasInsert;
+
+        /// <summary>
+        /// Get A Account on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="body">New account account payload</param>
+        Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID;
+
+        /// <summary>
+        /// Get A Account on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="id">Account ID</param>
+        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+
+        /// <summary>
+        /// Get All Accounts on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="body">New account account payload</param>
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+
+        /// <summary>
+        /// Get All Accounts on ID
+        /// </summary>
+        /// <typeparam name="T">Account class get endpoint from</typeparam>
+        /// <param name="id">Account ID</param>
+        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
 
         /// <summary>
         /// Update account information on account ID.
         /// </summary>
         /// <param name="body">Account ID and content used for update</param>
-        Task<Result<TEntity>> Update<TEntity>(TEntity body) where TEntity : IHasUpdate;
+        Task<Result<T>> Update<T>(T body) where T : IHasUpdate;
 
         /// <summary>
         /// Clone account by using his ID.
         /// </summary>
         /// <param name="body">Account ID and content used for cloning</param>
-        Task<Result<TEntity>> Clone<TEntity>(TEntity body) where TEntity : IHasClone;
+        Task<Result<T>> Clone<T>(T body) where T : IHasClone;
 
         /// <summary>
         /// Remove account by account ID.
         /// </summary>
         /// <param name="body">Account ID</param>
-        Task<Result<bool>> Delete<TEntity>(TEntity body) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<T>(T body) where T : IHasDelete;
 
         /// <summary>
         /// Remove account by account ID.
         /// </summary>
         /// <param name="id">Account ID</param>
-        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
 
         /// <summary>
         /// Hard delete a account and all the associated data.
         /// </summary>
         /// <param name="body">Account contains ID that will been deleted</param>
-        Task<Result<bool>> Forget<TEntity>(TEntity body) where TEntity : IHasForget;
+        Task<Result<bool>> Forget<T>(T body) where T : IHasForget;
 
         /// <summary>
         /// Hard delete a account and all the associated data.
         /// </summary>
         /// <param name="id">ID that will been deleted</param>
-        Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget;
+        Task<Result<bool>> Forget<T>(long? id) where T : IHasForget;
 
         /// <summary>
         /// Delete Accounts in bulk.
         /// </summary>
         /// <param name="body">Account contains needed data for deletion</param>
-        Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk;
+        Task<Result<T>> DeleteBulk<T>(T body) where T : IHasDeleteBulk;
     }
 }

@@ -58,7 +58,7 @@ namespace Bitfox.Freshworks.Tests
             Contact contact = new() { ID = content.ID };
 
             // execute
-            var result = await _client.Query.GetAllByID(contact);
+            var result = await _client.GetAllByID(contact);
             //var result = await _client.Query().GetAllByID<Contact>(content.ID);
             //var result = await _client.Contact.Query().GetAllByID(Contact);
             //var result = await _client.Contact.Query().GetAllByID<Contact>(content.ID);
@@ -110,7 +110,7 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task AssignBulkContactOnSuccess()
         {
-            var owners = await _client.Query.GetOwners();
+            var owners = await _client.GetOwners();
             var owner = (owners.Value as Selector).Users[0];
 
             Contact contact = await CreateContact();
@@ -123,7 +123,7 @@ namespace Bitfox.Freshworks.Tests
         [Fact]
         public async Task DeleteBulkContactOnSuccess()
         {
-            var owners = await _client.Query.GetOwners();
+            var owners = await _client.GetOwners();
             var owner = (owners.Value as Selector).Users[0];
 
             Contact contact = await CreateContact();
@@ -200,10 +200,10 @@ namespace Bitfox.Freshworks.Tests
             var contact = await CreateContact();
 
             // exucute get Contact
-            var result = await _client.Query.GetByID(contact.Contact);
-            //var result = await _client.Query.GetByID<Contact>(contact.Contact.ID);
-            //var result = await _client.Contact.Query.GetByID(contact.Contact);
-            //var result = await _client.Contact.Query.GetByID<Contact>(contact.Contact.ID);
+            var result = await _client.GetByID(contact.Contact);
+            //var result = await _client.GetByID<Contact>(contact.Contact.ID);
+            //var result = await _client.Contact.GetByID(contact.Contact);
+            //var result = await _client.Contact.GetByID<Contact>(contact.Contact.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -217,7 +217,7 @@ namespace Bitfox.Freshworks.Tests
             Contact contact = new() { ID = content.Contact.ID };
 
             // exucute get Contact
-            var result = await _client.Query
+            var result = await _client
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -332,8 +332,8 @@ namespace Bitfox.Freshworks.Tests
         public async Task<Contact> AllContactFields()
         {
             // Commands
-            var result = await _client.Query.GetAllFields<Contact>();
-            //var result = await _client.Contact.Query.GetAllFields<Contact>();
+            var result = await _client.GetAllFields<Contact>();
+            //var result = await _client.Contact.GetAllFields<Contact>();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

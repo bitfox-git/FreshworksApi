@@ -63,8 +63,8 @@ namespace Bitfox.Freshworks.Tests
         {
             Account account = await CreateAccount();
 
-            var result = await _client.Query.GetAllFileAndLinks(account);
-            //var result = await _client.Query.GetAllFileAndLinks<Sale>(17001420209);
+            var result = await _client.GetAllFileAndLinks(account);
+            //var result = await _client.GetAllFileAndLinks<Sale>(17001420209);
 
             Assert.NotNull(result.Value);
             Assert.Null(result.Error);

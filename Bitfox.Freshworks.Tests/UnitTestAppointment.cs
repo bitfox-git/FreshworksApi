@@ -103,10 +103,10 @@ namespace Bitfox.Freshworks.Tests
             var appointment =  await CreateAppointment();
 
             // exucute get Tasks
-            var result = await _client.Query.GetByID(appointment.Item);
-            //var result = await _client.Query.GetByID<Appointment>(appointment.Item.ID);
-            //var result = await _client.Appointment.Query.GetByID(appointment.Item);
-            //var result = await _client.Appointment.Query.GetByID<Appointment>(appointment.Item.ID);
+            var result = await _client.GetByID(appointment.Item);
+            //var result = await _client.GetByID<Appointment>(appointment.Item.ID);
+            //var result = await _client.Appointment.GetByID(appointment.Item);
+            //var result = await _client.Appointment.GetByID<Appointment>(appointment.Item.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -120,7 +120,7 @@ namespace Bitfox.Freshworks.Tests
             Appointment appointment = new() { ID = content.Item.ID };
 
             // exucute get Tasks
-            var result = await _client.Query
+            var result = await _client
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -145,7 +145,7 @@ namespace Bitfox.Freshworks.Tests
         public async Task<Appointment> GetAllTasksByFilter()
         {
             // execute
-            var result = await _client.Query.GetAllByFilter<Appointment>("upcoming");
+            var result = await _client.GetAllByFilter<Appointment>("upcoming");
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

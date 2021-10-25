@@ -8,11 +8,6 @@ namespace Bitfox.Freshworks
     public interface ICRMClient: IQuery
     {
         /// <summary>
-        /// Query data from database. [ GET ]
-        /// </summary>
-        IQuery Query { get; }
-
-        /// <summary>
         /// Handles data based on subdomain. [ Query ]
         /// </summary>
         ISelector Selector { get; }
@@ -144,22 +139,5 @@ namespace Bitfox.Freshworks
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="item">Item that needs to been Deleting a bulk</param>
         Task<Result<T>> DeleteBulk<T>(T item) where T : IHasDeleteBulk;
-
-
-        /// <summary>
-        /// Get all content of TEntity from database, than filter data on SearchOnFilter model.
-        /// </summary>
-        /// <typeparam name="TEntity">Model you want to get data from</typeparam>
-        /// <param name="body">The Value that you want to filter</param>
-        Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch;
-
-        /// <summary>
-        /// Lookup in data with some filters specified.
-        /// </summary>
-        /// <param name="query">lookup for this string in models</param>
-        /// <param name="field">data from given field ()</param>
-        /// <param name="entities">entities to get data from</param>
-        /// <returns></returns>
-        Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities);
     }
 }

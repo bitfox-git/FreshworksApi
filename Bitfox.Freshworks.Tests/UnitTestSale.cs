@@ -114,10 +114,10 @@ namespace Bitfox.Freshworks.Tests
             var sale = await CreateSale(account);
 
             // exucute get Tasks
-            var result = await _client.Query.GetByID(sale.Item);
-            //var result = await _client.Query.GetByID<Sale>(sale.Item.ID);
-            //var result = await _client.Sale.Query.GetByID(sale.Item);
-            //var result = await _client.Sale.Query.GetByID<Sale>(sale.Item.ID);
+            var result = await _client.GetByID(sale.Item);
+            //var result = await _client.GetByID<Sale>(sale.Item.ID);
+            //var result = await _client.Sale.GetByID(sale.Item);
+            //var result = await _client.Sale.GetByID<Sale>(sale.Item.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -132,7 +132,7 @@ namespace Bitfox.Freshworks.Tests
             Sale sale = new() { ID = content.Item.ID };
 
             // exucute get Tasks
-            var result = await _client.Query
+            var result = await _client
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -157,7 +157,7 @@ namespace Bitfox.Freshworks.Tests
         public async Task<Sale> GetAllTasksByFilter()
         {
             // execute
-            var result = await _client.Query.GetAllByFilter<Sale>("upcoming");
+            var result = await _client.GetAllByFilter<Sale>("upcoming");
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

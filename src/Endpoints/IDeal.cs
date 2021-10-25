@@ -1,4 +1,5 @@
-﻿using Bitfox.Freshworks.Endpoints;
+﻿using Bitfox.Freshworks.EndpointFilters;
+using Bitfox.Freshworks.Endpoints;
 using Bitfox.Freshworks.Models;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,6 @@ namespace Bitfox.Freshworks.Endpoints
     public interface IDeal
     {
         /// <summary>
-        /// Query data from database. [ GET ]
-        /// </summary>
-        IQuery Query { get; }
-
-        /// <summary>
         /// Include data to this model.
         /// </summary>
         /// <param name="include">name of table</param>
@@ -26,6 +22,34 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">New deal item payload</param>
         Task<Result<TEntity>> Insert<TEntity>(TEntity body) where TEntity : IHasInsert;
+
+        /// <summary>
+        /// Get A Deal on ID
+        /// </summary>
+        /// <typeparam name="T">Deal class get endpoint from</typeparam>
+        /// <param name="body">New Deal account payload</param>
+        Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID;
+
+        /// <summary>
+        /// Get A Deal on ID
+        /// </summary>
+        /// <typeparam name="T">Deal class get endpoint from</typeparam>
+        /// <param name="id">Deal ID</param>
+        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+
+        /// <summary>
+        /// Get All Deal on ID
+        /// </summary>
+        /// <typeparam name="T">Deal class get endpoint from</typeparam>
+        /// <param name="body">New Deal payload</param>
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+
+        /// <summary>
+        /// Get All Deal on ID
+        /// </summary>
+        /// <typeparam name="T">Deal class get endpoint from</typeparam>
+        /// <param name="id">Deal ID</param>
+        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
 
         /// <summary>
         /// Update deal information on deal ID.
@@ -69,5 +93,14 @@ namespace Bitfox.Freshworks.Endpoints
         /// <param name="body">Account contains needed data for deletion</param>
         Task<Result<TEntity>> DeleteBulk<TEntity>(TEntity body) where TEntity : IHasDeleteBulk;
 
+        /// <summary>
+        /// Get Deal Fields
+        /// </summary>
+        Task<Result<T>> GetAllFields<T>() where T : IHasFields;
+
+        /// <summary>
+        /// Get Deal Filters
+        /// </summary>
+        Task<Result<T>> FetchAll<T>() where T : IHasFilters;
     }
 }

@@ -130,9 +130,13 @@ namespace Bitfox.Freshworks.Tests
                 OwnerID = owner.ID
             };
 
+
+            //_client.Account.Get
+
+
+
             // execute creation
             var result = await _client.Insert(account);
-
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -156,10 +160,10 @@ namespace Bitfox.Freshworks.Tests
             var account = await CreateAccount();
 
             // exucute get account
-            var result = await _client.Query.GetByID(account.Account);
-            //var result = await _client.Query.GetByID<Account>(account.Account.ID);
-            //var result = await _client.Account.Query.GetByID(account.Account);
-            //var result = await _client.Account.Query.GetByID<Account>(account.Account.ID);
+            var result = await _client.GetByID(account.Account);
+            //var result = await _client.GetByID<Account>(account.Account.ID);
+            //var result = await _client.Account.GetByID(account.Account);
+            //var result = await _client.Account.GetByID<Account>(account.Account.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -199,11 +203,15 @@ namespace Bitfox.Freshworks.Tests
             var content = filters.Filters[0];
             Account account = new(){ ID = content.ID };
 
+            // _client.Account.Include().
+            //_client.Task
+            //_client.Appointment
+
             // execute
-            var result = await _client.Query.GetAllByID(account);
-            //var result = await _client.Query.GetAllByID<Account>(content.ID);
-            //var result = await _client.Account.Query.GetAllByID(account);
-            //var result = await _client.Account.Query.GetAllByID<Account>(content.ID);
+            var result = await _client.GetAllByID(account);
+            //var result = await _client.GetAllByID<Account>(content.ID);
+            //var result = await _client.Account.GetAllByID(account);
+            //var result = await _client.Account.GetAllByID<Account>(content.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -270,8 +278,8 @@ namespace Bitfox.Freshworks.Tests
         public async Task<Account> AllAccountFields()
         {
             // Commands
-            var result = await _client.Query.GetAllFields<Account>();
-            //var result = await _client.Account.Query.GetAllFields<Account>();
+            var result = await _client.GetAllFields<Account>();
+            //var result = await _client.Account.GetAllFields<Account>();
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

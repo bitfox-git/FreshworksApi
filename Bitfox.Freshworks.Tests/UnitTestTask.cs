@@ -119,10 +119,10 @@ namespace Bitfox.Freshworks.Tests
             var task = await CreateTask();
 
             // exucute get Tasks
-            var result = await _client.Query.GetByID(task.Item);
-            //var result = await _client.Query.GetByID<Tasks>(Tasks.Tasks.ID);
-            //var result = await _client.Tasks.Query.GetByID(Tasks.Tasks);
-            //var result = await _client.Tasks.Query.GetByID<Tasks>(Tasks.Tasks.ID);
+            var result = await _client.GetByID(task.Item);
+            //var result = await _client.GetByID<Tasks>(Tasks.Tasks.ID);
+            //var result = await _client.Tasks.GetByID(Tasks.Tasks);
+            //var result = await _client.Tasks.GetByID<Tasks>(Tasks.Tasks.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -136,7 +136,7 @@ namespace Bitfox.Freshworks.Tests
             TaskModel task = new() { ID = content.Item.ID };
 
             // exucute get Tasks
-            var result = await _client.Query
+            var result = await _client
                 .Include("owner")
                 .Include("creater")
                 .Include("updater")
@@ -149,9 +149,9 @@ namespace Bitfox.Freshworks.Tests
                 .Include("industry_type")
                 .Include("child_sales_Tasks")
                 .GetByID(task);
-            //var result = await _client.Query.Include("owner").GetByID<Tasks>(Tasks.ID);
-            //var result = await _client.Tasks.Query.Include("owner").GetByID(Tasks);
-            //var result = await _client.Tasks.Query.Include("owner").GetByID<Tasks>(Tasks.ID);
+            //var result = await _client.Include("owner").GetByID<Tasks>(Tasks.ID);
+            //var result = await _client.Tasks.Include("owner").GetByID(Tasks);
+            //var result = await _client.Tasks.Include("owner").GetByID<Tasks>(Tasks.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);
@@ -161,10 +161,10 @@ namespace Bitfox.Freshworks.Tests
         public async Task<TaskModel> GetAllTasksByFilter()
         {
             // execute
-            var result = await _client.Query.GetAllByFilter<TaskModel>("open");
-            //var result = await _client.Query.GetAllByFilter<TaskModel>(content.ID);
-            //var result = await _client.Tasks.Query.GetAllByFilter(content);
-            //var result = await _client.Tasks.Query.GetAllByFilter<TaskModel>(content.ID);
+            var result = await _client.GetAllByFilter<TaskModel>("open");
+            //var result = await _client.GetAllByFilter<TaskModel>(content.ID);
+            //var result = await _client.Tasks.GetAllByFilter(content);
+            //var result = await _client.Tasks.GetAllByFilter<TaskModel>(content.ID);
 
             Assert.Null(result.Error);
             Assert.NotNull(result.Value);

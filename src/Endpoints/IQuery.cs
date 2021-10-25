@@ -32,6 +32,5 @@ namespace Bitfox.Freshworks.Endpoints
 
         Task<Result<T>> GetAllFields<T>() where T : IHasFields;
 
-
     }
 }

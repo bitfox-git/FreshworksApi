@@ -21,98 +21,98 @@ namespace Bitfox.Freshworks.Models
             return this;
         }
 
-        public async Task<Result<TEntity>> GetByID<TEntity>(TEntity body) where TEntity : IHasView, IHasUniqueID
+        public async Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID
         {
-            return await GetByID<TEntity>((long)body.ID);
+            return await GetByID<T>((long)body.ID);
         }
 
-        public async Task<Result<TEntity>> GetByID<TEntity>(long? id) where TEntity : IHasView
+        public async Task<Result<T>> GetByID<T>(long? id) where T : IHasView
         {
             if(id == null)
             {
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var endpoint = GetEndpoint<TEntity>();
+            var endpoint = GetEndpoint<T>();
             var uri = $"{endpoint}/{id}";
             uri = AddIncludes(uri);
 
             //add includes
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllByID<TEntity>(TEntity body) where TEntity : IHasAllView, IHasUniqueID
+        public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID
         {
-            return await GetAllByID<TEntity>((long)body.ID);
+            return await GetAllByID<T>((long)body.ID);
         }
 
-        public async Task<Result<TEntity>> GetAllByID<TEntity>(long? id) where TEntity : IHasAllView
+        public async Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView
         {
             if (id == null)
             {
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var endpoint = GetEndpoint<TEntity>();
+            var endpoint = GetEndpoint<T>();
             var uri = $"{endpoint}/view/{id}";
             uri = AddIncludes(uri);
 
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllByFilter<TEntity>(string filter) where TEntity : IHasView
+        public async Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView
         {
-            var endpoint = GetEndpoint<TEntity>();
+            var endpoint = GetEndpoint<T>();
             var uri = $"{endpoint}?filter={filter}";
             uri = AddIncludes(uri);
 
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllFileAndLinks<TEntity>(TEntity body) where TEntity : IHasFileAndLinks
+        public async Task<Result<T>> GetAllFileAndLinks<T>(T body) where T : IHasFileAndLinks
         {
-            return await GetAllFileAndLinks<TEntity>((long)body.ID);
+            return await GetAllFileAndLinks<T>((long)body.ID);
         }
 
-        public async Task<Result<TEntity>> GetAllFileAndLinks<TEntity>(long? id) where TEntity : IHasFileAndLinks
+        public async Task<Result<T>> GetAllFileAndLinks<T>(long? id) where T : IHasFileAndLinks
         {
             if (id == null)
             {
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var paths = GetEndpoint<TEntity>().Split("\\");
+            var paths = GetEndpoint<T>().Split("\\");
             var uri = $"{paths[^1]}/{id}/document_associations";
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllActivitiesByID<TEntity>(TEntity body) where TEntity : IHasActivities, IHasUniqueID
+        public async Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID
         {
-            return await GetAllActivitiesByID<TEntity>((long)body.ID);
+            return await GetAllActivitiesByID<T>((long)body.ID);
         }
 
-        public async Task<Result<TEntity>> GetAllActivitiesByID<TEntity>(long? id) where TEntity : IHasActivities
+        public async Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities
         {
             if (id == null)
             {
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var endpoint = GetEndpoint<TEntity>();
+            var endpoint = GetEndpoint<T>();
             var uri = $"{endpoint}/{id}/activities.json";
             uri = AddIncludes(uri);
 
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
-        public async Task<Result<TEntity>> GetAllFields<TEntity>() where TEntity: IHasFields
+        public async Task<Result<T>> GetAllFields<T>() where T: IHasFields
         {
-            var endpoint = GetEndpoint<TEntity>();
+            var endpoint = GetEndpoint<T>();
             string lastName = endpoint.Split("/").Last();
             string uri = $"/api/settings/{lastName}/fields";
             uri = AddIncludes(uri);
 
-            return await GetApiRequest<TEntity>(uri);
+            return await GetApiRequest<T>(uri);
         }
 
         public async Task<Result<Search>> SearchOnQuery(string query)
@@ -124,9 +124,9 @@ namespace Bitfox.Freshworks.Models
             return await GetApiRequest<Search>(uri);
         }
 
-        public async Task<Result<SearchFilter>> SearchOnFilter<TEntity>(SearchFilter body) where TEntity : IHasFilteredSearch
+        public async Task<Result<SearchFilter>> SearchOnFilter<T>(SearchFilter body) where T : IHasFilteredSearch
         {
-            string[] paths = GetEndpoint<TEntity>().Split("/");
+            string[] paths = GetEndpoint<T>().Split("/");
             string target = paths[^1];
             if (target.EndsWith("s"))
             {

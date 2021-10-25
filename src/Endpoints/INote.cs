@@ -11,17 +11,6 @@ namespace Bitfox.Freshworks.Endpoints
     public interface INote
     {
         /// <summary>
-        /// Query data from database. [ GET ]
-        /// </summary>
-        IQuery Query { get; }
-
-        /// <summary>
-        /// Include data to this model.
-        /// </summary>
-        /// <param name="include">name of table</param>
-        IQuery Include(string include);
-
-        /// <summary>
         /// Insert a new note item.
         /// </summary>
         /// <param name="body">New note item payload</param>
@@ -44,6 +33,5 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="id">Note ID</param>
         Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
-
     }
 }
