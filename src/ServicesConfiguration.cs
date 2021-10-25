@@ -29,6 +29,7 @@ namespace Bitfox.Freshworks
         {
             FreshworkConfig options = new(configuration);
             ICRMClient client = new CRMClientBuilder(options).Build();
+
             services.AddSingleton(client);
         }
     }
