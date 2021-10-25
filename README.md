@@ -51,7 +51,7 @@ var output = await _client.Delete(account);
 `output.Values`= A List of values as response.  
 
 Check for more samples on this [Page](./Samples.md)  
-For ways of binding the `FreshworksApi` to the application check this [File](./Binding.md).  
+For ways of binding the `FreshworksApi` to the application check this [File](./Samples_Binding.md).  
 Any Error or miss behaviour please leave a issue, Thanks.
 
 
