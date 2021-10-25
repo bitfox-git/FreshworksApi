@@ -103,5 +103,12 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <param name="body">Account contains needed data for deletion</param>
         Task<Result<T>> DeleteBulk<T>(T body) where T : IHasDeleteBulk;
+
+
+
+
+
+
+
     }
 }
