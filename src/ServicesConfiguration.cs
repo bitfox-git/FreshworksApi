@@ -22,21 +22,13 @@ namespace Bitfox.Freshworks
             configurationBuilder.AddJsonFile("appsettings.json");
             IConfiguration configuration = configurationBuilder.Build();
 
-            AddFreshworks(services, configuration);
+            ServicesConfiguration.AddFreshworks(services, configuration);
         }
 
         public static void AddFreshworks(this IServiceCollection services, IConfiguration configuration)
         {
-            var options = new FreshworkOptions();
-            string optionName = FreshworkOptions.Position;
-            configuration.GetSection(optionName).Bind(options);
-
-            // create client
-            ICRMClient client = new CRMClientBuilder()
-                                    .SetSubdomain(options.Domain)
-                                    .SetApiKey(options.ApiKey)
-                                    .Build();
-
+            FreshworkConfig options = new(configuration);
+            ICRMClient client = new CRMClientBuilder(options).Build();
             services.AddSingleton(client);
         }
     }

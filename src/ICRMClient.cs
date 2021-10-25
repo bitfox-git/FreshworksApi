@@ -65,8 +65,8 @@ namespace Bitfox.Freshworks
         /// <summary>
         /// Get all panel data. [ GET ]
         /// </summary>
-        /// <typeparam name="TEntity">Type of fetch</typeparam>
-        Task<Result<TEntity>> FetchAll<TEntity>() where TEntity : IHasFilters;
+        /// <typeparam name="T">Type of fetch</typeparam>
+        Task<Result<T>> FetchAll<T>() where T : IHasFilters;
 
         /// <summary>
         /// Insert item into database.
