@@ -1,5 +1,4 @@
 # Samples 
-For ways of binding the `FreshworksApi` to the application check this [File](./Binding.md).  
 
 ## `Account Types:`
 ```csharp
