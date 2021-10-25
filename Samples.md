@@ -346,7 +346,3 @@ var output = client.Selector.GetLifecycleStages();
 // Get all industry types
 var output = client.Selector.GetIndustryTypes();
 ```
-
-## Query
-
-Query You can call them
