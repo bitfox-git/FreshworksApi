@@ -16,9 +16,7 @@ namespace Bitfox.Freshworks
         private string subdomain;
         private string apikey;
 
-        public CRMClientBuilder()
-        { }
-
+        public CRMClientBuilder() { }
         public CRMClientBuilder(FreshworkConfig configuration)
         {
             subdomain = configuration.Domain;

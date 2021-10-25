@@ -106,7 +106,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// <param name="query">lookup for this string in models</param>
         /// <param name="field">data from given field ()</param>
         /// <param name="entities">entities to get data from</param>
-        /// <returns></returns>
         Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities);
 
     }

@@ -9,38 +9,39 @@ namespace Bitfox.Freshworks
 {
     public class CRMClient : Query, 
         ICRMClient,
-        ISearch,
-        IContact,
         IAccount,
-        IDeal,
-        INote,
-        ITask,
         IAppointment,
-        ISale,
+        IContact,
+        IDeal,
+        IFile,
+        INote,
         IPhone,
-        IFile
+        ISale,
+        ISearch,
+        ITask
     {
-        public ISelector Selector => this;
-
-        public ISearch Search => this;
-
-        public IContact Contact => this;
-
         public IAccount Account => this;
-
-        public IDeal Deal => this;
-
-        public INote Note => this;
-
-        public ITask Task => this;
 
         public IAppointment Appointment => this;
 
-        public ISale Sale => this;
+        public IContact Contact => this;
+
+        public IDeal Deal => this;
+
+        public IFile File => this;
+
+        public INote Note => this;
 
         public IPhone Phone => this;
 
-        public IFile File => this;
+        public ISale Sale => this;
+
+        public ISearch Search => this;
+
+        public ITask Task => this;
+
+        public ISelector Selector => this;
+
 
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }

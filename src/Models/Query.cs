@@ -21,30 +21,34 @@ namespace Bitfox.Freshworks.Models
             return this;
         }
 
-        public async Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID
+        private string AddIncludes(string uri)
         {
-            return await GetByID<T>((long)body.ID);
+            if(Includes.Count > 0)
+            {
+                uri += uri.Contains("?") ? "&" : "?";
+                uri += $"include={string.Join(",", Includes)}";
+            }
+
+            return uri;
         }
+
+        public async Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID
+            => await GetByID<T>((long)body.ID);
 
         public async Task<Result<T>> GetByID<T>(long? id) where T : IHasView
         {
-            if(id == null)
+            if (id == null)
             {
                 throw new ArgumentException($"ID is missing in request");
             }
-
-            var endpoint = GetEndpoint<T>();
-            var uri = $"{endpoint}/{id}";
-            uri = AddIncludes(uri);
+            var uri = AddIncludes($"{GetEndpoint<T>()}/{id}");
 
             //add includes
             return await GetApiRequest<T>(uri);
         }
 
         public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID
-        {
-            return await GetAllByID<T>((long)body.ID);
-        }
+            => await GetAllByID<T>((long)body.ID);
 
         public async Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView
         {
@@ -53,26 +57,18 @@ namespace Bitfox.Freshworks.Models
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var endpoint = GetEndpoint<T>();
-            var uri = $"{endpoint}/view/{id}";
-            uri = AddIncludes(uri);
-
+            var uri = AddIncludes($"{GetEndpoint<T>()}/view/{id}");
             return await GetApiRequest<T>(uri);
         }
 
         public async Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView
         {
-            var endpoint = GetEndpoint<T>();
-            var uri = $"{endpoint}?filter={filter}";
-            uri = AddIncludes(uri);
-
+            var uri = AddIncludes($"{GetEndpoint<T>()}?filter={filter}");
             return await GetApiRequest<T>(uri);
         }
 
         public async Task<Result<T>> GetAllFileAndLinks<T>(T body) where T : IHasFileAndLinks
-        {
-            return await GetAllFileAndLinks<T>((long)body.ID);
-        }
+            => await GetAllFileAndLinks<T>((long)body.ID);
 
         public async Task<Result<T>> GetAllFileAndLinks<T>(long? id) where T : IHasFileAndLinks
         {
@@ -87,9 +83,7 @@ namespace Bitfox.Freshworks.Models
         }
 
         public async Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID
-        {
-            return await GetAllActivitiesByID<T>((long)body.ID);
-        }
+            => await GetAllActivitiesByID<T>((long)body.ID);
 
         public async Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities
         {
@@ -98,10 +92,7 @@ namespace Bitfox.Freshworks.Models
                 throw new ArgumentException($"ID is missing in request");
             }
 
-            var endpoint = GetEndpoint<T>();
-            var uri = $"{endpoint}/{id}/activities.json";
-            uri = AddIncludes(uri);
-
+            var uri = AddIncludes($"{GetEndpoint<T>()}/{id}/activities.json");
             return await GetApiRequest<T>(uri);
         }
 
@@ -117,10 +108,7 @@ namespace Bitfox.Freshworks.Models
 
         public async Task<Result<Search>> SearchOnQuery(string query)
         {
-            var endpoint = GetEndpoint<Search>();
-            var uri = $"{endpoint}?q={query}";
-            uri = AddIncludes(uri);
-
+            var uri = AddIncludes($"{GetEndpoint<Search>()}?q={query}");
             return await GetApiRequest<Search>(uri);
         }
 
@@ -138,141 +126,71 @@ namespace Bitfox.Freshworks.Models
         }
 
         public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
-        {
-            string endpoint = $"{GetEndpoint<SearchLookup>()}?q={query}&f={field}&entities={entities}";
-            return await GetApiRequest<SearchLookup>(endpoint);
-        }
-
-        private string AddIncludes(string uri)
-        {
-            if(Includes.Count > 0)
-            {
-                uri += uri.Contains("?") ? "&" : "?";
-                uri += $"include={string.Join(",", Includes)}";
-            }
-
-            return uri;
-        }
-
-
-
-
+            => await GetEndpoint<SearchLookup>($"?q={query}&f={field}&entities={entities}");
 
         // Selectors
-        public async Task<Result<Selector>> GetSalesActivityTypes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_types";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetSalesActivityTypes() 
+            => await GetEndpoint<Selector>("/sales_activity_types");
 
-        public async Task<Result<Selector>> GetSalesActivityEntityTypes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_entity_types";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetSalesActivityEntityTypes() 
+            => await GetEndpoint<Selector>("/sales_activity_entity_types");
 
-        public async Task<Result<Selector>> GetSalesActivityOutcomes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_outcomes";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetSalesActivityOutcomes() 
+            => await GetEndpoint<Selector>("/sales_activity_outcomes");
 
-        public async Task<Result<Selector>> GetSalesActivityOutcomesByID(long id)
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/sales_activity_types/{id}/sales_activity_outcomes";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetSalesActivityOutcomesByID(long id) 
+            => await GetEndpoint<Selector>("/sales_activity_types/{id}/sales_activity_outcomes");
 
-        public async Task<Result<Selector>> GetDealProducts()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_products";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealProducts() 
+            => await GetEndpoint<Selector>("/deal_products");
 
-        public async Task<Result<Selector>> GetDealStages()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_stages";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealStages() 
+            => await GetEndpoint<Selector>("/deal_stages");
 
-        public async Task<Result<Selector>> GetDealTypes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_types";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealTypes() 
+            => await GetEndpoint<Selector>("/deal_types");
 
-        public async Task<Result<Selector>> GetDealReasons()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_reasons";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealReasons() 
+            => await GetEndpoint<Selector>("/deal_reasons");
 
-        public async Task<Result<Selector>> GetDealPipelines()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_pipelines";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealPipelines() 
+            => await GetEndpoint<Selector>("/deal_pipelines");
 
-        public async Task<Result<Selector>> GetDealPipelinesByID(long id)
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_pipelines/{id}/deal_stages";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealPipelinesByID(long id) 
+            => await GetEndpoint<Selector>($"/deal_pipelines/{id}/deal_stages");
 
-        public async Task<Result<Selector>> GetDealPaymentStatuses()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/deal_payment_statuses";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetDealPaymentStatuses() 
+            => await GetEndpoint<Selector>("/deal_payment_statuses");
 
-        public async Task<Result<Selector>> GetTerritories()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/territories";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetTerritories() 
+            => await GetEndpoint<Selector>("/territories");
 
-        public async Task<Result<Selector>> GetCampaigns()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/campaigns";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetCampaigns() 
+            => await GetEndpoint<Selector>("/campaigns");
 
-        public async Task<Result<Selector>> GetOwners()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/owners";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetOwners() 
+            => await GetEndpoint<Selector>("/owners");
 
-        public async Task<Result<Selector>> GetCurrencies()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/currencies";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetCurrencies() 
+            => await GetEndpoint<Selector>("/currencies");
 
-        public async Task<Result<Selector>> GetContactStatuses()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/contact_statuses";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetContactStatuses() 
+            => await GetEndpoint<Selector>("/contact_statuses");
 
-        public async Task<Result<Selector>> GetBusinessTypes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/business_types";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetBusinessTypes() 
+            => await GetEndpoint<Selector>("/business_types");
 
-        public async Task<Result<Selector>> GetLifecycleStages()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/lifecycle_stages";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetLifecycleStages() 
+            => await GetEndpoint<Selector>("/lifecycle_stages");
 
-        public async Task<Result<Selector>> GetIndustryTypes()
-        {
-            string endpoint = $"{GetEndpoint<Selector>()}/industry_types";
-            return await GetApiRequest<Selector>(endpoint);
-        }
+        public async Task<Result<Selector>> GetIndustryTypes() 
+            => await GetEndpoint<Selector>("/industry_types");
 
+        private async Task<Result<TEntity>> GetEndpoint<TEntity>(string path)
+        {
+            string endpoint = $"{GetEndpoint<TEntity>()}{path}";
+            return await GetApiRequest<TEntity>(endpoint);
+        }
 
     }
 }
