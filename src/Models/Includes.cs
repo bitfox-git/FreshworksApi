@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Bitfox.Freshworks.Attributes;
+﻿using Bitfox.Freshworks.Attributes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -45,34 +44,29 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("tasks")]
         public List<TaskModel> Tasks { get; set; } = null;
 
-        
         [JsonProperty("appointment")]
         public List<Appointment> Appointment { get; set; } = null;
 
-        
         [JsonProperty("appointments")]
         public List<Appointment> Appointments { get; set; } = null;
 
-        
         [JsonProperty("business_types")]
         public List<BusinessType> BusinessTypes { get; set; } = null;
 
-        
         [JsonProperty("users")]
         public List<User> Users { get; set; } = null;
 
-        
         [JsonProperty("industry_types")]
         public List<IndustryType> IndustryTypes { get; set; } = null;
 
-        
         [JsonProperty("child_sales_accounts")]
         public List<Sale> ChildSalesAccounts { get; set; } = null;
 
-        
         [JsonProperty("territories")]
         public List<User> Territories { get; set; } = null;
 
+        [JsonProperty("lists")]
+        public List<IndustryType> Lists { get; set; } = null;
 
 
 

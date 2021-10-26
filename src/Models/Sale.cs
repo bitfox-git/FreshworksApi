@@ -27,6 +27,10 @@ namespace Bitfox.Freshworks.Models
         public Meta Meta { get; set; } = null;
 
 
+        [JsonProperty("filters")]
+        public List<Filter> Filters { get; set; } = null;
+
+
         // Childs
 
         [IsRequiredOn(nameof(IHasUpdate))]

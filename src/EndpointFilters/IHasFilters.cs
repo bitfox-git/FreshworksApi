@@ -7,5 +7,9 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     public interface IHasFilters
-    { }
+    { 
+
+        List<Filter> Filters { get; }
+
+    }
 }

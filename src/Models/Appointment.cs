@@ -24,7 +24,11 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("conferences")]
         public List<Conference> Conferences { get; set; } = null;
 
-        
+
+        [JsonProperty("filters")]
+        public List<Filter> Filters { get; set; } = null;
+
+
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
 

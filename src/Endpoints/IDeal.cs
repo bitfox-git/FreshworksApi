@@ -42,14 +42,14 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Deal class get endpoint from</typeparam>
         /// <param name="body">New Deal payload</param>
-        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView<T>, IHasUniqueID;
 
         /// <summary>
         /// Get All Deal on ID
         /// </summary>
         /// <typeparam name="T">Deal class get endpoint from</typeparam>
         /// <param name="id">Deal ID</param>
-        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView<T>;
 
         /// <summary>
         /// Update deal information on deal ID.

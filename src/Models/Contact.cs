@@ -12,15 +12,22 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/contacts")]
-    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasFileAndLinks, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView<Contact>, IHasFileAndLinks, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
+
+        [JsonProperty("contacts")]
+        public List<Contact> Items { get; set; } = null;
+
+        [JsonProperty("filters")]
+        public List<Filter> Filters { get; set; } = null;
+
+        [JsonProperty("meta")]
+        public Meta Meta { get; set; } = null;
+
 
         [JsonProperty("activities")]
         public List<Activity> Activities { get; set; } = null;
 
-
-        [JsonProperty("meta")]
-        public Meta Meta { get; set; } = null;
 
 
         [JsonProperty("field_groups")]
@@ -33,10 +40,6 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("message")]
         public string Message { get; set; } = null;
-
-
-        [JsonProperty("filters")]
-        public List<Filter> Filters { get; set; } = null;
 
         [JsonProperty("documents")]
         public List<File> Files { get; set; } = null;

@@ -10,12 +10,25 @@ namespace Bitfox.Freshworks.Endpoints
 {
     public interface IQuery: ISelector
     {
+
         /// <summary>
         /// Set Tables that add on response 
         /// </summary>
         /// <param name="include">string that includes</param>
         /// <returns></returns>
         IQuery Include(string include);
+
+
+        Task<List<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>;
+
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Get a single model
@@ -36,14 +49,14 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="body">Model ID used to get the models</param>
-        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView<T>, IHasUniqueID;
 
         /// <summary>
         /// Get all models
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="id">Used to get the models</param>
-        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView<T>;
 
         /// <summary>
         /// Get all models by filters

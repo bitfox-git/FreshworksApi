@@ -20,6 +20,13 @@ namespace Bitfox.Freshworks.Tests
         }
 
         [Fact]
+        public async Task GetAllAccountsOnSuccess()
+        {
+            var results = await _client.GetAll<Contact>();
+            Assert.NotEmpty(results);
+        }
+
+        [Fact]
         public async Task InsertAccountOnSuccess()
         {
             Account account = await CreateAccount();

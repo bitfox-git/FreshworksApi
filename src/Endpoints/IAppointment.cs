@@ -57,14 +57,14 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Appointment class get endpoint from</typeparam>
         /// <param name="body">New Appointment payload</param>
-        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID;
+        Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView<T>, IHasUniqueID;
 
         /// <summary>
         /// Get All Appointments on ID
         /// </summary>
         /// <typeparam name="T">Appointment class get endpoint from</typeparam>
         /// <param name="id">Appointment ID</param>
-        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView<T>;
 
         /// <summary>
         /// Update appointment information on appointment ID.

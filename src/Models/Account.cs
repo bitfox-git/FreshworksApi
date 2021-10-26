@@ -13,8 +13,18 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/sales_accounts")]
-    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView, IHasFileAndLinks, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView<Account>, IHasFileAndLinks, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
+        [JsonProperty("accounts")]
+        public List<Account> Items { get; set; } = null;
+
+        [JsonProperty("meta")]
+        public Meta Meta { get; set; } = null;
+        
+        [JsonProperty("filters")]
+        public List<Filter> Filters { get; set; } = null;
+
+
         [IsRequiredOn(nameof(IHasDelete))]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
@@ -23,11 +33,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
-        
-        [JsonProperty("meta")]
-        public Meta Meta { get; set; } = null;
 
-        
         [JsonProperty("field_groups")]
         public List<Field> FieldGroup { get; set; } = null;
 
@@ -39,9 +45,6 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("message")]
         public string Message { get; set; } = null;
 
-        
-        [JsonProperty("filters")]
-        public List<Filter> Filters { get; set; } = null;
 
 
         [JsonProperty("documents")]

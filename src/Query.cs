@@ -21,8 +21,61 @@ namespace Bitfox.Freshworks.Models
             return this;
         }
 
+        private async Task<long> GetDefaultViewID<T>() where T : IHasFilters
+        {
+            //first , request the correct filter
+            var filters = await FetchAll<T>();
+
+            //This is kind of a hack ? it looks for the "all ....." view for this entity...
+            //is this 100% sure?
+            var viewId = filters.Value.Filters
+                           .Where(x => x.Name.ToLower().StartsWith("all ") && (bool)x.IsDefault)
+                           .Select(x => x.ID)
+                           .FirstOrDefault();
+
+            return (long)viewId;
+        }
+
+        public async Task<Result<T>> GetPage<T>(long viewID, int page) where T : IHasAllView<T>
+            => await GetRequest<T>($"/view/{viewID}?page={page}");
+
+        public async Task<List<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>
+        {
+            long viewID = await GetDefaultViewID<T>();
+            var result = new List<T>();
+            int page = 1;
+            int prevCount = 0;
+
+            while (page > 0)
+            {
+                var records = await GetPage<T>(viewID, page);
+                result.AddRange(records.Value.Items);
+                if (result.Count < records.Value.Meta.Total && result.Count != prevCount)
+                {
+                    page++;
+                }
+                else
+                {
+                    page = -1;
+                }
+
+                prevCount = result.Count;
+            }
+
+            return result;
+        }
+
+
+
+        /// <summary>
+        /// ///////////////////////////
+        /// </summary>
+
+
+
+
         public async Task<Result<T>> FetchAll<T>() where T : IHasFilters
-            => await GetRequest<T>($"{GetEndpoint<T>()}/filters");
+            => await GetRequest<T>($"/filters");
 
         public async Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID
             => await GetByID<T>((long)body.ID);
@@ -34,24 +87,24 @@ namespace Bitfox.Freshworks.Models
                 throw new ArgumentException("Missing `ID` in request");
             }
 
-            return await GetRequest<T>($"{GetEndpoint<T>()}/{id}");
+            return await GetRequest<T>($"/{id}");
         }
         
-        public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID
+        public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView<T>, IHasUniqueID
             => await GetAllByID<T>((long)body.ID);
 
-        public async Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView
+        public async Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView<T>
         {
             if(id == 0)
             {
                 throw new ArgumentException("Missing `ID` in request");
             }
 
-            return await GetRequest<T>($"{GetEndpoint<T>()}/view/{id}");
+            return await GetRequest<T>($"/view/{id}");
         }
 
         public async Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView
-            => await GetRequest<T>($"{GetEndpoint<T>()}?filter={filter}");
+            => await GetRequest<T>($"?filter={filter}");
 
         public async Task<Result<T>> GetAllFileAndLinks<T>(T body) where T : IHasFileAndLinks
             => await GetAllFileAndLinks<T>((long)body.ID);

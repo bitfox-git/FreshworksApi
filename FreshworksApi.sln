@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitfox.Freshworks", "src\Bi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWebApp", "TestApplication\SampleWebApp.csproj", "{C7B41005-FB92-4C7E-A9C3-3DD502B5B990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bitfox.Freshworks.Tests", "Bitfox.Freshworks.Tests\Bitfox.Freshworks.Tests.csproj", "{3F60039D-29E9-47D8-BB0E-98A416D7F8AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bitfox.Freshworks.Tests", "Bitfox.Freshworks.Tests\Bitfox.Freshworks.Tests.csproj", "{3F60039D-29E9-47D8-BB0E-98A416D7F8AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
