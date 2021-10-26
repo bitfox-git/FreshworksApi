@@ -46,7 +46,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Account class get endpoint from</typeparam>
         /// <param name="id">Account ID</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get All Accounts on ID
@@ -60,7 +60,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Account class get endpoint from</typeparam>
         /// <param name="id">Account ID</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
         /// <summary>
         /// Update account information on account ID.
@@ -84,7 +84,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove account by account ID.
         /// </summary>
         /// <param name="id">Account ID</param>
-        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
+        Task<Result<bool>> Delete<T>(long id) where T : IHasDelete;
 
         /// <summary>
         /// Hard delete a account and all the associated data.
@@ -96,7 +96,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Hard delete a account and all the associated data.
         /// </summary>
         /// <param name="id">ID that will been deleted</param>
-        Task<Result<bool>> Forget<T>(long? id) where T : IHasForget;
+        Task<Result<bool>> Forget<T>(long id) where T : IHasForget;
 
         /// <summary>
         /// Delete Accounts in bulk.

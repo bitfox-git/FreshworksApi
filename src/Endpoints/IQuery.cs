@@ -29,7 +29,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="id">Used to get the model</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get all models
@@ -43,7 +43,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="id">Used to get the models</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
         /// <summary>
         /// Get all models by filters
@@ -64,7 +64,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="id">ID to get data from</param>
-        Task<Result<T>> GetAllFileAndLinks<T>(long? id) where T : IHasFileAndLinks;
+        Task<Result<T>> GetAllFileAndLinks<T>(long id) where T : IHasFileAndLinks;
 
         /// <summary>
         /// Get all Activities
@@ -78,7 +78,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Model data used in response</typeparam>
         /// <param name="id">ID to get data from.</param>
-        Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities;
+        Task<Result<T>> GetAllActivitiesByID<T>(long id) where T : IHasActivities;
 
         /// <summary>
         /// Get all Filters

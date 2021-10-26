@@ -18,5 +18,6 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("message")]
         public List<string> Message { get; set; } = null;
+
     }
 }

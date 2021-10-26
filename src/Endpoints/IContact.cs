@@ -35,7 +35,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Account class get endpoint from</typeparam>
         /// <param name="id">Account ID</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get All Accounts on ID
@@ -49,7 +49,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Account class get endpoint from</typeparam>
         /// <param name="id">Account ID</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
         /// <summary>
         /// Update contact information on contact ID.
@@ -73,7 +73,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove contact by contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
-        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<TEntity>(long id) where TEntity : IHasDelete;
 
         /// <summary>
         /// Hard delete a contact and all the associated data.
@@ -85,7 +85,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Hard delete a contact and all the associated data.
         /// </summary>
         /// <param name="id">ID that will been deleted</param>
-        Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget;
+        Task<Result<bool>> Forget<TEntity>(long id) where TEntity : IHasForget;
 
         /// <summary>
         /// Assign contacts in bulk.
@@ -107,7 +107,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// <summary>
         /// Get Contact Activities
         /// </summary>
-        Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities;
+        Task<Result<T>> GetAllActivitiesByID<T>(long id) where T : IHasActivities;
 
         /// <summary>
         /// Get Contact Fields

@@ -35,7 +35,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Deal class get endpoint from</typeparam>
         /// <param name="id">Deal ID</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get All Deal on ID
@@ -49,7 +49,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Deal class get endpoint from</typeparam>
         /// <param name="id">Deal ID</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
         /// <summary>
         /// Update deal information on deal ID.
@@ -73,7 +73,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove deal by deal ID.
         /// </summary>
         /// <param name="id">Deal ID</param>
-        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<TEntity>(long id) where TEntity : IHasDelete;
 
         /// <summary>
         /// Hard delete a deal and all the associated data.
@@ -85,7 +85,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Hard delete a deal and all the associated data.
         /// </summary>
         /// <param name="id">ID that will been deleted</param>
-        Task<Result<bool>> Forget<TEntity>(long? id) where TEntity : IHasForget;
+        Task<Result<bool>> Forget<TEntity>(long id) where TEntity : IHasForget;
 
         /// <summary>
         /// Delete deals in bulk.

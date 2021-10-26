@@ -21,96 +21,66 @@ namespace Bitfox.Freshworks.Models
             return this;
         }
 
-        private string AddIncludes(string uri)
-        {
-            if(Includes.Count > 0)
-            {
-                uri += uri.Contains("?") ? "&" : "?";
-                uri += $"include={string.Join(",", Includes)}";
-            }
-
-            return uri;
-        }
+        public async Task<Result<T>> FetchAll<T>() where T : IHasFilters
+            => await GetRequest<T>($"{GetEndpoint<T>()}/filters");
 
         public async Task<Result<T>> GetByID<T>(T body) where T : IHasView, IHasUniqueID
             => await GetByID<T>((long)body.ID);
 
-        public async Task<Result<T>> GetByID<T>(long? id) where T : IHasView
+        public async Task<Result<T>> GetByID<T>(long id) where T : IHasView
         {
-            if (id == null)
+            if(id == 0)
             {
-                throw new ArgumentException($"ID is missing in request");
+                throw new ArgumentException("Missing `ID` in request");
             }
-            var uri = AddIncludes($"{GetEndpoint<T>()}/{id}");
 
-            //add includes
-            return await GetApiRequest<T>(uri);
+            return await GetRequest<T>($"{GetEndpoint<T>()}/{id}");
         }
-
+        
         public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView, IHasUniqueID
             => await GetAllByID<T>((long)body.ID);
 
-        public async Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView
+        public async Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView
         {
-            if (id == null)
+            if(id == 0)
             {
-                throw new ArgumentException($"ID is missing in request");
+                throw new ArgumentException("Missing `ID` in request");
             }
 
-            var uri = AddIncludes($"{GetEndpoint<T>()}/view/{id}");
-            return await GetApiRequest<T>(uri);
+            return await GetRequest<T>($"{GetEndpoint<T>()}/view/{id}");
         }
 
         public async Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView
-        {
-            var uri = AddIncludes($"{GetEndpoint<T>()}?filter={filter}");
-            return await GetApiRequest<T>(uri);
-        }
+            => await GetRequest<T>($"{GetEndpoint<T>()}?filter={filter}");
 
         public async Task<Result<T>> GetAllFileAndLinks<T>(T body) where T : IHasFileAndLinks
             => await GetAllFileAndLinks<T>((long)body.ID);
 
-        public async Task<Result<T>> GetAllFileAndLinks<T>(long? id) where T : IHasFileAndLinks
+        public async Task<Result<T>> GetAllFileAndLinks<T>(long id) where T : IHasFileAndLinks
         {
-            if (id == null)
+            if (id == 0)
             {
-                throw new ArgumentException($"ID is missing in request");
+                throw new ArgumentException("Missing `ID` in request");
             }
 
             var paths = GetEndpoint<T>().Split("\\");
-            var uri = $"{paths[^1]}/{id}/document_associations";
-            return await GetApiRequest<T>(uri);
+            return await GetRequest<T>($"/{paths[^1]}/{id}/document_associations");
         }
 
         public async Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID
             => await GetAllActivitiesByID<T>((long)body.ID);
 
-        public async Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities
-        {
-            if (id == null)
-            {
-                throw new ArgumentException($"ID is missing in request");
-            }
-
-            var uri = AddIncludes($"{GetEndpoint<T>()}/{id}/activities.json");
-            return await GetApiRequest<T>(uri);
-        }
+        public async Task<Result<T>> GetAllActivitiesByID<T>(long id) where T : IHasActivities
+            => await GetRequest<T>($"/{id}/activities.json");
 
         public async Task<Result<T>> GetAllFields<T>() where T: IHasFields
         {
-            var endpoint = GetEndpoint<T>();
-            string lastName = endpoint.Split("/").Last();
-            string uri = $"/api/settings/{lastName}/fields";
-            uri = AddIncludes(uri);
-
-            return await GetApiRequest<T>(uri);
+            string lastName = GetEndpoint<T>().Split("/").Last();
+            return await GetRequest<T>($"/api/settings/{lastName}/fields");
         }
 
         public async Task<Result<Search>> SearchOnQuery(string query)
-        {
-            var uri = AddIncludes($"{GetEndpoint<Search>()}?q={query}");
-            return await GetApiRequest<Search>(uri);
-        }
+            => await GetRequest<Search>($"?q={query}");
 
         public async Task<Result<SearchFilter>> SearchOnFilter<T>(SearchFilter body) where T : IHasFilteredSearch
         {
@@ -126,69 +96,82 @@ namespace Bitfox.Freshworks.Models
         }
 
         public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
-            => await GetEndpoint<SearchLookup>($"?q={query}&f={field}&entities={entities}");
+            => await GetRequest<SearchLookup>($"?q={query}&f={field}&entities={entities}");
 
         // Selectors
         public async Task<Result<Selector>> GetSalesActivityTypes() 
-            => await GetEndpoint<Selector>("/sales_activity_types");
+            => await GetRequest<Selector>("/sales_activity_types");
 
         public async Task<Result<Selector>> GetSalesActivityEntityTypes() 
-            => await GetEndpoint<Selector>("/sales_activity_entity_types");
+            => await GetRequest<Selector>("/sales_activity_entity_types");
 
         public async Task<Result<Selector>> GetSalesActivityOutcomes() 
-            => await GetEndpoint<Selector>("/sales_activity_outcomes");
+            => await GetRequest<Selector>("/sales_activity_outcomes");
 
         public async Task<Result<Selector>> GetSalesActivityOutcomesByID(long id) 
-            => await GetEndpoint<Selector>("/sales_activity_types/{id}/sales_activity_outcomes");
+            => await GetRequest<Selector>("/sales_activity_types/{id}/sales_activity_outcomes");
 
         public async Task<Result<Selector>> GetDealProducts() 
-            => await GetEndpoint<Selector>("/deal_products");
+            => await GetRequest<Selector>("/deal_products");
 
         public async Task<Result<Selector>> GetDealStages() 
-            => await GetEndpoint<Selector>("/deal_stages");
+            => await GetRequest<Selector>("/deal_stages");
 
         public async Task<Result<Selector>> GetDealTypes() 
-            => await GetEndpoint<Selector>("/deal_types");
+            => await GetRequest<Selector>("/deal_types");
 
         public async Task<Result<Selector>> GetDealReasons() 
-            => await GetEndpoint<Selector>("/deal_reasons");
+            => await GetRequest<Selector>("/deal_reasons");
 
         public async Task<Result<Selector>> GetDealPipelines() 
-            => await GetEndpoint<Selector>("/deal_pipelines");
+            => await GetRequest<Selector>("/deal_pipelines");
 
         public async Task<Result<Selector>> GetDealPipelinesByID(long id) 
-            => await GetEndpoint<Selector>($"/deal_pipelines/{id}/deal_stages");
+            => await GetRequest<Selector>($"/deal_pipelines/{id}/deal_stages");
 
         public async Task<Result<Selector>> GetDealPaymentStatuses() 
-            => await GetEndpoint<Selector>("/deal_payment_statuses");
+            => await GetRequest<Selector>("/deal_payment_statuses");
 
         public async Task<Result<Selector>> GetTerritories() 
-            => await GetEndpoint<Selector>("/territories");
+            => await GetRequest<Selector>("/territories");
 
         public async Task<Result<Selector>> GetCampaigns() 
-            => await GetEndpoint<Selector>("/campaigns");
+            => await GetRequest<Selector>("/campaigns");
 
         public async Task<Result<Selector>> GetOwners() 
-            => await GetEndpoint<Selector>("/owners");
+            => await GetRequest<Selector>("/owners");
 
         public async Task<Result<Selector>> GetCurrencies() 
-            => await GetEndpoint<Selector>("/currencies");
+            => await GetRequest<Selector>("/currencies");
 
         public async Task<Result<Selector>> GetContactStatuses() 
-            => await GetEndpoint<Selector>("/contact_statuses");
+            => await GetRequest<Selector>("/contact_statuses");
 
         public async Task<Result<Selector>> GetBusinessTypes() 
-            => await GetEndpoint<Selector>("/business_types");
+            => await GetRequest<Selector>("/business_types");
 
         public async Task<Result<Selector>> GetLifecycleStages() 
-            => await GetEndpoint<Selector>("/lifecycle_stages");
+            => await GetRequest<Selector>("/lifecycle_stages");
 
         public async Task<Result<Selector>> GetIndustryTypes() 
-            => await GetEndpoint<Selector>("/industry_types");
+            => await GetRequest<Selector>("/industry_types");
 
-        private async Task<Result<TEntity>> GetEndpoint<TEntity>(string path)
+        private string AddIncludes(string uri)
+        {
+            if(Includes.Count > 0)
+            {
+                uri += uri.Contains("?") ? "&" : "?";
+                uri += $"include={string.Join(",", Includes)}";
+            }
+
+            return uri;
+        }
+
+        protected async Task<Result<TEntity>> GetRequest<TEntity>(string path)
         {
             string endpoint = $"{GetEndpoint<TEntity>()}{path}";
+            endpoint = AddIncludes(endpoint);
+
             return await GetApiRequest<TEntity>(endpoint);
         }
 

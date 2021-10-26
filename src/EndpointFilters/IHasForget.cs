@@ -9,7 +9,5 @@ namespace Bitfox.Freshworks.Models
     public interface IHasForget
     {
         long? ID { get; set; }
-
-        //void CatchForgetExceptions();
     }
 }

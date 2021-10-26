@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using RestSharp;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Bitfox.Freshworks.Models
 {
@@ -12,11 +14,15 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("errors")]
         public Error Error { get; set; } = null;
 
-        public Result(string body)
+        public RestRequest Request { get; set; } = null;
+
+        public Result(RestRequest request, string respContent)
         {
-            if (!HandleError(body))
+            Request = request;
+
+            if (!HandleError(respContent))
             {
-                HandleBody(body);
+                HandleBody(respContent);
             }
         }
 
@@ -36,12 +42,9 @@ namespace Bitfox.Freshworks.Models
             if (error != null && error.Error != null)
             {
                 Error = error.Error;
-                return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return (Error != null);
         }
 
         private void HandleBody(string fullBody)

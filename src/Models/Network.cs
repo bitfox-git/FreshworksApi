@@ -19,7 +19,6 @@ namespace Bitfox.Freshworks.Models
     {
         protected readonly string BaseURL;
         protected readonly string ApiKey;
-        private readonly HttpClient Client = new();
 
         public Network(string baseURL, string apikey)
         {
@@ -31,25 +30,20 @@ namespace Bitfox.Freshworks.Models
         protected async Task<Result<TEntity>> GetApiRequest<TEntity>(string path)
         {
             string url = BaseURL + path;
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(url),
-                Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" }
-                }
-            };
+            RestClient client = new(url);
 
-            var resp = await Client.SendAsync(request);
-            var content = await resp.Content.ReadAsStringAsync();
-            return new Result<TEntity>(content);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Authorization", $"Token token={ ApiKey }");
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            var content = response.Content;
+            return new Result<TEntity>(request, content);
         }
 
         // Post Http calls
         protected async Task<Result<TEntity>> PostApiRequest<TEntity>(string path, TEntity body)
         {
-            string url = BaseURL + path;
-
             // create json & remove unused content
             var json = JsonConvert.SerializeObject(body, Formatting.None,
                 new JsonSerializerSettings
@@ -58,19 +52,18 @@ namespace Bitfox.Freshworks.Models
                 }
             );
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(url),
-                Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" },
-                },
-                Content = new StringContent(json, Encoding.UTF8, "application/json")
-            };
+            string url = BaseURL + path;
+            RestClient client = new(url);
 
-            var resp = await Client.SendAsync(request);
-            var content = await resp.Content.ReadAsStringAsync();
-            return new Result<TEntity>(content);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Authorization", $"Token token={ ApiKey }");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            var content = response.Content;
+            return new Result<TEntity>(request, content);
         }
 
         protected async Task<Result<TEntity>> PostApiFormRequest<TEntity>(string path, Dictionary<string, string> files=null, Dictionary<string, string> parameters=null)
@@ -78,8 +71,6 @@ namespace Bitfox.Freshworks.Models
             string url = BaseURL + path;
             RestClient client = new(url);
 
-            #region Create Package
-            
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Authorization", $"Token token={ ApiKey }");
@@ -101,72 +92,61 @@ namespace Bitfox.Freshworks.Models
             }
 
             IRestResponse response = await client.ExecuteAsync(request);
-
-            #endregion
-
             var content = response.Content;
-            return new Result<TEntity>(content);
+            return new Result<TEntity>(request, content);
         }
 
         // Put Http calls
         protected async Task<Result<TEntity>> UpdateApiRequest<TEntity>(string path, TEntity body)
         {
-            string url = BaseURL + path;
             JsonSerializerSettings serializesettings = new()
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 DefaultValueHandling = DefaultValueHandling.Ignore
             };
-
             var json = JsonConvert.SerializeObject(body, serializesettings);
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Put,
-                RequestUri = new Uri(url),
-                Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" }
-                },
-                Content = new StringContent(json, Encoding.UTF8, "application/json")
-            };
 
-            var resp = await Client.SendAsync(request);
-            var content = await resp.Content.ReadAsStringAsync();
-            return new Result<TEntity>(content);
+            string url = BaseURL + path;
+            RestClient client = new(url);
+
+            client.Timeout = -1;
+            var request = new RestRequest(Method.PUT);
+            request.AddHeader("Authorization", $"Token token={ ApiKey }");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            var content = response.Content;
+            return new Result<TEntity>(request, content);
         }
 
         // Delete Http calls
         protected async Task<Result<TEntity>> DeleteApiRequest<TEntity>(string path)
         {
             string url = BaseURL + path;
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri(url),
-                Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" }
-                }
-            };
+            RestClient client = new(url);
 
-            var resp = await Client.SendAsync(request);
-            var content = await resp.Content.ReadAsStringAsync();
-            return new Result<TEntity>(content);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("Authorization", $"Token token={ ApiKey }");
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            var content = response.Content;
+            return new Result<TEntity>(request, content);
         }
 
         protected async Task<Result<bool>> DeleteApiRequest(string path)
         {
             string url = BaseURL + path;
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri(url),
-                Headers = {
-                    { HttpRequestHeader.Authorization.ToString(), $"Token token={ApiKey}" }
-                }
-            };
+            RestClient client = new(url);
 
-            var resp = await Client.SendAsync(request);
-            var content = await resp.Content.ReadAsStringAsync();
-            return new Result<bool>(content);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("Authorization", $"Token token={ ApiKey }");
+
+            IRestResponse response = await client.ExecuteAsync(request);
+            var content = response.Content;
+            return new Result<bool>(request, content);
         }
 
         // Get endpoint

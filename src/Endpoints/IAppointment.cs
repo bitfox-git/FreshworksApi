@@ -50,7 +50,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Appointment class get endpoint from</typeparam>
         /// <param name="id">Appointment ID</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get All Appointment on ID
@@ -64,7 +64,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Appointment class get endpoint from</typeparam>
         /// <param name="id">Appointment ID</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
         /// <summary>
         /// Update appointment information on appointment ID.
@@ -82,7 +82,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove contact by contact ID.
         /// </summary>
         /// <param name="id">Contact ID</param>
-        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<TEntity>(long id) where TEntity : IHasDelete;
 
 
     }

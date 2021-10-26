@@ -109,7 +109,7 @@ namespace Bitfox.Freshworks
         /// </summary>
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="id">Long id that needs to been deleted</param>
-        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
+        Task<Result<bool>> Delete<T>(long id) where T : IHasDelete;
 
         /// <summary>
         /// Forget item that contains in database.
@@ -123,7 +123,7 @@ namespace Bitfox.Freshworks
         /// </summary>
         /// <typeparam name="T">Type of item and response</typeparam>
         /// <param name="id">Long id that needs to been Forgotten</param>
-        Task<Result<bool>> Forget<T>(long? id) where T : IHasForget;
+        Task<Result<bool>> Forget<T>(long id) where T : IHasForget;
 
         /// <summary>
         /// Assign a bulk of items to the database.

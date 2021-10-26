@@ -48,7 +48,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Sale class get endpoint from</typeparam>
         /// <param name="id">Sale ID</param>
-        Task<Result<T>> GetByID<T>(long? id) where T : IHasView;
+        Task<Result<T>> GetByID<T>(long id) where T : IHasView;
 
         /// <summary>
         /// Get All Sale on ID
@@ -62,7 +62,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">Sale class get endpoint from</typeparam>
         /// <param name="id">Sale ID</param>
-        Task<Result<T>> GetAllByID<T>(long? id) where T : IHasAllView;
+        Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView;
 
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove Sales by Sales ID.
         /// </summary>
         /// <param name="id">Sales ID</param>
-        Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete;
+        Task<Result<bool>> Delete<T>(long id) where T : IHasDelete;
 
 
     }

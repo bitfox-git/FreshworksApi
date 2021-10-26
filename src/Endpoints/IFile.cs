@@ -42,7 +42,7 @@ namespace Bitfox.Freshworks.Endpoints
         /// </summary>
         /// <typeparam name="T">File model only</typeparam>
         /// <param name="id">File to get ID from</param>
-        Task<Result<T>> GetAllActivitiesByID<T>(long? id) where T : IHasActivities;
+        Task<Result<T>> GetAllActivitiesByID<T>(long id) where T : IHasActivities;
 
         /// <summary>
         /// Get File Filters

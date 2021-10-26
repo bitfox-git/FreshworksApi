@@ -32,6 +32,6 @@ namespace Bitfox.Freshworks.Endpoints
         /// Remove note by note ID.
         /// </summary>
         /// <param name="id">Note ID</param>
-        Task<Result<bool>> Delete<TEntity>(long? id) where TEntity : IHasDelete;
+        Task<Result<bool>> Delete<TEntity>(long id) where TEntity : IHasDelete;
     }
 }

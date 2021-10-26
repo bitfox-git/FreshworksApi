@@ -47,12 +47,6 @@ namespace Bitfox.Freshworks
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
 
-        public async Task<Result<T>> FetchAll<T>() where T : IHasFilters
-        {
-            string endpoint = $"{GetEndpoint<T>()}/filters";
-            return await GetApiRequest<T>(endpoint);
-        }
-
         public async Task<Result<T>> Insert<T>(T body) where T : IHasInsert
         {
             IsRequiredOnAttribute.CatchExceptions(body, nameof(IHasInsert));
@@ -94,9 +88,9 @@ namespace Bitfox.Freshworks
             return await PostApiRequest(endpoint, body);
         }
 
-        public async Task<Result<bool>> Delete<T>(long? id) where T : IHasDelete
+        public async Task<Result<bool>> Delete<T>(long id) where T : IHasDelete
         {
-            if (id == null)
+            if (id == 0)
             {
                 throw new ArgumentException($"ID is required for removing the view.");
             }
@@ -121,9 +115,9 @@ namespace Bitfox.Freshworks
             return await DeleteApiRequest<T>(endpoint);
         }
 
-        public async Task<Result<bool>> Forget<T>(long? id) where T : IHasForget
+        public async Task<Result<bool>> Forget<T>(long id) where T : IHasForget
         {
-            if (id == null)
+            if (id == 0)
             {
                 throw new ArgumentException($"ID is required for removing the view.");
             }
