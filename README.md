@@ -52,6 +52,6 @@ var output = await _client.Delete(account);
 
 Check for more samples on this [Page](./Samples.md)  
 For ways of binding the `FreshworksApi` to the application check this [File](./Samples_Binding.md).  
-Any Error or miss behaviour please leave a issue, Thanks.
+Any error or wrong behaviour please leave a issue, Thanks.
 
 
