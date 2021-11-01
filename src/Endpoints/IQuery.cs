@@ -21,6 +21,13 @@ namespace Bitfox.Freshworks.Endpoints
 
         Task<List<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>;
 
+        Task<List<ListItem>> GetAllLists();
+
+        //Task<List<Subscription>> GetAllSubscriptions();
+
+        Task<Contact> AddList(Contact contact, string listName);
+
+        Contact AddSubscription(Contact contact, long subscriptionType);
 
 
 

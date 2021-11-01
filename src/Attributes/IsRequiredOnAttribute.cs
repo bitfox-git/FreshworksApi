@@ -40,7 +40,7 @@ namespace Bitfox.Freshworks.Attributes
                         string propName = prop.Name;
                         var propValue = prop.GetValue(classModel);
 
-                        if (required.Contains(attribute.Interface))
+                        if (required.Contains(attribute.Interface) && propValue == null)
                         {
                             message += $"Required key `{propName}` is missing.\n";
                         }

@@ -66,7 +66,7 @@ namespace Bitfox.Freshworks.Models
         public List<User> Territories { get; set; } = null;
 
         [JsonProperty("lists")]
-        public List<IndustryType> Lists { get; set; } = null;
+        public List<ListItem> Lists { get; set; } = null;
 
 
 

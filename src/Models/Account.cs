@@ -18,18 +18,21 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("accounts")]
         public List<Account> Items { get; set; } = null;
 
+
         [JsonProperty("meta")]
         public Meta Meta { get; set; } = null;
         
+
         [JsonProperty("filters")]
         public List<Filter> Filters { get; set; } = null;
 
 
-        [IsRequiredOn(nameof(IHasDelete))]
+        //[IsRequiredOn(nameof(IHasDelete))]
         [JsonProperty("selected_ids")]
         public List<long> SelectedIDs { get; set; } = null;
 
-        [IsRequiredOn(nameof(IHasDelete))]
+
+        //[IsRequiredOn(nameof(IHasDelete))]
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
@@ -46,7 +49,6 @@ namespace Bitfox.Freshworks.Models
         public string Message { get; set; } = null;
 
 
-
         [JsonProperty("documents")]
         public List<File> Files { get; set; } = null;
 
@@ -57,6 +59,14 @@ namespace Bitfox.Freshworks.Models
 
         [JsonProperty("document_associations")]
         public List<FileAssociation> FileAssociations { get; set; } = null;
+
+
+
+
+
+
+
+        // Childs
 
         [IsRequiredOn(nameof(IHasUpdate))]
         [IsRequiredOn(nameof(IHasClone))]
@@ -71,7 +81,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("name")]
         public string Name { get; set; } = null;
 
-        [IsRequiredOn(nameof(IHasInsert))]
+        //[IsRequiredOn(nameof(IHasInsert))]
         [JsonProperty("owner_id")]
         public long? OwnerID { get; set; } = null;
 

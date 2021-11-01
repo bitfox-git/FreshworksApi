@@ -70,7 +70,7 @@ namespace Bitfox.Freshworks.Models
         [JsonProperty("owner_id")]
         public long? OwnerID { get; set; } = null;
 
-        [IsRequiredOn(nameof(IHasUpdate))]
+        //[IsRequiredOn(nameof(IHasUpdate))]
         [IsRequiredOn(nameof(IHasClone))]
         [JsonProperty("first_name")]
         public string FirstName { get; set; } = null;
@@ -239,7 +239,7 @@ namespace Bitfox.Freshworks.Models
         public string SubscriptionTypes { get; set; } = null;
 
         [JsonProperty("list_ids")]
-        public long[] ListIDs { get; set; } = null;
+        public List<long> ListIDs { get; set; } = null;
 
         [JsonProperty("has_duplicates")]
         public bool? HasDuplicates { get; set; } = null;

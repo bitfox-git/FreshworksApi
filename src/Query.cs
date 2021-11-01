@@ -11,33 +11,18 @@ namespace Bitfox.Freshworks.Models
     public class Query: Network, IQuery
     {
         protected List<string> Includes = new();
+        protected List<ListItem> AllLists = new();
 
         public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
         { }
 
-        public IQuery Include(string include)
-        {
-            Includes.Add(include);
-            return this;
-        }
 
-        private async Task<long> GetDefaultViewID<T>() where T : IHasFilters
-        {
-            //first , request the correct filter
-            var filters = await FetchAll<T>();
 
-            //This is kind of a hack ? it looks for the "all ....." view for this entity...
-            //is this 100% sure?
-            var viewId = filters.Value.Filters
-                           .Where(x => x.Name.ToLower().StartsWith("all ") && (bool)x.IsDefault)
-                           .Select(x => x.ID)
-                           .FirstOrDefault();
-
-            return (long)viewId;
-        }
-
+        // Custom
         public async Task<Result<T>> GetPage<T>(long viewID, int page) where T : IHasAllView<T>
-            => await GetRequest<T>($"/view/{viewID}?page={page}");
+        {
+            return await GetRequest<T>($"/view/{viewID}?page={page}&perPage=100");
+        }
 
         public async Task<List<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>
         {
@@ -65,14 +50,85 @@ namespace Bitfox.Freshworks.Models
             return result;
         }
 
+        public async Task<List<ListItem>> GetAllLists()
+        {
+            if (AllLists.Count > 0) return AllLists;
+
+            int page = 1;
+            int prevCount = 0;
+            while (page > 0)
+            {
+                var records = await GetRequest<ListParent>($"?page={page}&perPage=100");
+                AllLists.AddRange(records.Value.Lists);
+
+                if (AllLists.Count < records.Value.Meta.Total && AllLists.Count != prevCount)
+                {
+                    page++;
+                }
+                else
+                {
+                    page = -1;
+                }
+
+                prevCount = AllLists.Count;
+            }
+
+            return AllLists;
+        }
+        
+        public async Task<Contact> AddList(Contact contact, string listName)
+        {
+            var lists = await GetAllLists();
+            var listNames = lists.Select(item => item.Name).ToList();
+            var items = lists.Where(i => i.Name == listName).ToList();
+            
+            if(!listNames.Contains(listName) || items.Count == 0)
+            {
+                throw new ArgumentException(
+                    $"Not a valid listName:`{listName}`\n\noptions:[\n{string.Join("\n", listNames)}]"
+                );
+            }
+
+            // add list ID
+            contact.ListIDs ??= new();
+            if (!contact.ListIDs.Contains((long)items.First().ID))
+            {
+                contact.ListIDs.Add((long)items.First().ID);
+            }
+
+            return contact;
+        }
+
+        public Contact AddSubscription(Contact contact, long subscriptionType)
+        {
+            var matched = false;
+            var types = contact.SubscriptionTypes.Split(";")
+                .Where(x => !string.IsNullOrEmpty(x)).ToList();
+
+            foreach (string type in types)
+            {
+                if(subscriptionType == long.Parse(type))
+                {
+                    matched = true;
+                    break;
+                }
+            }
+
+            // Add subscription ID
+            if(!matched)
+            {
+                types.Add(subscriptionType.ToString());
+                contact.SubscriptionTypes = string.Join(";", types);
+            }
+
+            return contact;
+        }
 
 
-        /// <summary>
-        /// ///////////////////////////
-        /// </summary>
+        //////////////////////////////
 
 
-
+        // Queries
 
         public async Task<Result<T>> FetchAll<T>() where T : IHasFilters
             => await GetRequest<T>($"/filters");
@@ -81,27 +137,13 @@ namespace Bitfox.Freshworks.Models
             => await GetByID<T>((long)body.ID);
 
         public async Task<Result<T>> GetByID<T>(long id) where T : IHasView
-        {
-            if(id == 0)
-            {
-                throw new ArgumentException("Missing `ID` in request");
-            }
-
-            return await GetRequest<T>($"/{id}");
-        }
+            => await GetRequest<T>($"/{id}", id);
         
         public async Task<Result<T>> GetAllByID<T>(T body) where T : IHasAllView<T>, IHasUniqueID
             => await GetAllByID<T>((long)body.ID);
 
         public async Task<Result<T>> GetAllByID<T>(long id) where T : IHasAllView<T>
-        {
-            if(id == 0)
-            {
-                throw new ArgumentException("Missing `ID` in request");
-            }
-
-            return await GetRequest<T>($"/view/{id}");
-        }
+            => await GetRequest<T>($"/view/{id}", id);
 
         public async Task<Result<T>> GetAllByFilter<T>(string filter) where T : IHasView
             => await GetRequest<T>($"?filter={filter}");
@@ -111,13 +153,8 @@ namespace Bitfox.Freshworks.Models
 
         public async Task<Result<T>> GetAllFileAndLinks<T>(long id) where T : IHasFileAndLinks
         {
-            if (id == 0)
-            {
-                throw new ArgumentException("Missing `ID` in request");
-            }
-
-            var paths = GetEndpoint<T>().Split("\\");
-            return await GetRequest<T>($"/{paths[^1]}/{id}/document_associations");
+            var path = GetEndpoint<T>().Split("\\")[^1];
+            return await GetRequest<T>($"/{path}/{id}/document_associations", id);
         }
 
         public async Task<Result<T>> GetAllActivitiesByID<T>(T body) where T : IHasActivities, IHasUniqueID
@@ -150,6 +187,7 @@ namespace Bitfox.Freshworks.Models
 
         public async Task<Result<SearchLookup>> SearchOnLookup(string query, string field, string entities)
             => await GetRequest<SearchLookup>($"?q={query}&f={field}&entities={entities}");
+
 
         // Selectors
         public async Task<Result<Selector>> GetSalesActivityTypes() 
@@ -209,6 +247,14 @@ namespace Bitfox.Freshworks.Models
         public async Task<Result<Selector>> GetIndustryTypes() 
             => await GetRequest<Selector>("/industry_types");
 
+        // Extra
+
+        public IQuery Include(string include)
+        {
+            Includes.Add(include);
+            return this;
+        }
+
         private string AddIncludes(string uri)
         {
             if(Includes.Count > 0)
@@ -220,8 +266,28 @@ namespace Bitfox.Freshworks.Models
             return uri;
         }
 
-        protected async Task<Result<TEntity>> GetRequest<TEntity>(string path)
+        private async Task<long> GetDefaultViewID<T>() where T : IHasFilters
         {
+            //first , request the correct filter
+            var filters = await FetchAll<T>();
+
+            //This is kind of a hack ? it looks for the "all ....." view for this entity...
+            //is this 100% sure?
+            var viewId = filters.Value.Filters
+                           .Where(x => x.Name.ToLower().StartsWith("all ") && (bool)x.IsDefault)
+                           .Select(x => x.ID)
+                           .FirstOrDefault();
+
+            return (long)viewId;
+        }
+
+        protected async Task<Result<TEntity>> GetRequest<TEntity>(string path, long? id = null)
+        {
+            if (id != null && id == 0)
+            {
+                throw new ArgumentException("Missing `ID` in request");
+            }
+
             string endpoint = $"{GetEndpoint<TEntity>()}{path}";
             endpoint = AddIncludes(endpoint);
 
