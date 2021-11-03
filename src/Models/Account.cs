@@ -1,6 +1,5 @@
 ﻿using Bitfox.Freshworks.Attributes;
 using Bitfox.Freshworks.EndpointFilters;
-using Bitfox.Freshworks.Endpoints;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -197,7 +196,7 @@ namespace Bitfox.Freshworks.Models
         public bool? HasConnections { get; set; } = null;
 
         [JsonProperty("custom_field")]
-        public JObject CustomField { get; set; } = null;
+        public CustomFieldAccount CustomField { get; set; } = null;
 
         [JsonProperty("error_code")]
         public int? ErrorCode { get; set; } = null;

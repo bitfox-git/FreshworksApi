@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Bitfox.Freshworks.Models
 {
-    //[ParentClass(SubscriptionParent)]
     public class Subscription
     {
         [JsonProperty("id")]

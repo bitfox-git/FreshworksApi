@@ -8,42 +8,8 @@ using Bitfox.Freshworks.Attributes;
 
 namespace Bitfox.Freshworks
 {
-    public class CRMClient : Query, 
-        ICRMClient,
-        IAccount,
-        IAppointment,
-        IContact,
-        IDeal,
-        IFile,
-        INote,
-        IPhone,
-        ISale,
-        ISearch,
-        ITask
+    public class CRMClient : Query, ICRMClient
     {
-        public IAccount Account => this;
-
-        public IAppointment Appointment => this;
-
-        public IContact Contact => this;
-
-        public IDeal Deal => this;
-
-        public IFile File => this;
-
-        public INote Note => this;
-
-        public IPhone Phone => this;
-
-        public ISale Sale => this;
-
-        public ISearch Search => this;
-
-        public ITask Task => this;
-
-        public ISelector Selector => this;
-
-
         internal CRMClient(string subdomain, string apikey): base($"https://{subdomain}.myfreshworks.com/crm/sales", apikey)
         { }
 

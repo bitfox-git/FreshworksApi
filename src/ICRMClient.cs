@@ -8,61 +8,6 @@ namespace Bitfox.Freshworks
     public interface ICRMClient: IQuery
     {
         /// <summary>
-        /// Handles data based on subdomain. [ Query ]
-        /// </summary>
-        ISelector Selector { get; }
-
-        /// <summary>
-        /// Search data on subdomain. [ Query ]
-        /// </summary>
-        ISearch Search { get; }
-
-        /// <summary>
-        /// Handles Contacts Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IContact Contact { get; }
-
-        /// <summary>
-        /// Handles Account Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IAccount Account { get; }
-
-        /// <summary>
-        /// Handles Deals Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IDeal Deal { get; }
-
-        /// <summary>
-        /// Handles Notes Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        INote Note { get; }
-
-        /// <summary>
-        /// Handles Tasks Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        ITask Task { get; }
-
-        /// <summary>
-        /// Handles Appointment Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IAppointment Appointment { get; }
-
-        /// <summary>
-        /// Handles Appointment Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        ISale Sale { get; }
-
-        /// <summary>
-        /// Handles Phone Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IPhone Phone { get; }
-
-        /// <summary>
-        /// Handles File Actions. [Insert, Update, Delete etc.]
-        /// </summary>
-        IFile File { get; }
-
-        /// <summary>
         /// Get all panel data. [ GET ]
         /// </summary>
         /// <typeparam name="T">Type of fetch</typeparam>
