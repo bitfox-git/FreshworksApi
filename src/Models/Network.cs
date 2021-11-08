@@ -38,7 +38,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<TEntity>(request, content);
+            return new Result<TEntity>(content);
         }
 
         // Post Http calls
@@ -63,7 +63,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<TEntity>(request, content);
+            return new Result<TEntity>(content);
         }
 
         protected async Task<Result<TEntity>> PostApiFormRequest<TEntity>(string path, Dictionary<string, string> files=null, Dictionary<string, string> parameters=null)
@@ -93,7 +93,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<TEntity>(request, content);
+            return new Result<TEntity>(content);
         }
 
         // Put Http calls
@@ -117,7 +117,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<TEntity>(request, content);
+            return new Result<TEntity>(content);
         }
 
         // Delete Http calls
@@ -132,7 +132,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<TEntity>(request, content);
+            return new Result<TEntity>(content);
         }
 
         protected async Task<Result<bool>> DeleteApiRequest(string path)
@@ -146,7 +146,7 @@ namespace Bitfox.Freshworks.Models
 
             IRestResponse response = await client.ExecuteAsync(request);
             var content = response.Content;
-            return new Result<bool>(request, content);
+            return new Result<bool>(content);
         }
 
         // Get endpoint

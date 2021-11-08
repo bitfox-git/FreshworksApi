@@ -14,7 +14,8 @@ namespace Bitfox.Freshworks.Models
     [EndpointName("/api/sales_accounts")]
     public class Account: Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView<Account>, IHasFileAndLinks, IHasDelete, IHasDeleteBulk, IHasForget, IHasFields, IHasFilters, IHasFilteredSearch, IHasUniqueID
     {
-        [JsonProperty("accounts")]
+        //[JsonProperty("accounts")]
+        [JsonProperty("sales_accounts")]
         public List<Account> Items { get; set; } = null;
 
 

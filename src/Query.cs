@@ -16,26 +16,23 @@ namespace Bitfox.Freshworks.Models
         public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
         { }
 
-
-
-        // Custom
         public async Task<Result<T>> GetPage<T>(long viewID, int page) where T : IHasAllView<T>
         {
             return await GetRequest<T>($"/view/{viewID}?page={page}&perPage=100");
         }
 
-        public async Task<List<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>
+        public async Task<Result<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>
         {
             long viewID = await GetDefaultViewID<T>();
-            var result = new List<T>();
+            var values = new List<T>();
             int page = 1;
             int prevCount = 0;
 
             while (page > 0)
             {
                 var records = await GetPage<T>(viewID, page);
-                result.AddRange(records.Value.Items);
-                if (result.Count < records.Value.Meta.Total && result.Count != prevCount)
+                values.AddRange(records.Value.Items);
+                if (values.Count < records.Value.Meta.Total && values.Count != prevCount)
                 {
                     page++;
                 }
@@ -44,15 +41,15 @@ namespace Bitfox.Freshworks.Models
                     page = -1;
                 }
 
-                prevCount = result.Count;
+                prevCount = values.Count;
             }
 
-            return result;
+            return new Result<T>(values);
         }
 
-        public async Task<List<ListItem>> GetAllLists()
+        public async Task<Result<ListItem>> GetAllLists()
         {
-            if (AllLists.Count > 0) return AllLists;
+            if (AllLists.Count > 0) return new Result<ListItem>(AllLists);
 
             int page = 1;
             int prevCount = 0;
@@ -73,14 +70,14 @@ namespace Bitfox.Freshworks.Models
                 prevCount = AllLists.Count;
             }
 
-            return AllLists;
+            return new Result<ListItem>(AllLists);
         }
         
         public async Task<Contact> AddList(Contact contact, string listName)
         {
             var lists = await GetAllLists();
-            var listNames = lists.Select(item => item.Name).ToList();
-            var items = lists.Where(i => i.Name == listName).ToList();
+            var listNames = lists.Values.Select(item => item.Name).ToList();
+            var items = lists.Values.Where(i => i.Name == listName).ToList();
             
             if(!listNames.Contains(listName) || items.Count == 0)
             {
