@@ -74,9 +74,9 @@ namespace Bitfox.Freshworks
                     Value = JsonConvert.DeserializeObject<TEntity>(fullBody, settings);
                 }
             }
-            catch (JsonSerializationException ex)
+            catch (Exception ex)
             {
-                throw new JsonSerializationException(
+              throw new JsonSerializationException(
                     $"{ex.Message}\n Failed on Value:\n" + fullBody
                 );
             }

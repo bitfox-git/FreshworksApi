@@ -182,7 +182,7 @@ namespace Bitfox.Freshworks.Models
         public object LastAssignedAt { get; set; } = null;
 
         [JsonProperty("tags")]
-        public object[] Tags { get; set; } = null;
+        public List<string> Tags { get; set; } = null;
 
         [JsonProperty("is_deleted")]
         public bool? IsDeleted { get; set; } = null;

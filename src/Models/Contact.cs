@@ -260,10 +260,21 @@ namespace Bitfox.Freshworks.Models
         public long? LifecycleStageID { get; set; } = null;
 
         [JsonProperty("custom_field")]
-        public JObject CustomField { get; set; } = null;
+        public CustomField CustomField { get; set; } = null;
 
         [JsonProperty("delete_associated_contacts_deals")]
         public bool? DeleteAssociatedContactDeals { get; set; } = null;
 
     }
+
+    public class CustomField
+    {
+        public long? cf_account { get; set; }
+        public string cf_product_test { get; set; }
+        public string cf_gender { get; set; }
+        public string cf_dmu { get; set; }
+        public string cf_language { get; set; }
+    }
+
+
 }
