@@ -21,6 +21,9 @@ namespace Bitfox.Freshworks.Endpoints
         /// <returns></returns>
         IQuery Include(string include);
 
+        Task<Result<T>> GetAllDeals<T>(long viewID) where T : IHasFilters, IHasAllView<T>, IHasDeals;
+
+        Task<Result<T>> GetContactsLists<T>(long viewID) where T : IHasFilters, IHasAllView<T>, IHasContacts;
 
         Task<Result<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>;
 

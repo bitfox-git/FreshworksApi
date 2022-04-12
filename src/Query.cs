@@ -16,10 +16,71 @@ namespace Bitfox.Freshworks.Models
         public Query(string BaseURL, string apikey) : base(BaseURL, apikey)
         { }
 
-        public async Task<Result<T>> GetPage<T>(long viewID, int page) where T : IHasAllView<T>
+        public async Task<Result<T>> GetViewPage<T>(long viewID, int page) where T : IHasAllView<T>
         {
             return await GetRequest<T>($"/view/{viewID}?page={page}&perPage=100");
         }
+
+        public async Task<Result<T>> GetListPage<T>(long viewID, int page) where T : IHasAllView<T>
+        {
+            return await GetRequest<T>($"/lists/{viewID}?page={page}&perPage=100");
+        }
+
+        public async Task<Result<T>> GetAllDeals<T>(long viewID) where T : IHasFilters, IHasAllView<T>, IHasDeals
+        {
+            //long viewID = await GetDefaultViewID<T>();
+            var values = new List<T>();
+            int page = 1;
+            int prevCount = 0;
+
+            while (page > 0)
+            {
+                var records = await GetViewPage<T>(viewID, page);
+                values.AddRange((IEnumerable<T>)records.Value.deals);
+                if (values.Count < records.Value.Meta.Total && values.Count != prevCount)
+                {
+                    page++;
+                }
+                else
+                {
+                    page = -1;
+                }
+
+                prevCount = values.Count;
+            }
+
+            return new Result<T>(values);
+        }
+
+        public async Task<Result<T>> GetContactsLists<T>(long viewID) where T : IHasFilters, IHasAllView<T>, IHasContacts
+        {
+            //long viewID = await GetDefaultViewID<T>();
+            var values = new List<T>();
+            int page = 1;
+            int prevCount = 0;
+
+            while (page > 0)
+            {
+                var records = await GetListPage<T>(viewID, page);
+                values.AddRange((IEnumerable<T>)records.Value.Items);
+                if (values.Count < records.Value.Meta.Total && values.Count != prevCount)
+                {
+                    page++;
+                }
+                else
+                {
+                    page = -1;
+                }
+
+                prevCount = values.Count;
+            }
+
+            return new Result<T>(values);
+        }
+
+        
+
+
 
         public async Task<Result<T>> GetAll<T>() where T : IHasFilters, IHasAllView<T>
         {
@@ -30,7 +91,7 @@ namespace Bitfox.Freshworks.Models
 
             while (page > 0)
             {
-                var records = await GetPage<T>(viewID, page);
+                var records = await GetViewPage<T>(viewID, page);
                 values.AddRange(records.Value.Items);
                 if (values.Count < records.Value.Meta.Total && values.Count != prevCount)
                 {

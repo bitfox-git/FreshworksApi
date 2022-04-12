@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Bitfox.Freshworks.Models
 {
     [EndpointName("/api/contacts")]
-    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView<Contact>, IHasFileAndLinks, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID
+    public class Contact : Includes, IHasInsert, IHasUpdate, IHasClone, IHasView, IHasAllView<Contact>, IHasFileAndLinks, IHasDelete, IHasAssignBulk, IHasDeleteBulk, IHasForget, IHasFields, IHasActivities, IHasFilters, IHasFilteredSearch, IHasUniqueID, IHasContacts
     {
 
         [JsonProperty("contacts")]
